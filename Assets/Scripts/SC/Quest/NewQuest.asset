@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NewQuest
   m_EditorClassIdentifier: 
   questName: 0
-  description: 
+  description: qwe
   mustKillEnemies: 0
   mustReachLocation: 0
   isCompleted: 0
