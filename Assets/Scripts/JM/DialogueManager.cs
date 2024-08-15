@@ -35,7 +35,7 @@ public class DialogueManager : MonoBehaviour
         dialogueScreen.gameObject.SetActive(true);
         dialogEnd = false;
 
-        foreach (string sentence in dialogue.sentences)
+        foreach (string sentence in dialogue.contexts)
         {
             sentences.Enqueue(sentence);
         }
