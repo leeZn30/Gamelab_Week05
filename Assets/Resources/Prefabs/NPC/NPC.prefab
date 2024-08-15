@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 383814941195035049}
   - component: {fileID: 4331157004434805475}
   - component: {fileID: 193446495651011781}
-  - component: {fileID: 9101196515162568738}
+  - component: {fileID: 6617673071318957631}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -489,7 +489,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &9101196515162568738
+--- !u!114 &6617673071318957631
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,8 +498,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7990490172130631044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39c3868741f0ebd418ea442077a4ac3d, type: 3}
+  m_Script: {fileID: 11500000, guid: cfc4d740ec3032d4d820800e08e9c8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueId: 1
+  initialDialogueId: 2
+  incompleteQuestDialogueId: 3
+  completedQuestDialogueId: 4
+  quest: {fileID: 11400000, guid: 78a520c0e7fcfc84dbece016363e9e35, type: 2}
   interactionUI: {fileID: 6704406126788795913}
