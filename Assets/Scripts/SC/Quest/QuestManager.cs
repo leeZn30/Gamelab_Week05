@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Player;
 
 public class QuestManager : MonoBehaviour
 {
@@ -37,19 +38,18 @@ public class QuestManager : MonoBehaviour
         {
             activeQuests.Add(quest);
 
-            if (quest.mustReachLocation && quest.targetLocationObject != null)
+            if (quest.mustReachLocation && !string.IsNullOrEmpty(quest.targetLocationObjectName))
             {
-                quest.targetLocationObject.SetActive(true); // 목표 위치의 오브젝트 활성화
+                GameObject targetObject = GameObject.Find(quest.targetLocationObjectName);
+                if (targetObject != null)
+                {
+                    targetObject.SetActive(true);
+                }
             }
 
-            // 퀘스트 조건에 따라 델리게이트에 메소드 추가
             if (quest.mustKillEnemies)
             {
                 Enemy.OnEnemyDeath += OnEnemyKilled;
-            }
-            if (quest.mustReachLocation)
-            {
-                quest.targetLocationObject.SetActive(true);
             }
 
             Debug.Log($"{quest.questName} 퀘스트 수락됨!");

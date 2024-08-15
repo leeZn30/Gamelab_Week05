@@ -12,5 +12,5 @@ public class QuestSO : ScriptableObject
     public bool isCompleted;
     public bool isAvailable;
 
-    public GameObject targetLocationObject; // 목표 위치의 게임 오브젝트
+    public string targetLocationObjectName; // 목표 위치의 게임 오브젝트 이름 또는 태그
 }
