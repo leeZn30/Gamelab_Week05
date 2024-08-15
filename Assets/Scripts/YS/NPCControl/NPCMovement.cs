@@ -21,9 +21,9 @@ public class NPCMovement : MonoBehaviour
     private enum NPCState { Chase, Flee, Wander }
     private NPCState currentState;
 
-    public float chaseDistance = 10.0f;  // ÂÑ¾Æ°¡´Â °Å¸®
-    public float fleeDistance = 5.0f;    // µµ¸Á°¡´Â °Å¸®
-    public float wanderDistance = 15.0f; // ·£´ý ÀÌµ¿ °Å¸®
+    public float chaseDistance = 10.0f;  // ï¿½Ñ¾Æ°ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
+    public float fleeDistance = 5.0f;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
+    public float wanderDistance = 15.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Å¸ï¿½
 
     private bool canTalk;
 
@@ -33,7 +33,7 @@ public class NPCMovement : MonoBehaviour
     {
         walls = GameObject.FindGameObjectsWithTag("Wall");
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        currentState = NPCState.Wander; // ±âº» »óÅÂ¸¦ Wander(·£´ý ÀÌµ¿)·Î ¼³Á¤
+        currentState = NPCState.Wander; // ï¿½âº» ï¿½ï¿½ï¿½Â¸ï¿½ Wander(ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine("FindPath");
     }
 
@@ -43,13 +43,13 @@ public class NPCMovement : MonoBehaviour
     {
         isWall = false;
 
-        // NPC »óÅÂ °áÁ¤
+        // NPC ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         ChangeState();
 
-        // »óÅÂ¿¡ µû¸¥ Çàµ¿
+        // ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿
         Behave();
 
-        // º®°úÀÇ Ãæµ¹ Ã¼Å©
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ Ã¼Å©
         for (int i = 0; i < walls.Length; i++)
         {
             if (Vector3.Distance(targetPosition, walls[i].transform.position) < 1.0f)
@@ -64,12 +64,12 @@ public class NPCMovement : MonoBehaviour
             targetPos = new Vector2Int(Mathf.RoundToInt(targetPosition.x), Mathf.RoundToInt(targetPosition.y));
         }
 
-        
+
         if (targetPos != null && !GetComponent<Talking>().isTalking)
         {
             GetComponent<MoveManager>().MoveToTarget();
         }
-        
+
     }
 
     //NPC ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,14 +108,14 @@ public class NPCMovement : MonoBehaviour
                 break;
 
             case NPCState.Wander:
-                // ·£´ý À§Ä¡¸¦ »ý¼º
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Wander();
                 break;
         }
     }
     void Chase()
     {
-        targetPosition = playerTransform.position;  // ÇÃ·¹ÀÌ¾î¸¦ ¸ñÇ¥·Î ¼³Á¤
+        targetPosition = playerTransform.position;  // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
     void Flee()
     {
@@ -144,7 +144,7 @@ public class NPCMovement : MonoBehaviour
                 GetComponent<MoveManager>().PathFindingToTargetPos(targetPos);
             }
 
-            Debug.Log("°æ·Î Ã£±â");
+            Debug.Log("ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½");
         }
     }
 }

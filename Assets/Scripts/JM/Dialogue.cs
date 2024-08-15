@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ public class Dialogue
     public string name;
 
     [Tooltip("대사 내용")]
-    public string[] contexts;
+    public List<string> contexts; // 대사 내용은 리스트로 유지
 
     [Tooltip("이벤트 번호")]
-    public string[] number;
+    public int number; // 이벤트 번호 (단일 정수)
 
     [Tooltip("스킵라인")]
-    public string[] skipnum;
+    public int skipnum; // 스킵라인 (단일 정수)
 }

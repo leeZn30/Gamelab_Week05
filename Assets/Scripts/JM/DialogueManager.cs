@@ -10,29 +10,22 @@ public class DialogueManager : MonoBehaviour
     public Image dialogueScreen;
 
     private Queue<string> sentences;
-    private bool isDialogueActive = false;
+    public bool isDialogueActive = false;
     public bool dialogEnd;
 
     void Start()
     {
         sentences = new Queue<string>();
-    }
-
-    void Update()
-    {
-        if (isDialogueActive && InputManager.Instance.controls.Player.Interaction.WasPerformedThisFrame())
-        {
-            {
-                DisplayNextSentence();
-            }
-        }
+        dialogueScreen.gameObject.SetActive(false); // 초기에는 대화 UI를 비활성화
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Time.timeScale = 0;
+
         isDialogueActive = true;
         sentences.Clear();
-        dialogueScreen.gameObject.SetActive(true);
+        dialogueScreen.gameObject.SetActive(true); // 대화 시작 시 UI 활성화
         dialogEnd = false;
 
         foreach (string sentence in dialogue.contexts)
@@ -43,7 +36,7 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
-    void DisplayNextSentence()
+    public void DisplayNextSentence()
     {
         if (sentences.Count == 0)
         {
@@ -68,14 +61,11 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        dialogueScreen.gameObject.SetActive(false);
+        dialogueScreen.gameObject.SetActive(false); // 대화 종료 시 UI 비활성화
         isDialogueActive = false;
         dialogueText.text = "";
         dialogEnd = true;
-    }
-    public bool Dialog
-    {
-        get { return dialogEnd; }
-        set { dialogEnd = value; }
+        Time.timeScale = 1;
+
     }
 }
