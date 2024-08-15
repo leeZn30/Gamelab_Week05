@@ -104,7 +104,7 @@ public class Player_Movement : MonoBehaviour
         {
             if (hitdown[i].transform != null)
             {
-                if (hitdown[i].distance < 1 && hitdown[i].collider.CompareTag("Wall"))
+                if (hitdown[i].distance < 0.2f && hitdown[i].collider.CompareTag("Wall"))
                 {
                     if (verticalInput < 0)
                     {
@@ -120,7 +120,7 @@ public class Player_Movement : MonoBehaviour
         {
             if (hitup[i].transform != null)
             {
-                if (hitup[i].distance < 1 && hitup[i].collider.CompareTag("Wall"))
+                if (hitup[i].distance < 0.2f && hitup[i].collider.CompareTag("Wall"))
                 {
                     if (verticalInput > 0)
                     {
@@ -135,7 +135,7 @@ public class Player_Movement : MonoBehaviour
         {
             if (hitleft[i].transform != null)
             {
-                if (hitleft[i].distance < 1 && hitleft[i].collider.CompareTag("Wall"))
+                if (hitleft[i].distance < 0.2f && hitleft[i].collider.CompareTag("Wall"))
                 {
                     if (horizontalInput < 0)
                     {
@@ -151,7 +151,7 @@ public class Player_Movement : MonoBehaviour
         {
             if (hitright[i].transform != null)
             {
-                if (hitright[i].distance < 1 && hitright[i].collider.CompareTag("Wall"))
+                if (hitright[i].distance < 0.2f && hitright[i].collider.CompareTag("Wall"))
                 {
                     if (horizontalInput > 0)
                     {
