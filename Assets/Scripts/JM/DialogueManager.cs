@@ -17,6 +17,8 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         dialogueScreen.gameObject.SetActive(false); // 초기에는 대화 UI를 비활성화
+        dialogueText.gameObject.SetActive(false);
+
     }
 
     public void StartDialogue(Dialogue dialogue)

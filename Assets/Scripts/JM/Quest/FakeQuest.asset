@@ -15,6 +15,7 @@ MonoBehaviour:
   questName: 0
   description: "\uAC00\uC9DC \uD018\uC2A4\uD2B8"
   mustKillEnemies: 0
-  mustReachLocation: 0
-  isCompleted: 1
+  mustReachLocation: 1
+  isCompleted: 0
   isAvailable: 1
+  targetLocationObject: {fileID: 0}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum QuestName { Quest1, Quest2, Quest3 } // ¿­°ÅÇüÀ¸·Î Äù½ºÆ® ÀÌ¸§ Á¤ÀÇ
+public enum QuestName { Quest1, Quest2, Quest3 } // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "Quest System/Quest")]
 public class QuestSO : ScriptableObject
@@ -12,5 +12,5 @@ public class QuestSO : ScriptableObject
     public bool isCompleted;
     public bool isAvailable;
 
-    public GameObject targetLocationObject; // ¸ñÇ¥ À§Ä¡ÀÇ °ÔÀÓ ¿ÀºêÁ§Æ®
+    public GameObject targetLocationObject; // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 }
