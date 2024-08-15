@@ -11,4 +11,6 @@ public class QuestSO : ScriptableObject
     public bool mustReachLocation;
     public bool isCompleted;
     public bool isAvailable;
+
+    public GameObject targetLocationObject; // 목표 위치의 게임 오브젝트
 }
