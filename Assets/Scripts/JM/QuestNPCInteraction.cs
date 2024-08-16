@@ -7,22 +7,46 @@ public class QuestNPCInteraction : MonoBehaviour
     public int completedQuestDialogueId = 5; // 퀘스트가 완료된 후 출력할 대사 ID
     public int postCompletionDialogueId = 6; // 퀘스트가 완료된 후 항상 출력할 대사 ID
 
-    public QuestSO quest; // NPC가 주는 퀘스트 ScriptableObject
-    public GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
-    public bool questDialogueCompleted = false; // 퀘스트 완료 후 대화가 한 번 완료되었는지 확인
+    public QuestSO quest;
+    public GameObject interactionUI;
+    public bool questDialogueCompleted = false;
 
-    private bool isPlayerInRange = false; // 플레이어가 NPC 근처에 있는지 확인
+    private bool isPlayerInRange = false;
+
+    private bool isSend = false;
 
     void Start()
     {
-        interactionUI.SetActive(false); // 처음에는 E 키 UI를 숨깁니다.
+        interactionUI.SetActive(false);
     }
 
     void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
-            DialogueManager.instance.HandleQuestInteraction(this);
+            int dialogueId;
+            isSend = true;
+
+            if (questDialogueCompleted)
+            {
+                dialogueId = postCompletionDialogueId;
+            }
+            else if (!quest.isAvailable)
+            {
+                quest.isAvailable = true;
+                dialogueId = initialDialogueId;
+            }
+            else if (!quest.isCompleted)
+            {
+                dialogueId = incompleteQuestDialogueId;
+            }
+            else
+            {
+                questDialogueCompleted = true;
+                dialogueId = completedQuestDialogueId;
+            }
+
+            DialogueManager.Instance.SetDialogueID(dialogueId);
         }
     }
 
@@ -41,6 +65,7 @@ public class QuestNPCInteraction : MonoBehaviour
         {
             isPlayerInRange = false;
             interactionUI.SetActive(false); // 플레이어가 범위 밖으로 나가면 E 키 UI 숨김
+            isSend = false;
         }
     }
 }
