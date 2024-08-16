@@ -8,21 +8,23 @@ public class DialogueManager : Singleton<DialogueManager>
 {
     public DialogueReader csvReader; // CSV Reader
 
-    public TextMeshProUGUI dialogueText;
-    public Image dialogueScreen;
+    GameObject dialogueUI;
+    TextMeshProUGUI dialogueText;
 
     private Queue<string> sentences;
     public bool isDialogueActive = false;
     public bool dialogEnd;
 
-    private NPCInteraction currentNPCInteraction;
-    private QuestNPCInteraction currentQuestNPCInteraction;
+    void Awake()
+    {
+        dialogueUI = GameObject.Find("DialogueUI");
+        dialogueText = dialogueUI.GetComponentInChildren<TextMeshProUGUI>();
+    }
 
     void Start()
     {
         sentences = new Queue<string>();
-        dialogueScreen.gameObject.SetActive(false); // 초기에는 대화 UI를 비활성화
-        dialogueText.gameObject.SetActive(false);
+        dialogueUI.SetActive(false);
     }
 
     void Update()
@@ -32,18 +34,6 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             DisplayNextSentence();
         }
-    }
-
-    public void RegisterNPCInteraction(NPCInteraction npcInteraction)
-    {
-        currentNPCInteraction = npcInteraction;
-        currentQuestNPCInteraction = null; // 일반 NPC와 상호작용이 등록되면 퀘스트 NPC 상호작용 해제
-    }
-
-    public void RegisterQuestNPCInteraction(QuestNPCInteraction questNPC)
-    {
-        currentQuestNPCInteraction = questNPC;
-        currentNPCInteraction = null; // 퀘스트 NPC와 상호작용이 등록되면 일반 NPC 상호작용 해제
     }
 
     public void SetDialogueID(int id)
@@ -59,8 +49,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         Time.timeScale = 0;
         sentences.Clear();
-        dialogueScreen.gameObject.SetActive(true); // 대화 시작 시 UI 활성화
-        dialogueText.gameObject.SetActive(true);
+        dialogueUI.SetActive(true);
 
         dialogEnd = false;
 
@@ -100,15 +89,11 @@ public class DialogueManager : Singleton<DialogueManager>
 
     void EndDialogue()
     {
-        dialogueScreen.gameObject.SetActive(false); // 대화 종료 시 UI 비활성화
+        dialogueUI.SetActive(false);
         isDialogueActive = false;
         dialogueText.text = "";
         dialogEnd = true;
         Time.timeScale = 1;
-
-        // 대화가 끝나면 현재 NPC 상호작용 상태를 해제
-        currentNPCInteraction = null;
-        currentQuestNPCInteraction = null;
     }
 
     public Dialogue GetDialogueById(int id)
