@@ -19,7 +19,10 @@ public class NPCWeaponRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPos = GameObject.FindWithTag("Player").transform.position;
+
+        targetPos = BattleManager.Instance.Ally[0].transform.position;
+
+
         direction = new Vector2(targetPos.x - transform.position.x, targetPos.y - transform.position.y);
 
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
