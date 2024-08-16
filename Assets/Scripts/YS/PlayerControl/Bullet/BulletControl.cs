@@ -19,9 +19,9 @@ public class BulletControl : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Weapon") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Dead Body"))
+        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player") || collision.collider.CompareTag("Cult") || collision.collider.CompareTag("Resistance"))
         {
             Destroy(gameObject);
         }
