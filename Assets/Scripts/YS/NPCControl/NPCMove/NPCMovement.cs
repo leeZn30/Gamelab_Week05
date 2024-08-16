@@ -68,33 +68,21 @@ public class NPCMovement : MonoBehaviour
         }
 
 
-        
-        if (GetComponent<NPCInfo>().isBattle)
+        if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
         {
-
-            if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
-            {
-                currentState = NPCState.Run;
-            }
-
-            if (GetComponent<NPCInfo>().target != null)
-            {
-                if (currentState != NPCState.Battle)
-                {
-                    ChangeState();
-                }
-            }
-            
-
-            Behave();
-            
+            currentState = NPCState.Run;
         }
 
-
-
+        if (GetComponent<NPCInfo>().isBattle)
+        {
+            if (GetComponent<NPCInfo>().target != null)
+            {
+                ChangeState();
+            }
+            Behave();
+        }
         MoveToTarget();
         
-
     }
 
 
@@ -139,7 +127,10 @@ public class NPCMovement : MonoBehaviour
             {
                 currentState = NPCState.Wander;
             }
-            canTalk = false;
+            if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
+            {
+                currentState = NPCState.Battle;
+            }
         }
 
         if (!GetComponent<NPCInfo>().isBattle)
@@ -300,7 +291,7 @@ public class NPCMovement : MonoBehaviour
                 Right();
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 4 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 2 * Time.deltaTime);
 
             // 목표 지점에 도달하면 리스트에서 해당 노드를 제거
             if ((Vector2)transform.position == targetPosition)
@@ -320,18 +311,6 @@ public class NPCMovement : MonoBehaviour
                 {
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
-
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
             }
         }
     }
@@ -347,19 +326,6 @@ public class NPCMovement : MonoBehaviour
                 {
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
-
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
-
             }
         }
     }
@@ -374,19 +340,6 @@ public class NPCMovement : MonoBehaviour
                 {
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
-
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
-
             }
         }
     }
@@ -402,17 +355,6 @@ public class NPCMovement : MonoBehaviour
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
 
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
             }
         }
     }

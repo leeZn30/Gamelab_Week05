@@ -25,7 +25,7 @@ public class Player_Movement : MonoBehaviour
     {
         isUsingMap = false;
 
-        //BattleManager.Instance.Resistance.Add(gameObject);
+        BattleManager.Instance.Resistance.Add(gameObject);
         //PlayerGunSetting();
     }
 
@@ -37,7 +37,7 @@ public class Player_Movement : MonoBehaviour
         if (!isUsingMap)
         {
 
-            DataManager.Instance.Speed = 8f;
+            DataManager.Instance.Speed = 4f;
 
             // Player Movement
             Dock();
@@ -46,6 +46,13 @@ public class Player_Movement : MonoBehaviour
 
             transform.Translate(Vector2.right * horizontalInput * Time.deltaTime * DataManager.Instance.Speed);
             transform.Translate(Vector2.up * verticalInput * Time.deltaTime * DataManager.Instance.Speed);
+
+
+            if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame())
+            {
+                transform.Translate(Vector2.right * horizontalInput * DataManager.Instance.Speed);
+                transform.Translate(Vector2.up * verticalInput * DataManager.Instance.Speed);
+            }
 
 
             // Check Player Life
