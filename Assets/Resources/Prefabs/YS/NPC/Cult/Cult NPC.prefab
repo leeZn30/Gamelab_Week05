@@ -245,11 +245,11 @@ GameObject:
   - component: {fileID: 2176413968613426453}
   - component: {fileID: 3298368767805580150}
   - component: {fileID: 587669732542705918}
+  - component: {fileID: 2999273126900932976}
   - component: {fileID: 6039604904720405805}
   - component: {fileID: 2316879425522726721}
   - component: {fileID: 4454318873377880448}
   - component: {fileID: 5553912244506073182}
-  - component: {fileID: 4093874928018009813}
   m_Layer: 8
   m_Name: Cult NPC
   m_TagString: Cult
@@ -288,12 +288,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyID: 0
   side: 1
-  type: 0
+  type: Long
   health: 0
   maxHealth: 0
   damage: 0
   attackRange: 10
-  attackSpeed: 0.5
+  attackSpeed: 0.3
   target: {fileID: 0}
   isPatrol: 1
   isBattle: 0
@@ -323,6 +323,26 @@ MonoBehaviour:
   - {x: 0, y: 8, z: 0}
   patrolIndex: 0
   patWhat: 0
+--- !u!114 &2999273126900932976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833941040264391020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e610cde4531cf74f9ca70ae0c5ea2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottomLeft: {x: 0, y: 0}
+  topRight: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0}
+  FinalNodeList: []
+  allowDiagonal: 1
+  dontCrossCorner: 1
+  point: 0
 --- !u!61 &6039604904720405805
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -411,7 +431,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.6}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &4454318873377880448
 Rigidbody2D:
@@ -453,26 +473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTalking: 0
---- !u!114 &4093874928018009813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2833941040264391020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e610cde4531cf74f9ca70ae0c5ea2d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottomLeft: {x: 0, y: 0}
-  topRight: {x: 0, y: 0}
-  startPos: {x: 0, y: 0}
-  targetPos: {x: 0, y: 0}
-  FinalNodeList: []
-  allowDiagonal: 0
-  dontCrossCorner: 0
-  point: 0
 --- !u!1 &2999354329664128599
 GameObject:
   m_ObjectHideFlags: 0
