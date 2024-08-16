@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
         isDialogueActive = true;
         sentences.Clear();
         dialogueScreen.gameObject.SetActive(true); // 대화 시작 시 UI 활성화
+        dialogueText.gameObject.SetActive(true);
+
         dialogEnd = false;
 
         foreach (string sentence in dialogue.contexts)
