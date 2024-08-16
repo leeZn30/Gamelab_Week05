@@ -31,7 +31,7 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 1:
-                // yield return StartCoroutine(Event1());
+                yield return StartCoroutine(Event1());
                 break;
 
             case 2:
@@ -67,8 +67,7 @@ public class NoteEvent : MonoBehaviour
         GameObject go = Instantiate(person, Vector3.zero, Quaternion.identity);
 
         // 대화함
-        Dialogue dialogue = DialogueManager.instance.GetDialogueById(dialogueId1);
-        DialogueManager.Instance.StartDialogue(dialogue);
+        DialogueManager.Instance.SetDialogueID(dialogueId1);
 
         // while (true)
         // {
@@ -77,7 +76,9 @@ public class NoteEvent : MonoBehaviour
         //         DialogueManager.Instance.DisplayNextSentence();
         // }
 
-        yield return new WaitForSeconds(3f);
+        // yield return new WaitForSeconds(3f);
+
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // npc 나감
         Destroy(go);
