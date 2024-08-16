@@ -1,21 +1,13 @@
 using UnityEngine;
 
-public class NPCInteraction : MonoBehaviour
+public class ObjectInteraction : MonoBehaviour
 {
-    public int dialogueId; // 이 NPC가 출력할 기본 대사 ID
-    public GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
-
+    public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
 
     private bool isSend = false;
-    void Start()
-    {
-        if (interactionUI != null)
-        {
-            interactionUI.SetActive(false);
-        }
-    }
 
+    public bool isCollected = false;
 
     void Update()
     {
@@ -23,6 +15,7 @@ public class NPCInteraction : MonoBehaviour
         {
             DialogueManager.Instance.SetDialogueID(dialogueId);
             isSend = true;
+            isCollected = true;
         }
     }
 
@@ -31,10 +24,6 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            if (interactionUI != null)
-            {
-                interactionUI.SetActive(true);
-            }
         }
     }
 
@@ -43,13 +32,6 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-
-            if (interactionUI != null)
-            {
-                interactionUI.SetActive(false);
-            }
-
-            isSend = false;
         }
     }
 
