@@ -2486,9 +2486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f24aade5844ec749a070f5cbb0a48ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allQuests: []
-  activeQuests:
-  - {fileID: 11400000, guid: d765b48da88c91f4eac1497db8e15715, type: 2}
+  allQuests:
+  - {fileID: 11400000, guid: 015073e84d5278f49b82c7e0a230e3a6, type: 2}
+  activeQuests: []
   questListParent: {fileID: 1280607948}
   questTextPrefab: {fileID: 5624853273408506001, guid: 467cfa0171f1af44a96f3606c1b1376e, type: 3}
   activeQuestTexts: []
@@ -3177,7 +3177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questManager: {fileID: 1463639776}
-  quest: {fileID: 0}
+  quest: {fileID: 11400000, guid: 015073e84d5278f49b82c7e0a230e3a6, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

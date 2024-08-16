@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using static Player;
@@ -9,10 +10,17 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     public List<QuestSO> allQuests = new List<QuestSO>();
+    private Dictionary<string, QuestSO> questDictionary;
+
     public List<QuestSO> activeQuests = new List<QuestSO>();
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
     public TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
     [SerializeField] List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
+
+    void Start()
+    {
+        questDictionary = allQuests.ToDictionary(quest => quest.questName);
+    }
 
     private void Awake()
     {
@@ -27,8 +35,20 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void AcceptQuest(QuestSO quest)
+    public QuestSO FindQuest(string questName)
     {
+        if (questDictionary.TryGetValue(questName, out QuestSO quest))
+        {
+            return quest;
+        }
+
+        Debug.Log("퀘스트 없음");
+        return null;
+    }
+
+    public void AcceptQuest(string questName)
+    {
+        QuestSO quest = FindQuest(questName); 
         if (quest.isAvailable)
         {
             activeQuests.Add(quest);
@@ -102,23 +122,17 @@ public class QuestManager : MonoBehaviour
 
     public bool checkQuest(string questname)
     {
-        foreach (var quests in allQuests)
+        QuestSO quest = FindQuest(questname);
+        if (quest.isCompleted)
         {
-            if (quests.questName == questname)
-            {
-                if (quests.isCompleted)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            return true;
+        }
+        else
+        {
+            return false;
         }
 
         return false;
         Debug.Log("퀘스트 못찾음");
     }
 }
-

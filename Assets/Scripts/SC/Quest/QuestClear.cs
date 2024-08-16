@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class QuestClear : MonoBehaviour
 {
-    public void btn1Clear()
+    public void btn1Clear(string QuestName)
     {
-        GameObject.Find("QuestManager").GetComponent<QuestManager>().OnQuestClear("quest1");
+        
     }
 }
