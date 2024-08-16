@@ -51,6 +51,11 @@ public class NPCInfo : MonoBehaviour
             isBattle = true;
         }
 
+        if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 0)
+        {
+            isBattle = true;
+        }
+
         if(health < 0)
         {
             GameObject.Find("QuestManager").GetComponent<QuestManager>().OnEnemyKilled(EnemyID);
