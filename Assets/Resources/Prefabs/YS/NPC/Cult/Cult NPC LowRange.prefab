@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyID: 0
   side: 1
-  type: 0
+  type: Short
   health: 0
   maxHealth: 0
   damage: 0

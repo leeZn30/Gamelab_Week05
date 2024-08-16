@@ -18,7 +18,7 @@ public class DataManager : MonoBehaviour
     private float maxHealth;
 
     private float stemina;
-
+    public float money;
 
     private int bulletCount;
     public bool isDead = false;
