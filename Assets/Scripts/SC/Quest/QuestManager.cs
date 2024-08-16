@@ -53,7 +53,7 @@ public class QuestManager : MonoBehaviour
                     if (quest.currCount == quest.targetCount)
                     {
                         quest.isCompleted = true;
-                        questClear.OnQuestClear(quest.questName);
+                        questClear.OnQuestClear(quest);
                     }
                 }
             }
