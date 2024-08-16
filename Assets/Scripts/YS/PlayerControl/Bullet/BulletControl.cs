@@ -21,7 +21,7 @@ public class BulletControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("NPC") || collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player") || collision.collider.CompareTag("Cult") || collision.collider.CompareTag("Resistance"))
         {
             Destroy(gameObject);
         }

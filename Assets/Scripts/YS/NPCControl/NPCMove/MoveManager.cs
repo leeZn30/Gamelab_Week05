@@ -13,7 +13,7 @@ public class Node
     public bool isWall;
     public Node ParentNode;
 
-    // G : ½ÃÀÛÀ¸·ÎºÎÅÍ ÀÌµ¿Çß´ø °Å¸®, H : |°¡·Î|+|¼¼·Î| Àå¾Ö¹° ¹«½ÃÇÏ¿© ¸ñÇ¥±îÁöÀÇ °Å¸®, F : G + H
+    // G : ì‹œì‘ìœ¼ë¡œë¶€í„° ì´ë™í–ˆë˜ ê±°ë¦¬, H : |ê°€ë¡œ|+|ì„¸ë¡œ| ì¥ì• ë¬¼ ë¬´ì‹œí•˜ì—¬ ëª©í‘œê¹Œì§€ì˜ ê±°ë¦¬, F : G + H
     public int x, y, G, H;
     public int F { get { return G + H; } }
 }
@@ -25,11 +25,6 @@ public class MoveManager : MonoBehaviour
     public List<Node> FinalNodeList;
     public bool allowDiagonal, dontCrossCorner;
 
-    public bool spinUp;
-    public bool spinDown;
-    public bool spinLeft;
-    public bool spinRight;
-
     int sizeX, sizeY;
     public Node[,] NodeArray;
     Node StartNode, TargetNode, CurNode;
@@ -37,7 +32,7 @@ public class MoveManager : MonoBehaviour
 
     public int point;
 
-    //ÇÃ·¹ÀÌ¾î À§Ä¡±îÁöÀÇ ±æ Ã£±â
+    //í”Œë ˆì´ì–´ ìœ„ì¹˜ê¹Œì§€ì˜ ê¸¸ ì°¾ê¸°
     public void PathFindingToPlayer(Vector2Int pos)
     {
 
@@ -62,7 +57,7 @@ public class MoveManager : MonoBehaviour
         bottomLeft.y = startPos.y - 20;
 
 
-        // NodeArrayÀÇ Å©±â Á¤ÇØÁÖ°í, isWall, x, y ´ëÀÔ
+        // NodeArrayì˜ í¬ê¸° ì •í•´ì£¼ê³ , isWall, x, y ëŒ€ì…
 
         sizeX = topRight.x - bottomLeft.x + 1;
         sizeY = topRight.y - bottomLeft.y + 1;
@@ -81,7 +76,7 @@ public class MoveManager : MonoBehaviour
         }
 
 
-        // ½ÃÀÛ°ú ³¡ ³ëµå, ¿­¸°¸®½ºÆ®¿Í ´İÈù¸®½ºÆ®, ¸¶Áö¸·¸®½ºÆ® ÃÊ±âÈ­
+        // ì‹œì‘ê³¼ ë ë…¸ë“œ, ì—´ë¦°ë¦¬ìŠ¤íŠ¸ì™€ ë‹«íŒë¦¬ìŠ¤íŠ¸, ë§ˆì§€ë§‰ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         StartNode = NodeArray[startPos.x - bottomLeft.x, startPos.y - bottomLeft.y];
         if (Vector2.Distance(startPos, targetPos) < 20)
         {
@@ -96,7 +91,7 @@ public class MoveManager : MonoBehaviour
             {
                 while (OpenList.Count > 0)
                 {
-                    // ¿­¸°¸®½ºÆ® Áß °¡Àå F°¡ ÀÛ°í F°¡ °°´Ù¸é H°¡ ÀÛÀº °É ÇöÀç³ëµå·Î ÇÏ°í ¿­¸°¸®½ºÆ®¿¡¼­ ´İÈù¸®½ºÆ®·Î ¿Å±â±â
+                    // ì—´ë¦°ë¦¬ìŠ¤íŠ¸ ì¤‘ ê°€ì¥ Fê°€ ì‘ê³  Fê°€ ê°™ë‹¤ë©´ Hê°€ ì‘ì€ ê±¸ í˜„ì¬ë…¸ë“œë¡œ í•˜ê³  ì—´ë¦°ë¦¬ìŠ¤íŠ¸ì—ì„œ ë‹«íŒë¦¬ìŠ¤íŠ¸ë¡œ ì˜®ê¸°ê¸°
                     CurNode = OpenList[0];
                     for (int i = 1; i < OpenList.Count; i++)
                         if (OpenList[i].F <= CurNode.F && OpenList[i].H < CurNode.H) CurNode = OpenList[i];
@@ -104,7 +99,7 @@ public class MoveManager : MonoBehaviour
                     OpenList.Remove(CurNode);
                     ClosedList.Add(CurNode);
 
-                    // ¸¶Áö¸·
+                    // ë§ˆì§€ë§‰
                     if (CurNode == TargetNode)
                     {
 
@@ -121,7 +116,7 @@ public class MoveManager : MonoBehaviour
                     }
 
 
-                    // ¢Ö¢Ø¢×¢Ù
+                    // â†—â†–â†™â†˜
                     if (allowDiagonal)
                     {
                         OpenListAdd(CurNode.x + 1, CurNode.y + 1);
@@ -130,7 +125,7 @@ public class MoveManager : MonoBehaviour
                         OpenListAdd(CurNode.x + 1, CurNode.y - 1);
                     }
 
-                    // ¡è ¡æ ¡é ¡ç
+                    // â†‘ â†’ â†“ â†
                     OpenListAdd(CurNode.x, CurNode.y + 1);
                     OpenListAdd(CurNode.x + 1, CurNode.y);
                     OpenListAdd(CurNode.x, CurNode.y - 1);
@@ -143,7 +138,7 @@ public class MoveManager : MonoBehaviour
         }
     }
 
-    //·£´ıÀ§Ä¡¿¡ °üÇÑ ±æ Ã£±â
+    //ëœë¤ìœ„ì¹˜ì— ê´€í•œ ê¸¸ ì°¾ê¸°
     public void PathFindingToTargetPos(Vector2Int pos)
     {
 
@@ -151,14 +146,14 @@ public class MoveManager : MonoBehaviour
         targetPos = pos;
 
 
-        topRight.x = startPos.x + 20;
-        topRight.y = startPos.y + 20;
+        topRight.x = startPos.x + 40;
+        topRight.y = startPos.y + 40;
 
-        bottomLeft.x = startPos.x - 20;
-        bottomLeft.y = startPos.y - 20;
+        bottomLeft.x = startPos.x - 40;
+        bottomLeft.y = startPos.y - 40;
 
 
-        // NodeArrayÀÇ Å©±â Á¤ÇØÁÖ°í, isWall, x, y ´ëÀÔ
+        // NodeArrayì˜ í¬ê¸° ì •í•´ì£¼ê³ , isWall, x, y ëŒ€ì…
 
         sizeX = topRight.x - bottomLeft.x + 1;
         sizeY = topRight.y - bottomLeft.y + 1;
@@ -177,82 +172,80 @@ public class MoveManager : MonoBehaviour
         }
 
 
-        // ½ÃÀÛ°ú ³¡ ³ëµå, ¿­¸°¸®½ºÆ®¿Í ´İÈù¸®½ºÆ®, ¸¶Áö¸·¸®½ºÆ® ÃÊ±âÈ­
+        // ì‹œì‘ê³¼ ë ë…¸ë“œ, ì—´ë¦°ë¦¬ìŠ¤íŠ¸ì™€ ë‹«íŒë¦¬ìŠ¤íŠ¸, ë§ˆì§€ë§‰ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         StartNode = NodeArray[startPos.x - bottomLeft.x, startPos.y - bottomLeft.y];
-        if (Vector2.Distance(startPos, targetPos) < 20)
-        {
-            TargetNode = NodeArray[targetPos.x - bottomLeft.x, targetPos.y - bottomLeft.y];
+        TargetNode = NodeArray[targetPos.x - bottomLeft.x, targetPos.y - bottomLeft.y];
 
-            OpenList = new List<Node>() { StartNode };
-            ClosedList = new List<Node>();
-            FinalNodeList = new List<Node>();
+        OpenList = new List<Node>() { StartNode };
+        ClosedList = new List<Node>();
+        FinalNodeList = new List<Node>();
 
-            float distance = Vector2.Distance(new Vector2(StartNode.x, StartNode.y), new Vector2(TargetNode.x, TargetNode.y));
+        float distance = Vector2.Distance(new Vector2(StartNode.x, StartNode.y), new Vector2(TargetNode.x, TargetNode.y));
             
-            while (OpenList.Count > 0)
+        while (OpenList.Count > 0)
+        {
+            // ì—´ë¦°ë¦¬ìŠ¤íŠ¸ ì¤‘ ê°€ì¥ Fê°€ ì‘ê³  Fê°€ ê°™ë‹¤ë©´ Hê°€ ì‘ì€ ê±¸ í˜„ì¬ë…¸ë“œë¡œ í•˜ê³  ì—´ë¦°ë¦¬ìŠ¤íŠ¸ì—ì„œ ë‹«íŒë¦¬ìŠ¤íŠ¸ë¡œ ì˜®ê¸°ê¸°
+            CurNode = OpenList[0];
+            for (int i = 1; i < OpenList.Count; i++)
+                if (OpenList[i].F <= CurNode.F && OpenList[i].H < CurNode.H) CurNode = OpenList[i];
+
+            OpenList.Remove(CurNode);
+            ClosedList.Add(CurNode);
+
+            // ë§ˆì§€ë§‰
+            if (CurNode == TargetNode)
             {
-                // ¿­¸°¸®½ºÆ® Áß °¡Àå F°¡ ÀÛ°í F°¡ °°´Ù¸é H°¡ ÀÛÀº °É ÇöÀç³ëµå·Î ÇÏ°í ¿­¸°¸®½ºÆ®¿¡¼­ ´İÈù¸®½ºÆ®·Î ¿Å±â±â
-                CurNode = OpenList[0];
-                for (int i = 1; i < OpenList.Count; i++)
-                    if (OpenList[i].F <= CurNode.F && OpenList[i].H < CurNode.H) CurNode = OpenList[i];
 
-                OpenList.Remove(CurNode);
-                ClosedList.Add(CurNode);
-
-                // ¸¶Áö¸·
-                if (CurNode == TargetNode)
+                Node TargetCurNode = TargetNode;
+                while (TargetCurNode != StartNode)
                 {
-
-                    Node TargetCurNode = TargetNode;
-                    while (TargetCurNode != StartNode)
-                    {
-                        FinalNodeList.Add(TargetCurNode);
-                        TargetCurNode = TargetCurNode.ParentNode;
-                    }
-                    FinalNodeList.Add(StartNode);
-                    FinalNodeList.Reverse();
-
-                    return;
+                    FinalNodeList.Add(TargetCurNode);
+                    TargetCurNode = TargetCurNode.ParentNode;
                 }
+                FinalNodeList.Add(StartNode);
+                FinalNodeList.Reverse();
 
-
-                // ¢Ö¢Ø¢×¢Ù
-                if (allowDiagonal)
-                {
-                    OpenListAdd(CurNode.x + 1, CurNode.y + 1);
-                    OpenListAdd(CurNode.x - 1, CurNode.y + 1);
-                    OpenListAdd(CurNode.x - 1, CurNode.y - 1);
-                    OpenListAdd(CurNode.x + 1, CurNode.y - 1);
-                }
-
-                // ¡è ¡æ ¡é ¡ç
-                OpenListAdd(CurNode.x, CurNode.y + 1);
-                OpenListAdd(CurNode.x + 1, CurNode.y);
-                OpenListAdd(CurNode.x, CurNode.y - 1);
-                OpenListAdd(CurNode.x - 1, CurNode.y);
+                return;
             }
+
+
+            // â†—â†–â†™â†˜
+            if (allowDiagonal)
+            {
+                OpenListAdd(CurNode.x + 1, CurNode.y + 1);
+                OpenListAdd(CurNode.x - 1, CurNode.y + 1);
+                OpenListAdd(CurNode.x - 1, CurNode.y - 1);
+                OpenListAdd(CurNode.x + 1, CurNode.y - 1);
+            }
+
+            // â†‘ â†’ â†“ â†
+            OpenListAdd(CurNode.x, CurNode.y + 1);
+            OpenListAdd(CurNode.x + 1, CurNode.y);
+            OpenListAdd(CurNode.x, CurNode.y - 1);
+            OpenListAdd(CurNode.x - 1, CurNode.y);
         }
+        
     }
 
 
     void OpenListAdd(int checkX, int checkY)
     {
-        // »óÇÏÁÂ¿ì ¹üÀ§¸¦ ¹ş¾î³ªÁö ¾Ê°í, º®ÀÌ ¾Æ´Ï¸é¼­, ´İÈù¸®½ºÆ®¿¡ ¾ø´Ù¸é
+        // ìƒí•˜ì¢Œìš° ë²”ìœ„ë¥¼ ë²—ì–´ë‚˜ì§€ ì•Šê³ , ë²½ì´ ì•„ë‹ˆë©´ì„œ, ë‹«íŒë¦¬ìŠ¤íŠ¸ì— ì—†ë‹¤ë©´
         if (checkX >= bottomLeft.x && checkX < topRight.x + 1 && checkY >= bottomLeft.y && checkY < topRight.y + 1 && !NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y].isWall && !ClosedList.Contains(NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y]))
         {
-            // ´ë°¢¼± Çã¿ë½Ã, º® »çÀÌ·Î Åë°ú ¾ÈµÊ
+            // ëŒ€ê°ì„  í—ˆìš©ì‹œ, ë²½ ì‚¬ì´ë¡œ í†µê³¼ ì•ˆë¨
             if (allowDiagonal) if (NodeArray[CurNode.x - bottomLeft.x, checkY - bottomLeft.y].isWall && NodeArray[checkX - bottomLeft.x, CurNode.y - bottomLeft.y].isWall) return;
 
-            // ÄÚ³Ê¸¦ °¡·ÎÁú·¯ °¡Áö ¾ÊÀ»½Ã, ÀÌµ¿ Áß¿¡ ¼öÁ÷¼öÆò Àå¾Ö¹°ÀÌ ÀÖÀ¸¸é ¾ÈµÊ
+            // ì½”ë„ˆë¥¼ ê°€ë¡œì§ˆëŸ¬ ê°€ì§€ ì•Šì„ì‹œ, ì´ë™ ì¤‘ì— ìˆ˜ì§ìˆ˜í‰ ì¥ì• ë¬¼ì´ ìˆìœ¼ë©´ ì•ˆë¨
             if (dontCrossCorner) if (NodeArray[CurNode.x - bottomLeft.x, checkY - bottomLeft.y].isWall || NodeArray[checkX - bottomLeft.x, CurNode.y - bottomLeft.y].isWall) return;
 
 
-            // ÀÌ¿ô³ëµå¿¡ ³Ö°í, Á÷¼±Àº 10, ´ë°¢¼±Àº 14ºñ¿ë
+            // ì´ì›ƒë…¸ë“œì— ë„£ê³ , ì§ì„ ì€ 10, ëŒ€ê°ì„ ì€ 14ë¹„ìš©
             Node NeighborNode = NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y];
             int MoveCost = CurNode.G + (CurNode.x - checkX == 0 || CurNode.y - checkY == 0 ? 10 : 14);
 
 
-            // ÀÌµ¿ºñ¿ëÀÌ ÀÌ¿ô³ëµåGº¸´Ù ÀÛ°Å³ª ¶Ç´Â ¿­¸°¸®½ºÆ®¿¡ ÀÌ¿ô³ëµå°¡ ¾ø´Ù¸é G, H, ParentNode¸¦ ¼³Á¤ ÈÄ ¿­¸°¸®½ºÆ®¿¡ Ãß°¡
+            // ì´ë™ë¹„ìš©ì´ ì´ì›ƒë…¸ë“œGë³´ë‹¤ ì‘ê±°ë‚˜ ë˜ëŠ” ì—´ë¦°ë¦¬ìŠ¤íŠ¸ì— ì´ì›ƒë…¸ë“œê°€ ì—†ë‹¤ë©´ G, H, ParentNodeë¥¼ ì„¤ì • í›„ ì—´ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
             if (MoveCost < NeighborNode.G || !OpenList.Contains(NeighborNode))
             {
                 NeighborNode.G = MoveCost;
@@ -273,74 +266,7 @@ public class MoveManager : MonoBehaviour
     }
 
 
-    public void MoveToTarget()
-    {
-        if (FinalNodeList.Count > 1)
-        {
-            Vector2 targetPosition = new Vector2(FinalNodeList[1].x, FinalNodeList[1].y);
 
-
-            RaycastHit2D[] hitdown = Physics2D.RaycastAll(transform.position, Vector2.down);
-
-            for (int i = 0; i < hitdown.Length; i++)
-            {
-                if (hitdown[i].transform != null)
-                {
-                    if (hitdown[i].distance < 0.3f && hitdown[i].collider.CompareTag("Wall"))
-                    {
-                        FinalNodeList.RemoveAt(0);
-                    }
-
-                }
-            }
-
-            RaycastHit2D[] hitup = Physics2D.RaycastAll(transform.position, Vector2.up);
-            for (int i = 0; i < hitup.Length; i++)
-            {
-                if (hitup[i].transform != null)
-                {
-                    if (hitup[i].distance < 0.3f && hitup[i].collider.CompareTag("Wall"))
-                    {
-                        FinalNodeList.RemoveAt(0);
-                    }
-                }
-            }
-
-            RaycastHit2D[] hitleft = Physics2D.RaycastAll(transform.position, Vector2.left);
-            for (int i = 0; i < hitleft.Length; i++)
-            {
-                if (hitleft[i].transform != null)
-                {
-                    if (hitleft[i].distance < 0.3f && hitleft[i].collider.CompareTag("Wall"))
-                    {
-                        FinalNodeList.RemoveAt(0);
-                    }
-
-                }
-            }
-
-            RaycastHit2D[] hitright = Physics2D.RaycastAll(transform.position, Vector2.right);
-            for (int i = 0; i < hitright.Length; i++)
-            {
-                if (hitright[i].transform != null)
-                {
-                    if (hitright[i].distance < 0.3f && hitright[i].collider.CompareTag("Wall"))
-                    {
-                        FinalNodeList.RemoveAt(0);
-                    }
-                }
-            }
-
-
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 4 * Time.deltaTime);
-
-            // ¸ñÇ¥ ÁöÁ¡¿¡ µµ´ŞÇÏ¸é ¸®½ºÆ®¿¡¼­ ÇØ´ç ³ëµå¸¦ Á¦°Å
-            if ((Vector2)transform.position == targetPosition)
-            {
-                FinalNodeList.RemoveAt(0);
-            }
-        }
-    }
 
 
 }

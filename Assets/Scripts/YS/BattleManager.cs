@@ -6,22 +6,22 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
 
-    public List<GameObject> ally;
-    public List<GameObject> enemy;
+    public List<GameObject> resistance;
+    public List<GameObject> cult;
 
-    private List<GameObject> allySave;
-    private List<GameObject> enemySave;
+    private List<GameObject> resistanceSave;
+    private List<GameObject> cultSave;
 
-    public List<GameObject> Ally
+    public List<GameObject> Resistance
     {
-        get { return ally; }
-        set { ally = value; }
+        get { return resistance; }
+        set { resistance = value; }
     }
 
-    public List<GameObject> Enemy
+    public List<GameObject> Cult
     {
-        get { return enemy; }
-        set { enemy = value; }
+        get { return cult; }
+        set { cult = value; }
     }
 
 
@@ -38,37 +38,35 @@ public class BattleManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        allySave = new List<GameObject>();
-        enemySave = new List<GameObject>();
     }
 
 
 
     public void ResetList()
     {
-        allySave = new List<GameObject>();
-        enemySave = new List<GameObject>();
+        resistanceSave = new List<GameObject>();
+        cultSave = new List<GameObject>();
 
 
-        for (int i = 0; i < ally.Count; i++)
+        for (int i = 0; i < resistance.Count; i++)
         {
-            if(ally[i] != null)
+            if(resistance[i] != null)
             {
-                allySave.Add(ally[i]);
+                resistanceSave.Add(resistance[i]);
             }
         }
-        for (int i = 0; i < enemy.Count; i++)
+        for (int i = 0; i < cult.Count; i++)
         {
-            if (ally[i] != null)
+            if (resistance[i] != null)
             {
-                enemySave.Add(enemy[i]);
+                cultSave.Add(cult[i]);
             }
         }
 
-        ally = new List<GameObject>();
-        ally = allySave;
+        resistance = new List<GameObject>();
+        resistance = resistanceSave;
 
-        enemy = new List<GameObject>();
-        enemy = enemySave;
+        cult = new List<GameObject>();
+        cult = cultSave;
     }
 }

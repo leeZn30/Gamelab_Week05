@@ -25,12 +25,8 @@ public class Player_Movement : MonoBehaviour
     {
         isUsingMap = false;
 
+        BattleManager.Instance.Resistance.Add(gameObject);
         //PlayerGunSetting();
-    }
-
-    private void Awake()
-    {
-        BattleManager.Instance.Ally.Add(gameObject);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
