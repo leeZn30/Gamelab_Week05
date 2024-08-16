@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour
 {
@@ -57,3 +57,4 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 }
+*/
