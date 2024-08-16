@@ -45,7 +45,6 @@ public class BookshelfInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            Debug.Log("Player entered the range.");
         }
     }
 
@@ -54,7 +53,6 @@ public class BookshelfInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            Debug.Log("Player exited the range.");
         }
     }
 
