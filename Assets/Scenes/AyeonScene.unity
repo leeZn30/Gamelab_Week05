@@ -1283,6 +1283,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318461090}
   m_CullTransparentMesh: 1
+--- !u!1 &1402378050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1402378051}
+  - component: {fileID: 1402378052}
+  m_Layer: 0
+  m_Name: NoteEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1402378051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402378050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1530321013}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1402378052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402378050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6431d159b6a300b49b5dbdf148797f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentEvent: 0
+  dialogueId: 0
+  person: {fileID: 2033970691260634791, guid: c33b35db81549ea47804c63ea6edd2b5, type: 3}
 --- !u!1 &1530321012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,7 +1359,8 @@ Transform:
   m_LocalPosition: {x: -0.67847466, y: -0.26002395, z: 0.012901574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1402378051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1530321014
@@ -1336,6 +1384,7 @@ MonoBehaviour:
     isTarget: 0
   noteUI: {fileID: 0}
   noteBtn: {fileID: 0}
+  noteEvent: {fileID: 1402378052}
 --- !u!1 &1608335893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,8 +1864,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1997,6 +2046,7 @@ SceneRoots:
   - {fileID: 1608335895}
   - {fileID: 1941237190}
   - {fileID: 641549717}
+  - {fileID: 1901862658}
   - {fileID: 93678104642792808}
   - {fileID: 398051961}
   - {fileID: 2139146550}
@@ -2004,4 +2054,3 @@ SceneRoots:
   - {fileID: 1118460278}
   - {fileID: 712520279}
   - {fileID: 305344276}
-  - {fileID: 1901862658}

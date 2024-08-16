@@ -14,6 +14,9 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     [SerializeField] GameObject noteUI;
     [SerializeField] Button noteBtn;
 
+    [Header("노트 이벤트")]
+    [SerializeField] NoteEvent noteEvent;
+
     void Awake()
     {
         // 씬 이동해도 삭제되면 안됨
@@ -62,10 +65,25 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 // 현재 노트 안보이게 하기
                 currentNoteData.isTarget = false;
 
-                // 다음 노트 찾아서 보이게 하기
-                currentNoteData = noteDatas.Find(e => e.order == currentNoteData.order + 1);
-                currentNoteData.isTarget = true;
+                // 이벤트 처리
+                StartCoroutine(EventCheck());
+
                 break;
+        }
+    }
+
+    IEnumerator EventCheck()
+    {
+        bool isComplete = false;
+        StartCoroutine(noteEvent.DoEvent(() => isComplete = true, currentNoteData.order));
+        yield return new WaitUntil(() => isComplete);
+
+        // 다음 노트 찾아서 보이게 하기
+        NoteData nextNoteData = noteDatas.Find(e => e.order == currentNoteData.order + 1);
+        if (nextNoteData != null)
+        {
+            currentNoteData = nextNoteData;
+            currentNoteData.isTarget = true;
         }
     }
 
