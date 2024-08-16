@@ -64,7 +64,7 @@ public class QuestManager : MonoBehaviour
                 break;
             case "Location":
                 Debug.Log("특정 위치 가기 퀘스트 클리어");
-                // 최종 퀘스트 작성
+                StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
                 break;
 
         }
@@ -82,7 +82,7 @@ public class QuestManager : MonoBehaviour
 
     public void AcceptQuest(string questName)
     {
-        QuestSO quest = FindQuest(questName); 
+        QuestSO quest = FindQuest(questName);
         if (quest.isAvailable)
         {
             activeQuests.Add(quest);
@@ -102,7 +102,8 @@ public class QuestManager : MonoBehaviour
 
     public IEnumerator CompleteQuest(string questName)
     {
-        for(int j = 0; j< activeQuests.Count; j++){
+        for (int j = 0; j < activeQuests.Count; j++)
+        {
             if (activeQuests[j].questName == questName)
             {
                 activeQuests[j].isCompleted = true;
@@ -131,7 +132,7 @@ public class QuestManager : MonoBehaviour
         }
 
         return tempText;
-    } 
+    }
 
     public void OnEnemyKilled(int enemyID)
     {
@@ -158,11 +159,11 @@ public class QuestManager : MonoBehaviour
         QuestSO quest = FindQuest(questname);
         if (quest.isCompleted)
         {
-                return true;
+            return true;
         }
         else
         {
-                return false;
+            return false;
         }
-        }
+    }
 }
