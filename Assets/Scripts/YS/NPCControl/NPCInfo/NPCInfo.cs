@@ -95,7 +95,6 @@ public class NPCInfo : MonoBehaviour
             }
 
             target = BattleManager.Instance.Resistance[num];
-            Debug.Log("Target found: " + target.name);
         }
 
         else if (side == 2 && BattleManager.Instance.Cult.Count > 0)

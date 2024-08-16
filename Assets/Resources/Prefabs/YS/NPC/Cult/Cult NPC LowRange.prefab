@@ -254,12 +254,14 @@ MonoBehaviour:
   type: 0
   health: 0
   maxHealth: 0
-  isBattle: 0
   damage: 0
   attackRange: 10
   attackSpeed: 0.5
   target: {fileID: 0}
+  isPatrol: 0
+  isBattle: 0
   state: 0
+  blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
 --- !u!114 &6961975259566901443
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -67,22 +67,24 @@ public class NPCMovement : MonoBehaviour
             }
         }
 
+
+        
         if (GetComponent<NPCInfo>().isBattle)
         {
+
             if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
             {
                 currentState = NPCState.Run;
             }
-            else
+
+            if (GetComponent<NPCInfo>().target != null)
             {
-                if (GetComponent<NPCInfo>().target != null)
+                if (currentState != NPCState.Battle)
                 {
-                    if (currentState != NPCState.Battle)
-                    {
-                        ChangeState();
-                    }
+                    ChangeState();
                 }
             }
+            
 
             Behave();
             
@@ -222,7 +224,24 @@ public class NPCMovement : MonoBehaviour
     {
         GameObject[] runs = GameObject.FindGameObjectsWithTag("Run");
 
-        targetPosition = runs[Random.Range(0, runs.Length)].transform.position;
+        if (GetComponent<NPCInfo>().side == 1)
+        {
+            int ran = Random.Range(0,runs.Length);
+
+            if (runs[ran].GetComponent<RunTeam>().runTeam == 1)
+            {
+                targetPosition = runs[ran].transform.position;
+            }
+        }
+        else
+        {
+            int ran = Random.Range(0, runs.Length);
+
+            if (runs[ran].GetComponent<RunTeam>().runTeam == 2)
+            {
+                targetPosition = runs[ran].transform.position;
+            }
+        }
     }
 
     //NPC - Patrol ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
