@@ -10,14 +10,14 @@ public class EventManager : Singleton<EventManager>
     void Awake()
     {
         // 씬 이동해도 삭제되면 안됨
-        if (Instannce == null)
+        if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            DestroyImmediate(gameObject);
-        }
+        // else
+        // {
+        //     DestroyImmediate(gameObject);
+        // }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

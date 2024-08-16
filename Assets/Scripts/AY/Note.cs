@@ -1,28 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Note : MonoBehaviour
 {
+    [Header("노트 데이터")]
     [SerializeField] NoteData noteData;
+    [SerializeField] GameObject noteBody;
 
-    void Awake()
+    [Header("기타")]
+    [SerializeField] GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
+    private bool isPlayerInRange = false; // 플레이어가 NPC 근처에 있는지 확인
+
+    void Start()
     {
         // note
-        noteData = NoteRouteManager.Instannce.noteDatas.Find(e => e.noteID == gameObject.name);
+        noteData = NoteRouteManager.Instance.noteDatas.Find(e => e.noteID == gameObject.name);
+
+        interactionUI.SetActive(false);
     }
 
     void Update()
     {
-        // 노트 할성화
-        gameObject.SetActive(noteData.isTarget);
+        noteBody.SetActive(noteData.isTarget);
+
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        {
+            CallOpenNote();
+        }
     }
 
-    void OnMouseDown()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // 읽은거 보여주기
-
-        // 읽었다고 이벤트 보내기
-        EventManager.Instannce.PostNotification(Event_Type.eNoteRead, this, noteData);
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = true;
+            interactionUI.SetActive(true); // 플레이어가 범위 내에 들어오면 E 키 UI 표시
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+            interactionUI.SetActive(false); // 플레이어가 범위 밖으로 나가면 E 키 UI 숨김
+        }
+    }
+
+    void CallOpenNote()
+    {
+        NoteRouteManager.Instance.OpenNote(noteData.content);
+
+        // 이벤트 호출
+        EventManager.Instance.PostNotification(Event_Type.eNoteRead, this, noteData);
+
+        // 삭제
+        Destroy(gameObject);
+    }
+
 }
