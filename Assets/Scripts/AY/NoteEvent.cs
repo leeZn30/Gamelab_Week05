@@ -18,8 +18,18 @@ public class NoteEvent : MonoBehaviour
     public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
     [SerializeField] GameObject enemy;
 
-    // [Header("Event5")]
-    // [SerializeField] QuestSO questSO;
+    [Header("Event3")]
+    public int dialogueId3; // 대사 ID, 이 NPC가 말할 대사를 지정
+
+    [Header("Event4")]
+    public int dialogueId4; // 대사 ID, 이 NPC가 말할 대사를 지정
+
+    [Header("Event5")]
+    public int dialogueId5; // 대사 ID, 이 NPC가 말할 대사를 지정
+
+    [Header("Event6")]
+    [SerializeField] QuestSO questSO1;
+    [SerializeField] QuestSO questSO2;
 
     public IEnumerator DoEvent(Action onComplete, int eventNum)
     {
@@ -31,7 +41,7 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 1:
-                // yield return StartCoroutine(Event1());
+                yield return StartCoroutine(Event1());
                 break;
 
             case 2:
@@ -39,19 +49,18 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 3:
-                yield return StartCoroutine(Event3());
                 break;
 
             case 4:
-                // yield return StartCoroutine(Event4());
+                yield return StartCoroutine(Event4());
                 break;
 
             case 5:
-                // yield return StartCoroutine(Event5());
+                yield return StartCoroutine(Event5());
                 break;
 
             case 6:
-                // yield return StartCoroutine(Event6());
+                yield return StartCoroutine(Event6());
                 break;
 
         }
@@ -82,7 +91,7 @@ public class NoteEvent : MonoBehaviour
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 1; i++)
         {
             enemies.Add(Instantiate(enemy, Vector3.zero + new Vector3(i, 0, 0), Quaternion.identity));
         }
@@ -99,23 +108,16 @@ public class NoteEvent : MonoBehaviour
         // 문 엶
     }
 
-
-    IEnumerator Event3()
-    {
-        // 입단 테스트가 완료되지 않았다면
-
-        // 대화
-
-        yield return null;
-    }
-
     IEnumerator Event4()
     {
-        // 가는 길에..?
+        // 특정 방에 들어갔을 때 처리?
+        // yield return new WaitUntil(() => )
 
         // 대화
+        DialogueManager.Instance.SetDialogueID(dialogueId4);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
-        yield return null;
+        // 대화
     }
 
     IEnumerator Event5()
@@ -124,17 +126,8 @@ public class NoteEvent : MonoBehaviour
         GameObject go = Instantiate(person, Vector3.zero, Quaternion.identity);
 
         // 대화함
-        // Dialogue dialogue = DatabaseManager.instance.GetDialogueById(dialogueId);
-        // DialogueManager.Instance.StartDialogue(dialogue);
-
-        // while (true)
-        // {
-        //     if (Input.GetKeyDown(KeyCode.E))
-        //         // 다음 대사로 넘기기
-        //         DialogueManager.Instance.DisplayNextSentence();
-        // }
-
-        yield return new WaitForSeconds(3f);
+        DialogueManager.Instance.SetDialogueID(dialogueId5);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // npc 나감
         Destroy(go);
@@ -143,16 +136,16 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event6()
     {
         // Quest 완료
-        // 마지막 퀘슽 완료하면 전투 해야함 => DoEvent로 QuestMaanger에서 호출해야 함
-        // QuestManager.Instance.AcceptQuest(questSO);
+        QuestManager.Instance.AcceptQuest(questSO1);
+        QuestManager.Instance.AcceptQuest(questSO2);
 
-        // npc 생성함
-        GameObject go = Instantiate(person, Vector3.zero, Quaternion.identity);
+        yield return null;
+    }
 
-        yield return new WaitForSeconds(3f);
-
-        // npc 나감
-        Destroy(go);
+    public IEnumerator FinalBattle()
+    {
+        // 마지막 퀘스트 완료하면 전투 해야함 => DoEvent로 QuestMaanger에서 호출해야 함
+        yield return null;
     }
 
 
