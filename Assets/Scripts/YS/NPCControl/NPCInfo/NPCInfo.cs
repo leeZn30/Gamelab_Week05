@@ -9,8 +9,7 @@ public class NPCInfo : MonoBehaviour
     [Header("NPC Type")]
     public int EnemyID;
     public int side;
-    public int type;
-    private enum NPCType { LowRange, HighRange }
+    public string type;
 
     [Header("NPC HP")]
     public float health;
@@ -80,19 +79,47 @@ public class NPCInfo : MonoBehaviour
             float distance;
             float minDis = 50;
 
-            for(int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
+            if (type == "Long")
             {
-                if(BattleManager.Instance.Resistance[i] != null)
+                for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
                 {
-                    distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
-
-                    if(distance < minDis)
+                    if (BattleManager.Instance.Resistance[i] != null)
                     {
-                        minDis = distance; 
-                        num = i;
+                        distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
+
+                        if (distance < minDis)
+                        {
+                            minDis = distance;
+                            num = i;
+                        }
                     }
                 }
             }
+            else if(type == "Short")
+            {
+                for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
+                {
+                    if (BattleManager.Instance.Resistance[i] != null )
+                    {
+                        if(!BattleManager.Instance.Resistance[i].CompareTag("Player"))
+                        {
+                            if (BattleManager.Instance.Resistance[i].GetComponent<NPCInfo>().type == ("Long"))
+                            {
+                                distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
+
+                                if (distance < minDis)
+                                {
+                                    minDis = distance;
+                                    num = i;
+                                }
+                            }
+
+                        }
+                    }
+                
+                }
+            }
+            
 
             target = BattleManager.Instance.Resistance[num];
         }
@@ -101,18 +128,46 @@ public class NPCInfo : MonoBehaviour
         {
             int num = 0;
             float distance;
-            float minDis = 50;   
+            float minDis = 50;
 
-            for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
+            if (type == "Long")
             {
-                if (BattleManager.Instance.Cult[i] != null)
+                for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
                 {
-                    distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
-
-                    if (distance < minDis)
+                    if (BattleManager.Instance.Cult[i] != null)
                     {
-                        minDis = distance;
-                        num = i;
+                        distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
+
+                        if (distance < minDis)
+                        {
+                            minDis = distance;
+                            num = i;
+                        }
+                    }
+                }
+
+            }
+            else if (type == "Short")
+            {
+
+                for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
+                {
+                    if (BattleManager.Instance.Cult[i] != null)
+                    {
+                        if (!BattleManager.Instance.Resistance[i].CompareTag("Player"))
+                        {
+                            if(BattleManager.Instance.Cult[i].GetComponent<NPCInfo>().type == ("Long"))
+                            {
+                                distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
+
+                                if (distance < minDis)
+                                {
+                                    minDis = distance;
+                                    num = i;
+                                }
+
+                            }
+                        }
                     }
                 }
             }
