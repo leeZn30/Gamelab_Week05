@@ -827,7 +827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &712513815
 Rigidbody2D:
   serializedVersion: 4
@@ -1033,6 +1033,7 @@ MonoBehaviour:
   attackRange: 20
   attackSpeed: 0.5
   target: {fileID: 0}
+  state: 0
 --- !u!1 &736803465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,7 +2279,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2386,6 +2387,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 587669732542705918, guid: 89839ea75b784374ea09fc8c0a95d623, type: 3}
+      propertyPath: chaseDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 587669732542705918, guid: 89839ea75b784374ea09fc8c0a95d623, type: 3}
+      propertyPath: wanderDistance
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2176413968613426453, guid: 89839ea75b784374ea09fc8c0a95d623, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.1
