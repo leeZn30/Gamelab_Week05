@@ -7,9 +7,12 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
+    public List<QuestSO> allQuests = new List<QuestSO>();
     public List<QuestSO> activeQuests = new List<QuestSO>();
     [SerializeField] QuestClear questClear;
-    [SerializeField] private TMP_Text questText;
+    public Transform questListParent;  // 퀘스트가 표시될 부모 객체
+    public TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
+    private List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
 
     private void Awake()
     {
@@ -30,7 +33,9 @@ public class QuestManager : MonoBehaviour
         {
             activeQuests.Add(quest);
             quest.isActived = true;
-            OnQuestUI();
+            TextMeshProUGUI newQuestText = Instantiate(questTextPrefab, questListParent);
+            newQuestText.text = quest.description;
+            activeQuestTexts.Add(newQuestText);
 
             if (quest.ReachLocation)
             {
@@ -62,28 +67,25 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void OnQuestUI()
+    public bool checkQuest(string questname)
     {
-        questText.text = "";
-        foreach (var quest in activeQuests)
+        foreach (var quests in allQuests)
         {
-            if (quest.isCompleted)
+            if (quests.questName == questname)
             {
-                questText.text += "<s>";
+                if (quests.isCompleted)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            questText.text += quest.description;
-            if (quest.KillEnemies)
-            {
-                questText.text += " (" + quest.currCount + "/" + quest.targetCount + ")";
-            }
-
-            if (quest.isCompleted)
-            {
-                questText.text += "</s>";
-            }
-
-            questText.text += '\n';
         }
+
+        return false;
+        Debug.Log("퀘스트 못찾음");
     }
 }
 
