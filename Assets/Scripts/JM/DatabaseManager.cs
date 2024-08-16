@@ -5,7 +5,7 @@ using UnityEngine;
 public class DatabaseManager : MonoBehaviour
 {
     public static DatabaseManager instance;
-    public CSVReader csvReader;
+    public DialogueReader csvReader;
 
     void Awake()
     {
