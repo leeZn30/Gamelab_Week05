@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: NewQuest
   m_EditorClassIdentifier: 
   questName: 0
-  description: qwe
-  mustKillEnemies: 0
+  description: 
+  mustKillEnemies: 1
   mustReachLocation: 0
-  isCompleted: 0
+  isCompleted: 1
   isAvailable: 0
+  targetLocationObject: {fileID: 4537652627505147049, guid: d45949d6223cec24f8e9368b6a67cacd, type: 3}
