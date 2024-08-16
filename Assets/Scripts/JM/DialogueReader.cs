@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CSVReader : MonoBehaviour
+public class DialogueReader : MonoBehaviour
 {
     public TextAsset csvFile;
     public List<Dialogue> dialogues = new List<Dialogue>();

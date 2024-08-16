@@ -30,12 +30,14 @@ public class QuestManager : MonoBehaviour
             activeQuests.Add(quest);
             quest.isActived = true;
 
-            if (quest.ReachLocation && quest.targetLocationObject != null)
+            if (quest.ReachLocation)
             {
-                quest.targetLocationObject.SetActive(true);
+                GameObject tempGameObject = GameObject.Find(quest.targetLocationObject);
+                if (tempGameObject != null)
+                {
+                    tempGameObject.SetActive(true);
+                }
             }
-
-            Debug.Log($"{quest.questName} Äù½ºÆ® ¼ö¶ôµÊ!");
         }
     }
 
@@ -45,18 +47,16 @@ public class QuestManager : MonoBehaviour
         {
             if (quest.KillEnemies && !quest.isCompleted)
             {
-                if (quest.targetEnemy.GetComponent<Enemy>().EnemyID == enemyID)
+                if (quest.targetEnemyID == enemyID)
                 {
                     quest.currCount++;
                     if (quest.currCount == quest.targetCount)
                     {
                         quest.isCompleted = true;
-                        questClear.OnQuestClear(quest.questName);
+                        questClear.OnQuestClear(quest);
                     }
                 }
             }
         }
     }
-
-   
 }
