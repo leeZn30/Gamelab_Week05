@@ -14,8 +14,8 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
-    public TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
-    [SerializeField] List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
+    private TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
+    private List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
 
     void Start()
     {
@@ -125,14 +125,11 @@ public class QuestManager : MonoBehaviour
         QuestSO quest = FindQuest(questname);
         if (quest.isCompleted)
         {
-            return true;
+                return true;
         }
         else
         {
-            return false;
+                return false;
         }
-
-        return false;
-        Debug.Log("퀘스트 못찾음");
-    }
+        }
 }

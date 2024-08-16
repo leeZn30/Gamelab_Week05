@@ -50,7 +50,7 @@ public class QuestNPCInteraction : MonoBehaviour
                     {
                         Time.timeScale = 0;
                         dialogueManager.StartDialogue(dialogue);
-                        quest.isAvailable = true; // 퀘스트를 사용 가능 상태로 변경
+                        // 퀘스트 수락   
                     }
                 }
                 else if (!quest.isCompleted)
