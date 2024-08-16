@@ -13,10 +13,8 @@ public class QuestSO : ScriptableObject
     public bool isActived;
     public bool isAvailable;
 
-    public GameObject targetLocationObject;
-    public GameObject targetEnemy;
+    public string targetLocationObject;
+    public int targetEnemyID;
     public int targetCount;
     public int currCount;
-
-
 }
