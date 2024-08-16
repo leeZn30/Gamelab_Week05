@@ -122,6 +122,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &36863529
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744404194690242732, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275373923917867866, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: m_Name
+      value: ResistanceNPC (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
 --- !u!1 &125775453
 GameObject:
   m_ObjectHideFlags: 0
@@ -9326,6 +9383,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50be0bf80a811384d8fca4bb957188ff, type: 3}
+--- !u!1001 &7831625075575186148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467933556219298279, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494918501444103005, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
+      propertyPath: m_Name
+      value: ResistanceNPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 676f7cc08513dd34bbedb4018f176d91, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -9348,3 +9462,5 @@ SceneRoots:
   - {fileID: 798286973}
   - {fileID: 1770544960}
   - {fileID: 1187526916}
+  - {fileID: 7831625075575186148}
+  - {fileID: 36863529}
