@@ -16,18 +16,22 @@ public class NPCWeaponRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent.GetComponent<NPCInfo>().target != null)
+        if (transform.parent.GetComponent<NPCInfo>().isBattle)
         {
-            targetPos = transform.parent.GetComponent<NPCInfo>().target.transform.position;
+            if (transform.parent.GetComponent<NPCInfo>().target != null)
+            {
+                targetPos = transform.parent.GetComponent<NPCInfo>().target.transform.position;
+            }
+            aimPos = transform.parent.transform.position;
+
+
+            direction = new Vector2(targetPos.x - aimPos.x, targetPos.y - aimPos.y);
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = rotation;
+
         }
-        aimPos = transform.parent.transform.position;
-
-
-        direction = new Vector2(targetPos.x - aimPos.x, targetPos.y - aimPos.y);
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = rotation;
     }
 
 

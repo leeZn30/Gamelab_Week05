@@ -254,12 +254,14 @@ MonoBehaviour:
   type: 0
   health: 0
   maxHealth: 0
-  isBattle: 0
   damage: 0
   attackRange: 10
   attackSpeed: 0.5
   target: {fileID: 0}
+  isPatrol: 0
+  isBattle: 0
   state: 0
+  blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
 --- !u!114 &6961975259566901443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7421411161731263235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419b4fc2323e2d64bbbe972ae8a43d89, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e610cde4531cf74f9ca70ae0c5ea2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bottomLeft: {x: 0, y: 0}
@@ -277,7 +279,7 @@ MonoBehaviour:
   startPos: {x: 0, y: 0}
   targetPos: {x: 0, y: 0}
   FinalNodeList: []
-  allowDiagonal: 1
+  allowDiagonal: 0
   dontCrossCorner: 0
   point: 0
 --- !u!61 &5845431449578580188

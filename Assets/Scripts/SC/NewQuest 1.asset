@@ -17,8 +17,8 @@ MonoBehaviour:
   KillEnemies: 0
   ReachLocation: 0
   isCompleted: 0
-  isActived: 0
-  isAvailable: 0
+  isActived: 1
+  isAvailable: 1
   targetLocationObject: 
   targetEnemyID: 0
   targetCount: 0

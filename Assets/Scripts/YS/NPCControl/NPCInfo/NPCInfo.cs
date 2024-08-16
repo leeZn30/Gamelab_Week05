@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 using static UnityEngine.GraphicsBuffer;
 
 public class NPCInfo : MonoBehaviour
@@ -16,7 +17,6 @@ public class NPCInfo : MonoBehaviour
     public float maxHealth;
 
     [Header("NPC Attack")]
-    public bool isBattle;
     public float damage;
     public float attackRange;
     public float attackSpeed;
@@ -27,12 +27,16 @@ public class NPCInfo : MonoBehaviour
 
 
     [Header("NPC State")]
+    public bool isPatrol;
+    public bool isBattle;
     public int state;
 
 
+    public GameObject blood;
+
     private void Start()
     {
-        maxHealth = 30;
+        maxHealth = 10;
         health = maxHealth;
         switch (side)
         {
@@ -91,7 +95,6 @@ public class NPCInfo : MonoBehaviour
             }
 
             target = BattleManager.Instance.Resistance[num];
-            Debug.Log("Target found: " + target.name);
         }
 
         else if (side == 2 && BattleManager.Instance.Cult.Count > 0)
@@ -130,7 +133,11 @@ public class NPCInfo : MonoBehaviour
     {
         if (collision.collider.CompareTag("Bullet"))
         {
-            health--;
+            health--; 
+            float randX = UnityEngine.Random.Range(transform.position.x - 1, transform.position.x + 1);
+            float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
+
+            Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
         }
     }
 }

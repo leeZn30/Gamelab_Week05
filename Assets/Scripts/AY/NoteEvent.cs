@@ -136,8 +136,6 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event6()
     {
         // Quest 완료
-        QuestManager.Instance.AcceptQuest(questSO1);
-        QuestManager.Instance.AcceptQuest(questSO2);
 
         yield return null;
     }
