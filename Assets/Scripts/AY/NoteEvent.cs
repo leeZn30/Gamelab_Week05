@@ -21,7 +21,7 @@ public class NoteEvent : MonoBehaviour
     // [Header("Event5")]
     // [SerializeField] QuestSO questSO;
 
-    public IEnumerator DoEvent(System.Action onComplete, int eventNum)
+    public IEnumerator DoEvent(Action onComplete, int eventNum)
     {
         Debug.Log("Start Note Event");
 
@@ -31,7 +31,7 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 1:
-                yield return StartCoroutine(Event1());
+                // yield return StartCoroutine(Event1());
                 break;
 
             case 2:
@@ -43,22 +43,23 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 4:
-                yield return StartCoroutine(Event4());
+                // yield return StartCoroutine(Event4());
                 break;
 
             case 5:
-                yield return StartCoroutine(Event5());
+                // yield return StartCoroutine(Event5());
                 break;
 
             case 6:
-                yield return StartCoroutine(Event6());
+                // yield return StartCoroutine(Event6());
                 break;
 
         }
 
+        yield return null;
 
-        Debug.Log("End Note Event");
         onComplete?.Invoke();
+        Debug.Log("End Note Event");
     }
 
     IEnumerator Event1()
@@ -68,15 +69,6 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId1);
-
-        // while (true)
-        // {
-        //     if (Input.GetKeyDown(KeyCode.E))
-        //         // 다음 대사로 넘기기
-        //         DialogueManager.Instance.DisplayNextSentence();
-        // }
-
-        // yield return new WaitForSeconds(3f);
 
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
@@ -96,6 +88,8 @@ public class NoteEvent : MonoBehaviour
         }
 
         // 대화
+        DialogueManager.Instance.SetDialogueID(dialogueId2);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
         yield return new WaitUntil(() => enemies.All(e => e == null));
