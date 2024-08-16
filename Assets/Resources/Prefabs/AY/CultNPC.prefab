@@ -323,9 +323,10 @@ GameObject:
   - component: {fileID: 1467933556219298279}
   - component: {fileID: 9127295512982675618}
   - component: {fileID: 8558360426960379056}
-  m_Layer: 0
+  - component: {fileID: 2244994361347059786}
+  m_Layer: 8
   m_Name: CultNPC
-  m_TagString: Untagged
+  m_TagString: Cult
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -427,7 +428,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -443,3 +444,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2244994361347059786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494918501444103005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27abbbf6ccd914349a05152e3e226192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyID: 0
+  side: 0
+  type: 0
+  health: 0
+  maxHealth: 1
+  damage: 1
+  attackRange: 0
+  attackSpeed: 0
+  target: {fileID: 0}
+  isPatrol: 0
+  isBattle: 0
+  state: 0
+  blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
