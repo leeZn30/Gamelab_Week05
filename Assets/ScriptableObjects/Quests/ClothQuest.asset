@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: ExtraClothQuest
+  m_Name: ClothQuest
   m_EditorClassIdentifier: 
-  questName: ExtraClothQuest
-  description: "\uC5EC\uBC8C \uC2E0\uB3C4\uBCF5 \uCC3E"
+  questName: ClothQuest
+  description: "\uC2E0\uB3C4\uBCF5 \uCC3E\uAE30"
   KillEnemies: 0
   ReachLocation: 0
   isCompleted: 0
