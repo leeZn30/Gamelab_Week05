@@ -10,8 +10,12 @@ public class NPCInteraction : MonoBehaviour
     private bool isSend = false;
     void Start()
     {
-        interactionUI.SetActive(false);
+        if (interactionUI != null)
+        {
+            interactionUI.SetActive(false);
+        }
     }
+
 
     void Update()
     {
@@ -27,7 +31,10 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            interactionUI.SetActive(true); // 플레이어가 범위 내에 들어오면 E 키 UI 표시
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(true);
+            }
         }
     }
 
@@ -36,7 +43,12 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            interactionUI.SetActive(false); // 플레이어가 범위 밖으로 나가면 E 키 UI 숨김
+
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(false);
+            }
+
             isSend = false;
         }
     }

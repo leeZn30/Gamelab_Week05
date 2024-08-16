@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: 
   description: "\uAC00\uC9DC \uD018\uC2A4\uD2B8"
-  KillEnemies: 0
-  ReachLocation: 0
+  KillEnemies: 1
+  ReachLocation: 1
   isCompleted: 0
   isActived: 0
   isAvailable: 1
-  targetLocationObject: {fileID: 2970758439089141142, guid: b57336ab828596e45a6c3af960ba4e11, type: 3}
-  targetEnemy: {fileID: 0}
+  targetLocationObject: 
+  targetEnemyID: 0
   targetCount: 0
   currCount: 0
