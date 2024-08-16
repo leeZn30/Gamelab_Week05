@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -9,11 +10,16 @@ public class NoteEvent : MonoBehaviour
     public int currentEvent;
 
     [Header("Event1")]
-    public int dialogueId; // 대사 ID, 이 NPC가 말할 대사를 지정
+    public int dialogueId1; // 대사 ID, 이 NPC가 말할 대사를 지정
     [SerializeField] GameObject person;
 
-    [Header("Event5")]
-    [SerializeField] QuestSO questSO;
+
+    [Header("Event2")]
+    public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
+    [SerializeField] GameObject enemy;
+
+    // [Header("Event5")]
+    // [SerializeField] QuestSO questSO;
 
     public IEnumerator DoEvent(System.Action onComplete, int eventNum)
     {
@@ -25,7 +31,7 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 1:
-                yield return StartCoroutine(Event1());
+                // yield return StartCoroutine(Event1());
                 break;
 
             case 2:
@@ -61,8 +67,8 @@ public class NoteEvent : MonoBehaviour
         GameObject go = Instantiate(person, Vector3.zero, Quaternion.identity);
 
         // 대화함
-        // Dialogue dialogue = DatabaseManager.instance.GetDialogueById(dialogueId);
-        // DialogueManager.Instance.StartDialogue(dialogue);
+        Dialogue dialogue = DialogueManager.instance.GetDialogueById(dialogueId1);
+        DialogueManager.Instance.StartDialogue(dialogue);
 
         // while (true)
         // {
@@ -79,17 +85,23 @@ public class NoteEvent : MonoBehaviour
 
     IEnumerator Event2()
     {
+        // 문 닫음
+
         // 적이 엄청 생성됨
+        List<GameObject> enemies = new List<GameObject>();
+        for (int i = 0; i < 4; i++)
+        {
+            enemies.Add(Instantiate(enemy, Vector3.zero + new Vector3(i, 0, 0), Quaternion.identity));
+        }
 
         // 대화
 
-
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
-
+        yield return new WaitUntil(() => enemies.All(e => e == null));
 
         // 다시 진행함
 
-        yield return null;
+        // 문 엶
     }
 
 
@@ -137,7 +149,7 @@ public class NoteEvent : MonoBehaviour
     {
         // Quest 완료
         // 마지막 퀘슽 완료하면 전투 해야함 => DoEvent로 QuestMaanger에서 호출해야 함
-        QuestManager.Instance.AcceptQuest(questSO);
+        // QuestManager.Instance.AcceptQuest(questSO);
 
         // npc 생성함
         GameObject go = Instantiate(person, Vector3.zero, Quaternion.identity);

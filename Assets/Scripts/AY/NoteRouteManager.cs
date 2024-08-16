@@ -65,11 +65,18 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 // 현재 노트 안보이게 하기
                 currentNoteData.isTarget = false;
 
-                // 이벤트 처리
-                StartCoroutine(EventCheck());
+                // 노트 닫을 때까지 기다림
+                StartCoroutine(OnNoteClosed());
 
                 break;
         }
+    }
+
+    IEnumerator OnNoteClosed()
+    {
+        yield return new WaitUntil(() => !noteUI.activeSelf);
+
+        StartCoroutine(EventCheck());
     }
 
     IEnumerator EventCheck()

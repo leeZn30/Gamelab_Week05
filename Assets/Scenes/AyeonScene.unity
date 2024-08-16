@@ -1328,8 +1328,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEvent: 0
-  dialogueId: 0
+  dialogueId1: 1
   person: {fileID: 2033970691260634791, guid: c33b35db81549ea47804c63ea6edd2b5, type: 3}
+  dialogueId2: 1
+  enemy: {fileID: 2033970691260634791, guid: c33b35db81549ea47804c63ea6edd2b5, type: 3}
 --- !u!1 &1530321012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c8090fd4191f64ba2c01d7fe25dde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  csvReader: {fileID: 0}
   dialogueText: {fileID: 150486927}
   dialogueScreen: {fileID: 1828754691}
   isDialogueActive: 0
@@ -1623,6 +1626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeQuests: []
   completedQuests: []
+  questClear: {fileID: 0}
 --- !u!4 &1941237190
 Transform:
   m_ObjectHideFlags: 0
