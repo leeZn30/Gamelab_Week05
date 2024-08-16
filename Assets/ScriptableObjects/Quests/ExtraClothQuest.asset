@@ -15,11 +15,11 @@ MonoBehaviour:
   questName: ExtraClothQuest
   description: "\uC5EC\uBC8C \uC2E0\uB3C4\uBCF5 \uCC3E"
   KillEnemies: 0
-  ReachLocation: 0
-  isCompleted: 0
-  isActived: 0
+  ReachLocation: 1
+  isCompleted: 1
+  isActived: 1
   isAvailable: 1
-  targetLocationObject: 
+  targetLocationObject: ExtraShindobok
   targetEnemyID: 0
   targetCount: 0
   currCount: 0
