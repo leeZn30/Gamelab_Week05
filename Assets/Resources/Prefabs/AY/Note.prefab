@@ -94,8 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteData:
     noteID: 
-    content: 
     order: 0
+    content: 
     isTarget: 0
   noteBody: {fileID: 1578824675875595746}
   interactionUI: {fileID: 6628454669450372958}
@@ -169,8 +169,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1153876773
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.7647059, g: 1, b: 1, a: 1}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 8480559342858861353}
   - component: {fileID: 187788358522829404}
   - component: {fileID: 1155199069945714676}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -161046435
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &187788358522829404
