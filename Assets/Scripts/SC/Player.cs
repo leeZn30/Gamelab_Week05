@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public void AcceptQuest(QuestSO quest)
     {
-        questManager.AcceptQuest(quest);
+        questManager.AcceptQuest(quest.questName);
     }
 }
 
