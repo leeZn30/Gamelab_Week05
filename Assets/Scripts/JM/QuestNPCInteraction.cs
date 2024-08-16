@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class QuestNPCInteraction : MonoBehaviour
 {
-    public int initialDialogueId = 3; // 처음 말을 걸 때 출력할 대사 ID
-    public int incompleteQuestDialogueId = 4; // 퀘스트가 완료되지 않았을 때 출력할 대사 ID
-    public int completedQuestDialogueId = 5; // 퀘스트가 완료된 후 출력할 대사 ID
-    public int postCompletionDialogueId = 6; // 퀘스트가 완료된 후 항상 출력할 대사 ID
+    public int initialDialogueId = 3;
+    public int incompleteQuestDialogueId = 4;
+    public int completedQuestDialogueId = 5;
+    public int postCompletionDialogueId = 6;
+    private bool isSend = false;
 
     public QuestSO quest;
     public GameObject interactionUI;
     public bool questDialogueCompleted = false;
 
     private bool isPlayerInRange = false;
-
-    private bool isSend = false;
 
     void Start()
     {
@@ -24,29 +23,31 @@ public class QuestNPCInteraction : MonoBehaviour
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
-            int dialogueId;
-            isSend = true;
-
-            if (questDialogueCompleted)
-            {
-                dialogueId = postCompletionDialogueId;
-            }
-            else if (!quest.isAvailable)
-            {
-                quest.isAvailable = true;
-                dialogueId = initialDialogueId;
-            }
-            else if (!quest.isCompleted)
-            {
-                dialogueId = incompleteQuestDialogueId;
-            }
-            else
-            {
-                questDialogueCompleted = true;
-                dialogueId = completedQuestDialogueId;
-            }
-
+            int dialogueId = GetDialogueIdBasedOnQuestState();
             DialogueManager.Instance.SetDialogueID(dialogueId);
+            isSend = true;
+        }
+    }
+
+    private int GetDialogueIdBasedOnQuestState()
+    {
+        if (questDialogueCompleted)
+        {
+            return postCompletionDialogueId;
+        }
+        else if (!quest.isAvailable)
+        {
+            quest.isAvailable = true;
+            return initialDialogueId;
+        }
+        else if (!quest.isCompleted)
+        {
+            return incompleteQuestDialogueId;
+        }
+        else
+        {
+            questDialogueCompleted = true;
+            return completedQuestDialogueId;
         }
     }
 
@@ -55,7 +56,7 @@ public class QuestNPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            interactionUI.SetActive(true); // 플레이어가 범위 내에 들어오면 E 키 UI 표시
+            interactionUI.SetActive(true);
         }
     }
 
@@ -64,7 +65,7 @@ public class QuestNPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            interactionUI.SetActive(false); // 플레이어가 범위 밖으로 나가면 E 키 UI 숨김
+            interactionUI.SetActive(false);
             isSend = false;
         }
     }

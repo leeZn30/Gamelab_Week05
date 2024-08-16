@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using static Player;
@@ -7,9 +9,18 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
+    public List<QuestSO> allQuests = new List<QuestSO>();
+    private Dictionary<string, QuestSO> questDictionary;
+
     public List<QuestSO> activeQuests = new List<QuestSO>();
-    [SerializeField] QuestClear questClear;
-    [SerializeField] private TMP_Text questText;
+    public Transform questListParent;  // 퀘스트가 표시될 부모 객체
+    private TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
+    private List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
+
+    void Start()
+    {
+        questDictionary = allQuests.ToDictionary(quest => quest.questName);
+    }
 
     private void Awake()
     {
@@ -24,13 +35,27 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void AcceptQuest(QuestSO quest)
+    public QuestSO FindQuest(string questName)
     {
-        if (quest.isAvailable && !activeQuests.Contains(quest))
+        if (questDictionary.TryGetValue(questName, out QuestSO quest))
+        {
+            return quest;
+        }
+
+        Debug.Log("����Ʈ ����");
+        return null;
+    }
+
+    public void AcceptQuest(string questName)
+    {
+        QuestSO quest = FindQuest(questName); 
+        if (quest.isAvailable)
         {
             activeQuests.Add(quest);
             quest.isActived = true;
-            OnQuestUI();
+            TextMeshProUGUI newQuestText = Instantiate(questTextPrefab, questListParent);
+            newQuestText.text = quest.description;
+            activeQuestTexts.Add(newQuestText);
 
             if (quest.ReachLocation)
             {
@@ -39,6 +64,39 @@ public class QuestManager : MonoBehaviour
                 {
                     tempGameObject.SetActive(true);
                 }
+            }
+        }
+    }
+
+    public void OnQuestClear(string questName)
+    {
+        StartCoroutine(CompleteQuest(questName));
+        switch (questName)
+        {
+            case "quest1":
+                Debug.Log("퀘스트 클리어");
+                break;
+        }
+    }
+
+    public IEnumerator CompleteQuest(string questName)
+    {
+        for(int j = 0; j< activeQuests.Count; j++){
+            if (activeQuests[j].questName == questName)
+            {
+                activeQuests[j].isCompleted = true;
+                TextMeshProUGUI questText = activeQuestTexts[j];
+                questText.text = $"<s>{questText.text}</s>";
+
+                // 퀘스트 제거 (페이드 아웃 애니메이션)
+                for (float i = 1; i >= 0; i -= Time.deltaTime)
+                {
+                    questText.color = new Color(questText.color.r, questText.color.g, questText.color.b, i);
+                    yield return null;
+                }
+
+                Destroy(questText.gameObject);
+                activeQuestTexts.RemoveAt(j);
             }
         }
     }
@@ -55,35 +113,23 @@ public class QuestManager : MonoBehaviour
                     if (quest.currCount == quest.targetCount)
                     {
                         quest.isCompleted = true;
-                        questClear.OnQuestClear(quest);
+                        OnQuestClear(quest.questName);
                     }
                 }
             }
         }
     }
 
-    private void OnQuestUI()
+    public bool checkQuest(string questname)
     {
-        questText.text = "";
-        foreach (var quest in activeQuests)
+        QuestSO quest = FindQuest(questname);
+        if (quest.isCompleted)
         {
-            if (quest.isCompleted)
-            {
-                questText.text += "<s>";
-            }
-            questText.text += quest.description;
-            if (quest.KillEnemies)
-            {
-                questText.text += " (" + quest.currCount + "/" + quest.targetCount + ")";
-            }
-
-            if (quest.isCompleted)
-            {
-                questText.text += "</s>";
-            }
-
-            questText.text += '\n';
+                return true;
         }
-    }
+        else
+        {
+                return false;
+        }
+        }
 }
-
