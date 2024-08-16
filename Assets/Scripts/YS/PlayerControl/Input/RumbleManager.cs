@@ -18,37 +18,36 @@ public class RumbleManager : MonoBehaviour
         {
             instance = this;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     public void RumblePulse(float lowFrequency, float highFrequency, float duration)
     {
         if (InputManager.Instance.playerInput.currentControlScheme == "GamePad")
         {
-            // ÇöÀç °ÔÀÓÆĞµå¸¦ °¡Á®¿É´Ï´Ù.
+            // í˜„ì¬ ê²Œì„íŒ¨ë“œë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
             pad = Gamepad.current;
 
-            // °ÔÀÓÆĞµå°¡ ¿¬°áµÇ¾î ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+            // ê²Œì„íŒ¨ë“œê°€ ì—°ê²°ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
             if (pad != null)
             {
-                // °ÔÀÓÆĞµå Å¸ÀÔ¿¡ µû¶ó ´Ù¸¥ Áøµ¿ ¼³Á¤À» ÇÕ´Ï´Ù.
+                // ê²Œì„íŒ¨ë“œ íƒ€ì…ì— ë”°ë¼ ë‹¤ë¥¸ ì§„ë™ ì„¤ì •ì„ í•©ë‹ˆë‹¤.
                 if (pad is XInputController)
                 {
-                    // Xbox ÆĞµå Áøµ¿ ¼³Á¤ (¿¹: ¾àÇÑ Áøµ¿)
+                    // Xbox íŒ¨ë“œ ì§„ë™ ì„¤ì • (ì˜ˆ: ì•½í•œ ì§„ë™)
                     lowFrequency *= 0.8f;
                     highFrequency *= 0.8f;
                 }
                 else if (pad is DualShockGamepad)
                 {
-                    // DualShock ÆĞµå Áøµ¿ ¼³Á¤ (¿¹: °­ÇÑ Áøµ¿)
+                    // DualShock íŒ¨ë“œ ì§„ë™ ì„¤ì • (ì˜ˆ: ê°•í•œ ì§„ë™)
                     lowFrequency *= 1f;
                     highFrequency *= 1f;
                 }
 
-                // Áøµ¿ ½ÃÀÛ
+                // ì§„ë™ ì‹œì‘
                 pad.SetMotorSpeeds(lowFrequency, highFrequency);
 
-                // ÀÏÁ¤ ½Ã°£ ÈÄ¿¡ Áøµ¿À» ¸ØÃä´Ï´Ù.
+                // ì¼ì • ì‹œê°„ í›„ì— ì§„ë™ì„ ë©ˆì¶¥ë‹ˆë‹¤.
                 if (stopRumbleAfterCoroutine != null)
                 {
                     StopCoroutine(stopRumbleAfterCoroutine);
@@ -72,7 +71,7 @@ public class RumbleManager : MonoBehaviour
 
     private void OnDisable()
     {
-        // ¸ğµç °ÔÀÓÆĞµåÀÇ Áøµ¿À» ¸ØÃä´Ï´Ù.
+        // ëª¨ë“  ê²Œì„íŒ¨ë“œì˜ ì§„ë™ì„ ë©ˆì¶¥ë‹ˆë‹¤.
         var gamepads = Gamepad.all;
         foreach (var gamepad in gamepads)
         {

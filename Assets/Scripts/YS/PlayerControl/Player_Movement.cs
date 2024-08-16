@@ -18,24 +18,26 @@ public class Player_Movement : MonoBehaviour
 
     public bool isUsingMap;
 
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Start()
     {
         isUsingMap = false;
 
+        BattleManager.Instance.Resistance.Add(gameObject);
         //PlayerGunSetting();
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
-    
+
 
     void Update()
     {
-        if(!isUsingMap)
+        if (!isUsingMap)
         {
 
-            DataManager.Instance.Speed = 10f;
+            DataManager.Instance.Speed = 8f;
 
             // Player Movement
             Dock();
@@ -45,33 +47,11 @@ public class Player_Movement : MonoBehaviour
             transform.Translate(Vector2.right * horizontalInput * Time.deltaTime * DataManager.Instance.Speed);
             transform.Translate(Vector2.up * verticalInput * Time.deltaTime * DataManager.Instance.Speed);
 
+
             // Check Player Life
             PlayerDeath();
 
         }
-    }
-
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneUnloaded += OnSceneUnloaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.sceneUnloaded -= OnSceneUnloaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("Scene loaded: " + scene.name);
-        transform.position = new Vector3(0, 0, 0);
-    }
-
-    void OnSceneUnloaded(Scene scene)
-    {
-        Debug.Log("Scene unloaded: " + scene.name);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
