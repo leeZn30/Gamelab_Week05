@@ -19,5 +19,10 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
     {
+        switch (EventType)
+        {
+            case Event_Type.eRevoltQuestDone:
+                break;
+        }
     }
 }
