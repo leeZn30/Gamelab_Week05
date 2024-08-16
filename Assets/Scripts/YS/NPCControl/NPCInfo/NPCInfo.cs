@@ -26,6 +26,10 @@ public class NPCInfo : MonoBehaviour
     public GameObject target;
 
 
+    [Header("NPC State")]
+    public int state;
+
+
     private void Start()
     {
         maxHealth = 30;
@@ -51,7 +55,8 @@ public class NPCInfo : MonoBehaviour
             isBattle = true;
         }
 
-        if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 0)
+
+        if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1)
         {
             isBattle = true;
         }

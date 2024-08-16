@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Weapon_Rotation : MonoBehaviour
 {
-    public float rotationSpeed = 720f; // È¸Àü ¼Óµµ (degrees per second)
+    public float rotationSpeed = 720f; // íšŒì „ ì†ë„ (degrees per second)
     public float angle;
     public Vector2 aimPos;
     public Vector2 direction;
@@ -13,7 +13,7 @@ public class Weapon_Rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ÇöÀç ÄÁÆ®·Ñ ½ºÅ´ È®ÀÎ (GamePad ¶Ç´Â ±âÅ¸)
+        // í˜„ìž¬ ì»¨íŠ¸ë¡¤ ìŠ¤í‚´ í™•ì¸ (GamePad ë˜ëŠ” ê¸°íƒ€)
         aimPos = InputManager.Instance.GetAimValue();
 
         if (InputManager.Instance.playerInput.currentControlScheme == "GamePad")
@@ -29,57 +29,11 @@ public class Weapon_Rotation : MonoBehaviour
             direction = mouseWorldPosition - transform.position;
         }
 
-        // °¢µµ¸¦ °è»ê
+        // ê°ë„ë¥¼ 
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // È¸ÀüÀ» Time.deltaTime¿¡ µû¶ó ºÎµå·´°Ô Àû¿ë
+        // íšŒì „ì„ Time.deltaTimeì— ë”°ë¼ ë¶€ë“œëŸ½ê²Œ ì ìš©
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }
-
-
-/*
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class Weapon_Rotation : MonoBehaviour
-{
-    public float horizontalInput;
-    public float angle;
-    public Vector2 aimPos;
-    public Vector2 direction;
-
-    public Vector3 mouseWorldPosition;
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (InputManager.Instance.playerInput.currentControlScheme == "GamePad")
-        {
-            aimPos = InputManager.Instance.GetAimValue(); 
-
-            if(aimPos.magnitude > 0.1f)
-            {
-                direction = aimPos;
-            }
-
-        }
-        else
-        {
-            aimPos = InputManager.Instance.GetAimValue();
-            direction = Camera.main.ScreenToWorldPoint(new Vector3(aimPos.x, aimPos.y, Camera.main.nearClipPlane)) - transform.position;
-        }
-
-
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = rotation;
-
-    }
-}
-*/
