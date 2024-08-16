@@ -4,31 +4,52 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : Singleton<DialogueManager>
 {
-    public TextMeshProUGUI dialogueText;
-    public Image dialogueScreen;
+    public DialogueReader csvReader; // CSV Reader
+
+    GameObject dialogueUI;
+    TextMeshProUGUI dialogueText;
 
     private Queue<string> sentences;
     public bool isDialogueActive = false;
     public bool dialogEnd;
 
+    void Awake()
+    {
+        dialogueUI = GameObject.Find("DialogueUI");
+        dialogueText = dialogueUI.GetComponentInChildren<TextMeshProUGUI>();
+    }
+
     void Start()
     {
         sentences = new Queue<string>();
-        dialogueScreen.gameObject.SetActive(false); // 초기에는 대화 UI를 비활성화
-        dialogueText.gameObject.SetActive(false);
+        dialogueUI.SetActive(false);
+    }
 
+    void Update()
+    {
+        // 대화 중이고 E 키를 눌렀을 때 다음 문장을 출력
+        if (isDialogueActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            DisplayNextSentence();
+        }
+    }
+
+    public void SetDialogueID(int id)
+    {
+        Dialogue dialogue = GetDialogueById(id);
+        if (dialogue != null)
+        {
+            StartDialogue(dialogue);
+        }
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
         Time.timeScale = 0;
-
-        isDialogueActive = true;
         sentences.Clear();
-        dialogueScreen.gameObject.SetActive(true); // 대화 시작 시 UI 활성화
-        dialogueText.gameObject.SetActive(true);
+        dialogueUI.SetActive(true);
 
         dialogEnd = false;
 
@@ -37,7 +58,8 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
-        DisplayNextSentence();
+        isDialogueActive = true; // 첫 번째 대사가 바로 출력되도록 설정
+        DisplayNextSentence();   // 첫 번째 대사를 바로 출력
     }
 
     public void DisplayNextSentence()
@@ -49,6 +71,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
+
+        Debug.Log(sentence);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
@@ -65,11 +89,20 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        dialogueScreen.gameObject.SetActive(false); // 대화 종료 시 UI 비활성화
+        dialogueUI.SetActive(false);
         isDialogueActive = false;
         dialogueText.text = "";
         dialogEnd = true;
         Time.timeScale = 1;
+    }
 
+    public Dialogue GetDialogueById(int id)
+    {
+        foreach (Dialogue dialogue in csvReader.GetDialogues())
+        {
+            if (dialogue.id == id)
+                return dialogue;
+        }
+        return null; // 해당 id를 가진 대사가 없으면 null 반환
     }
 }

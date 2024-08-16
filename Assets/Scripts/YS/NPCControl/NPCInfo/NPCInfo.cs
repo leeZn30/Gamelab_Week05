@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class NPCInfo : MonoBehaviour
 {
     [Header("NPC Type")]
+    public int EnemyID;
     public int side;
     public int type;
     private enum NPCType { LowRange, HighRange }
@@ -23,6 +24,10 @@ public class NPCInfo : MonoBehaviour
 
     [Header("NPC Aim")]
     public GameObject target;
+
+
+    [Header("NPC State")]
+    public int state;
 
 
     private void Start()
@@ -50,8 +55,15 @@ public class NPCInfo : MonoBehaviour
             isBattle = true;
         }
 
+
+        if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1)
+        {
+            isBattle = true;
+        }
+
         if(health < 0)
         {
+            GameObject.Find("QuestManager").GetComponent<QuestManager>().OnEnemyKilled(EnemyID);
             Destroy(gameObject);
         }
     }
