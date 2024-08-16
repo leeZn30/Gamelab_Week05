@@ -20,7 +20,6 @@ public class InputManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -75,29 +74,29 @@ public class InputManager : MonoBehaviour
 
     private void SwitchControls(PlayerInput input)
     {
-        Debug.Log("µğ¹ÙÀÌ½º : " + input.currentControlScheme);
+        Debug.Log("ë””ë°”ì´ìŠ¤ : " + input.currentControlScheme);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("¾ÀÀÌ ·ÎµåµÇ¾ú½À´Ï´Ù: " + scene.name);
+        Debug.Log("ì”¬ì´ ë¡œë“œë˜ì—ˆìŠµë‹ˆë‹¤: " + scene.name);
 
         StartCoroutine(FindPlayerInput());
     }
 
     private IEnumerator FindPlayerInput()
     {
-        yield return new WaitForSeconds(0.1f);  // ¾ÀÀÌ ¿ÏÀüÈ÷ ·ÎµåµÉ ¶§±îÁö Àá½Ã ´ë±â
+        yield return new WaitForSeconds(0.1f);  // ì”¬ì´ ì™„ì „íˆ ë¡œë“œë  ë•Œê¹Œì§€ ì ì‹œ ëŒ€ê¸°
 
         playerInput = FindObjectOfType<PlayerInput>();
         if (playerInput != null)
         {
-            Debug.Log("PlayerInput ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Ò½À´Ï´Ù: " + playerInput.name);
+            Debug.Log("PlayerInput ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì•˜ìŠµë‹ˆë‹¤: " + playerInput.name);
             playerInput.onControlsChanged += SwitchControls;
         }
         else
         {
-            Debug.LogError("PlayerInput ÄÄÆ÷³ÍÆ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù. ¾À¿¡ PlayerInput ÄÄÆ÷³ÍÆ®°¡ ÀÖ´ÂÁö È®ÀÎÇÏ¼¼¿ä.");
+            Debug.LogError("PlayerInput ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ì”¬ì— PlayerInput ì»´í¬ë„ŒíŠ¸ê°€ ìˆëŠ”ì§€ í™•ì¸í•˜ì„¸ìš”.");
         }
     }
 }
