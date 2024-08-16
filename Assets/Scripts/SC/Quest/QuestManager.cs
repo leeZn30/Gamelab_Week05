@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,10 +10,9 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> allQuests = new List<QuestSO>();
     public List<QuestSO> activeQuests = new List<QuestSO>();
-    [SerializeField] QuestClear questClear;
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
     public TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
-    private List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
+    [SerializeField] List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class QuestManager : MonoBehaviour
 
     public void AcceptQuest(QuestSO quest)
     {
-        if (quest.isAvailable && !activeQuests.Contains(quest))
+        if (quest.isAvailable)
         {
             activeQuests.Add(quest);
             quest.isActived = true;
@@ -48,6 +48,39 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    public void OnQuestClear(string questName)
+    {
+        StartCoroutine(CompleteQuest(questName));
+        switch (questName)
+        {
+            case "quest1":
+                Debug.Log("퀘스트 클리어");
+                break;
+        }
+    }
+
+    public IEnumerator CompleteQuest(string questName)
+    {
+        for(int j = 0; j< activeQuests.Count; j++){
+            if (activeQuests[j].questName == questName)
+            {
+                activeQuests[j].isCompleted = true;
+                TextMeshProUGUI questText = activeQuestTexts[j];
+                questText.text = $"<s>{questText.text}</s>";
+
+                // 퀘스트 제거 (페이드 아웃 애니메이션)
+                for (float i = 1; i >= 0; i -= Time.deltaTime)
+                {
+                    questText.color = new Color(questText.color.r, questText.color.g, questText.color.b, i);
+                    yield return null;
+                }
+
+                Destroy(questText.gameObject);
+                activeQuestTexts.RemoveAt(j);
+            }
+        }
+    }
+
     public void OnEnemyKilled(int enemyID)
     {
         foreach (var quest in activeQuests)
@@ -60,7 +93,7 @@ public class QuestManager : MonoBehaviour
                     if (quest.currCount == quest.targetCount)
                     {
                         quest.isCompleted = true;
-                        questClear.OnQuestClear(quest);
+                        OnQuestClear(quest.questName);
                     }
                 }
             }
