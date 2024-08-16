@@ -11,12 +11,10 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public TextMeshProUGUI dialogueText;
     public Image dialogueScreen;
-    public GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
-    public int dialogueId; // 대사 ID, 이 NPC가 말할 대사를 지정
 
     private Queue<string> sentences;
     public bool isDialogueActive = false;
-    private bool isPlayerInRange = false; // 플레이어가 NPC 근처에 있는지 확인
+    public bool dialogEnd;
 
     void Awake()
     {
@@ -26,8 +24,8 @@ public class DialogueManager : Singleton<DialogueManager>
             return;
         }
 
-        instance = this; // Singleton instance 설정
-        DontDestroyOnLoad(this.gameObject); // 이 오브젝트가 씬 전환 시 파괴되지 않도록 설정
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
@@ -35,27 +33,68 @@ public class DialogueManager : Singleton<DialogueManager>
         sentences = new Queue<string>();
         dialogueScreen.gameObject.SetActive(false); // 초기에는 대화 UI를 비활성화
         dialogueText.gameObject.SetActive(false);
-        interactionUI.SetActive(false); // 처음에는 E 키 UI를 숨깁니다.
     }
 
-    void Update()
+    public void HandleQuestInteraction(QuestNPCInteraction questNPC)
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (isDialogueActive)
         {
-            // 대화 진행 중인지 확인
-            if (isDialogueActive)
+            // 대화 진행 중이면 다음 대사로 넘기기
+            DisplayNextSentence();
+        }
+        else
+        {
+            Dialogue dialogue = null;
+
+            if (questNPC.questDialogueCompleted)
             {
-                // 다음 대사로 넘기기
-                DisplayNextSentence();
+                // 퀘스트 완료 후 대화가 한 번 완료되었다면, 이후에는 항상 postCompletionDialogueId 출력
+                dialogue = GetDialogueById(questNPC.postCompletionDialogueId);
             }
-            else
+            else if (!questNPC.quest.isAvailable)
             {
-                // 대화 시작
-                Dialogue dialogue = GetDialogueById(dialogueId);
+                // 퀘스트가 아직 사용 가능하지 않다면, 처음 대사만 출력
+                dialogue = GetDialogueById(questNPC.initialDialogueId);
                 if (dialogue != null)
                 {
-                    StartDialogue(dialogue);
+                    questNPC.quest.isAvailable = true; // 퀘스트를 사용 가능 상태로 변경
                 }
+            }
+            else if (!questNPC.quest.isCompleted)
+            {
+                // 퀘스트가 사용 가능하지만 아직 완료되지 않은 상태라면
+                dialogue = GetDialogueById(questNPC.incompleteQuestDialogueId);
+            }
+            else if (questNPC.quest.isCompleted)
+            {
+                // 퀘스트가 완료된 상태라면
+                dialogue = GetDialogueById(questNPC.completedQuestDialogueId);
+                if (dialogue != null)
+                {
+                    questNPC.questDialogueCompleted = true; // 퀘스트 완료 후 대화가 한 번 완료되었음을 기록
+                }
+            }
+
+            if (dialogue != null)
+            {
+                StartDialogue(dialogue);
+            }
+        }
+    }
+
+    public void HandleInteraction(NPCInteraction npcInteraction)
+    {
+        if (isDialogueActive)
+        {
+            // 대화 진행 중이면 다음 대사로 넘기기
+            DisplayNextSentence();
+        }
+        else
+        {
+            Dialogue dialogue = GetDialogueById(npcInteraction.dialogueId);
+            if (dialogue != null)
+            {
+                StartDialogue(dialogue);
             }
         }
     }
@@ -63,11 +102,12 @@ public class DialogueManager : Singleton<DialogueManager>
     public void StartDialogue(Dialogue dialogue)
     {
         Time.timeScale = 0;
-
         isDialogueActive = true;
         sentences.Clear();
         dialogueScreen.gameObject.SetActive(true); // 대화 시작 시 UI 활성화
         dialogueText.gameObject.SetActive(true);
+
+        dialogEnd = false;
 
         foreach (string sentence in dialogue.contexts)
         {
@@ -103,27 +143,10 @@ public class DialogueManager : Singleton<DialogueManager>
     void EndDialogue()
     {
         dialogueScreen.gameObject.SetActive(false); // 대화 종료 시 UI 비활성화
-        dialogueText.gameObject.SetActive(false);
         isDialogueActive = false;
+        dialogueText.text = "";
+        dialogEnd = true;
         Time.timeScale = 1;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            interactionUI.SetActive(true); // 플레이어가 범위 내에 들어오면 E 키 UI 표시
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-            interactionUI.SetActive(false); // 플레이어가 범위 밖으로 나가면 E 키 UI 숨김
-        }
     }
 
     public Dialogue GetDialogueById(int id)
@@ -134,10 +157,5 @@ public class DialogueManager : Singleton<DialogueManager>
                 return dialogue;
         }
         return null; // 해당 id를 가진 대사가 없으면 null 반환
-    }
-
-    public Dialogue[] GetDialogues(int someParameter, int lineY)
-    {
-        return csvReader.GetDialogues();
     }
 }
