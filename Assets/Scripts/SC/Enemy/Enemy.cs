@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public delegate void EnemyDeath(Enemy enemy);
     public static event EnemyDeath OnEnemyDeath;
-
+    public int EnemyID;
     public void Die()
     {
         // 적이 죽을 때 실행되는 코드
