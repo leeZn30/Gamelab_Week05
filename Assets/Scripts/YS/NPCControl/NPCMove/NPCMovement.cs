@@ -23,13 +23,19 @@ public class NPCMovement : MonoBehaviour
 
     private bool isWall;
 
-    private enum NPCState { Chase, Flee, Wander, Battle, Run , Idle}
+    private enum NPCState { Chase, Flee, Wander, Battle, Run, Idle, Patrol}
     private NPCState currentState;
 
     [Header("Distance")]
     public float chaseDistance = 10.0f;  
     public float fleeDistance = 5.0f;    
-    public float wanderDistance = 15.0f; 
+    public float wanderDistance = 15.0f;
+
+
+    [Header("Patrol")]
+    public List<Vector3> PatrolLocation;
+    public int patrolIndex;
+    public bool patWhat;
 
     private bool canTalk;
 
@@ -52,23 +58,37 @@ public class NPCMovement : MonoBehaviour
     void Update()
     {
         FindWall();
-
-        if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
+        if (GetComponent<NPCInfo>().isPatrol)
         {
-            currentState = NPCState.Run;
-        }
-        else
-        {
-            if (GetComponent<NPCInfo>().target != null)
+            currentState = NPCState.Patrol;
+            if (transform.position == targetPosition)
             {
-                if (currentState != NPCState.Battle)
-                {
-                    ChangeState();
-                }
+                Behave();
             }
         }
 
-        Behave();
+        if (GetComponent<NPCInfo>().isBattle)
+        {
+            if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
+            {
+                currentState = NPCState.Run;
+            }
+            else
+            {
+                if (GetComponent<NPCInfo>().target != null)
+                {
+                    if (currentState != NPCState.Battle)
+                    {
+                        ChangeState();
+                    }
+                }
+            }
+
+            Behave();
+            
+        }
+
+
 
         MoveToTarget();
         
@@ -155,6 +175,9 @@ public class NPCMovement : MonoBehaviour
                 Idle();
                 break;
 
+            case NPCState.Patrol:
+                Patrol();
+                break;
         }
     }
 
@@ -167,6 +190,7 @@ public class NPCMovement : MonoBehaviour
             targetPosition = GetComponent<NPCInfo>().target.transform.position;
         }
     }
+
     void Flee()
     {
         if (GetComponent<NPCInfo>().target != null)
@@ -175,6 +199,7 @@ public class NPCMovement : MonoBehaviour
         }
         targetPosition = transform.position + directionAwayFromPlayer * Random.Range(3.0f, 7.0f);
     }
+
     void Wander()
     {
         targetPosition = new Vector3(
@@ -183,6 +208,7 @@ public class NPCMovement : MonoBehaviour
             transform.position.z
         );
     }
+
     void Battle()
     {
         targetPosition = new Vector3(
@@ -191,9 +217,41 @@ public class NPCMovement : MonoBehaviour
             transform.position.z
         );
     }
+
     void Run()
     {
-        targetPosition = GameObject.FindWithTag("Run").transform.position;
+        GameObject[] runs = GameObject.FindGameObjectsWithTag("Run");
+
+        targetPosition = runs[Random.Range(0, runs.Length)].transform.position;
+    }
+
+    //NPC - Patrol ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    void Patrol()
+    {
+        targetPosition = PatrolLocation[patrolIndex];
+        PatrolIndexChange();
+    }
+    
+    void PatrolIndexChange()
+    {
+        if (patrolIndex == PatrolLocation.Count-1)
+        {
+            patWhat = false; 
+        }
+        else if(patrolIndex == 0)
+        {
+            patWhat = true;
+        }
+
+        if (patWhat)
+        {
+            patrolIndex++;
+        }
+        else
+        {
+            patrolIndex--;
+        }
     }
 
     //NPC - Idle -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
