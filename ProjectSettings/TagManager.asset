@@ -17,6 +17,8 @@ TagManager:
   - Water
   - UI
   - 
+  - Wall
+  - CanShoot
   - 
   - 
   - 
@@ -30,9 +32,7 @@ TagManager:
   - 
   - 
   - 
-  - Layer 1
-  - Layer 2
-  - Layer 3
+  - 
   - 
   - 
   - 
@@ -46,12 +46,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Layer 1
-    uniqueID: 2425651459
+  - name: Map
+    uniqueID: 2846902439
     locked: 0
-  - name: Layer 2
-    uniqueID: 4250941897
+  - name: Object
+    uniqueID: 3141090523
     locked: 0
-  - name: Layer 3
-    uniqueID: 4189426099
+  - name: NPC
+    uniqueID: 844849627
+    locked: 0
+  - name: Player
+    uniqueID: 2218202189
+    locked: 0
+  - name: UI
+    uniqueID: 4133920861
     locked: 0
