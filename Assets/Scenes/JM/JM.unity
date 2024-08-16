@@ -4500,7 +4500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f24aade5844ec749a070f5cbb0a48ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeQuests: []
+  activeQuests:
+  - {fileID: 11400000, guid: 061cfe820929ab54eb023fd65d47cdec, type: 2}
   completedQuests: []
   questClear: {fileID: 0}
 --- !u!4 &2130114887

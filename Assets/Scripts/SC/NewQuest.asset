@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
   m_Name: NewQuest
   m_EditorClassIdentifier: 
-  questName: 0
+  questName: quest1
   description: 
-  mustKillEnemies: 1
-  mustReachLocation: 0
+  KillEnemies: 1
+  ReachLocation: 0
   isCompleted: 1
-  isAvailable: 0
-  targetLocationObject: {fileID: 4537652627505147049, guid: d45949d6223cec24f8e9368b6a67cacd, type: 3}
+  isActived: 1
+  isAvailable: 1
+  targetLocationObject: 
+  targetEnemyID: 1
+  targetCount: 1
+  currCount: 0
