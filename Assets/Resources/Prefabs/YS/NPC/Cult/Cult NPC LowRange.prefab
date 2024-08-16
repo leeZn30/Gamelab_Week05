@@ -271,7 +271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7421411161731263235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419b4fc2323e2d64bbbe972ae8a43d89, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e610cde4531cf74f9ca70ae0c5ea2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bottomLeft: {x: 0, y: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   startPos: {x: 0, y: 0}
   targetPos: {x: 0, y: 0}
   FinalNodeList: []
-  allowDiagonal: 1
+  allowDiagonal: 0
   dontCrossCorner: 0
   point: 0
 --- !u!61 &5845431449578580188
