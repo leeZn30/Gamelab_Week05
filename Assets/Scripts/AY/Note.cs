@@ -33,7 +33,7 @@ public class Note : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && noteBody.activeSelf)
         {
             isPlayerInRange = true;
             interactionUI.SetActive(true); // 플레이어가 범위 내에 들어오면 E 키 UI 표시

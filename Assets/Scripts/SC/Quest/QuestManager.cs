@@ -42,7 +42,7 @@ public class QuestManager : MonoBehaviour
             return quest;
         }
 
-        Debug.Log("퀘스트 없음");
+        Debug.Log("����Ʈ ����");
         return null;
     }
 
