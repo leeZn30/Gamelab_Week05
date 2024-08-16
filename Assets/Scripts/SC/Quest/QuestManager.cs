@@ -14,7 +14,7 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
-    private TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
+    [SerializeField] TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
     private List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
 
     void Start()
