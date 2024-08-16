@@ -16,10 +16,10 @@ MonoBehaviour:
   description: 
   KillEnemies: 1
   ReachLocation: 0
-  isCompleted: 0
+  isCompleted: 1
   isActived: 1
   isAvailable: 1
   targetLocationObject: 
-  targetEnemyID: 0
-  targetCount: 10
+  targetEnemyID: 1
+  targetCount: 1
   currCount: 0

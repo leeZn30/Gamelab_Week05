@@ -252,6 +252,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &255443591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 255443593}
+  - component: {fileID: 255443592}
+  m_Layer: 0
+  m_Name: QuestClear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &255443592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255443591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a2eaa3c6492e249b879ddbbddcd99b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &255443593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255443591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.757874, y: 0.807481, z: -0.096580826}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264794519
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554070328}
+  - component: {fileID: 554070332}
   - component: {fileID: 554070331}
   - component: {fileID: 554070325}
   - component: {fileID: 554070324}
@@ -632,6 +677,19 @@ MonoBehaviour:
   attackRange: 10
   attackSpeed: 0.5
   target: {fileID: 0}
+--- !u!114 &554070332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554070323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc854438f537363449aac643e7e97a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyID: 1
 --- !u!1 &634784877
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,7 +2284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeQuests: []
   completedQuests: []
-  questClear: {fileID: 0}
+  questClear: {fileID: 255443592}
 --- !u!4 &1463639777
 Transform:
   m_ObjectHideFlags: 0
@@ -2498,7 +2556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766305735}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: '-------------------------------------------- '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2912,6 +2970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questManager: {fileID: 1463639776}
+  quest: {fileID: 11400000, guid: 015073e84d5278f49b82c7e0a230e3a6, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2924,6 +2983,7 @@ SceneRoots:
   - {fileID: 298478228}
   - {fileID: 1960300946}
   - {fileID: 1463639777}
+  - {fileID: 255443593}
   - {fileID: 1766305735}
   - {fileID: 1045861884}
   - {fileID: 5130652741154567819}
