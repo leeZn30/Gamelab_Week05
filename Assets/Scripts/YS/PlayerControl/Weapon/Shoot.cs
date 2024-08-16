@@ -22,6 +22,7 @@ public class Shoot : MonoBehaviour
     {
         if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
         {
+            DataManager.Instance.isDectected = true;
             shooting = true;
         }
         if (InputManager.Instance.controls.Player.Shoot.WasReleasedThisFrame())
@@ -33,7 +34,7 @@ public class Shoot : MonoBehaviour
         {
             shootTime = 0;
             Instantiate(bullet, transform.position, rotation.transform.rotation);
-            RumbleManager.instance.RumblePulse(0.5f,0.5f,0.1f);
+            RumbleManager.instance.RumblePulse(0.3f, 1f, 0.1f);
         }
     }
 
