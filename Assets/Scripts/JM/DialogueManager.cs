@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    public static DialogueManager instance; // Singleton instance
     public DialogueReader csvReader; // CSV Reader
 
     public TextMeshProUGUI dialogueText;
@@ -16,17 +15,8 @@ public class DialogueManager : Singleton<DialogueManager>
     public bool isDialogueActive = false;
     public bool dialogEnd;
 
-    void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
+    private NPCInteraction currentNPCInteraction;
+    private QuestNPCInteraction currentQuestNPCInteraction;
 
     void Start()
     {
@@ -35,67 +25,45 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueText.gameObject.SetActive(false);
     }
 
-    public void HandleQuestInteraction(QuestNPCInteraction questNPC)
+    void Update()
     {
-        if (isDialogueActive)
+        if (isDialogueActive && Input.GetKeyDown(KeyCode.E))
         {
-            // 대화 진행 중이면 다음 대사로 넘기기
             DisplayNextSentence();
         }
-        else
-        {
-            Dialogue dialogue = null;
-
-            if (questNPC.questDialogueCompleted)
-            {
-                // 퀘스트 완료 후 대화가 한 번 완료되었다면, 이후에는 항상 postCompletionDialogueId 출력
-                dialogue = GetDialogueById(questNPC.postCompletionDialogueId);
-            }
-            else if (!questNPC.quest.isAvailable)
-            {
-                // 퀘스트가 아직 사용 가능하지 않다면, 처음 대사만 출력
-                dialogue = GetDialogueById(questNPC.initialDialogueId);
-                if (dialogue != null)
-                {
-                    questNPC.quest.isAvailable = true; // 퀘스트를 사용 가능 상태로 변경
-                }
-            }
-            else if (!questNPC.quest.isCompleted)
-            {
-                // 퀘스트가 사용 가능하지만 아직 완료되지 않은 상태라면
-                dialogue = GetDialogueById(questNPC.incompleteQuestDialogueId);
-            }
-            else if (questNPC.quest.isCompleted)
-            {
-                // 퀘스트가 완료된 상태라면
-                dialogue = GetDialogueById(questNPC.completedQuestDialogueId);
-                if (dialogue != null)
-                {
-                    questNPC.questDialogueCompleted = true; // 퀘스트 완료 후 대화가 한 번 완료되었음을 기록
-                }
-            }
-
-            if (dialogue != null)
-            {
-                StartDialogue(dialogue);
-            }
-        }
+        // else if (Input.GetKeyDown(KeyCode.E))
+        // {
+        // // 퀘스트 NPC와 상호작용이 설정된 경우
+        // if (currentQuestNPCInteraction != null && currentQuestNPCInteraction.IsPlayerInRange())
+        // {
+        //     HandleQuestInteraction(currentQuestNPCInteraction);
+        // }
+        // // 일반 NPC와 상호작용이 설정된 경우
+        // else if (currentNPCInteraction != null && currentNPCInteraction.IsPlayerInRange())
+        // {
+        //     HandleInteraction(currentNPCInteraction);
+        // }
+        // }
     }
 
-    public void HandleInteraction(NPCInteraction npcInteraction)
+    public void RegisterNPCInteraction(NPCInteraction npcInteraction)
     {
-        if (isDialogueActive)
+        currentNPCInteraction = npcInteraction;
+        currentQuestNPCInteraction = null; // 일반 NPC와 상호작용이 등록되면 퀘스트 NPC 상호작용 해제
+    }
+
+    public void RegisterQuestNPCInteraction(QuestNPCInteraction questNPC)
+    {
+        currentQuestNPCInteraction = questNPC;
+        currentNPCInteraction = null; // 퀘스트 NPC와 상호작용이 등록되면 일반 NPC 상호작용 해제
+    }
+
+    public void SetDialogueID(int id)
+    {
+        Dialogue dialogue = GetDialogueById(id);
+        if (dialogue != null)
         {
-            // 대화 진행 중이면 다음 대사로 넘기기
-            DisplayNextSentence();
-        }
-        else
-        {
-            Dialogue dialogue = GetDialogueById(npcInteraction.dialogueId);
-            if (dialogue != null)
-            {
-                StartDialogue(dialogue);
-            }
+            StartDialogue(dialogue);
         }
     }
 
@@ -126,6 +94,8 @@ public class DialogueManager : Singleton<DialogueManager>
         }
 
         string sentence = sentences.Dequeue();
+
+        Debug.Log(sentence);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
@@ -147,6 +117,11 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueText.text = "";
         dialogEnd = true;
         Time.timeScale = 1;
+
+        // 대화가 끝나면 현재 NPC 상호작용 상태를 해제
+        currentNPCInteraction = null;
+        currentQuestNPCInteraction = null;
+
     }
 
     public Dialogue GetDialogueById(int id)
