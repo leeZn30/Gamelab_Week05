@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3201571140694704537, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
+      propertyPath: quest
+      value: 
+      objectReference: {fileID: 11400000, guid: c6f415fe86fd8ed4fbcf7b01d5593390, type: 2}
     - target: {fileID: 3275373923917867866, guid: 152dab6c9e2bb654192ac581cf06cb84, type: 3}
       propertyPath: m_Name
       value: ResistanceNPC (1)
@@ -8930,6 +8934,7 @@ MonoBehaviour:
   allQuests:
   - {fileID: 11400000, guid: 7e17f387f98face4395f831ccbd95709, type: 2}
   - {fileID: 11400000, guid: ce54326c6e766bb4088c9064d8f3c160, type: 2}
+  - {fileID: 11400000, guid: c6f415fe86fd8ed4fbcf7b01d5593390, type: 2}
   activeQuests: []
   questListParent: {fileID: 1288410763}
   questTextPrefab: {fileID: 5624853273408506001, guid: 467cfa0171f1af44a96f3606c1b1376e, type: 3}

@@ -26,6 +26,8 @@ public class QuestNPCInteraction : MonoBehaviour
             int dialogueId = GetDialogueIdBasedOnQuestState();
             DialogueManager.Instance.SetDialogueID(dialogueId);
             isSend = true;
+
+
         }
     }
 
@@ -38,6 +40,7 @@ public class QuestNPCInteraction : MonoBehaviour
         else if (!quest.isAvailable)
         {
             quest.isAvailable = true;
+            QuestManager.Instance.AcceptQuest(quest.questName);
             return initialDialogueId;
         }
         else if (!quest.isCompleted)
