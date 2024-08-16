@@ -51,6 +51,7 @@ public class Note : MonoBehaviour
 
     void CallOpenNote()
     {
+
         NoteRouteManager.Instance.OpenNote(noteData.content);
 
         // 이벤트 호출

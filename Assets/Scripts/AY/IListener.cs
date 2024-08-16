@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum Event_Type
 {
-    eQuestDone,
+    eRevoltQuestDone,
     eNoteRead,
 }
 

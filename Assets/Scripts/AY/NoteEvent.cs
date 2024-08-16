@@ -15,7 +15,6 @@ public class NoteEvent : MonoBehaviour
     public int dialogueId1; // 대사 ID, 이 NPC가 말할 대사를 지정
     [SerializeField] GameObject person;
 
-
     [Header("Event2")]
     public GameObject event2Door;
     public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
@@ -33,6 +32,9 @@ public class NoteEvent : MonoBehaviour
     [Header("Event6")]
     [SerializeField] QuestSO questSO1;
     [SerializeField] QuestSO questSO2;
+
+    // [Header("최종 직전")]
+
 
     void Awake()
     {
@@ -74,6 +76,21 @@ public class NoteEvent : MonoBehaviour
         }
 
         yield return null;
+
+        onComplete?.Invoke();
+        Debug.Log("End Note Event");
+    }
+
+    public IEnumerator DoEvent(Action onComplete, string EventName)
+    {
+        Debug.Log("Start Note Event");
+
+        switch (EventName)
+        {
+            case "FinalBattle":
+                yield return StartCoroutine(FinalBattle());
+                break;
+        }
 
         onComplete?.Invoke();
         Debug.Log("End Note Event");
@@ -131,7 +148,7 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event5()
     {
         // npc 생성함
-        GameObject go = Instantiate(person, Vector3.zero, Quaternion.identity);
+        GameObject go = Instantiate(person, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId5);
@@ -143,15 +160,26 @@ public class NoteEvent : MonoBehaviour
 
     IEnumerator Event6()
     {
-        // Quest 완료
+        // Quest 실행하게 하기
+        QuestManager.Instance.AcceptQuest(questSO1.questName);
+        QuestManager.Instance.AcceptQuest(questSO2.questName);
 
         yield return null;
     }
 
+
+    // 마지막 퀘스트 완료하면 전투 해야함 => DoEvent로 QuestMaanger에서 호출해야 함
     public IEnumerator FinalBattle()
     {
-        // 마지막 퀘스트 완료하면 전투 해야함 => DoEvent로 QuestMaanger에서 호출해야 함
-        yield return null;
+        // 적이 엄청 생성됨
+        List<GameObject> enemies = new List<GameObject>();
+        for (int i = 0; i < 4; i++)
+        {
+            enemies.Add(Instantiate(enemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
+        }
+
+        yield return new WaitUntil(() => enemies.All(e => e == null));
+
     }
 
 
