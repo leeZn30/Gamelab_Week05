@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NewQuest
   m_EditorClassIdentifier: 
   questName: quest1
-  description: 
+  description: "\uCCAD\uC18C\uD558\uAE30"
   KillEnemies: 1
   ReachLocation: 0
   isCompleted: 1
