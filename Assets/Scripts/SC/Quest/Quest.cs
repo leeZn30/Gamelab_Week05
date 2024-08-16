@@ -10,6 +10,7 @@ public class QuestSO : ScriptableObject
     public bool KillEnemies;
     public bool ReachLocation;
     public bool isCompleted;
+    public bool isActived;
     public bool isAvailable;
 
     public GameObject targetLocationObject;

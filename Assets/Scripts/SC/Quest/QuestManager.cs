@@ -7,7 +7,8 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
-    public List<QuestSO> completedQuests = new List<QuestSO>(); 
+    public List<QuestSO> completedQuests = new List<QuestSO>();
+    [SerializeField] QuestClear questClear;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class QuestManager : MonoBehaviour
         if (quest.isAvailable && !activeQuests.Contains(quest))
         {
             activeQuests.Add(quest);
+            quest.isActived = true;
 
             if (quest.ReachLocation && quest.targetLocationObject != null)
             {
@@ -49,7 +51,7 @@ public class QuestManager : MonoBehaviour
                     if (quest.currCount == quest.targetCount)
                     {
                         quest.isCompleted = true;
-                        // Äù½ºÆ® ¿Ï·á
+                        questClear.OnQuestClear(quest.questName);
                     }
                 }
             }
