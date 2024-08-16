@@ -18,7 +18,7 @@ MonoBehaviour:
   ReachLocation: 0
   isCompleted: 0
   isActived: 0
-  isAvailable: 0
+  isAvailable: 1
   targetLocationObject: {fileID: 2970758439089141142, guid: b57336ab828596e45a6c3af960ba4e11, type: 3}
   targetEnemy: {fileID: 0}
   targetCount: 0
