@@ -25,7 +25,7 @@ public class Player_Movement : MonoBehaviour
     {
         isUsingMap = false;
 
-        BattleManager.Instance.Resistance.Add(gameObject);
+        //BattleManager.Instance.Resistance.Add(gameObject);
         //PlayerGunSetting();
     }
 
@@ -34,7 +34,7 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        if(!isUsingMap)
+        if (!isUsingMap)
         {
 
             DataManager.Instance.Speed = 8f;

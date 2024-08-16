@@ -23,7 +23,7 @@ public class HealNPCMovement : MonoBehaviour
 
     private bool isWall;
 
-    private enum NPCState { Chase, Flee, Wander, Battle, Run , Idle}
+    private enum NPCState { Run , Idle}
     private NPCState currentState;
 
     [Header("Distance")]
@@ -52,19 +52,9 @@ public class HealNPCMovement : MonoBehaviour
     {
         FindWall();
 
-        if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
+        if (GetComponent<NPCInfo>().isBattle)
         {
             currentState = NPCState.Run;
-        }
-        else
-        {
-            if (GetComponent<NPCInfo>().target != null)
-            {
-                if (currentState != NPCState.Battle)
-                {
-                    ChangeState();
-                }
-            }
         }
 
         Behave();
@@ -102,18 +92,6 @@ public class HealNPCMovement : MonoBehaviour
         {
             distanceToTarget = Vector3.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position);
         }
-        if (GetComponent<NPCInfo>().isBattle)
-        {
-            if (distanceToTarget < fleeDistance)
-            {
-                currentState = NPCState.Flee;
-            }
-            else if (distanceToTarget > wanderDistance)
-            {
-                currentState = NPCState.Wander;
-            }
-            canTalk = false;
-        }
 
         if (!GetComponent<NPCInfo>().isBattle)
         {
@@ -126,22 +104,6 @@ public class HealNPCMovement : MonoBehaviour
     {
         switch (currentState)
         {
-            case NPCState.Chase:
-                Chase();
-                break;
-
-            case NPCState.Flee:
-                Flee();
-                break;
-
-            case NPCState.Wander:
-                Wander();
-                break;
-
-            case NPCState.Battle:
-                Battle();
-                break;
-
             case NPCState.Run:
                 Run(); 
                 break;
@@ -239,17 +201,6 @@ public class HealNPCMovement : MonoBehaviour
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
 
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
             }
         }
     }
@@ -264,18 +215,6 @@ public class HealNPCMovement : MonoBehaviour
                 if (hitdown[i].distance < 0.5f && hitdown[i].collider.CompareTag("Wall"))
                 {
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                }
-
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
                 }
 
             }
@@ -293,18 +232,6 @@ public class HealNPCMovement : MonoBehaviour
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
 
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
-
             }
         }
     }
@@ -320,17 +247,6 @@ public class HealNPCMovement : MonoBehaviour
                     GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
                 }
 
-                if (currentState == NPCState.Chase)
-                {
-
-                    if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
-                    {
-                        GetComponent<MoveManager>().FinalNodeList.RemoveAt(0);
-                        currentState = NPCState.Battle;
-
-                    }
-
-                }
             }
         }
     }
