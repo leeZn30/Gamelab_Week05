@@ -18,7 +18,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     QuestSO currentQuestSO;
 
     [Header("노트 이벤트")]
-    public NoteEvent noteEvent;
+    [SerializeField] NoteEvent noteEvent;
 
     void Awake()
     {

@@ -7,19 +7,20 @@ using UnityEngine;
 
 public class NoteEvent : MonoBehaviour
 {
-    public int currentEvent;
-
     [Header("Player")]
     GameObject player;
 
+    [Header("프리팹")]
+    [SerializeField] GameObject resistance;
+    [SerializeField] GameObject cultEnemy;
+    [SerializeField] GameObject resistanceEnemy;
+
     [Header("Event1")]
     public int dialogueId1; // 대사 ID, 이 NPC가 말할 대사를 지정
-    [SerializeField] GameObject person;
 
     [Header("Event2")]
     public GameObject event2Door;
     public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
-    [SerializeField] GameObject enemy;
 
     [Header("Event3")]
     public int dialogueId3; // 대사 ID, 이 NPC가 말할 대사를 지정
@@ -36,18 +37,9 @@ public class NoteEvent : MonoBehaviour
 
     // [Header("최종 직전")]
 
-
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
-    }
-
-    public IEnumerator CallEvent(string eventName)
-    {
-        bool isComplete = false;
-        // 최종 퀘스트 작성
-        StartCoroutine(DoEvent(() => isComplete = true, eventName));
-        yield return new WaitUntil(() => isComplete);
     }
 
     public IEnumerator DoEvent(Action onComplete, int eventNum)
@@ -108,7 +100,7 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event1()
     {
         // npc 생성함
-        GameObject go = Instantiate(person, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistance, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId1);
@@ -128,7 +120,7 @@ public class NoteEvent : MonoBehaviour
         List<GameObject> enemies = new List<GameObject>();
         for (int i = 0; i < 4; i++)
         {
-            enemies.Add(Instantiate(enemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
+            enemies.Add(Instantiate(cultEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
         }
 
         // 대화
@@ -151,13 +143,14 @@ public class NoteEvent : MonoBehaviour
         DialogueManager.Instance.SetDialogueID(dialogueId4);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
-        // 대화
+        // 할머니 끌려감
+
     }
 
     IEnumerator Event5()
     {
         // npc 생성함
-        GameObject go = Instantiate(person, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistance, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId5);
@@ -177,14 +170,14 @@ public class NoteEvent : MonoBehaviour
     }
 
 
-    // 마지막 퀘스트 완료하면 전투 해야함 => DoEvent로 QuestMaanger에서 호출해야 함
+    // 마지막 퀘스트 완료하면 전투 해야함
     public IEnumerator FinalBattle()
     {
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
         for (int i = 0; i < 4; i++)
         {
-            enemies.Add(Instantiate(enemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
+            enemies.Add(Instantiate(resistanceEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
         }
 
         yield return new WaitUntil(() => enemies.All(e => e == null));
