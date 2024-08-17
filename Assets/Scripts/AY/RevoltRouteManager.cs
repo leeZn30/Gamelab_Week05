@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 {
+    [Header("반란 이벤트")]
     [SerializeField] RevoltEvent revoltEvent;
-    QuestSO currentQuest;
     int sumQuest;
+
+    [Header("최종 루트 진입 직전")]
+    [SerializeField] bool isEveLast;
 
     void Awake()
     {

@@ -20,6 +20,9 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     [Header("노트 이벤트")]
     [SerializeField] NoteEvent noteEvent;
 
+    [Header("최종 루트 진입 직전")]
+    [SerializeField] bool isEveLast;
+
     void Awake()
     {
         // 씬 이동해도 삭제되면 안됨

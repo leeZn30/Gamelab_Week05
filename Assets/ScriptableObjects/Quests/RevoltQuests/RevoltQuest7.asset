@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
   m_Name: RevoltQuest7
   m_EditorClassIdentifier: 
-  questName: RevolotQuest7
+  questName: RevoltQuest7
   description: "\uC804\uAE30\uC2E4\uC5D0 \uD3ED\uD0C4 \uC124\uCE58\uD558\uAE30"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 0
   ReachLocation: 1
   ReachItem: 0
   ReachNPC: 0
   isCompleted: 0
-  isActived: 1
-  eventType: 2
+  isActived: 0
+  eventType: 0
   targetObject: "\uC804\uAE30\uC2E4"
   targetEnemyID: 0
   targetCount: 0
