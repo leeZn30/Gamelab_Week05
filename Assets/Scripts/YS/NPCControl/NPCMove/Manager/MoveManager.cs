@@ -265,8 +265,4 @@ public class MoveManager : MonoBehaviour
                 Gizmos.DrawLine(new Vector2(FinalNodeList[i].x, FinalNodeList[i].y), new Vector2(FinalNodeList[i + 1].x, FinalNodeList[i + 1].y));
     }
 
-
-
-
-
 }
