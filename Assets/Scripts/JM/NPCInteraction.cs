@@ -16,7 +16,6 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
