@@ -8,6 +8,8 @@ public class NPCInfo : MonoBehaviour
 {
     [Header("NPC Type")]
     public int EnemyID;
+    public bool questNPC;
+    private int hitTime;
     public int side;
     public string type;
 
@@ -47,9 +49,10 @@ public class NPCInfo : MonoBehaviour
     {
         if (weapon != null)
         {
-            weapon.SetActive(true);
+            weapon.SetActive(false);
         }
 
+        hitTime = 0;
         maxHealth = 10;
         health = maxHealth;
         SetSide();
@@ -91,9 +94,9 @@ public class NPCInfo : MonoBehaviour
 
         if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1)
         {
-            isBattle = true;
-            if (weapon != null)
+            if (weapon != null && !questNPC)
             {
+                isBattle = true;
                 weapon.SetActive(true);
             }
 
@@ -110,9 +113,9 @@ public class NPCInfo : MonoBehaviour
                 Debug.Log("INININNINI");
                 if (DataManager.Instance.playerState == "Battle")
                 {
-                    isBattle = true; 
-                    if (weapon != null)
+                    if (weapon != null && !questNPC)
                     {
+                        isBattle = true;
                         weapon.SetActive(true);
                     }
 
@@ -272,10 +275,24 @@ public class NPCInfo : MonoBehaviour
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
             DataManager.Instance.playerState = "Battle";
-            isBattle = true; 
-            if (weapon != null)
+
+
+            if (weapon != null && !questNPC)
             {
+                isBattle = true;
                 weapon.SetActive(true);
+            }
+
+
+            if (questNPC)
+            {
+                hitTime++;
+
+                if(hitTime >= 5)
+                {
+                    isBattle = true;
+                    weapon.SetActive(true);
+                }
             }
 
         }

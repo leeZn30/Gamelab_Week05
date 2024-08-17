@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Delete : MonoBehaviour
 {
+
+    public float deleteDelay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,7 @@ public class Delete : MonoBehaviour
 
     IEnumerator DeleteGameobject()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(deleteDelay);
         Destroy(gameObject);
     }
 }
