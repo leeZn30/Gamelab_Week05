@@ -49,7 +49,7 @@ public class Note : MonoBehaviour
         }
     }
 
-    void CallOpenNote()
+    public void CallOpenNote()
     {
 
         NoteRouteManager.Instance.OpenNote(noteData.content);

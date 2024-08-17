@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   isDead: 0
-  isDectected: 0
+  playerState: 
   homeActiveFire: []
 --- !u!114 &4663089229533672087
 MonoBehaviour:
@@ -467,7 +467,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2726966968575543964}
   - component: {fileID: 549003525362325391}
-  - component: {fileID: 453217708681874356}
   - component: {fileID: 8208399311207262314}
   - component: {fileID: 5261444659378762780}
   - component: {fileID: 5464844698971323879}
@@ -513,19 +512,6 @@ MonoBehaviour:
   isDashing: 0
   dashTime: 0.2
   dashSpeedMultiplier: 2
---- !u!114 &453217708681874356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7335465811959261400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4345295245a0c0d4ebe1565bdcdf405d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsInCollider: []
 --- !u!114 &8208399311207262314
 MonoBehaviour:
   m_ObjectHideFlags: 0

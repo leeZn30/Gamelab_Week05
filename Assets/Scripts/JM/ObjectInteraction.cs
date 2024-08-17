@@ -49,7 +49,10 @@ public class ObjectInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            interactionUI.SetActive(true);
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(true);
+            }
         }
     }
 
@@ -58,7 +61,10 @@ public class ObjectInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            interactionUI.SetActive(true);
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(false);
+            }
         }
     }
 

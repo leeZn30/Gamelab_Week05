@@ -13,9 +13,11 @@ public class Shoot : MonoBehaviour
     public float shootDelay;
     public float shootTime;
 
+    AudioSource gunsound;
 
     private void OnEnable()
     {
+        gunsound = GetComponent<AudioSource>();
         rotation = GameObject.FindWithTag("Player").transform.Find("PlayerGunRotatePos").gameObject;
         StartCoroutine(ShootDelay());
     }
@@ -25,7 +27,7 @@ public class Shoot : MonoBehaviour
 
         if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
         {
-            DataManager.Instance.isDectected = true;
+            DataManager.Instance.playerState = "Battle";
             shooting = true;
         }
         if (InputManager.Instance.controls.Player.Shoot.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
@@ -35,6 +37,7 @@ public class Shoot : MonoBehaviour
 
         if (shooting && shootTime > shootDelay)
         {
+            gunsound.Play();
             shootTime = 0;
             Instantiate(bullet, transform.position, rotation.transform.rotation);
             RumbleManager.instance.RumblePulse(0.3f, 1f, 0.1f);

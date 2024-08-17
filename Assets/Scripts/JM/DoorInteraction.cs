@@ -1,3 +1,4 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class DoorInteraction : MonoBehaviour
@@ -5,7 +6,7 @@ public class DoorInteraction : MonoBehaviour
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
     public GameObject openDoor; // 열린 상태의 도어 오브젝트
     public GameObject closedDoor; // 닫힌 상태의 도어 오브젝트
-    public ObjectInteraction requiredObject; // 필요한 오브젝트 스크립트 참조
+    public ObjectInteraction KeyObject; // 필요한 오브젝트 스크립트 참조
 
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
     private bool isSend = false;
@@ -14,18 +15,27 @@ public class DoorInteraction : MonoBehaviour
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
-            if (requiredObject != null && requiredObject.isCollected)
+            if (KeyObject != null && KeyObject.isCollected)
             {
-                // 필요한 오브젝트가 수집되었을 경우
-                closedDoor.SetActive(false);
-                openDoor.SetActive(true);
-                isSend = true;
+                //필요한 열쇠 수집 시
+                OpenDoor();
             }
-            else
+            else if (KeyObject != null && KeyObject.isCollected == false)
             {
                 // 필요한 오브젝트가 수집되지 않았을 경우 대사 출력
                 DialogueManager.Instance.SetDialogueID(dialogueId);
                 isSend = true;
+            }
+
+            else if (KeyObject == null)
+            {
+                //열쇠 없을 시
+                OpenDoor();
+            }
+
+            else
+            {
+                OpenDoor();
             }
         }
     }
@@ -50,5 +60,19 @@ public class DoorInteraction : MonoBehaviour
     public bool IsPlayerInRange()
     {
         return isPlayerInRange;
+    }
+
+    public void OpenDoor()
+    {
+        // 필요한 오브젝트가 없을 경우
+        closedDoor.SetActive(false);
+        openDoor.SetActive(true);
+        isSend = true;
+    }
+
+    public void CloseDoor()
+    {
+        closedDoor.SetActive(true);
+        openDoor.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     public TextAsset noteCSV;
     public List<NoteData> noteDatas = new List<NoteData>();
     public NoteData currentNoteData;
-    [SerializeField] GameObject noteUI;
+    public GameObject noteUI;
     [SerializeField] Button noteBtn;
 
     [Header("퀘스트 관련")]
@@ -48,10 +48,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         currentNoteData = noteDatas[0];
         currentNoteData.isTarget = true;
 
-        noteUI = GameObject.Find("NoteUI");
-        noteBtn = noteUI.GetComponentInChildren<Button>();
         noteBtn.onClick.AddListener(() => CloseNote());
-        noteUI.SetActive(false);
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
