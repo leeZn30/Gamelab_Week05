@@ -312,6 +312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueId: 206
   interactionUI: {fileID: 6704406126788795913}
+  isActive: 0
+  targetQuest: 
 --- !u!114 &5223426875867731739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +331,7 @@ MonoBehaviour:
   type: 
   health: 0
   maxHealth: 0
+  weapon: {fileID: 0}
   damage: 0
   attackRange: 0
   attackSpeed: 0
@@ -336,7 +339,11 @@ MonoBehaviour:
   isPatrol: 0
   isBattle: 0
   state: 0
-  blood: {fileID: 0}
+  radius: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
 --- !u!114 &5382745284416825995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +363,7 @@ MonoBehaviour:
   PatrolLocation: []
   patrolIndex: 0
   patWhat: 0
+  idleStop: 0
 --- !u!114 &7157400149397983668
 MonoBehaviour:
   m_ObjectHideFlags: 0

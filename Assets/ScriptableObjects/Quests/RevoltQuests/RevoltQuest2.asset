@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevolotQuest2
   description: "\uAD50\uC8FC\uC758 \uBC29\uC5D0\uC11C \uC77C\uAE30 \uD6D4\uCE58\uAE30"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 0
   ReachLocation: 0
   ReachItem: 1
   ReachNPC: 0
-  isCompleted: 0
-  isActived: 0
+  isCompleted: 1
+  isActived: 1
   eventType: 2
   targetObject: Diary
   targetEnemyID: 0

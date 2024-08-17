@@ -63,7 +63,7 @@ public class NoteEvent : MonoBehaviour
                 break;
 
             case 4:
-                yield return StartCoroutine(Event4());
+                // yield return StartCoroutine(Event4());
                 break;
 
             case 5:
@@ -144,7 +144,6 @@ public class NoteEvent : MonoBehaviour
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // 할머니 끌려감
-
     }
 
     IEnumerator Event5()

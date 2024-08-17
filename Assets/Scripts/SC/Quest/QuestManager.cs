@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> allQuests = new List<QuestSO>();
     private Dictionary<string, QuestSO> questDictionary;
+    public List<QuestSO> clearedQuests = new List<QuestSO>();
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
 
@@ -97,15 +98,20 @@ public class QuestManager : MonoBehaviour
                     questName = "RevoltQuest67";
                 }
                 break;
-
         }
 
         QuestSO quest = FindQuest(questName);
-        if (quest.eventType == Event_Type.eRevoltQuestDone)
+
+        if (!clearedQuests.Contains(quest))
         {
-            sumRevoltQuest++;
-            // EventManager.Instance.PostNotification(quest.eventType, this, quest);
-            EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
+            clearedQuests.Add(quest);
+
+            if (quest.eventType == Event_Type.eRevoltQuestDone)
+            {
+                sumRevoltQuest++;
+                EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
+            }
+
         }
     }
 
