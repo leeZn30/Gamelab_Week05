@@ -25,7 +25,15 @@ public class ObjectInteraction : MonoBehaviour
 
             if (isQuest)
             {
-                GameObject.Find("QuestManager").GetComponent<QuestManager>().OnQuestClear(questName);
+                QuestManager tempQuestManager = QuestManager.Instance;
+                if (tempQuestManager.FindQuest(questName).returnNPC)
+                {
+                    tempQuestManager.UnderlineQuest(questName);
+                }
+                else
+                {
+                    tempQuestManager.OnQuestClear(questName);
+                }
             }
 
             if (CollectedObject != null)
