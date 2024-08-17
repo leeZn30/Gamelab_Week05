@@ -16,11 +16,11 @@ MonoBehaviour:
   description: "\uD2B9\uC810 \uC704\uCE58\uAE4C\uC9C0 \uB3C4\uB2EC"
   KillEnemies: 0
   ReachLocation: 1
-  isCompleted: 1
-  isActived: 1
-  isAvailable: 1
+  ReachItem: 0
+  isCompleted: 0
+  isActived: 0
   eventType: 3
-  targetLocationObject: Location
+  targetObject: FinalRoom
   targetEnemyID: 0
   targetCount: 0
   currCount: 0
