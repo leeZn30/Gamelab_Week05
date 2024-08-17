@@ -5,18 +5,17 @@ using UnityEngine;
 public class TargetLocation : MonoBehaviour
 {
     public string targetQuest;
-    private bool isActived;
+    public bool isActived = false;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider != null && !isActived)
+        if (collider != null && isActived)
         {
             if (collider.CompareTag("Player"))
             {
                 isActived = true;
+                GetComponent<BoxCollider2D>().enabled = false;
                 QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-                if (tempQuestManager != null)
-                {
                     if (tempQuestManager.FindQuest(targetQuest).returnNPC)
                     {
                         tempQuestManager.UnderlineQuest(targetQuest);
@@ -25,7 +24,7 @@ public class TargetLocation : MonoBehaviour
                     {
                         tempQuestManager.OnQuestClear(targetQuest);
                     }
-                }
+                
             }
         }
     }

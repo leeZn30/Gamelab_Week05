@@ -90,7 +90,7 @@ public class RevoltEvent : MonoBehaviour
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // 문 닫음
-        event2Door.SetActive(true);
+        //event2Door.SetActive(true);
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
