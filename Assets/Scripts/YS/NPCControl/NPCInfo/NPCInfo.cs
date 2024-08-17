@@ -53,10 +53,6 @@ public class NPCInfo : MonoBehaviour
 
     private void Update()
     {
-        if (DataManager.Instance.isDectected)
-        {
-            isBattle = true;
-        }
 
 
         if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1)
@@ -184,6 +180,8 @@ public class NPCInfo : MonoBehaviour
         }
     }
 
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -196,7 +194,4 @@ public class NPCInfo : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-    }
 }
