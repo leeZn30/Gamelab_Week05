@@ -76,7 +76,6 @@ public class DialogueManager : Singleton<DialogueManager>
 
         string sentence = sentences.Dequeue();
 
-        Debug.Log(sentence);
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
