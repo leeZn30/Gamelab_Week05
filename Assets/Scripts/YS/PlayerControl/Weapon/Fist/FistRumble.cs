@@ -27,15 +27,14 @@ public class FistRumble : MonoBehaviour
         }
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Cult") || collision.collider.CompareTag("Resistance"))
+        if (collision.CompareTag("Cult") || collision.CompareTag("Resistance"))
         {
             audioSource.Play();
             RumbleManager.instance.RumblePulse(1f, 1f, 0.2f);
-            
-        }       
-    }
 
+        }
+
+    }
 }
