@@ -10,7 +10,7 @@ public class NPCMovement : MonoBehaviour
     private GameObject[] walls;
     Vector3 directionAwayFromPlayer;
 
-    
+    [Header("MinMax")]
     private float minX = -5.0f;
     private float maxX = 5.0f;
     private float minY = -5.0f;
@@ -36,6 +36,9 @@ public class NPCMovement : MonoBehaviour
     public List<Vector3> PatrolLocation;
     public int patrolIndex;
     public bool patWhat;
+
+    [Header("Target")]
+    public bool idleStop;
 
     private bool canTalk;
 
@@ -266,11 +269,14 @@ public class NPCMovement : MonoBehaviour
 
     void Idle()
     {
-        targetPosition = new Vector3(
-          Random.Range(transform.position.x - 2, transform.position.x + 2),
-          Random.Range(transform.position.y - 2, transform.position.y + 2),
-          transform.position.z
-        );
+        if (idleStop)
+        {
+            targetPosition = transform.position;
+        }
+        else if (!idleStop)
+        {
+            targetPosition = new Vector3(Random.Range(transform.position.x - 2, transform.position.x + 2), Random.Range(transform.position.y - 2, transform.position.y + 2), transform.position.z);
+        }
     }
 
     //Ray ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

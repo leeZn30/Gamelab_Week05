@@ -33,11 +33,12 @@ public class ShootRaycast : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    if (hit.collider.CompareTag("Player"))
+                    if (hit.collider.CompareTag("Player") && DataManager.Instance.playerState != "Battle")
                     {
-                        DataManager.Instance.isDectected = true;
+                        DataManager.Instance.playerState = "Dectected";
                     }
                     Debug.DrawLine(transform.position, hit.point, Color.red);
+
                     // 여기서 히트된 오브젝트에 대한 로직을 처리할 수 있습니다.
                 }
                 else

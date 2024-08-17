@@ -20,23 +20,52 @@ public class NPCInfo : MonoBehaviour
     public float attackRange;
     public float attackSpeed;
 
-
     [Header("NPC Aim")]
     public GameObject target;
-
 
     [Header("NPC State")]
     public bool isPatrol;
     public bool isBattle;
     public int state;
 
+    [Header("Finding Target")]
+    int num = 0;
+    float distance;
+    float minDis = 50;
+
+
+    [Header("Check Battle")]
+    public float radius = 5f;
+    public LayerMask layerMask;
 
     public GameObject blood;
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     private void Start()
     {
         maxHealth = 10;
         health = maxHealth;
+        SetSide();
+
+        StartCoroutine(FindTargets());
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    private void Update()
+    {
+        BattleCheck();
+
+        DeathCheck();
+
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    void SetSide()
+    {
         switch (side)
         {
             case 1:
@@ -47,39 +76,82 @@ public class NPCInfo : MonoBehaviour
                 BattleManager.Instance.Resistance.Add(gameObject);
                 break;
         }
-
-        StartCoroutine(FindTargets());
     }
 
-    private void Update()
-    {
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    void BattleCheck()
+    {
 
         if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1)
         {
             isBattle = true;
         }
 
-        if(health < 0)
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
+
+        for (int i = 0; i < hitColliders.Length; i++)
         {
-            GameObject.Find("QuestManager").GetComponent<QuestManager>().OnEnemyKilled(EnemyID);
-            Destroy(gameObject);
+            Debug.Log("Collider detected: " + hitColliders[i].name + " with tag: " + hitColliders[i].tag);
+
+            if (hitColliders[i].CompareTag("Player"))
+            {
+                Debug.Log("INININNINI");
+                if (DataManager.Instance.playerState == "Battle")
+                {
+                    isBattle = true;
+                }
+            }
         }
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public void FindTarget()
     {
         if (side == 1 && BattleManager.Instance.Resistance.Count > 0)
         {
-            int num = 0;
-            float distance;
-            float minDis = 50;
 
             if (type == "Long")
             {
-                for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
+                LongCult();
+            }
+            else if(type == "Short")
+            {
+                ShortCult();
+            }
+
+            target = BattleManager.Instance.Resistance[num];
+        }
+
+        else if (side == 2 && BattleManager.Instance.Cult.Count > 0)
+        {
+            if (type == "Long")
+            {
+                LongResistance();
+            }
+            else if (type == "Short")
+            {
+                ShortResistance();
+            }
+            target = BattleManager.Instance.Cult[num];
+        }
+    }
+    void ShortCult()
+    {
+
+        for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
+        {
+            if (BattleManager.Instance.Resistance[i] != null)
+            {
+                if (!BattleManager.Instance.Resistance[i].CompareTag("Player"))
                 {
-                    if (BattleManager.Instance.Resistance[i] != null)
+                    if (BattleManager.Instance.Resistance[i].GetComponent<NPCInfo>().type == ("Long"))
                     {
                         distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
 
@@ -89,48 +161,39 @@ public class NPCInfo : MonoBehaviour
                             num = i;
                         }
                     }
+
                 }
             }
-            else if(type == "Short")
-            {
-                for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
-                {
-                    if (BattleManager.Instance.Resistance[i] != null )
-                    {
-                        if(!BattleManager.Instance.Resistance[i].CompareTag("Player"))
-                        {
-                            if (BattleManager.Instance.Resistance[i].GetComponent<NPCInfo>().type == ("Long"))
-                            {
-                                distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
 
-                                if (distance < minDis)
-                                {
-                                    minDis = distance;
-                                    num = i;
-                                }
-                            }
-
-                        }
-                    }
-                
-                }
-            }
-            
-
-            target = BattleManager.Instance.Resistance[num];
         }
+    }
+    void LongCult()
+    {
 
-        else if (side == 2 && BattleManager.Instance.Cult.Count > 0)
+        for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
         {
-            int num = 0;
-            float distance;
-            float minDis = 50;
-
-            if (type == "Long")
+            if (BattleManager.Instance.Resistance[i] != null)
             {
-                for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
+                distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
+
+                if (distance < minDis)
                 {
-                    if (BattleManager.Instance.Cult[i] != null)
+                    minDis = distance;
+                    num = i;
+                }
+            }
+        }
+    }
+    void ShortResistance()
+    {
+
+        for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
+        {
+            if (BattleManager.Instance.Cult[i] != null)
+            {
+                if (!BattleManager.Instance.Resistance[i].CompareTag("Player"))
+                {
+                    if (BattleManager.Instance.Cult[i].GetComponent<NPCInfo>().type == ("Long"))
                     {
                         distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
 
@@ -139,35 +202,26 @@ public class NPCInfo : MonoBehaviour
                             minDis = distance;
                             num = i;
                         }
+
                     }
                 }
-
             }
-            else if (type == "Short")
+        }
+    }
+    void LongResistance()
+    {
+        for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
+        {
+            if (BattleManager.Instance.Cult[i] != null)
             {
+                distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
 
-                for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
+                if (distance < minDis)
                 {
-                    if (BattleManager.Instance.Cult[i] != null)
-                    {
-                        if (!BattleManager.Instance.Resistance[i].CompareTag("Player"))
-                        {
-                            if(BattleManager.Instance.Cult[i].GetComponent<NPCInfo>().type == ("Long"))
-                            {
-                                distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
-
-                                if (distance < minDis)
-                                {
-                                    minDis = distance;
-                                    num = i;
-                                }
-
-                            }
-                        }
-                    }
+                    minDis = distance;
+                    num = i;
                 }
             }
-            target = BattleManager.Instance.Cult[num];
         }
     }
 
@@ -180,8 +234,18 @@ public class NPCInfo : MonoBehaviour
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    void DeathCheck()
+    {
+        if (health < 0)
+        {
+            GameObject.Find("QuestManager").GetComponent<QuestManager>().OnEnemyKilled(EnemyID);
+            Destroy(gameObject);
+        }
+    }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -191,6 +255,8 @@ public class NPCInfo : MonoBehaviour
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+            DataManager.Instance.playerState = "Battle";
+            isBattle = true;
         }
     }
 
