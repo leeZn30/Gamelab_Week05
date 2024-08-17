@@ -12,7 +12,7 @@ public class DoorInteraction : MonoBehaviour, IListener
     private bool isSend = false;
 
     public bool isOpend = false;
-    public bool isOpending = false;
+    public int saveIndex = -1;
 
     void Update()
     {
@@ -87,7 +87,11 @@ public class DoorInteraction : MonoBehaviour, IListener
         {
             case Event_Type.eSave:
                 SaveManager.Instance.savedDoors.Add(this);
+                saveIndex = SaveManager.Instance.savedDoors.Count - 1;
                 break;
+            case Event_Type.eLoad:
+                break;
+
 
         }
     }
