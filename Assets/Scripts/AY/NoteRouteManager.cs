@@ -15,7 +15,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     [SerializeField] Button noteBtn;
 
     [Header("노트 이벤트")]
-    [SerializeField] NoteEvent noteEvent;
+    public NoteEvent noteEvent;
 
     void Awake()
     {
@@ -52,7 +52,6 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
-
     }
 
     // 노트를 봤다면 이벤트 실행

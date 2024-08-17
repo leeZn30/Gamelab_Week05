@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
-using static Player;
+using Color = UnityEngine.Color;
 
 public class QuestManager : MonoBehaviour
 {
@@ -14,12 +16,17 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
-    [SerializeField] TextMeshProUGUI questTextPrefab;  // 퀘스트 텍스트 프리팹
-    private List<TextMeshProUGUI> activeQuestTexts = new List<TextMeshProUGUI>();
+    [SerializeField] GameObject questTextPrefab;  // 퀘스트 텍스트 프리팹
+    [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();
 
     void Start()
     {
         questDictionary = allQuests.ToDictionary(quest => quest.questName);
+        foreach (var quests in allQuests)
+        {
+            quests.isActived = false;
+            quests.isCompleted = false;
+        }
     }
 
     private void Awake()
@@ -34,6 +41,34 @@ public class QuestManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void OnQuestClear(string questName)
+    {
+        StartCoroutine(CompleteQuest(questName));
+        switch (questName)
+        {
+            case "ClothQuest":
+                Debug.Log("신도복 퀘스트 클리어");
+                if (FindQuest("ExtraClothQuest").isCompleted)
+                {
+                    Debug.Log("이후 퀘스트 실행");
+                    AcceptQuest("Location");
+                }
+                break;
+            case "ExtraClothQuest":
+                Debug.Log("여벌의 신도복 퀘스트 클리어");
+                if (FindQuest("ClothQuest").isCompleted)
+                {
+                    Debug.Log("이후 퀘스트 실행");
+                    AcceptQuest("Location");
+                }
+                break;
+            case "Location":
+                Debug.Log("특정 위치 가기 퀘스트 클리어");
+                StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
+                break;
+
+        }
+    }
 
     public QuestSO FindQuest(string questName)
     {
@@ -42,63 +77,61 @@ public class QuestManager : MonoBehaviour
             return quest;
         }
 
-        Debug.Log("����Ʈ ����");
         return null;
     }
 
     public void AcceptQuest(string questName)
     {
-        QuestSO quest = FindQuest(questName); 
+        QuestSO quest = FindQuest(questName);
         if (quest.isAvailable)
         {
             activeQuests.Add(quest);
             quest.isActived = true;
-            TextMeshProUGUI newQuestText = Instantiate(questTextPrefab, questListParent);
-            newQuestText.text = quest.description;
+            GameObject newQuestText = Instantiate(questTextPrefab, questListParent);
+            //TextMeshProUGUI newQuestText = Instantiate(questTextPrefab, questListParent).GetComponent<TextMeshProUGUI>();
+            newQuestText.GetComponent<TextMeshProUGUI>().text = EditText(quest);
             activeQuestTexts.Add(newQuestText);
 
             if (quest.ReachLocation)
             {
-                GameObject tempGameObject = GameObject.Find(quest.targetLocationObject);
-                if (tempGameObject != null)
-                {
-                    tempGameObject.SetActive(true);
-                }
+                GameObject.Find(quest.targetLocationObject).GetComponent<BoxCollider2D>().enabled = true;
+                GameObject.Find(quest.targetLocationObject).GetComponent<TargetLocation>().targetQuest = questName;
             }
-        }
-    }
-
-    public void OnQuestClear(string questName)
-    {
-        StartCoroutine(CompleteQuest(questName));
-        switch (questName)
-        {
-            case "quest1":
-                Debug.Log("퀘스트 클리어");
-                break;
         }
     }
 
     public IEnumerator CompleteQuest(string questName)
     {
-        for(int j = 0; j< activeQuests.Count; j++){
+        for (int j = 0; j < activeQuests.Count; j++)
+        {
             if (activeQuests[j].questName == questName)
             {
                 activeQuests[j].isCompleted = true;
-                TextMeshProUGUI questText = activeQuestTexts[j];
-                questText.text = $"<s>{questText.text}</s>";
+                GameObject questText = activeQuestTexts[j];
+                questText.GetComponent<TextMeshProUGUI>().text = $"<s>{questText.GetComponent<TextMeshProUGUI>().text}</s>";
 
                 // 퀘스트 제거 (페이드 아웃 애니메이션)
                 for (float i = 1; i >= 0; i -= Time.deltaTime)
                 {
-                    questText.color = new Color(questText.color.r, questText.color.g, questText.color.b, i);
+                    questText.GetComponent<TextMeshProUGUI>().color = new Color(questText.GetComponent<TextMeshProUGUI>().color.r, questText.GetComponent<TextMeshProUGUI>().color.g, questText.GetComponent<TextMeshProUGUI>().color.b, i);
                     yield return null;
                 }
-
-                Destroy(questText.gameObject);
+                Destroy(questText);
+                activeQuests.RemoveAt(j);
                 activeQuestTexts.RemoveAt(j);
             }
         }
+    }
+
+    public string EditText(QuestSO quest)
+    {
+        string tempText = quest.description;
+        if (quest.KillEnemies)
+        {
+            tempText += " (" + quest.currCount + "/" + quest.targetCount + ")";
+        }
+
+        return tempText;
     }
 
     public void OnEnemyKilled(int enemyID)
@@ -110,6 +143,7 @@ public class QuestManager : MonoBehaviour
                 if (quest.targetEnemyID == enemyID)
                 {
                     quest.currCount++;
+                    EditText(quest);
                     if (quest.currCount == quest.targetCount)
                     {
                         quest.isCompleted = true;
@@ -125,11 +159,11 @@ public class QuestManager : MonoBehaviour
         QuestSO quest = FindQuest(questname);
         if (quest.isCompleted)
         {
-                return true;
+            return true;
         }
         else
         {
-                return false;
+            return false;
         }
-        }
+    }
 }

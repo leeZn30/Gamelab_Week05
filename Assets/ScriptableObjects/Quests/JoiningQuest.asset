@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: JoiningQuest
   m_EditorClassIdentifier: 
   questName: JoiningQuest
-  description: "\uC2E0\uB3C4 3\uBA85 \uC8FD\uC774\uACE0 \uBB34\uAE30 \uAD6C\uD574\uC624\uAE30"
+  description: "\uC2E0\uB3C4 3\uBA85 \uC8FD\uC774\uAE30"
   KillEnemies: 1
-  ReachLocation: 1
+  ReachLocation: 0
   isCompleted: 0
-  isActived: 1
-  isAvailable: 1
+  isActived: 0
+  isAvailable: 0
   targetLocationObject: 
   targetEnemyID: 0
-  targetCount: 0
+  targetCount: 3
   currCount: 0

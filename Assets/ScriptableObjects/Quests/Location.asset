@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: ClothQuest
+  m_Name: Location
   m_EditorClassIdentifier: 
-  questName: ClothQuest
-  description: "\uC2E0\uB3C4\uBCF5 \uCC3E\uAE30"
+  questName: Location
+  description: "\uD2B9\uC810 \uC704\uCE58\uAE4C\uC9C0 \uB3C4\uB2EC"
   KillEnemies: 0
   ReachLocation: 1
   isCompleted: 1
   isActived: 1
   isAvailable: 1
-  targetLocationObject: Shindobok
+  targetLocationObject: Location
   targetEnemyID: 0
   targetCount: 0
   currCount: 0

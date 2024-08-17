@@ -7,6 +7,7 @@ public enum Event_Type
 {
     eRevoltQuestDone,
     eNoteRead,
+    eCommonEvent
 }
 
 public interface IListener

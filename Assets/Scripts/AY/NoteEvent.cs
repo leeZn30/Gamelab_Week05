@@ -8,6 +8,7 @@ using UnityEngine;
 public class NoteEvent : MonoBehaviour
 {
     public int currentEvent;
+
     [Header("Player")]
     GameObject player;
 
@@ -39,6 +40,14 @@ public class NoteEvent : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
+    }
+
+    public IEnumerator CallEvent(string eventName)
+    {
+        bool isComplete = false;
+        // 최종 퀘스트 작성
+        StartCoroutine(DoEvent(() => isComplete = true, eventName));
+        yield return new WaitUntil(() => isComplete);
     }
 
     public IEnumerator DoEvent(Action onComplete, int eventNum)
