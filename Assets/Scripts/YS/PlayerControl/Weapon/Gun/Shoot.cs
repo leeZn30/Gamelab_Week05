@@ -25,7 +25,7 @@ public class Shoot : MonoBehaviour
 
         if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
         {
-            DataManager.Instance.isDectected = true;
+            DataManager.Instance.playerState = "Battle";
             shooting = true;
         }
         if (InputManager.Instance.controls.Player.Shoot.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())

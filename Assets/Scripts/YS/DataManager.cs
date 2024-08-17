@@ -22,8 +22,8 @@ public class DataManager : MonoBehaviour
 
     private int bulletCount;
     public bool isDead = false;
-    public bool isDectected = false;
     private bool canShoot = false;
+    public string playerState;
 
     public List<GameObject> homeActiveFire;
 
@@ -40,12 +40,6 @@ public class DataManager : MonoBehaviour
     {
         get { return canShoot; }
         set { canShoot = value; }
-    }
-
-    public bool IsDectected
-    {
-        get { return isDectected; }
-        set { isDectected = value; }
     }
 
     public float Speed
@@ -94,5 +88,7 @@ public class DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        playerState = "Idle";
     }
 }

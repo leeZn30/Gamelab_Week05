@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   isDead: 0
-  isDectected: 0
+  playerState: 
   homeActiveFire: []
 --- !u!114 &4663089229533672087
 MonoBehaviour:
