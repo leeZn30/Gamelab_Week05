@@ -18,12 +18,18 @@ public class Player_Movement : MonoBehaviour
 
     public bool isUsingMap;
 
+    public bool isDashing = false;
+    public float dashTime = 0.2f;
+    public float dashSpeedMultiplier = 2.0f;
+
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Start()
     {
+        DataManager.Instance.Speed = 4f;
         isUsingMap = false;
+        isDashing = false;
 
         BattleManager.Instance.Resistance.Add(gameObject);
         //PlayerGunSetting();
@@ -37,23 +43,22 @@ public class Player_Movement : MonoBehaviour
         if (!isUsingMap)
         {
 
-            DataManager.Instance.Speed = 4f;
 
             // Player Movement
             Dock();
             Move();
             Block();
 
+            
+            // 일반 이동
             transform.Translate(Vector2.right * horizontalInput * Time.deltaTime * DataManager.Instance.Speed);
             transform.Translate(Vector2.up * verticalInput * Time.deltaTime * DataManager.Instance.Speed);
-
-
-            if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame())
+            
+            if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame() && !isDashing)
             {
-                transform.Translate(Vector2.right * horizontalInput * DataManager.Instance.Speed);
-                transform.Translate(Vector2.up * verticalInput * DataManager.Instance.Speed);
+                // 대시 코루틴 시작
+                StartCoroutine(Dash());
             }
-
 
             // Check Player Life
             PlayerDeath();
@@ -164,5 +169,17 @@ public class Player_Movement : MonoBehaviour
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
+    private IEnumerator Dash()
+    {
+        isDashing = true;  // 대시 상태 시작float startTime = Time.time;
 
+        // 대시 중 움직임while (Time.time < startTime + dashTime)
+        
+        DataManager.Instance.Speed *= dashSpeedMultiplier;
+        yield return new WaitForSeconds(dashTime);  // 다음 프레임까지 대기
+        
+
+        isDashing = false;  // 대시 상태 종료
+        DataManager.Instance.Speed = DataManager.Instance.Speed / 2;
+    }
 }
