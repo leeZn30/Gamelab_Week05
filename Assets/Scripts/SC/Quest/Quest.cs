@@ -7,12 +7,13 @@ public class QuestSO : ScriptableObject
     public string description;
     public bool KillEnemies;
     public bool ReachLocation;
+    public bool ReachItem;
     public bool isCompleted;
     public bool isActived;
     public bool isAvailable;
     public Event_Type eventType;
 
-    public string targetLocationObject;
+    public string targetObject;
     public int targetEnemyID;
     public int targetCount;
     public int currCount;
