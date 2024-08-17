@@ -74,6 +74,14 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 currentQuestSO = (QuestSO)Param;
                 StartCoroutine(NoteQuestEventCheck());
                 break;
+
+            case Event_Type.eSave:
+                SaveManager.Instance.savedNote = currentNoteData;
+                break;
+
+            case Event_Type.eLoad:
+                currentNoteData = SaveManager.Instance.savedNote;
+                break;
         }
     }
 

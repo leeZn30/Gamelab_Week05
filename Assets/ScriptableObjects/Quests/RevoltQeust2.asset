@@ -17,11 +17,11 @@ MonoBehaviour:
     \uB538 \uC704\uCE58 \uC54C\uC544\uB0B4\uAE30"
   KillEnemies: 0
   ReachLocation: 0
+  ReachItem: 0
   isCompleted: 0
   isActived: 0
-  isAvailable: 0
-  eventType: 1
-  targetLocationObject: 
+  eventType: 2
+  targetObject: 
   targetEnemyID: 0
   targetCount: 0
   currCount: 0

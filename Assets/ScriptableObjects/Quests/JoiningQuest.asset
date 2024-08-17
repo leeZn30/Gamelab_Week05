@@ -19,9 +19,8 @@ MonoBehaviour:
   ReachItem: 0
   isCompleted: 0
   isActived: 1
-  isAvailable: 1
-  eventType: 1
+  eventType: 2
   targetObject: 
-  targetEnemyID: 0
+  targetEnemyID: 1
   targetCount: 3
   currCount: 0
