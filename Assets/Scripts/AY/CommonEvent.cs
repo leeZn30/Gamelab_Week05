@@ -10,6 +10,9 @@ public class CommonEvent : MonoBehaviour
     [Header("Player")]
     GameObject player;
 
+    [Header("Prefabs")]
+    [SerializeField] GameObject resistance;
+
     [Header("Intro")]
     [SerializeField] int introDialogueId0; // 대사 ID, 이 NPC가 말할 대사를 지정
     [SerializeField] int introDialogueId1; // 대사 ID, 이 NPC가 말할 대사를 지정
@@ -35,6 +38,8 @@ public class CommonEvent : MonoBehaviour
 
     IEnumerator Intro()
     {
+        yield return new WaitForSeconds(0.5f);
+
         DialogueManager.Instance.SetDialogueID(introDialogueId0);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
@@ -44,8 +49,20 @@ public class CommonEvent : MonoBehaviour
         DialogueManager.Instance.SetDialogueID(introDialogueId1);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
+        RoomDoor.OpenDoor();
+        yield return new WaitForSeconds(0.5f);
+        GameObject go = Instantiate(resistance, RoomDoor.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
 
+        DialogueManager.Instance.SetDialogueID(introDialogueId2);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
+        Destroy(go);
+        RoomDoor.CloseDoor();
+        yield return new WaitForSeconds(0.5f);
+
+        DialogueManager.Instance.SetDialogueID(introDialogueId3);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
     }
 
 
