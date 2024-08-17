@@ -2354,7 +2354,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4839490998288162479, guid: f963b710a08beb04e9a32cd58ea69d64, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4125,6 +4126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueId: 306
   interactionUI: {fileID: 0}
+  isActive: 0
+  targetQuest: 
 --- !u!4 &834690630 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8787270924669201513, guid: 86ed6d84e5250ba4d826bc35a680f4e5,
@@ -5689,6 +5692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueId: 304
   interactionUI: {fileID: 0}
+  isActive: 0
+  targetQuest: 
 --- !u!1 &1062256441
 GameObject:
   m_ObjectHideFlags: 0
@@ -36982,7 +36987,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4839490998288162479, guid: f963b710a08beb04e9a32cd58ea69d64, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
