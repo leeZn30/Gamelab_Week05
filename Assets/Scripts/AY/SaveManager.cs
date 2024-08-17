@@ -24,6 +24,6 @@ public class SaveManager : Singleton<SaveManager>
 
     public void Load()
     {
-
+        EventManager.Instance.PostNotification(Event_Type.eLoad, this);
     }
 }

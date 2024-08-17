@@ -45,7 +45,7 @@ public class NPCInfo : MonoBehaviour
 
     private void Start()
     {
-        weapon.SetActive(false);
+        //weapon.SetActive(false);
         maxHealth = 10;
         health = maxHealth;
         SetSide();

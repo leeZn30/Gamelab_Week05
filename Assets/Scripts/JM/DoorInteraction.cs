@@ -14,6 +14,12 @@ public class DoorInteraction : MonoBehaviour, IListener
     public bool isOpend = false;
     public int saveIndex = -1;
 
+    void Awake()
+    {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
+    }
+
     void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
@@ -90,9 +96,11 @@ public class DoorInteraction : MonoBehaviour, IListener
                 saveIndex = SaveManager.Instance.savedDoors.Count - 1;
                 break;
             case Event_Type.eLoad:
+                if (SaveManager.Instance.savedDoors[saveIndex].isOpend)
+                {
+                    OpenDoor();
+                }
                 break;
-
-
         }
     }
 }
