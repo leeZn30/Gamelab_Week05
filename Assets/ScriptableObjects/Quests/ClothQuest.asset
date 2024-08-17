@@ -15,12 +15,12 @@ MonoBehaviour:
   questName: ClothQuest
   description: "\uC2E0\uB3C4\uBCF5 \uCC3E\uAE30"
   KillEnemies: 0
-  ReachLocation: 1
-  isCompleted: 1
-  isActived: 1
-  isAvailable: 1
+  ReachLocation: 0
+  ReachItem: 1
+  isCompleted: 0
+  isActived: 0
   eventType: 3
-  targetLocationObject: Shindobok
+  targetObject: Cloth
   targetEnemyID: 0
   targetCount: 0
   currCount: 0

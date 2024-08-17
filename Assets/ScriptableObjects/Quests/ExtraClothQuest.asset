@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: ExtraClothQuest
   m_EditorClassIdentifier: 
   questName: ExtraClothQuest
-  description: "\uC5EC\uBC8C \uC2E0\uB3C4\uBCF5 \uCC3E"
+  description: "\uC5EC\uBC8C \uC2E0\uB3C4\uBCF5 \uCC3E\uAE30"
   KillEnemies: 0
-  ReachLocation: 1
-  isCompleted: 1
-  isActived: 1
-  isAvailable: 1
+  ReachLocation: 0
+  ReachItem: 1
+  isCompleted: 0
+  isActived: 0
   eventType: 3
-  targetLocationObject: ExtraShindobok
+  targetObject: ExtraCloth
   targetEnemyID: 0
   targetCount: 0
   currCount: 0
