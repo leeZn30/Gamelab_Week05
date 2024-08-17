@@ -14,6 +14,7 @@ public class ObjectInteraction : MonoBehaviour
     public bool isCollected = false;
     public bool isQuest = false;
     public string questName;
+    public int saveIndex = -1;
 
 
     void Update()

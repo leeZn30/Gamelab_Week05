@@ -22,14 +22,8 @@ public class SaveManager : Singleton<SaveManager>
         EventManager.Instance.PostNotification(Event_Type.eSave, this);
     }
 
-    public int AddSaveDoors(DoorInteraction door)
-    {
-        savedDoors.Add(door);
-        return savedDoors.Count-1;
-    }
-
     public void Load()
     {
-
+        EventManager.Instance.PostNotification(Event_Type.eLoad, this);
     }
 }

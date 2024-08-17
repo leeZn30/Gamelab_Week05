@@ -15,13 +15,16 @@ public class TargetLocation : MonoBehaviour
             {
                 isActived = true;
                 QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-                if (tempQuestManager.FindQuest(targetQuest).returnNPC)
+                if (tempQuestManager != null)
                 {
-                    tempQuestManager.UnderlineQuest(targetQuest);
-                }
-                else
-                {
-                    tempQuestManager.OnQuestClear(targetQuest);
+                    if (tempQuestManager.FindQuest(targetQuest).returnNPC)
+                    {
+                        tempQuestManager.UnderlineQuest(targetQuest);
+                    }
+                    else
+                    {
+                        tempQuestManager.OnQuestClear(targetQuest);
+                    }
                 }
             }
         }
