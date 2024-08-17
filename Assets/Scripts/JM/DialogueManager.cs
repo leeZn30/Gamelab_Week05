@@ -14,7 +14,7 @@ public class DialogueManager : Singleton<DialogueManager>
     private Queue<string> sentences;
     public bool isDialogueActive = false;
     public bool dialogEnd;
-
+    private string currentSpeaker; // 현재 대화를 하는 캐릭터의 이름
     void Awake()
     {
         dialogueUI = GameObject.Find("DialogueUI");
@@ -52,7 +52,7 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueUI.SetActive(true);
 
         dialogEnd = false;
-
+        currentSpeaker = dialogue.name; // 대화를 시작할 때 캐릭터 이름을 설정
         foreach (string sentence in dialogue.contexts)
         {
             sentences.Enqueue(sentence);
@@ -79,7 +79,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     IEnumerator TypeSentence(string sentence)
     {
-        dialogueText.text = "";
+        dialogueText.text = $"{currentSpeaker}: "; // 캐릭터 이름을 먼저 출력foreach (char letter in sentence.ToCharArray())
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;

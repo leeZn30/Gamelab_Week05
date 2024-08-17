@@ -3,11 +3,16 @@ using UnityEngine;
 public class ObjectInteraction : MonoBehaviour
 {
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
+    public GameObject CollectedObject; // 이 오브젝트가 출력할 기본 대사 ID
+
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
 
     private bool isSend = false;
 
     public bool isCollected = false;
+    public bool isQuest = false;
+    public string questName;
+
 
     void Update()
     {
@@ -15,7 +20,17 @@ public class ObjectInteraction : MonoBehaviour
         {
             DialogueManager.Instance.SetDialogueID(dialogueId);
             isSend = true;
-            isCollected = true;
+
+            if (isQuest)
+            {
+                GameObject.Find("QuestManager").GetComponent<QuestManager>().OnQuestClear(questName);
+            }
+
+            if (CollectedObject != null)
+            {
+                Destroy(CollectedObject);
+                isCollected = true;
+            }
         }
     }
 
