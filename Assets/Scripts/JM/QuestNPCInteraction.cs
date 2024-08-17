@@ -39,7 +39,7 @@ public class QuestNPCInteraction : MonoBehaviour
         {
             if (tempID == -1)
             {
-                tempID = 0;
+                tempID = postCompletionDialogueId;
             }
         }
 
@@ -51,7 +51,7 @@ public class QuestNPCInteraction : MonoBehaviour
                 {
                     quest[i].isActived = true;
                     QuestManager.Instance.AcceptQuest(quest[i].questName);
-                    tempID = 1;
+                    tempID = initialDialogueId;
                 }
             }
         }
@@ -62,7 +62,7 @@ public class QuestNPCInteraction : MonoBehaviour
             {
                 if (!quest[i].isCompleted)
                 {
-                    tempID = 2;
+                    tempID = incompleteQuestDialogueId;
                 }
             }
         }
@@ -74,10 +74,12 @@ public class QuestNPCInteraction : MonoBehaviour
                 if (quest[i].isCompleted)
                 {
                     questDialogueCompleted = true;
-                    tempID = 3;
+                    tempID = completedQuestDialogueId;
                 }
             }
         }
+
+        return tempID;
 
         /*
         if (questDialogueCompleted)
@@ -99,21 +101,6 @@ public class QuestNPCInteraction : MonoBehaviour
             return completedQuestDialogueId;
         }
         */
-
-        switch (tempID)
-        {
-            case 0:
-                return postCompletionDialogueId;
-            case 1:
-                return initialDialogueId;
-            case 2:
-                return incompleteQuestDialogueId;
-            case 3:
-                return completedQuestDialogueId;
-            default:
-                Debug.Log("퀘스트 NPC대사 오류");
-                return -1;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
