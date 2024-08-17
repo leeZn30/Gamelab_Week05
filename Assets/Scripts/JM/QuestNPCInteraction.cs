@@ -81,12 +81,10 @@ public class QuestNPCInteraction : MonoBehaviour
         {
             for (int i = 0; i < quest.Length; i++)
             {
-                if (!quest[i].isActived)
-                {
-                    GameObject.Find("QuestManager").GetComponent<QuestManager>().AcceptQuest(quest[i].questName);
-                    tempID = initialDialogueId;
-                }
+                QuestManager.Instance.AcceptQuest(quest[i].questName);
             }
+
+            tempID = initialDialogueId;
         }
 
         if (tempID == -1)
