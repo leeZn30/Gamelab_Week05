@@ -7,13 +7,15 @@ public class BulletControl : MonoBehaviour
     public float speed;
     public float lifeTime;
 
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, lifeTime);
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 

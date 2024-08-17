@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: NoteLastQuest
+  m_Name: RevoltQeust1
   m_EditorClassIdentifier: 
-  questName: NoteLastQuest
-  description: "\uD2B9\uC810 \uC704\uCE58\uAE4C\uC9C0 \uB3C4\uB2EC"
+  questName: RevolotQuest1
+  description: "\uAD50\uC8FC\uC758 \uBC29\uC5D0\uC11C \uC77C\uAE30 \uD6D4\uCE58\uAE30"
   KillEnemies: 0
-  ReachLocation: 1
-  ReachItem: 0
+  ReachLocation: 0
+  ReachItem: 1
   isCompleted: 0
   isActived: 0
-  eventType: 3
-  targetObject: FinalRoom
+  isAvailable: 0
+  eventType: 1
+  targetObject: Diary
   targetEnemyID: 0
   targetCount: 0
   currCount: 0

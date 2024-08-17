@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
 {
+    public GameObject interactionUI;
+
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
     public GameObject CollectedObject; // 이 오브젝트가 출력할 기본 대사 ID
 
@@ -39,6 +41,7 @@ public class ObjectInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
+            interactionUI.SetActive(true);
         }
     }
 
@@ -47,6 +50,7 @@ public class ObjectInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            interactionUI.SetActive(true);
         }
     }
 

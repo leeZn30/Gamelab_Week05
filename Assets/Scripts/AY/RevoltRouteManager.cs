@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 {
+    [SerializeField] RevoltEvent revoltEvent;
+
     void Awake()
     {
         // 씬 이동해도 삭제되면 안됨
