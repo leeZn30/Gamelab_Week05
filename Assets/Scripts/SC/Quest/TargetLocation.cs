@@ -14,7 +14,15 @@ public class TargetLocation : MonoBehaviour
             if (collider.CompareTag("Player"))
             {
                 isActived = true;
-                GameObject.Find("QuestManager").GetComponent<QuestManager>().OnQuestClear(targetQuest);
+                QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+                if (tempQuestManager.FindQuest(targetQuest).returnNPC)
+                {
+                    tempQuestManager.UnderlineQuest(targetQuest);
+                }
+                else
+                {
+                    tempQuestManager.OnQuestClear(targetQuest);
+                }
             }
         }
     }

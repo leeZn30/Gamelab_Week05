@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class QuestNPCInteraction : MonoBehaviour
@@ -10,6 +11,10 @@ public class QuestNPCInteraction : MonoBehaviour
 
     public QuestSO[] quest;
     public GameObject interactionUI;
+
+    public GameObject questStart;
+    public GameObject onQuest;
+    public GameObject completeQuest;
     public bool questDialogueCompleted = false;
 
     private bool isPlayerInRange = false;
@@ -21,13 +26,42 @@ public class QuestNPCInteraction : MonoBehaviour
 
     void Update()
     {
+        if (!questDialogueCompleted)
+        {
+            bool chk = true;
+            for (int i = 0; i < quest.Length; i++)
+            {
+                if (!quest[i].isActived)
+                {
+                    questStart.SetActive(true);
+                    chk = false;
+                }
+            }
+
+            if (chk)
+            {
+                for (int i = 0; i < quest.Length; i++)
+                {
+                    if (!quest[i].isCompleted)
+                    {
+                        questStart.SetActive(false);
+                        onQuest.SetActive(true);
+                        chk = false;
+                    }
+                }
+            }
+
+            if (chk)
+            {
+                onQuest.SetActive(false);
+                completeQuest.SetActive(true);
+            }
+        }
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
             int dialogueId = GetDialogueIdBasedOnQuestState();
             DialogueManager.Instance.SetDialogueID(dialogueId);
             isSend = true;
-
-
         }
     }
 
@@ -49,8 +83,7 @@ public class QuestNPCInteraction : MonoBehaviour
             {
                 if (!quest[i].isActived)
                 {
-                    quest[i].isActived = true;
-                    QuestManager.Instance.AcceptQuest(quest[i].questName);
+                    GameObject.Find("QuestManager").GetComponent<QuestManager>().AcceptQuest(quest[i].questName);
                     tempID = initialDialogueId;
                 }
             }
@@ -69,16 +102,13 @@ public class QuestNPCInteraction : MonoBehaviour
 
         if (tempID == -1)
         {
-            for (int i = 0; i < quest.Length; i++)
-            {
-                if (!quest[i].isCompleted)
-                {
-                    return incompleteQuestDialogueId;
-                }
-            }
             questDialogueCompleted = true;
             tempID = completedQuestDialogueId;
-            //퀘스트 완료
+            for (int i = 0; i < quest.Length; i++)
+            {
+                QuestManager.Instance.OnQuestClear(quest[i].questName);
+            }
+            completeQuest.SetActive(false);
         }
 
         return tempID;

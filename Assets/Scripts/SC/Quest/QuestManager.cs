@@ -17,6 +17,7 @@ public class QuestManager : MonoBehaviour
     public List<QuestSO> activeQuests = new List<QuestSO>();
 
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
+
     [SerializeField] GameObject questTextPrefab;
     [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();
 
@@ -42,6 +43,7 @@ public class QuestManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void OnQuestClear(string questName)
     {
         StartCoroutine(CompleteQuest(questName));
@@ -86,7 +88,7 @@ public class QuestManager : MonoBehaviour
     public void AcceptQuest(string questName)
     {
         QuestSO quest = FindQuest(questName);
-        if (quest.isActived)
+        if (!quest.isActived)
         {
             activeQuests.Add(quest);
             quest.isActived = true;
@@ -102,6 +104,19 @@ public class QuestManager : MonoBehaviour
             {
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().isQuest = true;
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().questName = questName;
+            }
+        }
+    }
+
+    public void UnderlineQuest(string questName)
+    {
+        for (int j = 0; j < activeQuests.Count; j++)
+        {
+            if (activeQuests[j].questName == questName)
+            {
+                activeQuests[j].isCompleted = true;
+                GameObject questText = activeQuestTexts[j];
+                questText.GetComponent<TextMeshProUGUI>().text = $"<s>{questText.GetComponent<TextMeshProUGUI>().text}</s>";
             }
         }
     }
@@ -142,18 +157,22 @@ public class QuestManager : MonoBehaviour
 
     public void OnEnemyKilled(int enemyID)
     {
-        foreach (var quest in activeQuests)
+        for(int i = 0; i < activeQuests.Count; i++)
         {
-            if (quest.KillEnemies && !quest.isCompleted)
+            if (activeQuests[i].KillEnemies && !activeQuests[i].isCompleted)
             {
-                if (quest.targetEnemyID == enemyID)
+                if (activeQuests[i].targetEnemyID == enemyID)
                 {
-                    quest.currCount++;
-                    EditText(quest);
-                    if (quest.currCount == quest.targetCount)
+                    activeQuests[i].currCount++;
+                    activeQuestTexts[i].GetComponent<TextMeshProUGUI>().text = EditText(activeQuests[i]);
+                    QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>(); ;
+                    if (tempQuestManager.FindQuest(activeQuests[i].questName).returnNPC)
                     {
-                        quest.isCompleted = true;
-                        OnQuestClear(quest.questName);
+                        tempQuestManager.UnderlineQuest(activeQuests[i].questName);
+                    }
+                    else
+                    {
+                        tempQuestManager.OnQuestClear(activeQuests[i].questName);
                     }
                 }
             }
