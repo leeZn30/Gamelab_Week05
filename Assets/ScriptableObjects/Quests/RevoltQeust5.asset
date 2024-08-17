@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevolotQuest5
   description: "\uC804\uAE30\uC2E4\uC5D0 \uD3ED\uD0C4 \uC124\uCE58\uD558\uAE30"
+  returnNPC: 0
   KillEnemies: 0
-  ReachLocation: 0
+  ReachLocation: 1
   ReachItem: 0
+  ReachNPC: 0
   isCompleted: 0
   isActived: 0
   eventType: 2
