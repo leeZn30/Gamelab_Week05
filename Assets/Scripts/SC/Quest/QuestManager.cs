@@ -85,7 +85,7 @@ public class QuestManager : MonoBehaviour
     public void AcceptQuest(string questName)
     {
         QuestSO quest = FindQuest(questName);
-        if (quest.isAvailable)
+        if (quest.isActived)
         {
             activeQuests.Add(quest);
             quest.isActived = true;

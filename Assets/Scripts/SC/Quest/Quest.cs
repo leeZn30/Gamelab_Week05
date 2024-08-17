@@ -10,7 +10,7 @@ public class QuestSO : ScriptableObject
     public bool ReachItem;
     public bool isCompleted;
     public bool isActived;
-    public bool isAvailable;
+    //public bool isAvailable;
     public Event_Type eventType;
 
     public string targetObject;
