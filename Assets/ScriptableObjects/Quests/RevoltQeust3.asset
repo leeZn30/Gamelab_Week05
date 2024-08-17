@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevolotQuest3
   description: "\uAC10\uC625\uC5D0 \uAC07\uD78C \uBC18\uB780\uAD70 \uAC00\uC871 \uAD6C\uD558\uAE30"
+  returnNPC: 0
   KillEnemies: 0
   ReachLocation: 0
-  ReachItem: 0
+  ReachItem: 1
+  ReachNPC: 0
   isCompleted: 0
   isActived: 0
   eventType: 2
-  targetObject: 
+  targetObject: Wife
   targetEnemyID: 0
   targetCount: 0
   currCount: 0

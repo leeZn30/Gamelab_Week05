@@ -22,7 +22,7 @@ MonoBehaviour:
   isCompleted: 0
   isActived: 0
   eventType: 2
-  targetObject: 
+  targetObject: "\uC804\uAE30\uC2E4"
   targetEnemyID: 0
   targetCount: 0
   currCount: 0
