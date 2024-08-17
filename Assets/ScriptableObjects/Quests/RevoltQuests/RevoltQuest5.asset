@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevoltQuest5
   description: "\uAC10\uC625\uC5D0 \uAC07\uD78C \uBC18\uB780\uAD70 \uAC00\uC871 \uAD6C\uD558\uAE30"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 0
   ReachLocation: 0
   ReachItem: 1

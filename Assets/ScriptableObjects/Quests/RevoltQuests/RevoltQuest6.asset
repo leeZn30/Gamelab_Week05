@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
   m_Name: RevoltQuest6
   m_EditorClassIdentifier: 
-  questName: RevolotQuest6
+  questName: RevoltQuest6
   description: "\uBB34\uAE30\uACE0\uC5D0 \uD3ED\uD0C4 \uC124\uCE58\uD558\uAE30"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 0
   ReachLocation: 1
   ReachItem: 0

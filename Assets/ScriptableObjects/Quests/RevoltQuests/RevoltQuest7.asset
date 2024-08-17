@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevolotQuest7
   description: "\uC804\uAE30\uC2E4\uC5D0 \uD3ED\uD0C4 \uC124\uCE58\uD558\uAE30"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 0
   ReachLocation: 1
   ReachItem: 0
   ReachNPC: 0
   isCompleted: 0
-  isActived: 1
+  isActived: 0
   eventType: 2
   targetObject: "\uC804\uAE30\uC2E4"
   targetEnemyID: 0

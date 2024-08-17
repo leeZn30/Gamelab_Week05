@@ -14,18 +14,15 @@ public class RevoltEvent : MonoBehaviour
     [SerializeField] GameObject cultEnemy;
     [SerializeField] GameObject resistaceBoss;
 
-    [Header("Event2")]
+    [Header("Event1")]
     [SerializeField] int dialogueId1;
 
-    [Header("Event3")]
+    [Header("Event2")]
     [SerializeField] int dialogueId3_0;
     [SerializeField] int dialogueId3_1;
     [SerializeField] GameObject event2Door;
 
-    [Header("Event4")]
-    [SerializeField] int dialogueId4;
-
-    [Header("Event5")]
+    [Header("Event67")]
     [SerializeField] int dialogueId5;
     [SerializeField] QuestSO questSO;
 
@@ -41,22 +38,22 @@ public class RevoltEvent : MonoBehaviour
         switch (questNum)
         {
             case 1:
-                yield return StartCoroutine(Event2());
+                // yield return StartCoroutine(Event1());
                 break;
 
             case 2:
-                yield return StartCoroutine(Event3());
+                yield return StartCoroutine(Event2());
                 break;
 
             case 4:
-                yield return StartCoroutine(Event45());
+                // yield return StartCoroutine(Event34());
                 break;
 
-            case 5:
-                yield return StartCoroutine(Event6());
+            case 7:
+                yield return StartCoroutine(Event67());
                 break;
 
-            case 6: // last
+            case 8: // last
                 break;
         }
 
@@ -64,7 +61,7 @@ public class RevoltEvent : MonoBehaviour
         Debug.Log("End Revolt Event");
     }
 
-    IEnumerator Event2()
+    IEnumerator Event1()
     {
         // npc 생성함
         GameObject go = Instantiate(resistance, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
@@ -77,20 +74,19 @@ public class RevoltEvent : MonoBehaviour
         Destroy(go);
     }
 
-    IEnumerator Event3()
+    IEnumerator Event2()
     {
+        // 쿵 소리
+        yield return new WaitForSeconds(0.5f);
+
         // 대화
         DialogueManager.Instance.SetDialogueID(dialogueId3_0);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
-        // 이동
+        // 문 닫음 (뭐 부터 깰지 몰라서 없애두기)
+        // event2Door.SetActive(true);
 
-        // 대화2
-        DialogueManager.Instance.SetDialogueID(dialogueId3_1);
-        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
-
-        // 문 닫음
-        event2Door.SetActive(true);
+        // 말한 반란군 잠시 안보이게 하기 (미완)
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
@@ -98,23 +94,25 @@ public class RevoltEvent : MonoBehaviour
         {
             enemies.Add(Instantiate(cultEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
         }
-
-
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
         yield return new WaitUntil(() => enemies.All(e => e == null));
 
-        // 문 엶
+        // 대화2
+        DialogueManager.Instance.SetDialogueID(dialogueId3_1);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        // 문 엶 (뭐 부터 깰지 몰라서 없애두기)
         event2Door.SetActive(false);
     }
 
-    IEnumerator Event45()
+    IEnumerator Event34()
     {
         // 할머니 끌고감 (이거 겹치면 쪽지루트랑 겹치면 쪽지루트 우선)
 
         yield return null;
     }
 
-    IEnumerator Event6()
+    IEnumerator Event67()
     {
         // 보스 등장
         GameObject go = Instantiate(resistaceBoss, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);

@@ -15,14 +15,14 @@ MonoBehaviour:
   questName: RevoltQuest4
   description: "\uAD11\uC2E0\uB3C4\uB4E4\uACFC \uB300\uD654\uD558\uBA70 \uAD50\uC8FC
     \uB538 \uC704\uCE58 \uC54C\uC544\uB0B4\uAE301"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 0
   ReachLocation: 0
   ReachItem: 0
   ReachNPC: 1
   isCompleted: 0
   isActived: 0
-  eventType: 4
+  eventType: 2
   targetObject: AnswerNPC2
   targetEnemyID: 0
   targetCount: 0

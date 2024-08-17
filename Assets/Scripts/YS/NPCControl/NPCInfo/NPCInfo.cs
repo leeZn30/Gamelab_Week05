@@ -137,7 +137,7 @@ public class NPCInfo : MonoBehaviour
             {
                 LongCult();
             }
-            else if(type == "Short")
+            else if (type == "Short")
             {
                 ShortCult();
             }

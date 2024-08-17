@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevoltQuest1
   description: "\uC2E0\uB3C4 3\uBA85 \uC8FD\uC774\uAE30"
-  returnNPC: 0
+  returnNPC: 1
   KillEnemies: 1
   ReachLocation: 0
   ReachItem: 0
   ReachNPC: 0
-  isCompleted: 0
-  isActived: 0
+  isCompleted: 1
+  isActived: 1
   eventType: 2
   targetObject: 
   targetEnemyID: 1
   targetCount: 3
-  currCount: 0
+  currCount: 1
