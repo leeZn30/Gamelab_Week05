@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastEventId: 0
+  commonEvent: {fileID: 9052588749714916937}
 --- !u!114 &4836519509127534200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5995af7e437d6e24bba11b0a5000234c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revoltEvent: {fileID: 0}
+  revoltEvent: {fileID: 2549719918221561708}
 --- !u!1 &2931823689495631830
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3626297354755873503}
+  - component: {fileID: 9052588749714916937}
   m_Layer: 0
   m_Name: CommonEvents
   m_TagString: Untagged
@@ -231,3 +233,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2186844091315706294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9052588749714916937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7075122282776903226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf14bf189ecf0942bc85c1f592df458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentEvent: 0
+  introDialogueId0: 0
+  introDialogueId1: 0
+  note0: {fileID: 0}

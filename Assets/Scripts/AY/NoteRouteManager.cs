@@ -11,7 +11,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     public TextAsset noteCSV;
     public List<NoteData> noteDatas = new List<NoteData>();
     public NoteData currentNoteData;
-    [SerializeField] GameObject noteUI;
+    public GameObject noteUI;
     [SerializeField] Button noteBtn;
 
     [Header("퀘스트 관련")]
