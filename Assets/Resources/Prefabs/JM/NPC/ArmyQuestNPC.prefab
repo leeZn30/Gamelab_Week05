@@ -316,11 +316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4d740ec3032d4d820800e08e9c8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDialogueId: 3
-  incompleteQuestDialogueId: 4
-  completedQuestDialogueId: 5
-  postCompletionDialogueId: 6
-  quest: []
+  initialDialogueId: 2
+  incompleteQuestDialogueId: 3
+  completedQuestDialogueId: 4
+  postCompletionDialogueId: 14
+  quest:
+  - {fileID: 11400000, guid: c6f415fe86fd8ed4fbcf7b01d5593390, type: 2}
   interactionUI: {fileID: 724903926559008170}
   questStart: {fileID: 4949751876991689560}
   onQuest: {fileID: 2989996581978232129}

@@ -37,7 +37,7 @@ public class Shoot : MonoBehaviour
 
         if (shooting && shootTime > shootDelay)
         {
-            gunsound.Play();
+            // gunsound.Play();
             shootTime = 0;
             Instantiate(bullet, transform.position, rotation.transform.rotation);
             RumbleManager.instance.RumblePulse(0.3f, 1f, 0.1f);
@@ -53,5 +53,5 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    
+
 }
