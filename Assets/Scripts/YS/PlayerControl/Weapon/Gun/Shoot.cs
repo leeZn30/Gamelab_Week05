@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Shoot : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class Shoot : MonoBehaviour
     private bool shooting;
 
     public float shootDelay;
-    private float shootTime;
+    public float shootTime;
 
-    private void Start()
+
+    private void OnEnable()
     {
         rotation = GameObject.FindWithTag("Player").transform.Find("PlayerGunRotatePos").gameObject;
         StartCoroutine(ShootDelay());
@@ -20,12 +22,13 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
+
+        if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
         {
             DataManager.Instance.isDectected = true;
             shooting = true;
         }
-        if (InputManager.Instance.controls.Player.Shoot.WasReleasedThisFrame())
+        if (InputManager.Instance.controls.Player.Shoot.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
         {
             shooting = false;
         }

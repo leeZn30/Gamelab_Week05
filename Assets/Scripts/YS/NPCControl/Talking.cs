@@ -23,7 +23,7 @@ public class Talking : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isTalking = true;
-            Time.timeScale = 0.2f;
+            //Time.timeScale = 0.2f;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -31,7 +31,7 @@ public class Talking : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isTalking = false;
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
         }
     }
 }

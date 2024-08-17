@@ -188,9 +188,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6191228726517070680}
   - component: {fileID: 5409989278443765356}
-  - component: {fileID: 6080178620537599826}
   - component: {fileID: 3083790682663744738}
+  - component: {fileID: 6080178620537599826}
   - component: {fileID: 8951014081835904807}
+  - component: {fileID: 5927953788113210885}
+  - component: {fileID: 7290926260028284591}
+  - component: {fileID: 8300507761734393550}
   m_Layer: 0
   m_Name: NPC (1)
   m_TagString: Untagged
@@ -268,6 +271,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3083790682663744738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714615146271489924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c3868741f0ebd418ea442077a4ac3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: 213
+  interactionUI: {fileID: 128865448450425839}
 --- !u!61 &6080178620537599826
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -313,20 +330,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4367499, y: 2.8645265}
   m_EdgeRadius: 0
---- !u!114 &3083790682663744738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714615146271489924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39c3868741f0ebd418ea442077a4ac3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueId: 213
-  interactionUI: {fileID: 128865448450425839}
 --- !u!61 &8951014081835904807
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -372,6 +375,70 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.7221477}
   m_EdgeRadius: 0
+--- !u!114 &5927953788113210885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714615146271489924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e610cde4531cf74f9ca70ae0c5ea2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottomLeft: {x: 0, y: 0}
+  topRight: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0}
+  FinalNodeList: []
+  allowDiagonal: 0
+  dontCrossCorner: 0
+  point: 0
+--- !u!114 &7290926260028284591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714615146271489924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27abbbf6ccd914349a05152e3e226192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyID: 0
+  side: 0
+  type: 
+  health: 0
+  maxHealth: 0
+  damage: 0
+  attackRange: 0
+  attackSpeed: 0
+  target: {fileID: 0}
+  isPatrol: 0
+  isBattle: 0
+  state: 0
+  blood: {fileID: 0}
+--- !u!114 &8300507761734393550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4714615146271489924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b557556b0b483642ade6ee60097ed5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0, z: 0}
+  chaseDistance: 10
+  fleeDistance: 5
+  wanderDistance: 15
+  PatrolLocation: []
+  patrolIndex: 0
+  patWhat: 0
 --- !u!1 &8183591132908440409
 GameObject:
   m_ObjectHideFlags: 0
