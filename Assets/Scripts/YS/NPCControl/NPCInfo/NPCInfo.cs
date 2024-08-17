@@ -184,15 +184,19 @@ public class NPCInfo : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet"))
         {
-            health--; 
+            health--;
             float randX = UnityEngine.Random.Range(transform.position.x - 1, transform.position.x + 1);
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
     }
 }

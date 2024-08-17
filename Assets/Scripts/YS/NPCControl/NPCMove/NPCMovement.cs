@@ -58,21 +58,22 @@ public class NPCMovement : MonoBehaviour
     void Update()
     {
         FindWall();
+
+
         if (GetComponent<NPCInfo>().isPatrol)
-        {
+        {   
+            /*
             currentState = NPCState.Patrol;
             if (transform.position == targetPosition)
             {
                 Behave();
             }
+            */
         }
-
-
         if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
         {
             currentState = NPCState.Run;
         }
-
         if (GetComponent<NPCInfo>().isBattle)
         {
             if (GetComponent<NPCInfo>().target != null)
@@ -81,6 +82,11 @@ public class NPCMovement : MonoBehaviour
             }
             Behave();
         }
+        else
+        {
+            Behave();
+        }
+
         MoveToTarget();
         
     }
@@ -215,23 +221,15 @@ public class NPCMovement : MonoBehaviour
     {
         GameObject[] runs = GameObject.FindGameObjectsWithTag("Run");
 
-        if (GetComponent<NPCInfo>().side == 1)
+        if(runs != null)
         {
-            int ran = Random.Range(0,runs.Length);
-
-            if (runs[ran].GetComponent<RunTeam>().runTeam == 1)
+            if (GetComponent<NPCInfo>().side == 1)
             {
+                int ran = Random.Range(0, runs.Length);
+
                 targetPosition = runs[ran].transform.position;
             }
-        }
-        else
-        {
-            int ran = Random.Range(0, runs.Length);
 
-            if (runs[ran].GetComponent<RunTeam>().runTeam == 2)
-            {
-                targetPosition = runs[ran].transform.position;
-            }
         }
     }
 
@@ -269,8 +267,8 @@ public class NPCMovement : MonoBehaviour
     void Idle()
     {
         targetPosition = new Vector3(
-          Random.Range(minX, maxX),
-          Random.Range(minY, maxY),
+          Random.Range(transform.position.x - 2, transform.position.x + 2),
+          Random.Range(transform.position.y - 2, transform.position.y + 2),
           transform.position.z
         );
     }
