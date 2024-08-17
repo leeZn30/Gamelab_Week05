@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2641880074403720074}
   - component: {fileID: 8184382724993860618}
   - component: {fileID: 7798479129446196463}
-  m_Layer: 0
+  - component: {fileID: 7812309626953223411}
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +116,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -147,6 +148,51 @@ MonoBehaviour:
   openDoor: {fileID: 764490693319987026}
   closedDoor: {fileID: 1825444923459911486}
   KeyObject: {fileID: 0}
+--- !u!61 &7812309626953223411
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825444923459911486}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.76, y: 3.89}
+    newSize: {x: 4.76, y: 3.89}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.76, y: 3.89}
+  m_EdgeRadius: 0
 --- !u!1 &4376147770351759154
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +204,7 @@ GameObject:
   - component: {fileID: 4382410907012512911}
   m_Layer: 7
   m_Name: ClosedDoor
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +219,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.004, y: -14.87, z: -0.00056569}
-  m_LocalScale: {x: 1.5185887, y: 1.1353934, z: 1.1353934}
+  m_LocalScale: {x: 1.8675603, y: 1.3963068, z: 1.3963068}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 979706103166958539}
