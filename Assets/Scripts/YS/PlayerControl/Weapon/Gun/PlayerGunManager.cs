@@ -8,11 +8,16 @@ public class PlayerGunManager : MonoBehaviour
 
     public List<GameObject> playerGun;
     public int currentGunIndex = 0;
+    public bool isActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        for(int i = 0; i < playerGun.Count; i++)
+        {
+            playerGun[i].SetActive(false);
+        }
+        isActive = false;
     }
 
     // Update is called once per frame
@@ -23,22 +28,31 @@ public class PlayerGunManager : MonoBehaviour
 
     public void WeaponChange()
     {
-        for (int i = 0; i < playerGun.Count; i++)
+        if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
-                SwitchGun(i);
-            }
+            playerGun[currentGunIndex].SetActive(true);
+            isActive = true;
         }
 
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (InputManager.Instance.controls.Player.WeaponChange1.WasPerformedThisFrame())
+        if (isActive)
         {
-            SwitchGun((currentGunIndex + 1) % playerGun.Count);
-        }
-        if (InputManager.Instance.controls.Player.WeaponChange2.WasPerformedThisFrame())
-        {
-            SwitchGun((currentGunIndex - 1 + playerGun.Count) % playerGun.Count);
+            for (int i = 0; i < playerGun.Count; i++)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+                {
+                    SwitchGun(i);
+                }
+            }
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (InputManager.Instance.controls.Player.WeaponChange1.WasPerformedThisFrame())
+            {
+                SwitchGun((currentGunIndex + 1) % playerGun.Count);
+            }
+            if (InputManager.Instance.controls.Player.WeaponChange2.WasPerformedThisFrame())
+            {
+                SwitchGun((currentGunIndex - 1 + playerGun.Count) % playerGun.Count);
+            }
         }
     }
 

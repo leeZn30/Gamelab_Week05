@@ -11,7 +11,7 @@ public class NPCShoot : MonoBehaviour
 
     public LayerMask layermask;
 
-    private void Start()
+    private void OnEnable()
     {
         rotation = transform.parent.parent; // parent로부터 Transform을 가져옴
         StartCoroutine(ShootDelay());
@@ -31,15 +31,19 @@ public class NPCShoot : MonoBehaviour
 
             if (hit.collider != null)
             {
-                // 사격 처리
-                if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Cult") || hit.collider.CompareTag("Resistance"))
+                if (Vector2.Distance(sPoint.transform.position, hit.point) < transform.parent.parent.parent.GetComponent<NPCInfo>().attackRange)
                 {
-                    if (shootTime > transform.parent.parent.parent.GetComponent<NPCInfo>().attackSpeed)
+                    // 사격 처리
+                    if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Cult") || hit.collider.CompareTag("Resistance"))
                     {
-                        shootTime = 0;
-                        Instantiate(bullet, transform.position, rotation.rotation);
-                        Debug.Log("Shooting bullet");
+                        if (shootTime > transform.parent.parent.parent.GetComponent<NPCInfo>().attackSpeed)
+                        {
+                            shootTime = 0;
+                            Instantiate(bullet, transform.position, rotation.rotation);
+                            Debug.Log("Shooting bullet");
+                        }
                     }
+
                 }
             }
         }
