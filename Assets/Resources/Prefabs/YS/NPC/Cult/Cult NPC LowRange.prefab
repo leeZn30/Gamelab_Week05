@@ -261,7 +261,7 @@ MonoBehaviour:
   isPatrol: 0
   isBattle: 0
   state: 0
-  radius: 5
+  radius: 3
   layerMask:
     serializedVersion: 2
     m_Bits: 0
