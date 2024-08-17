@@ -205,13 +205,16 @@ public class QuestManager : MonoBehaviour
                     activeQuests[i].currCount++;
                     activeQuestTexts[i].GetComponent<TextMeshProUGUI>().text = EditText(activeQuests[i]);
                     QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>(); ;
-                    if (tempQuestManager.FindQuest(activeQuests[i].questName).returnNPC)
+                    if (activeQuests[i].currCount == activeQuests[i].targetCount)
                     {
-                        tempQuestManager.UnderlineQuest(activeQuests[i].questName);
-                    }
-                    else
-                    {
-                        tempQuestManager.OnQuestClear(activeQuests[i].questName);
+                        if (tempQuestManager.FindQuest(activeQuests[i].questName).returnNPC)
+                        {
+                            tempQuestManager.UnderlineQuest(activeQuests[i].questName);
+                        }
+                        else
+                        {
+                            tempQuestManager.OnQuestClear(activeQuests[i].questName);
+                        }
                     }
                 }
             }
