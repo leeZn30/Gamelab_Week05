@@ -63,10 +63,10 @@ public class DialogueReader : MonoBehaviour
             dialogues.Add(currentDialogue); // 마지막 대사 추가
         }
 
-        foreach (var dialogue in dialogues)
-        {
-            Debug.Log($"Loaded Dialogue ID: {dialogue.id}, Name: {dialogue.name}, Sentences: {dialogue.contexts.Count}");
-        }
+        // foreach (var dialogue in dialogues)
+        // {
+        //     Debug.Log($"Loaded Dialogue ID: {dialogue.id}, Name: {dialogue.name}, Sentences: {dialogue.contexts.Count}");
+        // }
     }
 
     int ParseInt(string value)

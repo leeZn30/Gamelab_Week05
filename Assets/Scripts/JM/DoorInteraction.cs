@@ -1,7 +1,7 @@
 using System.Data.Common;
 using UnityEngine;
 
-public class DoorInteraction : MonoBehaviour
+public class DoorInteraction : MonoBehaviour, IListener
 {
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
     public GameObject openDoor; // 열린 상태의 도어 오브젝트
@@ -74,5 +74,17 @@ public class DoorInteraction : MonoBehaviour
     {
         closedDoor.SetActive(true);
         openDoor.SetActive(false);
+    }
+
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                break;
+
+            case Event_Type.eLoad:
+                break;
+        }
     }
 }

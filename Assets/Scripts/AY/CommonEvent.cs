@@ -38,7 +38,7 @@ public class CommonEvent : MonoBehaviour
 
     IEnumerator Intro()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         DialogueManager.Instance.SetDialogueID(introDialogueId0);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
@@ -51,7 +51,7 @@ public class CommonEvent : MonoBehaviour
 
         RoomDoor.OpenDoor();
         yield return new WaitForSeconds(0.5f);
-        GameObject go = Instantiate(resistance, RoomDoor.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistance, RoomDoor.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
 
         DialogueManager.Instance.SetDialogueID(introDialogueId2);
