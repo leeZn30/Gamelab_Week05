@@ -11,6 +11,9 @@ public class DoorInteraction : MonoBehaviour, IListener
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
     private bool isSend = false;
 
+    public bool isOpend = false;
+    public bool isOpending = false;
+
     void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
@@ -68,12 +71,14 @@ public class DoorInteraction : MonoBehaviour, IListener
         closedDoor.SetActive(false);
         openDoor.SetActive(true);
         isSend = true;
+        isOpend = true;
     }
 
     public void CloseDoor()
     {
         closedDoor.SetActive(true);
         openDoor.SetActive(false);
+        isOpend = false;
     }
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
@@ -81,10 +86,9 @@ public class DoorInteraction : MonoBehaviour, IListener
         switch (EventType)
         {
             case Event_Type.eSave:
+                SaveManager.Instance.savedDoors.Add(this);
                 break;
 
-            case Event_Type.eLoad:
-                break;
         }
     }
 }
