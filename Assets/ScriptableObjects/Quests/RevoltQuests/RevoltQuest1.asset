@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: RevoltQeust5
+  m_Name: RevoltQuest1
   m_EditorClassIdentifier: 
-  questName: RevolotQuest5
-  description: "\uC804\uAE30\uC2E4\uC5D0 \uD3ED\uD0C4 \uC124\uCE58\uD558\uAE30"
+  questName: RevoltQuest1
+  description: "\uC2E0\uB3C4 3\uBA85 \uC8FD\uC774\uAE30"
   returnNPC: 0
-  KillEnemies: 0
-  ReachLocation: 1
+  KillEnemies: 1
+  ReachLocation: 0
   ReachItem: 0
   ReachNPC: 0
   isCompleted: 0
   isActived: 0
   eventType: 2
-  targetObject: "\uC804\uAE30\uC2E4"
-  targetEnemyID: 0
-  targetCount: 0
+  targetObject: 
+  targetEnemyID: 1
+  targetCount: 3
   currCount: 0
