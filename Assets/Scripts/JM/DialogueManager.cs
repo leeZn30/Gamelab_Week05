@@ -55,7 +55,11 @@ public class DialogueManager : Singleton<DialogueManager>
         currentSpeaker = dialogue.name; // 대화를 시작할 때 캐릭터 이름을 설정
         foreach (string sentence in dialogue.contexts)
         {
-            sentences.Enqueue(sentence);
+            // 문장이 빈 문자열이거나 공백만 포함된 경우 건너뜁니다.
+            if (!string.IsNullOrWhiteSpace(sentence))
+            {
+                sentences.Enqueue(sentence);
+            }
         }
 
         isDialogueActive = true; // 첫 번째 대사가 바로 출력되도록 설정
