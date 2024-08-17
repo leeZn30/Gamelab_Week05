@@ -9,7 +9,9 @@ public enum Event_Type
     eGameStart,
     eRevoltQuestDone,
     eNoteRead,
-    eNoteQuestDone
+    eNoteQuestDone,
+    eSave,
+    eLoad
 }
 
 public interface IListener

@@ -1,7 +1,7 @@
 using System.Data.Common;
 using UnityEngine;
 
-public class DoorInteraction : MonoBehaviour
+public class DoorInteraction : MonoBehaviour, IListener
 {
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
     public GameObject openDoor; // 열린 상태의 도어 오브젝트
@@ -10,6 +10,9 @@ public class DoorInteraction : MonoBehaviour
 
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
     private bool isSend = false;
+
+    public bool isOpend = false;
+    public bool isOpending = false;
 
     void Update()
     {
@@ -68,11 +71,24 @@ public class DoorInteraction : MonoBehaviour
         closedDoor.SetActive(false);
         openDoor.SetActive(true);
         isSend = true;
+        isOpend = true;
     }
 
     public void CloseDoor()
     {
         closedDoor.SetActive(true);
         openDoor.SetActive(false);
+        isOpend = false;
+    }
+
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                SaveManager.Instance.savedDoors.Add(this);
+                break;
+
+        }
     }
 }

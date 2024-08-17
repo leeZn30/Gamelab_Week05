@@ -21,6 +21,8 @@ public class QuestManager : MonoBehaviour
     [SerializeField] GameObject questTextPrefab;
     [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();
 
+    public int sumRevoltQuest = 0;
+
     void Start()
     {
         questDictionary = allQuests.ToDictionary(quest => quest.questName);
@@ -70,16 +72,29 @@ public class QuestManager : MonoBehaviour
                 // StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
                 EventManager.Instance.PostNotification(Event_Type.eNoteQuestDone, this, FindQuest(questName));
                 break;
-            case "RevoltQuest4":
-                if (FindQuest("RevoltQuest5").isCompleted)
-                {
-                    questName = "RevoltQuest45";
-                }
-                break;
-            case "RevoltQuest5":
+            case "RevoltQuest3":
                 if (FindQuest("RevoltQuest4").isCompleted)
                 {
-                    questName = "RevoltQuest45";
+                    questName = "RevoltQuest34";
+                }
+                break;
+            case "RevoltQuest4":
+                if (FindQuest("RevoltQuest3").isCompleted)
+                {
+                    questName = "RevoltQuest34";
+                }
+                break;
+
+            case "RevoltQuest6":
+                if (FindQuest("RevoltQuest7").isCompleted)
+                {
+                    questName = "RevoltQuest67";
+                }
+                break;
+            case "RevoltQuest7":
+                if (FindQuest("RevoltQuest6").isCompleted)
+                {
+                    questName = "RevoltQuest67";
                 }
                 break;
 
@@ -88,7 +103,9 @@ public class QuestManager : MonoBehaviour
         QuestSO quest = FindQuest(questName);
         if (quest.eventType == Event_Type.eRevoltQuestDone)
         {
-            EventManager.Instance.PostNotification(quest.eventType, this, quest);
+            sumRevoltQuest++;
+            // EventManager.Instance.PostNotification(quest.eventType, this, quest);
+            EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
         }
     }
 
@@ -117,11 +134,13 @@ public class QuestManager : MonoBehaviour
             {
                 GameObject.Find(quest.targetObject).GetComponent<BoxCollider2D>().enabled = true;
                 GameObject.Find(quest.targetObject).GetComponent<TargetLocation>().targetQuest = questName;
-            }else if (quest.ReachItem)
+            }
+            else if (quest.ReachItem)
             {
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().isQuest = true;
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().questName = questName;
-            }else if (quest.ReachNPC)
+            }
+            else if (quest.ReachNPC)
             {
                 GameObject.Find(quest.targetObject).GetComponent<NPCInteraction>().isActive = true;
                 GameObject.Find(quest.targetObject).GetComponent<NPCInteraction>().targetQuest = questName;
@@ -178,7 +197,7 @@ public class QuestManager : MonoBehaviour
 
     public void OnEnemyKilled(int enemyID)
     {
-        for(int i = 0; i < activeQuests.Count; i++)
+        for (int i = 0; i < activeQuests.Count; i++)
         {
             if (activeQuests[i].KillEnemies && !activeQuests[i].isCompleted)
             {

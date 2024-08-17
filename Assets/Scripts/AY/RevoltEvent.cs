@@ -34,37 +34,30 @@ public class RevoltEvent : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    public IEnumerator DoEvent(Action onComplete, QuestSO quest)
+    public IEnumerator DoEvent(Action onComplete, int questNum)
     {
         Debug.Log("Start Revolt Event");
 
-        switch (quest.questName)
+        switch (questNum)
         {
-            case "JoiningQuest":
-                break;
-
-            case "RevoltQeust1":
-                break;
-
-            case "RevoltQuest2":
+            case 1:
                 yield return StartCoroutine(Event2());
                 break;
 
-            case "RevoltQuest3":
+            case 2:
                 yield return StartCoroutine(Event3());
                 break;
 
-            case "RevoltQuest4":
-                yield return StartCoroutine(Event4());
+            case 4:
+                yield return StartCoroutine(Event45());
                 break;
 
-            case "RevoltQuest5":
-                yield return StartCoroutine(Event5());
+            case 5:
+                yield return StartCoroutine(Event6());
                 break;
 
-            case "RevolotLastQuest":
+            case 6: // last
                 break;
-
         }
 
         onComplete?.Invoke();
@@ -114,14 +107,14 @@ public class RevoltEvent : MonoBehaviour
         event2Door.SetActive(false);
     }
 
-    IEnumerator Event4()
+    IEnumerator Event45()
     {
         // 할머니 끌고감 (이거 겹치면 쪽지루트랑 겹치면 쪽지루트 우선)
 
         yield return null;
     }
 
-    IEnumerator Event5()
+    IEnumerator Event6()
     {
         // 보스 등장
         GameObject go = Instantiate(resistaceBoss, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
@@ -135,4 +128,5 @@ public class RevoltEvent : MonoBehaviour
 
         Destroy(go);
     }
+
 }

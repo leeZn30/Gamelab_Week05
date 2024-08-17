@@ -5,6 +5,8 @@ using UnityEngine;
 public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 {
     [SerializeField] RevoltEvent revoltEvent;
+    QuestSO currentQuest;
+    int sumQuest;
 
     void Awake()
     {
@@ -23,7 +25,17 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
         switch (EventType)
         {
             case Event_Type.eRevoltQuestDone:
+                // currentQuest = (QuestSO)Param;
+                sumQuest = (int)Param;
+                StartCoroutine(EventCheck());
                 break;
         }
+    }
+
+    IEnumerator EventCheck()
+    {
+        bool isComplete = false;
+        StartCoroutine(revoltEvent.DoEvent(() => isComplete = true, sumQuest));
+        yield return new WaitUntil(() => isComplete);
     }
 }
