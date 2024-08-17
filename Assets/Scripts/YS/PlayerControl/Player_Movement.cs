@@ -24,11 +24,16 @@ public class Player_Movement : MonoBehaviour
 
     private bool isDamaged;
 
+    private AudioSource audioSource;
+    public AudioClip walkSound;
+    public AudioClip dashSound;
+
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         DataManager.Instance.Speed = 4f;
         isUsingMap = false;
         isDashing = false;
@@ -53,7 +58,8 @@ public class Player_Movement : MonoBehaviour
             // 일반 이동
             transform.Translate(Vector2.right * horizontalInput * Time.deltaTime * DataManager.Instance.Speed);
             transform.Translate(Vector2.up * verticalInput * Time.deltaTime * DataManager.Instance.Speed);
-            
+            //audioSource.PlayOneShot(walkSound);
+
             if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame() && !isDashing)
             {
                 // 대시 코루틴 시작
@@ -178,6 +184,7 @@ public class Player_Movement : MonoBehaviour
     {
         isDashing = true;  // 대시 상태 시작float startTime = Time.time;
 
+        audioSource.PlayOneShot(dashSound);
         // 대시 중 움직임while (Time.time < startTime + dashTime)
         
         DataManager.Instance.Speed *= dashSpeedMultiplier;
