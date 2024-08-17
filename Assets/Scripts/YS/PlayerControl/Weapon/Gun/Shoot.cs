@@ -41,6 +41,7 @@ public class Shoot : MonoBehaviour
             shootTime = 0;
             Instantiate(bullet, transform.position, rotation.transform.rotation);
             RumbleManager.instance.RumblePulse(0.3f, 1f, 0.1f);
+            DataManager.Instance.ResetCoolDownTime = 0;
         }
     }
 

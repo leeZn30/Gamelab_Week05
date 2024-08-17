@@ -22,6 +22,8 @@ public class Player_Movement : MonoBehaviour
     public float dashTime = 0.2f;
     public float dashSpeedMultiplier = 2.0f;
 
+    private bool isDamaged;
+
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -42,8 +44,6 @@ public class Player_Movement : MonoBehaviour
     {
         if (!isUsingMap)
         {
-
-
             // Player Movement
             Dock();
             Move();
@@ -63,6 +63,11 @@ public class Player_Movement : MonoBehaviour
             // Check Player Life
             PlayerDeath();
 
+        }
+
+        if(DataManager.Instance.playerState == "Battle" && !isDamaged)
+        {
+            DataManager.Instance.playerState = "Idle";
         }
     }
 
@@ -181,5 +186,16 @@ public class Player_Movement : MonoBehaviour
 
         isDashing = false;  // 대시 상태 종료
         DataManager.Instance.Speed = DataManager.Instance.Speed / 2;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            isDamaged = true;
+            DataManager.Instance.Health--;
+
+            DataManager.Instance.ResetCoolDownTime = 0;
+        }
     }
 }

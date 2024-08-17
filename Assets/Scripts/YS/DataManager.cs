@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class DataManager : MonoBehaviour
     private float attacSpeed;
     private float damage;
 
-    private float health;
+    public float health;
     private float maxHealth;
 
     private float stemina;
@@ -24,6 +25,7 @@ public class DataManager : MonoBehaviour
     public bool isDead = false;
     private bool canShoot = false;
     public string playerState;
+    public float ResetCoolDownTime;
 
     public List<GameObject> homeActiveFire;
 
@@ -90,5 +92,39 @@ public class DataManager : MonoBehaviour
         }
 
         playerState = "Idle";
+        StartCoroutine(ResetCoolDown());
     }
+
+
+    private void Update()
+    {
+        ResetState();
+    }
+
+    void ResetState()
+    {
+        if (ResetCoolDownTime > 5f)
+        {
+            playerState = "Idle";
+            ResetCoolDownTime = 0;
+
+            for(int i = 0; i < GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().playerGun.Count; i++)
+            {
+                GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().playerGun[i].SetActive(false);
+                GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().isActive = false;
+            }
+
+        }
+    }
+
+    IEnumerator ResetCoolDown()
+    {
+        while (true)
+        {
+            yield return null;
+            ResetCoolDownTime = ResetCoolDownTime + Time.deltaTime;
+
+        }
+    }
+
 }
