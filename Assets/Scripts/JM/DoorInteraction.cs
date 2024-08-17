@@ -32,6 +32,11 @@ public class DoorInteraction : MonoBehaviour
                 //열쇠 없을 시
                 OpenDoor();
             }
+
+            else
+            {
+                OpenDoor();
+            }
         }
     }
 

@@ -317,7 +317,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03285244, y: -0.932263}
+  m_Offset: {x: 0.0056209564, y: -0.84667456}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -328,7 +328,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4367499, y: 2.8645265}
+  m_Size: {x: 2.2693024, y: 3.5648024}
   m_EdgeRadius: 0
 --- !u!61 &8951014081835904807
 BoxCollider2D:
@@ -413,12 +413,16 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   damage: 0
-  attackRange: 0
-  attackSpeed: 0
+  attackRange: 10
+  attackSpeed: 0.4
   target: {fileID: 0}
   isPatrol: 0
   isBattle: 0
   state: 0
+  radius: 3
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
 --- !u!114 &8300507761734393550
 MonoBehaviour:
@@ -439,6 +443,7 @@ MonoBehaviour:
   PatrolLocation: []
   patrolIndex: 0
   patWhat: 0
+  idleStop: 0
 --- !u!1 &8183591132908440409
 GameObject:
   m_ObjectHideFlags: 0
