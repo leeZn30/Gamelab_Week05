@@ -45,11 +45,7 @@ public class NPCInfo : MonoBehaviour
 
     private void Start()
     {
-        if (weapon != null)
-        {
-            weapon.SetActive(true);
-        }
-
+        //weapon.SetActive(false);
         maxHealth = 10;
         health = maxHealth;
         SetSide();
@@ -92,11 +88,7 @@ public class NPCInfo : MonoBehaviour
         if (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1)
         {
             isBattle = true;
-            if (weapon != null)
-            {
-                weapon.SetActive(true);
-            }
-
+            weapon.SetActive(true);
         }
 
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
@@ -110,12 +102,8 @@ public class NPCInfo : MonoBehaviour
                 Debug.Log("INININNINI");
                 if (DataManager.Instance.playerState == "Battle")
                 {
-                    isBattle = true; 
-                    if (weapon != null)
-                    {
-                        weapon.SetActive(true);
-                    }
-
+                    isBattle = true;
+                    weapon.SetActive(true);
                 }
             }
         }
@@ -272,12 +260,8 @@ public class NPCInfo : MonoBehaviour
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
             DataManager.Instance.playerState = "Battle";
-            isBattle = true; 
-            if (weapon != null)
-            {
-                weapon.SetActive(true);
-            }
-
+            isBattle = true;
+            weapon.SetActive(true);
         }
     }
 
