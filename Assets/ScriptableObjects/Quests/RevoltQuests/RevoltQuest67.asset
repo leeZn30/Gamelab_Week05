@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: RevoltQuest45
+  m_Name: RevoltQuest67
   m_EditorClassIdentifier: 
-  questName: RevoltQuest45
+  questName: RevoltQuest67
   description: 
   returnNPC: 0
   KillEnemies: 0

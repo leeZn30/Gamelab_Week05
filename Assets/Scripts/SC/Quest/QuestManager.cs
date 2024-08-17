@@ -72,16 +72,29 @@ public class QuestManager : MonoBehaviour
                 // StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
                 EventManager.Instance.PostNotification(Event_Type.eNoteQuestDone, this, FindQuest(questName));
                 break;
-            case "RevoltQuest4":
-                if (FindQuest("RevoltQuest5").isCompleted)
-                {
-                    questName = "RevoltQuest45";
-                }
-                break;
-            case "RevoltQuest5":
+            case "RevoltQuest3":
                 if (FindQuest("RevoltQuest4").isCompleted)
                 {
-                    questName = "RevoltQuest45";
+                    questName = "RevoltQuest34";
+                }
+                break;
+            case "RevoltQuest4":
+                if (FindQuest("RevoltQuest3").isCompleted)
+                {
+                    questName = "RevoltQuest34";
+                }
+                break;
+
+            case "RevoltQuest6":
+                if (FindQuest("RevoltQuest7").isCompleted)
+                {
+                    questName = "RevoltQuest67";
+                }
+                break;
+            case "RevoltQuest7":
+                if (FindQuest("RevoltQuest6").isCompleted)
+                {
+                    questName = "RevoltQuest67";
                 }
                 break;
 

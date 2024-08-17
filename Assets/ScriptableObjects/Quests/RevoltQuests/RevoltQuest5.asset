@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: JoiningQuest
+  m_Name: RevoltQuest5
   m_EditorClassIdentifier: 
-  questName: JoiningQuest
-  description: "\uC2E0\uB3C4 3\uBA85 \uC8FD\uC774\uAE30"
-  KillEnemies: 1
+  questName: RevoltQuest5
+  description: "\uAC10\uC625\uC5D0 \uAC07\uD78C \uBC18\uB780\uAD70 \uAC00\uC871 \uAD6C\uD558\uAE30"
+  returnNPC: 0
+  KillEnemies: 0
   ReachLocation: 0
-  ReachItem: 0
+  ReachItem: 1
+  ReachNPC: 0
   isCompleted: 0
-  isActived: 1
+  isActived: 0
   eventType: 2
-  targetObject: 
-  targetEnemyID: 1
-  targetCount: 3
+  targetObject: Wife
+  targetEnemyID: 0
+  targetCount: 0
   currCount: 0
