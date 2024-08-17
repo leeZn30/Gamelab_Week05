@@ -19,6 +19,7 @@ MonoBehaviour:
   isCompleted: 0
   isActived: 0
   isAvailable: 0
+  eventType: 1
   targetLocationObject: 
   targetEnemyID: 0
   targetCount: 3
