@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1dde048b9cd4e3479b1de778a0b6ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastEventId: 0
+  commonEvent: {fileID: 9052588749714916937}
 --- !u!114 &4836519509127534200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5995af7e437d6e24bba11b0a5000234c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  revoltEvent: {fileID: 2549719918221561708}
 --- !u!1 &2931823689495631830
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +97,7 @@ GameObject:
   - component: {fileID: 1252543430541952199}
   - component: {fileID: 8375307396598538245}
   m_Layer: 0
-  m_Name: NoteEvents
+  m_Name: NoteEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,12 +130,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6431d159b6a300b49b5dbdf148797f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEvent: 0
+  resistance: {fileID: 2094562570039198571, guid: 497a8e651a89faa4185c4ea6c6f7b26d,
+    type: 3}
+  cultEnemy: {fileID: 7421411161731263235, guid: 6a1ea446e7c862144a37ca8fe027d9fd,
+    type: 3}
+  resistanceEnemy: {fileID: 2051661203306257206, guid: e8592f47d994a00429be3d65447b35d7,
+    type: 3}
   dialogueId1: 101
-  person: {fileID: 2033970691260634791, guid: c33b35db81549ea47804c63ea6edd2b5, type: 3}
   event2Door: {fileID: 0}
   dialogueId2: 102
-  enemy: {fileID: 2833941040264391020, guid: 89839ea75b784374ea09fc8c0a95d623, type: 3}
   dialogueId3: 103
   dialogueId4: 104
   dialogueId5: 105
@@ -147,8 +153,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8123067753742036159}
+  - component: {fileID: 2549719918221561708}
   m_Layer: 0
-  m_Name: RevoltEvents
+  m_Name: RevoltEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,6 +176,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2186844091315706294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2549719918221561708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281603346398694590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712acabb156506c4fb003c7676610ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resistance: {fileID: 2094562570039198571, guid: 497a8e651a89faa4185c4ea6c6f7b26d,
+    type: 3}
+  cultEnemy: {fileID: 7421411161731263235, guid: 6a1ea446e7c862144a37ca8fe027d9fd,
+    type: 3}
+  resistaceBoss: {fileID: 8389332310892115242, guid: abc82e537c2315d48aea6b80241e1929,
+    type: 3}
+  dialogueId1: 1
+  dialogueId3_0: 1
+  dialogueId3_1: 1
+  event2Door: {fileID: 0}
+  dialogueId4: 0
+  dialogueId5: 0
+  questSO: {fileID: 11400000, guid: 153f89dccd02f224290a99a41e3520f1, type: 2}
 --- !u!1 &7075122282776903226
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3626297354755873503}
+  - component: {fileID: 9052588749714916937}
   m_Layer: 0
   m_Name: CommonEvents
   m_TagString: Untagged
@@ -200,3 +233,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2186844091315706294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9052588749714916937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7075122282776903226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf14bf189ecf0942bc85c1f592df458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentEvent: 0
+  introDialogueId0: 0
+  introDialogueId1: 0
+  note0: {fileID: 0}

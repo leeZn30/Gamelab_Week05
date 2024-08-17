@@ -6,10 +6,10 @@ using UnityEngine;
 public enum Event_Type
 {
     normal,
+    eGameStart,
     eRevoltQuestDone,
     eNoteRead,
-    eNoteQuestDone,
-    eCommonEvent
+    eNoteQuestDone
 }
 
 public interface IListener
