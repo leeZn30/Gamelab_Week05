@@ -316,11 +316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4d740ec3032d4d820800e08e9c8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDialogueId: 3
-  incompleteQuestDialogueId: 4
-  completedQuestDialogueId: 5
-  postCompletionDialogueId: 6
-  quest: []
+  initialDialogueId: 2
+  incompleteQuestDialogueId: 3
+  completedQuestDialogueId: 4
+  postCompletionDialogueId: 14
+  quest:
+  - {fileID: 11400000, guid: c6f415fe86fd8ed4fbcf7b01d5593390, type: 2}
   interactionUI: {fileID: 724903926559008170}
   questStart: {fileID: 4949751876991689560}
   onQuest: {fileID: 2989996581978232129}
@@ -384,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 3822939385306119993}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.011, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7990001, z: 0}
   m_LocalScale: {x: 0.6769716, y: 0.6769716, z: 0.6769716}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -549,7 +550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.06}
+  m_AnchoredPosition: {x: 0, y: 1.2499998}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1897549098292708750
@@ -1246,7 +1247,7 @@ PrefabInstance:
     - target: {fileID: 2441942408531617066, guid: e8e8a52d34773ea47a0b9c62fa813d18,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.81
       objectReference: {fileID: 0}
     - target: {fileID: 2441942408531617066, guid: e8e8a52d34773ea47a0b9c62fa813d18,
         type: 3}

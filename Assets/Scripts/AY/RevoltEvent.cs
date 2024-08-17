@@ -34,34 +34,30 @@ public class RevoltEvent : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    public IEnumerator DoEvent(Action onComplete, QuestSO quest)
+    public IEnumerator DoEvent(Action onComplete, int questNum)
     {
         Debug.Log("Start Revolt Event");
 
-        switch (quest.questName)
+        switch (questNum)
         {
-            case "JoiningQuest":
-                break;
-
-            case "RevoltQeust1":
-                break;
-
-            case "RevoltQuest2":
+            case 1:
                 yield return StartCoroutine(Event2());
                 break;
 
-            case "RevoltQuest3":
+            case 2:
                 yield return StartCoroutine(Event3());
                 break;
 
-            case "RevoltQuest45":
+            case 4:
                 yield return StartCoroutine(Event45());
                 break;
 
-            case "RevolotLastQuest":
+            case 5:
                 yield return StartCoroutine(Event6());
                 break;
 
+            case 6: // last
+                break;
         }
 
         onComplete?.Invoke();
@@ -132,4 +128,5 @@ public class RevoltEvent : MonoBehaviour
 
         Destroy(go);
     }
+
 }

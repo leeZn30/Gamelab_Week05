@@ -21,6 +21,8 @@ public class QuestManager : MonoBehaviour
     [SerializeField] GameObject questTextPrefab;
     [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();
 
+    public int sumRevoltQuest = 0;
+
     void Start()
     {
         questDictionary = allQuests.ToDictionary(quest => quest.questName);
@@ -88,7 +90,9 @@ public class QuestManager : MonoBehaviour
         QuestSO quest = FindQuest(questName);
         if (quest.eventType == Event_Type.eRevoltQuestDone)
         {
-            EventManager.Instance.PostNotification(quest.eventType, this, quest);
+            sumRevoltQuest++;
+            // EventManager.Instance.PostNotification(quest.eventType, this, quest);
+            EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
         }
     }
 
@@ -117,11 +121,13 @@ public class QuestManager : MonoBehaviour
             {
                 GameObject.Find(quest.targetObject).GetComponent<BoxCollider2D>().enabled = true;
                 GameObject.Find(quest.targetObject).GetComponent<TargetLocation>().targetQuest = questName;
-            }else if (quest.ReachItem)
+            }
+            else if (quest.ReachItem)
             {
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().isQuest = true;
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().questName = questName;
-            }else if (quest.ReachNPC)
+            }
+            else if (quest.ReachNPC)
             {
                 GameObject.Find(quest.targetObject).GetComponent<NPCInteraction>().isActive = true;
                 GameObject.Find(quest.targetObject).GetComponent<NPCInteraction>().targetQuest = questName;
@@ -178,7 +184,7 @@ public class QuestManager : MonoBehaviour
 
     public void OnEnemyKilled(int enemyID)
     {
-        for(int i = 0; i < activeQuests.Count; i++)
+        for (int i = 0; i < activeQuests.Count; i++)
         {
             if (activeQuests[i].KillEnemies && !activeQuests[i].isCompleted)
             {
