@@ -34,9 +34,6 @@ public class FistAttack : MonoBehaviour
                 isAttacking = true;
                 animator.SetBool("IsAttacking", true);
 
-                hand = animator.GetBool("Hand");
-                animator.SetBool("Hand", !hand);
-
                 StartCoroutine(Delay());
             }
         }
@@ -46,7 +43,7 @@ public class FistAttack : MonoBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         isAttacking = false;
         animator.SetBool("IsAttacking", false);
     }
