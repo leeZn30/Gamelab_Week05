@@ -51,7 +51,7 @@ public class QuestManager : MonoBehaviour
                 if (FindQuest("ExtraClothQuest").isCompleted)
                 {
                     Debug.Log("이후 퀘스트 실행");
-                    AcceptQuest("Location");
+                    AcceptQuest("NoteLastQuest");
                 }
                 break;
             case "ExtraClothQuest":
@@ -59,14 +59,20 @@ public class QuestManager : MonoBehaviour
                 if (FindQuest("ClothQuest").isCompleted)
                 {
                     Debug.Log("이후 퀘스트 실행");
-                    AcceptQuest("Location");
+                    AcceptQuest("NoteLastQuest");
                 }
                 break;
-            case "Location":
+            case "NoteLastQuest":
                 Debug.Log("특정 위치 가기 퀘스트 클리어");
-                StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
+                // StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
+                EventManager.Instance.PostNotification(Event_Type.eNoteQuestDone, this, FindQuest(questName));
                 break;
+        }
 
+        QuestSO quest = FindQuest(questName);
+        if (quest.eventType == Event_Type.eRevoltQuestDone)
+        {
+            EventManager.Instance.PostNotification(quest.eventType, this, quest);
         }
     }
 

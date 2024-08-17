@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb43db2ff4bbb5547b61467378734eb8, type: 3}
-  m_Name: Location
+  m_Name: NoteLastQuest
   m_EditorClassIdentifier: 
-  questName: Location
+  questName: NoteLastQuest
   description: "\uD2B9\uC810 \uC704\uCE58\uAE4C\uC9C0 \uB3C4\uB2EC"
   KillEnemies: 0
   ReachLocation: 1
   isCompleted: 1
   isActived: 1
   isAvailable: 1
+  eventType: 3
   targetLocationObject: Location
   targetEnemyID: 0
   targetCount: 0

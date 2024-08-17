@@ -14,6 +14,9 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     [SerializeField] GameObject noteUI;
     [SerializeField] Button noteBtn;
 
+    [Header("퀘스트 관련")]
+    QuestSO currentQuestSO;
+
     [Header("노트 이벤트")]
     public NoteEvent noteEvent;
 
@@ -52,6 +55,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
+        EventManager.Instance.AddListener(Event_Type.eNoteQuestDone, this);
     }
 
     // 노트를 봤다면 이벤트 실행
@@ -68,6 +72,11 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 StartCoroutine(OnNoteClosed());
 
                 break;
+
+            case Event_Type.eNoteQuestDone:
+                currentQuestSO = (QuestSO)Param;
+                StartCoroutine(NoteQuestEventCheck());
+                break;
         }
     }
 
@@ -75,10 +84,10 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     {
         yield return new WaitUntil(() => !noteUI.activeSelf);
 
-        StartCoroutine(EventCheck());
+        StartCoroutine(NoteReadEventCheck());
     }
 
-    IEnumerator EventCheck()
+    IEnumerator NoteReadEventCheck()
     {
         bool isComplete = false;
         StartCoroutine(noteEvent.DoEvent(() => isComplete = true, currentNoteData.order));
@@ -91,6 +100,13 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
             currentNoteData = nextNoteData;
             currentNoteData.isTarget = true;
         }
+    }
+
+    IEnumerator NoteQuestEventCheck()
+    {
+        bool isComplete = false;
+        StartCoroutine(noteEvent.DoEvent(() => isComplete = true, currentQuestSO.questName));
+        yield return new WaitUntil(() => isComplete);
     }
 
     public void OpenNote(string content)

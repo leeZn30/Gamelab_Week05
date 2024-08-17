@@ -19,6 +19,7 @@ MonoBehaviour:
   isCompleted: 1
   isActived: 1
   isAvailable: 1
+  eventType: 3
   targetLocationObject: ExtraShindobok
   targetEnemyID: 0
   targetCount: 0

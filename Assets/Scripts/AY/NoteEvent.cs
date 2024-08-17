@@ -96,7 +96,7 @@ public class NoteEvent : MonoBehaviour
 
         switch (EventName)
         {
-            case "FinalBattle":
+            case "NoteLastQuest":
                 yield return StartCoroutine(FinalBattle());
                 break;
         }

@@ -10,6 +10,7 @@ public class QuestSO : ScriptableObject
     public bool isCompleted;
     public bool isActived;
     public bool isAvailable;
+    public Event_Type eventType;
 
     public string targetLocationObject;
     public int targetEnemyID;

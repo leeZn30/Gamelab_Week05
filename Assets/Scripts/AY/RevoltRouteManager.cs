@@ -16,7 +16,6 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
         EventManager.Instance.AddListener(Event_Type.eRevoltQuestDone, this);
     }
 
-
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
     {
         switch (EventType)
