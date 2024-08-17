@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6339473772494372824}
   - component: {fileID: 1403976915991007321}
   - component: {fileID: 1100445979881519464}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BookShelf2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.06, y: 2.808, z: -0.049949966}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1937234, y: 1.1937234, z: 1.1937234}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 514431486821804610}
@@ -66,7 +66,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00000023841858, y: -0.052143008}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,7 +77,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1990907, y: 1.5119464}
   m_EdgeRadius: 0
 --- !u!50 &1100445979881519464
 Rigidbody2D:
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514431486821804610}
   - component: {fileID: 1146324651568071796}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BookShelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3636, y: 0.3636, z: 0.3636}
+  m_LocalScale: {x: 0.3636, y: 0.368145, z: 0.3636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6339473772494372824}
@@ -176,8 +176,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -161046435
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 864202868ec73d84b9ce89357334b98d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
