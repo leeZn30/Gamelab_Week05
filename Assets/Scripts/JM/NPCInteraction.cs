@@ -6,8 +6,11 @@ public class NPCInteraction : MonoBehaviour
     public GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
 
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
-
     private bool isSend = false;
+
+    public bool isActive = false;
+    public string targetQuest;
+
     void Start()
     {
         if (interactionUI != null)
@@ -21,6 +24,18 @@ public class NPCInteraction : MonoBehaviour
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
             DialogueManager.Instance.SetDialogueID(dialogueId);
+            if (isActive)
+            {
+                QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+                if (tempQuestManager.FindQuest(targetQuest).returnNPC)
+                {
+                    tempQuestManager.UnderlineQuest(targetQuest);
+                }
+                else
+                {
+                    tempQuestManager.OnQuestClear(targetQuest);
+                }
+            }
             isSend = true;
         }
     }
