@@ -5,6 +5,7 @@ public class QuestSO : ScriptableObject
 {
     public string questName;
     public string description;
+
     public bool KillEnemies;
     public bool ReachLocation;
     public bool ReachItem;

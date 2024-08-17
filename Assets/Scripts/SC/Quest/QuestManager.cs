@@ -15,6 +15,7 @@ public class QuestManager : MonoBehaviour
     private Dictionary<string, QuestSO> questDictionary;
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
+
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
     [SerializeField] GameObject questTextPrefab;
     [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();

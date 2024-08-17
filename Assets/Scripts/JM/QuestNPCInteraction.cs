@@ -71,12 +71,14 @@ public class QuestNPCInteraction : MonoBehaviour
         {
             for (int i = 0; i < quest.Length; i++)
             {
-                if (quest[i].isCompleted)
+                if (!quest[i].isCompleted)
                 {
-                    questDialogueCompleted = true;
-                    tempID = completedQuestDialogueId;
+                    return incompleteQuestDialogueId;
                 }
             }
+            questDialogueCompleted = true;
+            tempID = completedQuestDialogueId;
+            //퀘스트 완료
         }
 
         return tempID;
