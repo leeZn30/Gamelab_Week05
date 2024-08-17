@@ -9,6 +9,7 @@ public class QuestSO : ScriptableObject
     public bool KillEnemies;
     public bool ReachLocation;
     public bool ReachItem;
+    public bool ReachNPC;
     public bool isCompleted;
     public bool isActived;
     //public bool isAvailable;

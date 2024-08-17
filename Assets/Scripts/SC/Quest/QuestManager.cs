@@ -28,6 +28,10 @@ public class QuestManager : MonoBehaviour
         {
             quests.isActived = false;
             quests.isCompleted = false;
+            if (quests.KillEnemies)
+            {
+                quests.currCount = 0;
+            }
         }
     }
 
@@ -66,6 +70,19 @@ public class QuestManager : MonoBehaviour
                 // StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
                 EventManager.Instance.PostNotification(Event_Type.eNoteQuestDone, this, FindQuest(questName));
                 break;
+            case "RevoltQuest4":
+                if (FindQuest("RevoltQuest5").isCompleted)
+                {
+                    questName = "RevoltQuest45";
+                }
+                break;
+            case "RevoltQuest5":
+                if (FindQuest("RevoltQuest4").isCompleted)
+                {
+                    questName = "RevoltQuest45";
+                }
+                break;
+
         }
 
         QuestSO quest = FindQuest(questName);
@@ -104,6 +121,10 @@ public class QuestManager : MonoBehaviour
             {
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().isQuest = true;
                 GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().questName = questName;
+            }else if (quest.ReachNPC)
+            {
+                GameObject.Find(quest.targetObject).GetComponent<NPCInteraction>().isActive = true;
+                GameObject.Find(quest.targetObject).GetComponent<NPCInteraction>().targetQuest = questName;
             }
         }
     }
