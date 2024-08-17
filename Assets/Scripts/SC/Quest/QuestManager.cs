@@ -132,7 +132,7 @@ public class QuestManager : MonoBehaviour
 
             if (quest.ReachLocation)
             {
-                GameObject.Find(quest.targetObject).GetComponent<BoxCollider2D>().enabled = true;
+                GameObject.Find(quest.targetObject).GetComponent<TargetLocation>().isActived = true;
                 GameObject.Find(quest.targetObject).GetComponent<TargetLocation>().targetQuest = questName;
             }
             else if (quest.ReachItem)
