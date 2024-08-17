@@ -16,7 +16,7 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
     public Transform questListParent;  // 퀘스트가 표시될 부모 객체
-    [SerializeField] GameObject questTextPrefab;  // 퀘스트 텍스트 프리팹
+    [SerializeField] GameObject questTextPrefab;
     [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();
 
     void Start()
@@ -47,18 +47,14 @@ public class QuestManager : MonoBehaviour
         switch (questName)
         {
             case "ClothQuest":
-                Debug.Log("신도복 퀘스트 클리어");
                 if (FindQuest("ExtraClothQuest").isCompleted)
                 {
-                    Debug.Log("이후 퀘스트 실행");
                     AcceptQuest("NoteLastQuest");
                 }
                 break;
             case "ExtraClothQuest":
-                Debug.Log("여벌의 신도복 퀘스트 클리어");
                 if (FindQuest("ClothQuest").isCompleted)
                 {
-                    Debug.Log("이후 퀘스트 실행");
                     AcceptQuest("NoteLastQuest");
                 }
                 break;
@@ -94,14 +90,17 @@ public class QuestManager : MonoBehaviour
             activeQuests.Add(quest);
             quest.isActived = true;
             GameObject newQuestText = Instantiate(questTextPrefab, questListParent);
-            //TextMeshProUGUI newQuestText = Instantiate(questTextPrefab, questListParent).GetComponent<TextMeshProUGUI>();
             newQuestText.GetComponent<TextMeshProUGUI>().text = EditText(quest);
             activeQuestTexts.Add(newQuestText);
 
             if (quest.ReachLocation)
             {
-                GameObject.Find(quest.targetLocationObject).GetComponent<BoxCollider2D>().enabled = true;
-                GameObject.Find(quest.targetLocationObject).GetComponent<TargetLocation>().targetQuest = questName;
+                GameObject.Find(quest.targetObject).GetComponent<BoxCollider2D>().enabled = true;
+                GameObject.Find(quest.targetObject).GetComponent<TargetLocation>().targetQuest = questName;
+            }else if (quest.ReachItem)
+            {
+                GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().isQuest = true;
+                GameObject.Find(quest.targetObject).GetComponent<ObjectInteraction>().questName = questName;
             }
         }
     }

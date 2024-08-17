@@ -10,6 +10,9 @@ public class ObjectInteraction : MonoBehaviour
     private bool isSend = false;
 
     public bool isCollected = false;
+    public bool isQuest = false;
+    public string questName;
+
 
     void Update()
     {
@@ -17,6 +20,11 @@ public class ObjectInteraction : MonoBehaviour
         {
             DialogueManager.Instance.SetDialogueID(dialogueId);
             isSend = true;
+
+            if (isQuest)
+            {
+                GameObject.Find("QuestManager").GetComponent<QuestManager>().OnQuestClear(questName);
+            }
 
             if (CollectedObject != null)
             {
