@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
 
     public List<QuestSO> allQuests = new List<QuestSO>();
     private Dictionary<string, QuestSO> questDictionary;
+    public List<QuestSO> clearedQuests = new List<QuestSO>();
 
     public List<QuestSO> activeQuests = new List<QuestSO>();
 

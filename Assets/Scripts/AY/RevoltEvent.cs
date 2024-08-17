@@ -126,5 +126,4 @@ public class RevoltEvent : MonoBehaviour
 
         Destroy(go);
     }
-
 }

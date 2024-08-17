@@ -22,7 +22,7 @@ MonoBehaviour:
   ReachNPC: 1
   isCompleted: 0
   isActived: 0
-  eventType: 2
+  eventType: 0
   targetObject: AnswerNPC2
   targetEnemyID: 0
   targetCount: 0

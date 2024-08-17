@@ -21,7 +21,7 @@ MonoBehaviour:
   ReachNPC: 0
   isCompleted: 0
   isActived: 0
-  eventType: 2
+  eventType: 0
   targetObject: "\uBB34\uAE30\uACE0"
   targetEnemyID: 0
   targetCount: 0

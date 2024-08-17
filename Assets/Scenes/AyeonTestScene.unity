@@ -3362,6 +3362,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3a30c51bfa8f7f429d4b3de7a5e5ac2, type: 2}
   - {fileID: 11400000, guid: ff876a2d9fd16d640883f3293129f301, type: 2}
   - {fileID: 11400000, guid: 153f89dccd02f224290a99a41e3520f1, type: 2}
+  - {fileID: 11400000, guid: 7e17f387f98face4395f831ccbd95709, type: 2}
+  - {fileID: 11400000, guid: ce54326c6e766bb4088c9064d8f3c160, type: 2}
+  - {fileID: 11400000, guid: 29d85456d1a6e7942a189a09c188742d, type: 2}
   activeQuests: []
   questListParent: {fileID: 1288410763}
   questTextPrefab: {fileID: 7478661387578705169, guid: 467cfa0171f1af44a96f3606c1b1376e,

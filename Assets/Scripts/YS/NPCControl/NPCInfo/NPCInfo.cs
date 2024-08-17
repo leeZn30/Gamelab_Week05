@@ -95,7 +95,7 @@ public class NPCInfo : MonoBehaviour
 
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            Debug.Log("Collider detected: " + hitColliders[i].name + " with tag: " + hitColliders[i].tag);
+            // Debug.Log("Collider detected: " + hitColliders[i].name + " with tag: " + hitColliders[i].tag);
 
             if (hitColliders[i].CompareTag("Player"))
             {
