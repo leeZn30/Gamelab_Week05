@@ -6,10 +6,9 @@ public class SaveManager : Singleton<SaveManager>
 {
     public List<QuestSO> savedQuest = new List<QuestSO>();
     public List<DoorInteraction> savedDoors = new List<DoorInteraction>();
+    public List<ObjectInteraction> saveItemsScript = new List<ObjectInteraction>();
 
     public List<GameObject> savedItems = new List<GameObject>();
-
-    public List<ObjectInteraction> saveItemsScript = new List<ObjectInteraction>();
 
     public NoteData savedNote;
 
@@ -28,7 +27,7 @@ public class SaveManager : Singleton<SaveManager>
         }
         savedQuest.Clear();
         savedDoors.Clear();
-        savedItems.Clear();
+        saveItemsScript.Clear();
         EventManager.Instance.PostNotification(Event_Type.eSave, this);
     }
 
