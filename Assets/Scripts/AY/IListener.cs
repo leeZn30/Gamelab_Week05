@@ -11,7 +11,8 @@ public enum Event_Type
     eNoteRead,
     eNoteQuestDone,
     eSave,
-    eLoad
+    eLoad,
+    eGrandmaTalked
 }
 
 public interface IListener

@@ -319,11 +319,15 @@ public class NPCInfo : MonoBehaviour, IListener
             //Destroy(gameObject);
             if (questNPC)
             {
-                gameObject.GetComponent<QuestNPCInteraction>().isDeath = true;
+                QuestNPCInteraction interaction = GetComponent<QuestNPCInteraction>();
+                if (interaction != null)
+                    interaction.isDeath = true;
             }
             else
             {
-                gameObject.GetComponent<NPCInteraction>().isDeath = true;
+                QuestNPCInteraction interaction = GetComponent<QuestNPCInteraction>();
+                if (interaction != null)
+                    interaction.isDeath = true;
             }
             SaveManager.Instance.tempNPCDestroy.Add(gameObject);
             gameObject.SetActive(false);

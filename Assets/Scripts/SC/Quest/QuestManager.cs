@@ -104,13 +104,14 @@ public class QuestManager : MonoBehaviour, IListener
             case "RevoltQuest6":
                 if (FindQuest("RevoltQuest7").isCompleted)
                 {
-                    questName = "RevoltQuest67";
+                    AcceptQuest("RevoltQuest67");
                 }
                 break;
+
             case "RevoltQuest7":
                 if (FindQuest("RevoltQuest6").isCompleted)
                 {
-                    questName = "RevoltQuest67";
+                    AcceptQuest("RevoltQuest67");
                 }
                 break;
         }
@@ -123,8 +124,6 @@ public class QuestManager : MonoBehaviour, IListener
 
             if (quest.eventType == Event_Type.eRevoltQuestDone)
             {
-                // sumRevoltQuest++;
-                // EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
                 EventManager.Instance.PostNotification(quest.eventType, this, quest);
             }
 

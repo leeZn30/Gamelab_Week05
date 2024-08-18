@@ -32,36 +32,6 @@ public class RevoltEvent : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    // public IEnumerator DoEvent(Action onComplete, int questNum)
-    // {
-    //     Debug.Log("Start Revolt Event");
-
-    //     switch (questNum)
-    //     {
-    //         case 1:
-    //             // yield return StartCoroutine(Event1());
-    //             break;
-
-    //         case 2:
-    //             yield return StartCoroutine(Event2());
-    //             break;
-
-    //         case 4:
-    //             // yield return StartCoroutine(Event34());
-    //             break;
-
-    //         case 7:
-    //             yield return StartCoroutine(Event67());
-    //             break;
-
-    //         case 8: // last
-    //             break;
-    //     }
-
-    //     onComplete?.Invoke();
-    //     Debug.Log("End Revolt Event");
-    // }
-
     public IEnumerator DoEvent(Action onComplete, QuestSO questSO)
     {
         Debug.Log("Start Revolt Event");
@@ -73,7 +43,7 @@ public class RevoltEvent : MonoBehaviour
                 break;
 
             case "RevoltQuest67":
-                yield return StartCoroutine(Event67());
+                yield return StartCoroutine(EventMeetBoss());
                 break;
 
             case "RevoltLastQuest": // last
@@ -127,31 +97,35 @@ public class RevoltEvent : MonoBehaviour
         event2Door.OpenDoor();
     }
 
-    IEnumerator Event34()
-    {
-        // 할머니 끌고감 (이거 겹치면 쪽지루트랑 겹치면 쪽지루트 우선)
-
-        yield return null;
-    }
-    IEnumerator RevoltGrandma()
-    {
-        // 할머니 끌고감 (이거 겹치면 쪽지루트랑 겹치면 쪽지루트 우선)
-
-        yield return null;
-    }
-
-    IEnumerator Event67()
+    IEnumerator EventMeetBoss()
     {
         // 보스 등장
-        GameObject go = Instantiate(resistaceBoss, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistaceBoss, player.transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId5);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
+        // npc 나감
+        SpriteRenderer sprite = go.GetComponent<SpriteRenderer>();
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            // 투명도 조절
+            float alpha = Mathf.Clamp01(1 - (elapsedTime / 1f));
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
+            yield return null; // 다음 프레임까지 대기
+        }
+        // 페이드 아웃이 완료된 후 오브젝트를 비활성화 또는 삭제
+        Destroy(go); // 오브젝트를 삭제하고 싶다면 이 줄을 사용하세요.
+
         // 퀘스트 주기
         QuestManager.Instance.AcceptQuest(questSO.name);
+    }
 
-        Destroy(go);
+    IEnumerator FinalBattle()
+    {
+        yield return null;
     }
 }

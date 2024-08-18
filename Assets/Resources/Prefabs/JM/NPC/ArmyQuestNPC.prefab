@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27abbbf6ccd914349a05152e3e226192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questNPC: 0
+  questNPC: 1
   EnemyID: 0
   side: 2
   type: Long

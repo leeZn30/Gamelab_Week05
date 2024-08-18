@@ -71,11 +71,6 @@ public class NoteEvent : MonoBehaviour
             case 5:
                 yield return StartCoroutine(Event5());
                 break;
-
-            case 6:
-                yield return StartCoroutine(Event6());
-                break;
-
         }
 
         yield return null;
@@ -155,29 +150,29 @@ public class NoteEvent : MonoBehaviour
         event2Door.OpenDoor();
     }
 
-    IEnumerator Event4()
-    {
-        // 특정 방에 들어갔을 때 처리?
-        // yield return new WaitUntil(() => )
-
-        // 대화
-        DialogueManager.Instance.SetDialogueID(dialogueId4);
-        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
-
-        // 할머니 끌려감
-    }
-
     IEnumerator Event5()
     {
         // npc 생성함
-        GameObject go = Instantiate(resistanceDefault, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistanceDefault, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId5);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // npc 나감
-        Destroy(go);
+        SpriteRenderer sprite = go.GetComponent<SpriteRenderer>();
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            // 투명도 조절
+            float alpha = Mathf.Clamp01(1 - (elapsedTime / 1f));
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
+            yield return null; // 다음 프레임까지 대기
+        }
+        // 페이드 아웃이 완료된 후 오브젝트를 비활성화 또는 삭제
+        Destroy(go); // 오브젝트를 삭제하고 싶다면 이 줄을 사용하세요.
+
     }
 
     IEnumerator Event6()

@@ -16,13 +16,13 @@ MonoBehaviour:
   description: 
   returnNPC: 0
   KillEnemies: 0
-  ReachLocation: 0
+  ReachLocation: 1
   ReachItem: 0
   ReachNPC: 0
   isCompleted: 0
   isActived: 0
   eventType: 2
-  targetObject: 
+  targetObject: BossMeetLocation
   targetEnemyID: 0
   targetCount: 0
   currCount: 0

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: RevoltLastQuest
   description: "\uAD50\uC8FC\uC758 \uB538 \uB0A9\uCE58\uD558\uB7EC \uAC00\uAE30"
+  returnNPC: 0
   KillEnemies: 0
   ReachLocation: 1
   ReachItem: 0
+  ReachNPC: 0
   isCompleted: 0
   isActived: 0
   eventType: 2
-  targetObject: 
+  targetObject: Rooftop
   targetEnemyID: 0
   targetCount: 0
   currCount: 0
