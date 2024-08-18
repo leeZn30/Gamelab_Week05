@@ -7,9 +7,10 @@ public class PlayerUI : MonoBehaviour
 {
     public HealthUIManager healthUIManager;
     //public GameObject stemina;
-    public GameObject[] PlayerGunUI;
+    public GameObject PlayerGunUI;
     public TextMeshProUGUI gunIndexText;
 
+    private GameObject battleUI;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,26 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthUIManager.SethealthCount(DataManager.Instance.Health);
+        battleUI = GameObject.FindWithTag("Canvas").transform.Find("BattleUI").gameObject;
+        healthUIManager = GameObject.FindWithTag("Canvas").transform.Find("BattleUI").transform.GetComponentInChildren<HealthUIManager>();
+        PlayerGunUI = battleUI.transform.Find("SkillCoolDown").gameObject;
+
+        if (DataManager.Instance.playerState == "Battle")
+        {
+            if (battleUI != null)
+            {
+                battleUI.SetActive(true);
+                healthUIManager.SethealthCount(DataManager.Instance.Health);
+            }
+        }
+
+        if (DataManager.Instance.playerState != "Battle")
+        {
+            if (battleUI != null)
+            {
+                battleUI.SetActive(false);
+            }
+        }
     }
 
 
@@ -33,33 +53,10 @@ public class PlayerUI : MonoBehaviour
 
         GetComponent<PlayerGunManager>().playerGun[GetComponent<PlayerGunManager>().currentGunIndex].SetActive(true);
 
-        PlayerGunUI = new GameObject[10];
-
-        for (int i = 0; i < GameObject.Find("Battle_Ui").transform.Find("SkillCoolDown").transform.childCount; i++)
-        {
-            PlayerGunUI[i] = GameObject.Find("Battle_Ui").transform.Find("SkillCoolDown").transform.GetChild(i).gameObject;
-
-            if (PlayerGunUI[i].name.Contains("Text"))
-            {
-                gunIndexText = PlayerGunUI[i].transform.GetComponent<TextMeshProUGUI>();
-            }
-        }
-
     }
     void GunUI()
     {
-        for (int i = 0; i < PlayerGunUI.Length; i++)
-        {
-            if (PlayerGunUI[i] != null)
-            {
-                PlayerGunUI[i].SetActive(true);
-            }
-            else
-            {
-                break;
-            }
-        }
-
+        PlayerGunUI.SetActive(true);
         gunIndexText.text = GetComponent<PlayerGunManager>().currentGunIndex.ToString();
     }
 }
