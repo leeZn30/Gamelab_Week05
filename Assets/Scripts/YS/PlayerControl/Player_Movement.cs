@@ -17,6 +17,7 @@ public class Player_Movement : MonoBehaviour
     private float verticalInput;
 
     public bool isUsingMap;
+    public float speed;
 
     public bool isDashing = false;
     public float dashTime = 0.2f;
@@ -34,7 +35,7 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        DataManager.Instance.Speed = 4f;
+        DataManager.Instance.Speed = speed;
         DataManager.Instance.MaxHealth = 5f;
         DataManager.Instance.health = DataManager.Instance.MaxHealth;
 

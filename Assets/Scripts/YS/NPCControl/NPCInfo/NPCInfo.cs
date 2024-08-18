@@ -315,9 +315,7 @@ public class NPCInfo : MonoBehaviour
                     StartCoroutine(DamagedDelay());
                 }
             }
-
         }
-
     }
 
     IEnumerator DamagedDelay()
