@@ -7,8 +7,9 @@ using static UnityEngine.GraphicsBuffer;
 public class NPCInfo : MonoBehaviour
 {
     [Header("NPC Type")]
-    public int EnemyID;
     public bool questNPC;
+
+    public int EnemyID;
     private int hitTime;
     public int side;
     public string type;
@@ -40,7 +41,10 @@ public class NPCInfo : MonoBehaviour
     [Header("Check Battle")]
     public float radius = 5f;
     public LayerMask layerMask;
+    public float resetDistance;
 
+
+    public float distaance;
     public GameObject blood;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -66,6 +70,8 @@ public class NPCInfo : MonoBehaviour
     private void Update()
     {
         BattleCheck();
+
+        distaance = Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
 
         DeathCheck();
 
@@ -102,24 +108,34 @@ public class NPCInfo : MonoBehaviour
 
         }
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
-
-        for (int i = 0; i < hitColliders.Length; i++)
+        if (questNPC)
         {
-            // Debug.Log("Collider detected: " + hitColliders[i].name + " with tag: " + hitColliders[i].tag);
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
 
-            if (hitColliders[i].CompareTag("Player"))
+            for (int i = 0; i < hitColliders.Length; i++)
             {
-                Debug.Log("INININNINI");
-                if (DataManager.Instance.playerState == "Battle")
+                if (hitColliders[i].CompareTag("Player"))
                 {
-                    if (weapon != null && !questNPC)
+                    if (DataManager.Instance.playerState == "Battle")
                     {
-                        isBattle = true;
-                        weapon.SetActive(true);
-                    }
+                        if (weapon != null && !questNPC)
+                        {
+                            Debug.Log("PlayerIN");
+                            isBattle = true;
+                            weapon.SetActive(true);
+                        }
 
+                    }
                 }
+            }
+        }
+
+        if (isBattle)
+        {
+            if (distaance > resetDistance)
+            {
+                isBattle = false;
+                weapon.SetActive(false);
             }
         }
     }
