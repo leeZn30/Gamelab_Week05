@@ -52,7 +52,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         currentNoteData.isTarget = true;
 
         noteUI = GameObject.Find("NoteUI");
-        //noteBtn = noteUI.GetComponentInChildren<Button>();
+        noteBtn = noteUI.GetComponentInChildren<Button>();
         noteBtn.onClick.AddListener(() => CloseNote());
 
         // 이벤트 등록

@@ -10,7 +10,7 @@ public class RevoltEvent : MonoBehaviour
     GameObject player;
 
     [Header("프리팹")]
-    [SerializeField] GameObject resistance;
+    [SerializeField] GameObject resistanceDefault;
     [SerializeField] GameObject cultEnemy;
     [SerializeField] GameObject resistaceBoss;
 
@@ -20,7 +20,8 @@ public class RevoltEvent : MonoBehaviour
     [Header("Event2")]
     [SerializeField] int dialogueId3_0;
     [SerializeField] int dialogueId3_1;
-    [SerializeField] GameObject event2Door;
+    [SerializeField] DoorInteraction event2Door;
+    [SerializeField] List<Vector2> enemyPositions;
 
     [Header("Event67")]
     [SerializeField] int dialogueId5;
@@ -31,35 +32,35 @@ public class RevoltEvent : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    public IEnumerator DoEvent(Action onComplete, int questNum)
-    {
-        Debug.Log("Start Revolt Event");
+    // public IEnumerator DoEvent(Action onComplete, int questNum)
+    // {
+    //     Debug.Log("Start Revolt Event");
 
-        switch (questNum)
-        {
-            case 1:
-                // yield return StartCoroutine(Event1());
-                break;
+    //     switch (questNum)
+    //     {
+    //         case 1:
+    //             // yield return StartCoroutine(Event1());
+    //             break;
 
-            case 2:
-                yield return StartCoroutine(Event2());
-                break;
+    //         case 2:
+    //             yield return StartCoroutine(Event2());
+    //             break;
 
-            case 4:
-                // yield return StartCoroutine(Event34());
-                break;
+    //         case 4:
+    //             // yield return StartCoroutine(Event34());
+    //             break;
 
-            case 7:
-                yield return StartCoroutine(Event67());
-                break;
+    //         case 7:
+    //             yield return StartCoroutine(Event67());
+    //             break;
 
-            case 8: // last
-                break;
-        }
+    //         case 8: // last
+    //             break;
+    //     }
 
-        onComplete?.Invoke();
-        Debug.Log("End Revolt Event");
-    }
+    //     onComplete?.Invoke();
+    //     Debug.Log("End Revolt Event");
+    // }
 
     public IEnumerator DoEvent(Action onComplete, QuestSO questSO)
     {
@@ -86,7 +87,7 @@ public class RevoltEvent : MonoBehaviour
     IEnumerator Event1()
     {
         // npc 생성함
-        GameObject go = Instantiate(resistance, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistanceDefault, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId1);
@@ -105,16 +106,15 @@ public class RevoltEvent : MonoBehaviour
         DialogueManager.Instance.SetDialogueID(dialogueId3_0);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
-        // 문 닫음 (뭐 부터 깰지 몰라서 없애두기)
-        // event2Door.SetActive(true);
-
-        // 말한 반란군 잠시 안보이게 하기 (미완)
+        // 문 닫음
+        event2Door.CloseDoor();
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < enemyPositions.Count; i++)
         {
-            enemies.Add(Instantiate(cultEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
+            enemies.Add(Instantiate(cultEnemy, enemyPositions[i], Quaternion.identity));
+            yield return new WaitForSeconds(0.3f);
         }
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
         yield return new WaitUntil(() => enemies.All(e => e == null));
@@ -123,8 +123,8 @@ public class RevoltEvent : MonoBehaviour
         DialogueManager.Instance.SetDialogueID(dialogueId3_1);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
-        // 문 엶 (뭐 부터 깰지 몰라서 없애두기)
-        event2Door.SetActive(false);
+        // 문 엶
+        event2Door.OpenDoor();
     }
 
     IEnumerator Event34()

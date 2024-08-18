@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questNPC: 0
   EnemyID: 0
-  side: 1
+  side: 2
   type: Long
   health: 0
   maxHealth: 0

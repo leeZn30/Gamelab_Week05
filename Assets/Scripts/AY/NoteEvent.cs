@@ -11,12 +11,13 @@ public class NoteEvent : MonoBehaviour
     GameObject player;
 
     [Header("프리팹")]
-    [SerializeField] GameObject resistance;
+    [SerializeField] GameObject resistanceDefault;
     [SerializeField] GameObject cultEnemy;
     [SerializeField] GameObject resistanceEnemy;
 
     [Header("Event1")]
-    public int dialogueId1; // 대사 ID, 이 NPC가 말할 대사를 지정
+    public int dialogueId1_0; // 대사 ID, 이 NPC가 말할 대사를 지정
+    public int dialogueId1_1; // 대사 ID, 이 NPC가 말할 대사를 지정
 
     [Header("Event2")]
     public DoorInteraction event2Door;
@@ -100,19 +101,33 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event1()
     {
         // npc 생성함
-        GameObject go = Instantiate(resistance, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistanceDefault, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
         if (player.transform.position.x - go.transform.position.x <= 0)
         {
             go.GetComponent<SpriteRenderer>().flipX = true;
         }
 
         // 대화함
-        DialogueManager.Instance.SetDialogueID(dialogueId1);
-
+        DialogueManager.Instance.SetDialogueID(dialogueId1_0);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // npc 나감
-        Destroy(go);
+        SpriteRenderer sprite = go.GetComponent<SpriteRenderer>();
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            elapsedTime += Time.deltaTime;
+            // 투명도 조절
+            float alpha = Mathf.Clamp01(1 - (elapsedTime / 1f));
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alpha);
+            yield return null; // 다음 프레임까지 대기
+        }
+        // 페이드 아웃이 완료된 후 오브젝트를 비활성화 또는 삭제
+        Destroy(go); // 오브젝트를 삭제하고 싶다면 이 줄을 사용하세요.
+
+        // 대화함
+        DialogueManager.Instance.SetDialogueID(dialogueId1_1);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
     }
 
     IEnumerator Event2()
@@ -122,9 +137,13 @@ public class NoteEvent : MonoBehaviour
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
+        float poseX = event2Door.transform.parent.transform.position.x - 2;
         for (int i = 0; i < 4; i++)
         {
-            enemies.Add(Instantiate(cultEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
+            enemies.Add(Instantiate(cultEnemy, event2Door.transform.parent.transform.position + new Vector3(poseX, 3, 0), Quaternion.identity));
+            poseX += 1;
+
+            yield return new WaitForSeconds(0.2f);
         }
 
         // 대화
@@ -153,7 +172,7 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event5()
     {
         // npc 생성함
-        GameObject go = Instantiate(resistance, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistanceDefault, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId5);
