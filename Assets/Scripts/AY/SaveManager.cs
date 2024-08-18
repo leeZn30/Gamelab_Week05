@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    public List<QuestSO> savedQuest = new List<QuestSO>();
     public List<DoorInteractionStatus> savedDoorStatus = new List<DoorInteractionStatus>();
     public List<ObjectInteractionStatus> saveItemStatus = new List<ObjectInteractionStatus>();
     public List<NPCInfoStatus> saveNpcInfoStatus = new List<NPCInfoStatus>();
     public List<NPCInteractionStatus> saveNPCInteractionStatus = new List<NPCInteractionStatus>();
     public List<QuestNPCInteractionStatus> saveQuestNPCInteractionStatus = new List<QuestNPCInteractionStatus>();
+    
 
     public List<GameObject> tempDestroyGameObjects = new List<GameObject>();
     public List<GameObject> tempNPCDestroy = new List<GameObject>();
@@ -39,10 +39,12 @@ public class SaveManager : Singleton<SaveManager>
             tempNPCDestroy.RemoveAt(tempNPCDestroy.Count - 1);
         }
 
-        savedQuest.Clear();
         savedDoorStatus.Clear();
         saveItemStatus.Clear();
         saveNpcInfoStatus.Clear();
+        saveNPCInteractionStatus.Clear();
+        saveQuestNPCInteractionStatus.Clear();
+
         EventManager.Instance.PostNotification(Event_Type.eSave, this);
     }
 
@@ -61,6 +63,7 @@ public class SaveManager : Singleton<SaveManager>
             saveItem.SetActive(true);
             tempNPCDestroy.RemoveAt(tempNPCDestroy.Count - 1);
         }
+
         EventManager.Instance.PostNotification(Event_Type.eLoad, this);
     }
 }
