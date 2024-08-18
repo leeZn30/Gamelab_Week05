@@ -108,8 +108,9 @@ public class QuestManager : MonoBehaviour
 
             if (quest.eventType == Event_Type.eRevoltQuestDone)
             {
-                sumRevoltQuest++;
-                EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
+                // sumRevoltQuest++;
+                // EventManager.Instance.PostNotification(quest.eventType, this, sumRevoltQuest);
+                EventManager.Instance.PostNotification(quest.eventType, this, quest);
             }
 
         }

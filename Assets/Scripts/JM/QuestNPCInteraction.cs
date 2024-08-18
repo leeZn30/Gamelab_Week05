@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class QuestNPCInteraction : MonoBehaviour
 {
+    [Header("순서")]
+    public int order;
+
     public int initialDialogueId = 3;
     public int incompleteQuestDialogueId = 4;
     public int completedQuestDialogueId = 5;

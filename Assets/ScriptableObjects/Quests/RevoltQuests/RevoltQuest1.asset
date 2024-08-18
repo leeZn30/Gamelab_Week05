@@ -23,6 +23,6 @@ MonoBehaviour:
   isActived: 1
   eventType: 2
   targetObject: 
-  targetEnemyID: 1
+  targetEnemyID: 0
   targetCount: 3
-  currCount: 1
+  currCount: 3
