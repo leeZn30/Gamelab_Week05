@@ -590,7 +590,7 @@ MonoBehaviour:
   weapon: {fileID: 8462435281715169430}
   damage: 0
   attackRange: 10
-  attackSpeed: 0.4
+  attackSpeed: 0.6
   target: {fileID: 0}
   isPatrol: 0
   isBattle: 0
@@ -625,6 +625,7 @@ MonoBehaviour:
   patrolIndex: 0
   patWhat: 0
   idleStop: 0
+  moveSpeed: 0
 --- !u!1 &7299696127629854729
 GameObject:
   m_ObjectHideFlags: 0

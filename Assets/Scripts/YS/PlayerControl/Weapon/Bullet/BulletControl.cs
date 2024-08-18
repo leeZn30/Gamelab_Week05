@@ -8,6 +8,7 @@ public class BulletControl : MonoBehaviour
     public float lifeTime;
 
     public AudioSource AudioSource;
+    public AudioClip AudioClip;
 
     private Rigidbody2D rb;
 
@@ -16,7 +17,7 @@ public class BulletControl : MonoBehaviour
     {
         AudioSource = GetComponent<AudioSource>();
 
-        AudioSource.Play();
+        AudioSource.PlayOneShot(AudioClip);
         Destroy(gameObject, lifeTime);
     }
 
