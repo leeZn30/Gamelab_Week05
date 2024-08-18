@@ -14,6 +14,7 @@ public class FistRumble : MonoBehaviour
 
     private void Update()
     {
+
         if (hand != transform.parent.GetComponent<FistAttack>().hand)
         {
             if (transform.parent.GetComponent<FistAttack>().isAttacking)
@@ -26,6 +27,7 @@ public class FistRumble : MonoBehaviour
             }
         }
     }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
