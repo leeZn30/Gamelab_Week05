@@ -6,8 +6,21 @@ using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using Color = UnityEngine.Color;
+public struct QuestManagerStatus
+{
+    public bool isCompleted;
+    public bool isActived;
+    public int currCount;
 
-public class QuestManager : MonoBehaviour
+    public QuestManagerStatus(bool saveIsCompleted, bool saveiIsActived, int saveCurrCount)
+    {
+        isCompleted = saveIsCompleted;
+        isActived = saveiIsActived;
+        currCount = saveCurrCount;
+    }
+}
+
+public class QuestManager : MonoBehaviour, IListener
 {
     public static QuestManager Instance { get; private set; }
 
@@ -40,6 +53,8 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
         if (Instance == null)
         {
             Instance = this;
@@ -240,5 +255,27 @@ public class QuestManager : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+            switch (EventType)
+            {
+                case Event_Type.eSave:
+                    foreach (var quest in allQuests)
+                    {
+                        QuestManagerStatus questManagerStatus = new QuestManagerStatus(quest.isCompleted, quest.isActived, quest.currCount);
+                        SaveManager.Instance.saveQuestManagerStatus.Add(questManagerStatus);
+                    }
+                    break;
+                case Event_Type.eLoad:
+                    for (int i = 0; i < allQuests.Count; i++)
+                    {
+                        allQuests[i].isCompleted = SaveManager.Instance.saveQuestManagerStatus[i].isCompleted;
+                        allQuests[i].isActived = SaveManager.Instance.saveQuestManagerStatus[i].isActived;
+                        allQuests[i].currCount = SaveManager.Instance.saveQuestManagerStatus[i].currCount;
+                    }
+                    break;
+            }
     }
 }

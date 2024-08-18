@@ -56,6 +56,8 @@ public class QuestNPCInteraction : MonoBehaviour, IListener
                 if (!quest[i].isActived)
                 {
                     questStart.SetActive(true);
+                    onQuest.SetActive(false);
+                    completeQuest.SetActive(false);
                     chk = false;
                 }
             }
@@ -68,6 +70,7 @@ public class QuestNPCInteraction : MonoBehaviour, IListener
                     {
                         questStart.SetActive(false);
                         onQuest.SetActive(true);
+                        completeQuest.SetActive(false);
                         chk = false;
                     }
                 }
@@ -75,6 +78,7 @@ public class QuestNPCInteraction : MonoBehaviour, IListener
 
             if (chk)
             {
+                questStart.SetActive(false);
                 onQuest.SetActive(false);
                 completeQuest.SetActive(true);
             }
