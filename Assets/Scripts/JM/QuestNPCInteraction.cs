@@ -1,7 +1,18 @@
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+public struct QuestNPCInteractionStatus
+{
+    public bool isSend;
+    public bool questDialogueCompleted;
 
-public class QuestNPCInteraction : MonoBehaviour
+    public QuestNPCInteractionStatus(bool saveSend, bool saveQuestDialogueCompleted)
+    {
+        isSend = saveSend;
+        questDialogueCompleted = saveQuestDialogueCompleted;
+    }
+}
+
+public class QuestNPCInteraction : MonoBehaviour, IListener
 {
     [Header("순서")]
     public int order;
@@ -21,10 +32,18 @@ public class QuestNPCInteraction : MonoBehaviour
     public bool questDialogueCompleted = false;
 
     private bool isPlayerInRange = false;
+    public bool isDeath = false;
+    public int saveIndex = -1;
 
     void Start()
     {
         interactionUI.SetActive(false);
+    }
+
+    void Awake()
+    {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
 
     void Update()
@@ -161,6 +180,25 @@ public class QuestNPCInteraction : MonoBehaviour
             isPlayerInRange = false;
             interactionUI.SetActive(false);
             isSend = false;
+        }
+    }
+
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        if (!isDeath)
+        {
+            switch (EventType)
+            {
+                case Event_Type.eSave:
+                    QuestNPCInteractionStatus questNpcInteractionStatus = new QuestNPCInteractionStatus(isSend, questDialogueCompleted);
+                    SaveManager.Instance.saveQuestNPCInteractionStatus.Add(questNpcInteractionStatus);
+                    saveIndex = SaveManager.Instance.saveQuestNPCInteractionStatus.Count - 1;
+                    break;
+                case Event_Type.eLoad:
+                    questDialogueCompleted = SaveManager.Instance.saveQuestNPCInteractionStatus[saveIndex].questDialogueCompleted;
+                    isSend = SaveManager.Instance.saveQuestNPCInteractionStatus[saveIndex].isSend;
+                    break;
+            }
         }
     }
 }

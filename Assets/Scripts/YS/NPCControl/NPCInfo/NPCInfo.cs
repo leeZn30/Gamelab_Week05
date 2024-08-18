@@ -4,54 +4,68 @@ using UnityEngine;
 using static Unity.Collections.AllocatorManager;
 using static UnityEngine.GraphicsBuffer;
 
-public class NPCInfo : MonoBehaviour
+public struct NPCInfoStatus
 {
-    [Header("NPC Type")]
-    public bool questNPC;
+    public float health;
+    public Vector2 position;
+    public Quaternion rotation;
+
+    public NPCInfoStatus(float saveHealth, Vector2 savePosition, Quaternion saveRotation)
+    {
+        health = saveHealth;
+        position = savePosition;
+        rotation = saveRotation;
+    }
+}
+
+public class NPCInfo : MonoBehaviour, IListener
+{
+    [Header("NPC Type")] public bool questNPC;
 
     public int EnemyID;
     private int hitTime;
     public int side;
     public string type;
 
-    [Header("NPC HP")]
-    public float health;
+    [Header("NPC HP")] public float health;
     public float maxHealth;
 
-    [Header("NPC Attack")]
-    public GameObject weapon;
+    [Header("NPC Attack")] public GameObject weapon;
     public float damage;
     public float attackRange;
     public float attackSpeed;
 
-    [Header("NPC Aim")]
-    public GameObject target;
+    [Header("NPC Aim")] public GameObject target;
 
-    [Header("NPC State")]
-    public bool isPatrol;
+    [Header("NPC State")] public bool isPatrol;
     public bool isBattle;
     public int state;
 
-    [Header("Finding Target")]
-    int num = 0;
+    [Header("Finding Target")] int num = 0;
     float distance;
     float minDis = 50;
 
 
-    [Header("Check Battle")]
-    public float radius = 5f;
+    [Header("Check Battle")] public float radius = 5f;
     public LayerMask layerMask;
     public float resetDistance;
 
 
-    [Header("Damaged")]
-    public GameObject damaged;
+    [Header("Damaged")] public GameObject damaged;
 
 
     public float distaance;
     public GameObject blood;
+    public int saveIndex = -1;
+    public bool isDeath = false;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    void Awake()
+    {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
+    }
 
     private void Start()
     {
@@ -78,16 +92,17 @@ public class NPCInfo : MonoBehaviour
         BattleCheck();
 
         distaance = Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
-        
+
         if (isBattle)
         {
-            if (distaance > resetDistance && (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
+            if (distaance > resetDistance &&
+                (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
             {
                 isBattle = false;
                 weapon.SetActive(false);
             }
         }
-        
+
 
         DeathCheck();
 
@@ -145,6 +160,7 @@ public class NPCInfo : MonoBehaviour
             }
         }
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -180,9 +196,11 @@ public class NPCInfo : MonoBehaviour
             {
                 ShortResistance();
             }
+
             target = BattleManager.Instance.Cult[num];
         }
     }
+
     void ShortCult()
     {
 
@@ -194,7 +212,8 @@ public class NPCInfo : MonoBehaviour
                 {
                     if (BattleManager.Instance.Resistance[i].GetComponent<NPCInfo>().type == ("Long"))
                     {
-                        distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
+                        distance = Vector2.Distance(transform.position,
+                            BattleManager.Instance.Resistance[i].transform.position);
 
                         if (distance < minDis)
                         {
@@ -208,6 +227,7 @@ public class NPCInfo : MonoBehaviour
 
         }
     }
+
     void LongCult()
     {
 
@@ -215,7 +235,8 @@ public class NPCInfo : MonoBehaviour
         {
             if (BattleManager.Instance.Resistance[i] != null)
             {
-                distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
+                distance = Vector2.Distance(transform.position,
+                    BattleManager.Instance.Resistance[i].transform.position);
 
                 if (distance < minDis)
                 {
@@ -225,6 +246,7 @@ public class NPCInfo : MonoBehaviour
             }
         }
     }
+
     void ShortResistance()
     {
 
@@ -236,7 +258,8 @@ public class NPCInfo : MonoBehaviour
                 {
                     if (BattleManager.Instance.Cult[i].GetComponent<NPCInfo>().type == ("Long"))
                     {
-                        distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
+                        distance = Vector2.Distance(transform.position,
+                            BattleManager.Instance.Cult[i].transform.position);
 
                         if (distance < minDis)
                         {
@@ -249,6 +272,7 @@ public class NPCInfo : MonoBehaviour
             }
         }
     }
+
     void LongResistance()
     {
         for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
@@ -282,7 +306,17 @@ public class NPCInfo : MonoBehaviour
         if (health < 0)
         {
             GameObject.Find("QuestManager").GetComponent<QuestManager>().OnEnemyKilled(EnemyID);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            if (questNPC)
+            {
+                gameObject.GetComponent<QuestNPCInteraction>().isDeath = true;
+            }
+            else
+            {
+                gameObject.GetComponent<NPCInteraction>().isDeath = true;
+            }
+            SaveManager.Instance.tempNPCDestroy.Add(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -330,4 +364,23 @@ public class NPCInfo : MonoBehaviour
         }
     }
 
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        if (!isDeath)
+        {
+            switch (EventType)
+            {
+                case Event_Type.eSave:
+                    NPCInfoStatus npcInfoStatus = new NPCInfoStatus(health, gameObject.transform.position, gameObject.transform.rotation);
+                    SaveManager.Instance.saveNpcInfoStatus.Add(npcInfoStatus);
+                    saveIndex = SaveManager.Instance.saveNpcInfoStatus.Count - 1;
+                    break;
+                case Event_Type.eLoad:
+                    health = SaveManager.Instance.saveNpcInfoStatus[saveIndex].health;
+                    transform.position = SaveManager.Instance.saveNpcInfoStatus[saveIndex].position;
+                    transform.rotation = SaveManager.Instance.saveNpcInfoStatus[saveIndex].rotation;
+                    break;
+            }
+        }
+    }
 }

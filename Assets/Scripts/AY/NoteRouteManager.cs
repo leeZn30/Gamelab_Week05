@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
 public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 {
     [Header("노트 관련")]
@@ -48,8 +47,8 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
             noteDatas.Add(data);
         }
-        currentNoteData = noteDatas[0];
-        currentNoteData.isTarget = true;
+        currentNoteData = new NoteData(noteDatas[0].noteID, noteDatas[0].content, noteDatas[0].order);
+        noteDatas[0].isTarget = true;
 
         noteUI = GameObject.Find("NoteUI");
         noteBtn = noteUI.GetComponentInChildren<Button>();
@@ -59,6 +58,8 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
         EventManager.Instance.AddListener(Event_Type.eNoteQuestDone, this);
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
 
     // 노트를 봤다면 이벤트 실행
@@ -82,11 +83,16 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 break;
 
             case Event_Type.eSave:
-                SaveManager.Instance.savedNote = currentNoteData;
+                SaveManager.Instance.savedNote = new NoteData(currentNoteData.noteID, currentNoteData.content, currentNoteData.order);
                 break;
 
             case Event_Type.eLoad:
-                currentNoteData = SaveManager.Instance.savedNote;
+                for (int i = 0; i< noteDatas.Count; i++)
+                {
+                    noteDatas[i].isTarget = false;
+                }
+                noteDatas[SaveManager.Instance.savedNote.order].isTarget = true;
+                currentNoteData.order = SaveManager.Instance.savedNote.order;
                 break;
         }
     }
@@ -102,14 +108,15 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     {
         bool isComplete = false;
         StartCoroutine(noteEvent.DoEvent(() => isComplete = true, currentNoteData.order));
+        noteDatas.Find(e => e.order == currentNoteData.order).isTarget = false;
         yield return new WaitUntil(() => isComplete);
 
         // 다음 노트 찾아서 보이게 하기
         NoteData nextNoteData = noteDatas.Find(e => e.order == currentNoteData.order + 1);
         if (nextNoteData != null)
         {
-            currentNoteData = nextNoteData;
-            currentNoteData.isTarget = true;
+            currentNoteData = new NoteData(nextNoteData.noteID, nextNoteData.content, nextNoteData.order);
+            nextNoteData.isTarget = true;
         }
     }
 
@@ -133,5 +140,4 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         noteUI.SetActive(false); //노트 비활성화
         Time.timeScale = 1;
     }
-
 }

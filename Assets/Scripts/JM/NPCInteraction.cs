@@ -1,6 +1,17 @@
 using UnityEngine;
+public struct NPCInteractionStatus
+{
+    public bool isSend;
+    public bool isActive;
 
-public class NPCInteraction : MonoBehaviour
+    public NPCInteractionStatus(bool saveSend, bool saveActive)
+    {
+        isSend = false;
+        isActive = false;
+    }
+}
+
+public class NPCInteraction : MonoBehaviour, IListener
 {
     public int dialogueId; // 이 NPC가 출력할 기본 대사 ID
     public GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
@@ -11,6 +22,9 @@ public class NPCInteraction : MonoBehaviour
     public bool isActive = false;
     public string targetQuest;
 
+    public bool isDeath = false;
+    public int saveIndex = -1;
+
     void Start()
     {
         if (interactionUI != null)
@@ -20,7 +34,13 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
+    void Awake()
+    {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
+    }
+
+    void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
@@ -71,5 +91,24 @@ public class NPCInteraction : MonoBehaviour
     public bool IsPlayerInRange()
     {
         return isPlayerInRange;
+    }
+
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        if (!isDeath)
+        {
+            switch (EventType)
+            {
+                case Event_Type.eSave:
+                    NPCInteractionStatus npcInteractionStatus = new NPCInteractionStatus(isSend, isActive);
+                    SaveManager.Instance.saveNPCInteractionStatus.Add(npcInteractionStatus);
+                    saveIndex = SaveManager.Instance.saveNPCInteractionStatus.Count - 1;
+                    break;
+                case Event_Type.eLoad:
+                    isActive = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isActive;
+                    isSend = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isSend;
+                    break;
+            }
+        }
     }
 }

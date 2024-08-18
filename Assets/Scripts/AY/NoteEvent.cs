@@ -46,7 +46,7 @@ public class NoteEvent : MonoBehaviour
 
     public IEnumerator DoEvent(Action onComplete, int eventNum)
     {
-        Debug.Log("Start Note Event");
+        Debug.Log("Start Note Event"+eventNum);
 
         switch (eventNum)
         {
@@ -129,7 +129,7 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event2()
     {
         // 문 닫음
-        event2Door.CloseDoor();
+        //event2Door.CloseDoor();
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
