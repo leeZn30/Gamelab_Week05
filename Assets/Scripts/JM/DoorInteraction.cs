@@ -1,6 +1,15 @@
 using System.Data.Common;
 using UnityEngine;
 
+public struct DoorInteractionStatus
+{
+    public bool isOpend;
+    public DoorInteractionStatus(bool currOpend)
+    {
+        isOpend = currOpend;
+    }
+}
+
 public class DoorInteraction : MonoBehaviour, IListener
 {
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
@@ -92,13 +101,18 @@ public class DoorInteraction : MonoBehaviour, IListener
         switch (EventType)
         {
             case Event_Type.eSave:
-                SaveManager.Instance.savedDoors.Add(this);
-                saveIndex = SaveManager.Instance.savedDoors.Count - 1;
+                DoorInteractionStatus doorInteractionStatus = new DoorInteractionStatus(isOpend);
+                SaveManager.Instance.savedDoorStatus.Add(doorInteractionStatus);
+                saveIndex = SaveManager.Instance.savedDoorStatus.Count - 1;
                 break;
             case Event_Type.eLoad:
-                if (SaveManager.Instance.savedDoors[saveIndex].isOpend)
+                if (SaveManager.Instance.savedDoorStatus[saveIndex].isOpend)
                 {
                     OpenDoor();
+                }
+                else
+                {
+                    CloseDoor();
                 }
                 break;
         }
