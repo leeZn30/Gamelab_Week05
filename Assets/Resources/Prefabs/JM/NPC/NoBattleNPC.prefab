@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c3868741f0ebd418ea442077a4ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueId: 206
+  dialogueId: 207
   interactionUI: {fileID: 6704406126788795913}
   isActive: 0
   targetQuest: 
@@ -617,7 +617,7 @@ MonoBehaviour:
   - {x: 6, y: 5, z: 0}
   patrolIndex: 0
   patWhat: 0
-  idleStop: 0
+  idleStop: 1
 --- !u!114 &7157400149397983668
 MonoBehaviour:
   m_ObjectHideFlags: 0

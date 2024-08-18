@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 8300507761734393550}
   m_Layer: 0
   m_Name: BattleNPC
-  m_TagString: Untagged
+  m_TagString: Cult
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c3868741f0ebd418ea442077a4ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueId: 211
+  dialogueId: 210
   interactionUI: {fileID: 128865448450425839}
   isActive: 0
   targetQuest: 
@@ -596,7 +596,7 @@ MonoBehaviour:
   radius: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   resetDistance: 0
   damaged: {fileID: 3566947697411604384}
   distaance: 0
