@@ -22,6 +22,7 @@ public class NoteEvent : MonoBehaviour
     [Header("Event2")]
     public DoorInteraction event2Door;
     public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
+    [SerializeField] List<Vector2> enemyPositions;
 
     [Header("Event3")]
     public int dialogueId3; // 대사 ID, 이 NPC가 말할 대사를 지정
@@ -137,12 +138,9 @@ public class NoteEvent : MonoBehaviour
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
-        float poseX = event2Door.transform.parent.transform.position.x - 2;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < enemyPositions.Count; i++)
         {
-            enemies.Add(Instantiate(cultEnemy, event2Door.transform.parent.transform.position + new Vector3(poseX, 3, 0), Quaternion.identity));
-            poseX += 1;
-
+            enemies.Add(Instantiate(cultEnemy, enemyPositions[i], Quaternion.identity));
             yield return new WaitForSeconds(0.2f);
         }
 

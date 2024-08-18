@@ -59,6 +59,7 @@ MonoBehaviour:
   noteUI: {fileID: 0}
   noteBtn: {fileID: 0}
   noteEvent: {fileID: 8375307396598538245}
+  isEveLast: 0
 --- !u!114 &3675337214351692816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1dde048b9cd4e3479b1de778a0b6ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastEventId: 0
   commonEvent: {fileID: 9052588749714916937}
 --- !u!114 &4836519509127534200
 MonoBehaviour:
@@ -85,7 +85,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5995af7e437d6e24bba11b0a5000234c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  QuestNPCs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentNPCOrder: 0
   revoltEvent: {fileID: 2549719918221561708}
+  isEveLast: 0
 --- !u!1 &2931823689495631830
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,15 +138,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6431d159b6a300b49b5dbdf148797f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resistance: {fileID: 2094562570039198571, guid: 497a8e651a89faa4185c4ea6c6f7b26d,
+  resistanceDefault: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
     type: 3}
-  cultEnemy: {fileID: 7421411161731263235, guid: 6a1ea446e7c862144a37ca8fe027d9fd,
+  cultEnemy: {fileID: 4714615146271489924, guid: 8ea2dce29d0f1ff4cb912f937ecb5e27,
     type: 3}
-  resistanceEnemy: {fileID: 2051661203306257206, guid: e8592f47d994a00429be3d65447b35d7,
+  resistanceEnemy: {fileID: 2094562570039198571, guid: c66e0394befe70a4fb45a205ec0cb195,
     type: 3}
-  dialogueId1: 101
+  dialogueId1_0: 101
+  dialogueId1_1: 107
   event2Door: {fileID: 0}
   dialogueId2: 102
+  enemyPositions:
+  - {x: 13, y: -1}
+  - {x: 15, y: -1}
   dialogueId3: 103
   dialogueId4: 104
   dialogueId5: 105
@@ -188,18 +200,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712acabb156506c4fb003c7676610ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resistance: {fileID: 2094562570039198571, guid: 497a8e651a89faa4185c4ea6c6f7b26d,
+  resistanceDefault: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
     type: 3}
-  cultEnemy: {fileID: 7421411161731263235, guid: 6a1ea446e7c862144a37ca8fe027d9fd,
+  cultEnemy: {fileID: 4714615146271489924, guid: 8ea2dce29d0f1ff4cb912f937ecb5e27,
     type: 3}
-  resistaceBoss: {fileID: 8389332310892115242, guid: abc82e537c2315d48aea6b80241e1929,
+  resistaceBoss: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
     type: 3}
-  dialogueId1: 1
-  dialogueId3_0: 1
-  dialogueId3_1: 1
+  dialogueId1: 23
+  dialogueId3_0: 20
+  dialogueId3_1: 21
   event2Door: {fileID: 0}
-  dialogueId4: 0
-  dialogueId5: 0
+  enemyPositions:
+  - {x: 12, y: -21}
+  - {x: 12, y: -23}
+  - {x: 12, y: -25}
+  dialogueId5: 22
   questSO: {fileID: 11400000, guid: 153f89dccd02f224290a99a41e3520f1, type: 2}
 --- !u!1 &7075122282776903226
 GameObject:
@@ -212,7 +227,7 @@ GameObject:
   - component: {fileID: 3626297354755873503}
   - component: {fileID: 9052588749714916937}
   m_Layer: 0
-  m_Name: CommonEvents
+  m_Name: CommonEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +261,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEvent: 0
-  introDialogueId0: 0
-  introDialogueId1: 0
+  resistance: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
+    type: 3}
+  introDialogueId0: 16
+  introDialogueId1: 17
+  introDialogueId2: 18
+  introDialogueId3: 19
   note0: {fileID: 0}
+  RoomDoor: {fileID: 0}

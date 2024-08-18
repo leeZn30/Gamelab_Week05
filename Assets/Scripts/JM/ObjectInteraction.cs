@@ -30,7 +30,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
     public string questName;
     public int saveIndex = -1;
 
-    
+
 
     void Awake()
     {
@@ -74,7 +74,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
                     CollectedObject.SetActive(false);
                     isCollected = true;
                 }
-                
+
             }
         }
     }
