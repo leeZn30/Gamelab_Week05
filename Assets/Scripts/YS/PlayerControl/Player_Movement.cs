@@ -17,6 +17,7 @@ public class Player_Movement : MonoBehaviour
     private float verticalInput;
 
     public bool isUsingMap;
+    public float speed;
 
     public bool isDashing = false;
     public float dashTime = 0.2f;
@@ -34,7 +35,11 @@ public class Player_Movement : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        DataManager.Instance.Speed = 4f;
+        DataManager.Instance.Speed = speed;
+        DataManager.Instance.MaxHealth = 5f;
+        DataManager.Instance.health = DataManager.Instance.MaxHealth;
+
+
         isUsingMap = false;
         isDashing = false;
 
@@ -195,9 +200,9 @@ public class Player_Movement : MonoBehaviour
         DataManager.Instance.Speed = DataManager.Instance.Speed / 2;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Bullet"))
+        if (collision.transform.CompareTag("Bullet"))
         {
             isDamaged = true;
             DataManager.Instance.Health--;

@@ -287,9 +287,10 @@ public class NPCInfo : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Bullet"))
+        if (collision.transform.CompareTag("Bullet"))
         {
             health--;
             float randX = UnityEngine.Random.Range(transform.position.x - 1, transform.position.x + 1);
@@ -309,12 +310,11 @@ public class NPCInfo : MonoBehaviour
             {
                 hitTime++;
 
-                if(hitTime >= 5)
+                if (hitTime >= 5)
                 {
                     StartCoroutine(DamagedDelay());
                 }
             }
-
         }
     }
 

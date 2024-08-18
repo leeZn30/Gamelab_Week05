@@ -84,6 +84,10 @@ public class NPCMovement : MonoBehaviour
             }
             Behave();
         }
+        else
+        {
+            Behave();
+        }
 
         MoveToTarget();
         
