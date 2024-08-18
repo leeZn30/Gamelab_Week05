@@ -20,12 +20,13 @@ public struct NPCInfoStatus
 
 public class NPCInfo : MonoBehaviour, IListener
 {
-    [Header("NPC Type")] public bool questNPC;
-
+    [Header("NPC Type")] 
+    public bool questNPC;
     public int EnemyID;
     private int hitTime;
     public int side;
     public string type;
+    private Vector2 startPos;
 
     [Header("NPC HP")] public float health;
     public float maxHealth;
@@ -69,6 +70,7 @@ public class NPCInfo : MonoBehaviour, IListener
 
     private void Start()
     {
+        startPos = transform.position;
         damaged.SetActive(false);
 
         if (weapon != null)
@@ -95,11 +97,15 @@ public class NPCInfo : MonoBehaviour, IListener
 
         if (isBattle)
         {
-            if (distaance > resetDistance &&
-                (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
+            if (distaance > resetDistance) //&& (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
             {
+                if (questNPC)
+                {
+                    GetComponent<NPCMovement>().targetPosition = startPos;
+                }
                 isBattle = false;
                 weapon.SetActive(false);
+                
             }
         }
 

@@ -9,6 +9,7 @@ TagManager:
   - Resistance
   - Bullet
   - Run
+  - Canvas
   layers:
   - Default
   - TransparentFX
