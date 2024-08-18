@@ -35,6 +35,10 @@ public class Player_Movement : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         DataManager.Instance.Speed = 4f;
+        DataManager.Instance.MaxHealth = 5f;
+        DataManager.Instance.health = DataManager.Instance.MaxHealth;
+
+
         isUsingMap = false;
         isDashing = false;
 
