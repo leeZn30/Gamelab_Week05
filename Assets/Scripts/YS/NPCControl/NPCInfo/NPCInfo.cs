@@ -9,12 +9,14 @@ public struct NPCInfoStatus
     public float health;
     public Vector2 position;
     public Quaternion rotation;
+    public bool isBattle;
 
-    public NPCInfoStatus(float saveHealth, Vector2 savePosition, Quaternion saveRotation)
+    public NPCInfoStatus(float saveHealth, bool saveBattle, Vector2 savePosition, Quaternion saveRotation)
     {
         health = saveHealth;
         position = savePosition;
         rotation = saveRotation;
+        isBattle = saveBattle;
     }
 }
 
@@ -379,7 +381,7 @@ public class NPCInfo : MonoBehaviour, IListener
             switch (EventType)
             {
                 case Event_Type.eSave:
-                    NPCInfoStatus npcInfoStatus = new NPCInfoStatus(health, gameObject.transform.position, gameObject.transform.rotation);
+                    NPCInfoStatus npcInfoStatus = new NPCInfoStatus(health, isBattle, gameObject.transform.position, gameObject.transform.rotation);
                     SaveManager.Instance.saveNpcInfoStatus.Add(npcInfoStatus);
                     saveIndex = SaveManager.Instance.saveNpcInfoStatus.Count - 1;
                     break;
@@ -387,6 +389,11 @@ public class NPCInfo : MonoBehaviour, IListener
                     health = SaveManager.Instance.saveNpcInfoStatus[saveIndex].health;
                     transform.position = SaveManager.Instance.saveNpcInfoStatus[saveIndex].position;
                     transform.rotation = SaveManager.Instance.saveNpcInfoStatus[saveIndex].rotation;
+                    if (SaveManager.Instance.saveNpcInfoStatus[saveIndex].isBattle)
+                    {
+                        isBattle = true;
+                        weapon.SetActive(false);
+                    }
                     break;
             }
         }
