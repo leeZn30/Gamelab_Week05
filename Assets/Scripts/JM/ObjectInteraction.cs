@@ -29,9 +29,8 @@ public class ObjectInteraction : MonoBehaviour, IListener
     public bool notQuest = false;
     public string questName;
     public int saveIndex = -1;
-
+    public bool isDeath = false;
     
-
     void Awake()
     {
         EventManager.Instance.AddListener(Event_Type.eSave, this);
@@ -49,7 +48,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 if (CollectedObject != null)
                 {
                     //Destroy(CollectedObject);
-                    SaveManager.Instance.savedItems.Add(CollectedObject);
+                    SaveManager.Instance.tempDestroyGameObjects.Add(CollectedObject);
                     CollectedObject.SetActive(false);
                     isCollected = true;
                 }
@@ -70,7 +69,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 if (CollectedObject != null)
                 {
                     //Destroy(CollectedObject);
-                    SaveManager.Instance.savedItems.Add(CollectedObject);
+                    SaveManager.Instance.tempDestroyGameObjects.Add(CollectedObject);
                     CollectedObject.SetActive(false);
                     isCollected = true;
                 }
@@ -113,26 +112,32 @@ public class ObjectInteraction : MonoBehaviour, IListener
         switch (EventType)
         {
             case Event_Type.eSave:
-                ObjectInteractionStatus saveItemsStatus = new ObjectInteractionStatus(isCollected, isSend);
-                SaveManager.Instance.saveItemsStatus.Add(saveItemsStatus);
-                saveIndex = SaveManager.Instance.saveItemsStatus.Count - 1;
+                if (!isDeath)
+                {
+                    ObjectInteractionStatus saveItemsStatus = new ObjectInteractionStatus(isCollected, isSend);
+                    SaveManager.Instance.saveItemStatus.Add(saveItemsStatus);
+                    saveIndex = SaveManager.Instance.saveItemStatus.Count - 1;
+                }
                 break;
             case Event_Type.eLoad:
-                if (SaveManager.Instance.saveItemsStatus[saveIndex].isCollected)
+                if (!isDeath)
                 {
-                    isCollected = true;
-                }
-                else
-                {
-                    isCollected = false;
-                }
-                if (SaveManager.Instance.saveItemsStatus[saveIndex].isSend)
-                {
-                    isSend = true;
-                }
-                else
-                {
-                    isSend = false;
+                    if (SaveManager.Instance.saveItemStatus[saveIndex].isCollected)
+                    {
+                        isCollected = true;
+                    }
+                    else
+                    {
+                        isCollected = false;
+                    }
+                    if (SaveManager.Instance.saveItemStatus[saveIndex].isSend)
+                    {
+                        isSend = true;
+                    }
+                    else
+                    {
+                        isSend = false;
+                    }
                 }
                 break;
         }

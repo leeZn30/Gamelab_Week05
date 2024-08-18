@@ -50,7 +50,6 @@ public class EventManager : Singleton<EventManager>
         Listeners.Add(eventType, ListenList);
     }
 
-
     // 이벤트 발생시 해당 이벤트를 받는 리스너에게 알려줌
     public void PostNotification(Event_Type eventType, Component sender, object param = null)
     {
@@ -62,7 +61,9 @@ public class EventManager : Singleton<EventManager>
 
         // 해당 이벤트를 받는 리스너 모두 실행
         for (int i = 0; i < ListenList.Count; i++)
+        {
             ListenList?[i].OnEvent(eventType, sender, param);
+        }
     }
 
     // 더이상 사용하지 않는 이벤트 지우기
@@ -88,5 +89,4 @@ public class EventManager : Singleton<EventManager>
 
         Listeners = newListeners;
     }
-
 }

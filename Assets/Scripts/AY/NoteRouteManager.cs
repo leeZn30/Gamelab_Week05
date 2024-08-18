@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
 public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 {
     [Header("노트 관련")]
@@ -53,11 +52,13 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
         noteUI = GameObject.Find("NoteUI");
         //noteBtn = noteUI.GetComponentInChildren<Button>();
-        noteBtn.onClick.AddListener(() => CloseNote());
+        //noteBtn.onClick.AddListener(() => CloseNote());
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
         EventManager.Instance.AddListener(Event_Type.eNoteQuestDone, this);
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
 
     // 노트를 봤다면 이벤트 실행
@@ -85,7 +86,12 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 break;
 
             case Event_Type.eLoad:
-                currentNoteData = SaveManager.Instance.savedNote;
+                for (int i = currentNoteData.order - 1; i >= SaveManager.Instance.savedNote.order; i--)
+                {
+                    noteDatas[i].isTarget = false;
+                }
+
+                currentNoteData.order = SaveManager.Instance.savedNote.order;
                 break;
         }
     }

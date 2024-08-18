@@ -228,7 +228,7 @@ public class NPCMovement : MonoBehaviour
             {
                 int ran = Random.Range(0, runs.Length);
 
-                targetPosition = runs[ran].transform.position;
+                //targetPosition = runs[ran].transform.position;
             }
 
         }
