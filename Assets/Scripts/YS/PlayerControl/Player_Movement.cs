@@ -199,9 +199,9 @@ public class Player_Movement : MonoBehaviour
         DataManager.Instance.Speed = DataManager.Instance.Speed / 2;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Bullet"))
+        if (collision.transform.CompareTag("Bullet"))
         {
             isDamaged = true;
             DataManager.Instance.Health--;
