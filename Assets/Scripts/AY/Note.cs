@@ -12,12 +12,12 @@ public class Note : MonoBehaviour
     [Header("기타")]
     [SerializeField] GameObject interactionUI; // E 키 UI (플레이어의 자식 오브젝트로 설정된 UI)
     private bool isPlayerInRange = false; // 플레이어가 NPC 근처에 있는지 확인
+    public bool isEnd = false;
 
     void Start()
     {
         // note
         noteData = NoteRouteManager.Instance.noteDatas.Find(e => e.noteID == gameObject.name);
-
         interactionUI.SetActive(false);
     }
 
@@ -58,7 +58,7 @@ public class Note : MonoBehaviour
         EventManager.Instance.PostNotification(Event_Type.eNoteRead, this, noteData);
 
         // 삭제
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
 }
