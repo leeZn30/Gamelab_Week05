@@ -40,6 +40,5 @@ public class QuestData
         questID = id;
         description = desc;
     }
-
 }
 
