@@ -20,33 +20,40 @@ public struct NPCInfoStatus
 
 public class NPCInfo : MonoBehaviour, IListener
 {
-    [Header("NPC Type")] public bool questNPC;
-
+    [Header("NPC Type")] 
+    public bool questNPC;
     public int EnemyID;
     private int hitTime;
     public int side;
     public string type;
+    private Vector2 startPos;
 
-    [Header("NPC HP")] public float health;
+    [Header("NPC HP")] 
+    public float health;
     public float maxHealth;
 
-    [Header("NPC Attack")] public GameObject weapon;
+    [Header("NPC Attack")] 
+    public GameObject weapon;
     public float damage;
     public float attackRange;
     public float attackSpeed;
 
-    [Header("NPC Aim")] public GameObject target;
+    [Header("NPC Aim")] 
+    public GameObject target;
 
-    [Header("NPC State")] public bool isPatrol;
+    [Header("NPC State")] 
+    public bool isPatrol;
     public bool isBattle;
     public int state;
 
-    [Header("Finding Target")] int num = 0;
+    [Header("Finding Target")] 
+    int num = 0;
     float distance;
     float minDis = 50;
 
 
-    [Header("Check Battle")] public float radius = 5f;
+    [Header("Check Battle")] 
+    public float radius = 5f;
     public LayerMask layerMask;
     public float resetDistance;
 
@@ -69,6 +76,7 @@ public class NPCInfo : MonoBehaviour, IListener
 
     private void Start()
     {
+        startPos = transform.position;
         damaged.SetActive(false);
 
         if (weapon != null)
@@ -95,11 +103,15 @@ public class NPCInfo : MonoBehaviour, IListener
 
         if (isBattle)
         {
-            if (distaance > resetDistance &&
-                (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
+            if (distaance > resetDistance) //&& (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
             {
+                if (questNPC)
+                {
+                    GetComponent<NPCMovement>().targetPosition = startPos;
+                }
                 isBattle = false;
                 weapon.SetActive(false);
+                
             }
         }
 
@@ -138,7 +150,7 @@ public class NPCInfo : MonoBehaviour, IListener
             }
 
         }
-
+        /*
         if (!questNPC)
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
@@ -159,13 +171,9 @@ public class NPCInfo : MonoBehaviour, IListener
                 }
             }
         }
+        */
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
-    }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
