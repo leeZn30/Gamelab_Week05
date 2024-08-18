@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RevoltQuest2
   m_EditorClassIdentifier: 
   questName: RevoltQuest2
-  description: "\uAD50\uC8FC\uC758 \uBC29\uC5D0\uC11C \uC77C\uAE30 \uD6D4\uCE58\uAE30"
+  description: "\uAD50\uC8FC\uC758 \uC77C\uC9C0 \uCC3E\uC544\uC11C \uD6D4\uCE58\uAE30"
   returnNPC: 0
   KillEnemies: 0
   ReachLocation: 0

@@ -16,11 +16,11 @@ MonoBehaviour:
   description: "\uC804\uAE30\uC2E4\uC5D0 \uD3ED\uD0C4 \uC124\uCE58\uD558\uAE30"
   returnNPC: 1
   KillEnemies: 0
-  ReachLocation: 1
-  ReachItem: 0
+  ReachLocation: 0
+  ReachItem: 1
   ReachNPC: 0
-  isCompleted: 0
-  isActived: 0
+  isCompleted: 1
+  isActived: 1
   eventType: 0
   targetObject: "\uC804\uAE30\uC2E4"
   targetEnemyID: 0
