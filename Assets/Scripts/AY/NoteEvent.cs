@@ -19,7 +19,7 @@ public class NoteEvent : MonoBehaviour
     public int dialogueId1; // 대사 ID, 이 NPC가 말할 대사를 지정
 
     [Header("Event2")]
-    public GameObject event2Door;
+    public DoorInteraction event2Door;
     public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
 
     [Header("Event3")]
@@ -114,7 +114,7 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event2()
     {
         // 문 닫음
-        event2Door.SetActive(true);
+        event2Door.CloseDoor();
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
@@ -131,7 +131,7 @@ public class NoteEvent : MonoBehaviour
         yield return new WaitUntil(() => enemies.All(e => e == null));
 
         // 문 엶
-        event2Door.SetActive(false);
+        event2Door.OpenDoor();
     }
 
     IEnumerator Event4()

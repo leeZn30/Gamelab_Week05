@@ -61,6 +61,28 @@ public class RevoltEvent : MonoBehaviour
         Debug.Log("End Revolt Event");
     }
 
+    public IEnumerator DoEvent(Action onComplete, QuestSO questSO)
+    {
+        Debug.Log("Start Revolt Event");
+
+        switch (questSO.questName)
+        {
+            case "RevoltQuest2":
+                yield return StartCoroutine(Event2());
+                break;
+
+            case "RevoltQuest67":
+                yield return StartCoroutine(Event67());
+                break;
+
+            case "RevoltLastQuest": // last
+                break;
+        }
+
+        onComplete?.Invoke();
+        Debug.Log("End Revolt Event");
+    }
+
     IEnumerator Event1()
     {
         // npc 생성함
@@ -106,6 +128,12 @@ public class RevoltEvent : MonoBehaviour
     }
 
     IEnumerator Event34()
+    {
+        // 할머니 끌고감 (이거 겹치면 쪽지루트랑 겹치면 쪽지루트 우선)
+
+        yield return null;
+    }
+    IEnumerator RevoltGrandma()
     {
         // 할머니 끌고감 (이거 겹치면 쪽지루트랑 겹치면 쪽지루트 우선)
 
