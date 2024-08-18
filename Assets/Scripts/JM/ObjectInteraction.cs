@@ -1,6 +1,18 @@
 using UnityEngine;
 using System.Data.Common;
 
+public struct ObjectInteractionStatus
+{
+    public bool isCollected;
+    public bool isSend;
+
+    public ObjectInteractionStatus(bool collected, bool send)
+    {
+        isCollected = collected;
+        isSend = send;
+    }
+}
+
 public class ObjectInteraction : MonoBehaviour, IListener
 {
     public GameObject interactionUI;
@@ -17,6 +29,8 @@ public class ObjectInteraction : MonoBehaviour, IListener
     public bool notQuest = false;
     public string questName;
     public int saveIndex = -1;
+
+    
 
     void Awake()
     {
@@ -36,7 +50,6 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 {
                     //Destroy(CollectedObject);
                     SaveManager.Instance.savedItems.Add(CollectedObject);
-                    SaveManager.Instance.saveItemsScript.Add(this);
                     CollectedObject.SetActive(false);
                     isCollected = true;
                 }
@@ -52,10 +65,16 @@ public class ObjectInteraction : MonoBehaviour, IListener
             }
             else if (notQuest)
             {
-                SaveManager.Instance.savedItems.Add(CollectedObject);
-                SaveManager.Instance.saveItemsScript.Add(this);
-                CollectedObject.SetActive(false);
-                isCollected = true;
+                DialogueManager.Instance.SetDialogueID(dialogueId);
+                isSend = true;
+                if (CollectedObject != null)
+                {
+                    //Destroy(CollectedObject);
+                    SaveManager.Instance.savedItems.Add(CollectedObject);
+                    CollectedObject.SetActive(false);
+                    isCollected = true;
+                }
+                
             }
         }
     }
@@ -94,11 +113,12 @@ public class ObjectInteraction : MonoBehaviour, IListener
         switch (EventType)
         {
             case Event_Type.eSave:
-                SaveManager.Instance.saveItemsScript.Add(this);
-                saveIndex = SaveManager.Instance.saveItemsScript.Count - 1;
+                ObjectInteractionStatus saveItemsStatus = new ObjectInteractionStatus(isCollected, isSend);
+                SaveManager.Instance.saveItemsStatus.Add(saveItemsStatus);
+                saveIndex = SaveManager.Instance.saveItemsStatus.Count - 1;
                 break;
             case Event_Type.eLoad:
-                if (SaveManager.Instance.saveItemsScript[saveIndex].isCollected)
+                if (SaveManager.Instance.saveItemsStatus[saveIndex].isCollected)
                 {
                     isCollected = true;
                 }
@@ -106,7 +126,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 {
                     isCollected = false;
                 }
-                if (SaveManager.Instance.saveItemsScript[saveIndex].isSend)
+                if (SaveManager.Instance.saveItemsStatus[saveIndex].isSend)
                 {
                     isSend = true;
                 }
