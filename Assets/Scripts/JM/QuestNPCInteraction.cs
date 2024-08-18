@@ -65,6 +65,12 @@ public class QuestNPCInteraction : MonoBehaviour
             int dialogueId = GetDialogueIdBasedOnQuestState();
             DialogueManager.Instance.SetDialogueID(dialogueId);
             isSend = true;
+
+            // 말걸면 열쇠 얻게 하는 반란군 퀘스트를 위한 코드(하드코딩..)
+            if (GetComponentInChildren<ObjectInteraction>() != null)
+            {
+                GetComponentInChildren<ObjectInteraction>().isCollected = true;
+            }
         }
     }
 
