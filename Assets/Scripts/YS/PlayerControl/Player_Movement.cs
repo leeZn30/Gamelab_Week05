@@ -30,6 +30,9 @@ public class Player_Movement : MonoBehaviour
     public AudioClip dashSound;
 
 
+    public float radius = 5f;
+    public LayerMask layerMask;
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Start()
@@ -74,10 +77,36 @@ public class Player_Movement : MonoBehaviour
             // Check Player Life
             PlayerDeath();
 
+
+
+            
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
+
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                if (hitColliders[i].CompareTag("Cult"))
+                {
+                    if (DataManager.Instance.playerState == "Battle")
+                    {
+                        if (!hitColliders[i].GetComponent<NPCInfo>().questNPC)
+                        {
+                            hitColliders[i].GetComponent<NPCInfo>().isBattle = true;
+                        }
+                    }
+                }
+            }
+            
+
+
         }
 
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

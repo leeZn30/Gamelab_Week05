@@ -49,6 +49,7 @@ public class NPCMovement : MonoBehaviour
 
     void Start()
     {
+
         walls = GameObject.FindGameObjectsWithTag("Wall");
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -74,14 +75,17 @@ public class NPCMovement : MonoBehaviour
 
         if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
         {
-            currentState = NPCState.Run;
+            if (!GetComponent<NPCInfo>().questNPC)
+            {
+                currentState = NPCState.Run;
 
-            GetComponent<NPCInfo>().isPatrol = false;
-            Behave();
+                GetComponent<NPCInfo>().isPatrol = false;
+                Behave();
+            }
         }
 
 
-        if (GetComponent<NPCInfo>().isBattle && currentState != NPCState.Run)
+        if (GetComponent<NPCInfo>().isBattle)
         {
             if (GetComponent<NPCInfo>().target != null)
             {
@@ -231,20 +235,8 @@ public class NPCMovement : MonoBehaviour
         {
             if (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position) < 2f)
             {
-                int num = 0;
-                float distance = 0; 
 
-                for(int i = 0; i< runs.Length; i++)
-                {
-                    int ran = Random.Range(0, runs.Length);
-                    if (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, runs[i].transform.position) > distance)
-                    {
-                        distance = Vector2.Distance(GameObject.FindWithTag("Player").transform.position, runs[i].transform.position);
-                        num = i;
-                    }
-                }
-
-                targetPosition = runs[num].transform.position;
+                targetPosition = runs[Random.Range(0, runs.Length)].transform.position;
 
             }
 

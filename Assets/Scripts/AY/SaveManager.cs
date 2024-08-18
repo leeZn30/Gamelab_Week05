@@ -9,7 +9,9 @@ public class SaveManager : Singleton<SaveManager>
     public List<NPCInfoStatus> saveNpcInfoStatus = new List<NPCInfoStatus>();
     public List<NPCInteractionStatus> saveNPCInteractionStatus = new List<NPCInteractionStatus>();
     public List<QuestNPCInteractionStatus> saveQuestNPCInteractionStatus = new List<QuestNPCInteractionStatus>();
-    
+    public List<QuestManagerStatus> saveQuestManagerStatus = new List<QuestManagerStatus>();
+
+
 
     public List<GameObject> tempDestroyGameObjects = new List<GameObject>();
     public List<GameObject> tempNPCDestroy = new List<GameObject>();
