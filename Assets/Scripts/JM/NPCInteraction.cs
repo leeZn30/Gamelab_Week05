@@ -15,6 +15,7 @@ public class NPCInteraction : MonoBehaviour
     {
         if (interactionUI != null)
         {
+
             interactionUI.SetActive(false);
         }
     }
