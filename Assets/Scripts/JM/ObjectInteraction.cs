@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Data.Common;
 
-public class ObjectInteraction : MonoBehaviour
+public class ObjectInteraction : MonoBehaviour, IListener
 {
     public GameObject interactionUI;
 
@@ -18,6 +18,12 @@ public class ObjectInteraction : MonoBehaviour
     public string questName;
     public int saveIndex = -1;
 
+    void Awake()
+    {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
+    }
+
     void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
@@ -29,9 +35,9 @@ public class ObjectInteraction : MonoBehaviour
                 if (CollectedObject != null)
                 {
                     //Destroy(CollectedObject);
-                    SaveManager.Instance.savedItems.Add(gameObject);
+                    SaveManager.Instance.savedItems.Add(CollectedObject);
                     SaveManager.Instance.saveItemsScript.Add(this);
-                    gameObject.SetActive(false);
+                    CollectedObject.SetActive(false);
                     isCollected = true;
                 }
                 QuestManager tempQuestManager = QuestManager.Instance;
@@ -45,9 +51,9 @@ public class ObjectInteraction : MonoBehaviour
                 }
             }else if (notQuest)
             {
-                SaveManager.Instance.savedItems.Add(gameObject);
+                SaveManager.Instance.savedItems.Add(CollectedObject);
                 SaveManager.Instance.saveItemsScript.Add(this);
-                gameObject.SetActive(false);
+                CollectedObject.SetActive(false);
                 isCollected = true;
             }
         }
@@ -80,5 +86,34 @@ public class ObjectInteraction : MonoBehaviour
     public bool IsPlayerInRange()
     {
         return isPlayerInRange;
+    }
+
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                SaveManager.Instance.saveItemsScript.Add(this);
+                saveIndex = SaveManager.Instance.saveItemsScript.Count - 1;
+                break;
+            case Event_Type.eLoad:
+                if (SaveManager.Instance.saveItemsScript[saveIndex].isCollected)
+                {
+                    isCollected = true;
+                }
+                else
+                {
+                    isCollected = false;
+                }
+                if (SaveManager.Instance.saveItemsScript[saveIndex].isSend)
+                {
+                    isSend = true;
+                }
+                else
+                {
+                    isSend = false;
+                }
+                break;
+        }
     }
 }
