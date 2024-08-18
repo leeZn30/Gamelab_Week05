@@ -457,6 +457,8 @@ MonoBehaviour:
   interactionUI: {fileID: 128865448450425839}
   isActive: 0
   targetQuest: 
+  isDeath: 0
+  saveIndex: -1
 --- !u!61 &6080178620537599826
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -597,10 +599,12 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  resetDistance: 0
+  resetDistance: 10
   damaged: {fileID: 3566947697411604384}
   distaance: 0
   blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
+  saveIndex: -1
+  isDeath: 0
 --- !u!114 &8300507761734393550
 MonoBehaviour:
   m_ObjectHideFlags: 0

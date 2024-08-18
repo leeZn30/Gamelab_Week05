@@ -16400,11 +16400,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2130868031}
     m_Modifications:
-    - target: {fileID: 2252081558018317218, guid: 14e44d9b59e840f4ba8d4f7ac0123b69,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6884533111306058337, guid: 14e44d9b59e840f4ba8d4f7ac0123b69,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19644,7 +19639,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -30348,11 +30343,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2130868031}
     m_Modifications:
-    - target: {fileID: 2252081558018317218, guid: 14e44d9b59e840f4ba8d4f7ac0123b69,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6884533111306058337, guid: 14e44d9b59e840f4ba8d4f7ac0123b69,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31050,6 +31040,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 549003525362325391, guid: 0468a3651e3a21e4dace2e7ead3923a5,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2726966968575543964, guid: 0468a3651e3a21e4dace2e7ead3923a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31135,13 +31130,35 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.19109392
       objectReference: {fileID: 0}
+    - target: {fileID: 6696586765927110286, guid: 0468a3651e3a21e4dace2e7ead3923a5,
+        type: 3}
+      propertyPath: maxAmmoUI
+      value: 
+      objectReference: {fileID: 6647072875433392766}
+    - target: {fileID: 7015169060742255566, guid: 0468a3651e3a21e4dace2e7ead3923a5,
+        type: 3}
+      propertyPath: maxAmmoUI
+      value: 
+      objectReference: {fileID: 6647072875433392766}
     - target: {fileID: 7335465811959261400, guid: 0468a3651e3a21e4dace2e7ead3923a5,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 8208399311207262314, guid: 0468a3651e3a21e4dace2e7ead3923a5,
+        type: 3}
+      propertyPath: playerGun.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006120239145358835, guid: 0468a3651e3a21e4dace2e7ead3923a5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Sword
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8986050250268485284, guid: 0468a3651e3a21e4dace2e7ead3923a5, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 1994446735516245778, guid: 0468a3651e3a21e4dace2e7ead3923a5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0468a3651e3a21e4dace2e7ead3923a5, type: 3}

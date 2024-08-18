@@ -32,6 +32,7 @@ public class MoveManager : MonoBehaviour
 
     public int point;
 
+    /*
     //플레이어 위치까지의 길 찾기
     public void PathFindingToPlayer(Vector2Int pos)
     {
@@ -138,7 +139,10 @@ public class MoveManager : MonoBehaviour
         }
     }
 
-    //랜덤위치에 관한 길 찾기
+    */
+
+
+    //랜덤위치에 관한 길 찾기-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public void PathFindingToTargetPos(Vector2Int pos)
     {
 
@@ -174,57 +178,64 @@ public class MoveManager : MonoBehaviour
 
         // 시작과 끝 노드, 열린리스트와 닫힌리스트, 마지막리스트 초기화
         StartNode = NodeArray[startPos.x - bottomLeft.x, startPos.y - bottomLeft.y];
-        TargetNode = NodeArray[targetPos.x - bottomLeft.x, targetPos.y - bottomLeft.y];
-
-        OpenList = new List<Node>() { StartNode };
-        ClosedList = new List<Node>();
-        FinalNodeList = new List<Node>();
-
-        float distance = Vector2.Distance(new Vector2(StartNode.x, StartNode.y), new Vector2(TargetNode.x, TargetNode.y));
-            
-        while (OpenList.Count > 0)
+        if (Vector2.Distance(startPos, targetPos) < 20)
         {
-            // 열린리스트 중 가장 F가 작고 F가 같다면 H가 작은 걸 현재노드로 하고 열린리스트에서 닫힌리스트로 옮기기
-            CurNode = OpenList[0];
-            for (int i = 1; i < OpenList.Count; i++)
-                if (OpenList[i].F <= CurNode.F && OpenList[i].H < CurNode.H) CurNode = OpenList[i];
+            TargetNode = NodeArray[targetPos.x - bottomLeft.x, targetPos.y - bottomLeft.y];
 
-            OpenList.Remove(CurNode);
-            ClosedList.Add(CurNode);
+            OpenList = new List<Node>() { StartNode };
+            ClosedList = new List<Node>();
+            FinalNodeList = new List<Node>();
 
-            // 마지막
-            if (CurNode == TargetNode)
+            float distance = Vector2.Distance(new Vector2(StartNode.x, StartNode.y), new Vector2(TargetNode.x, TargetNode.y));
+            if (distance < 20)
             {
-
-                Node TargetCurNode = TargetNode;
-                while (TargetCurNode != StartNode)
+                while (OpenList.Count > 0)
                 {
-                    FinalNodeList.Add(TargetCurNode);
-                    TargetCurNode = TargetCurNode.ParentNode;
+                    // 열린리스트 중 가장 F가 작고 F가 같다면 H가 작은 걸 현재노드로 하고 열린리스트에서 닫힌리스트로 옮기기
+                    CurNode = OpenList[0];
+                    for (int i = 1; i < OpenList.Count; i++)
+                        if (OpenList[i].F <= CurNode.F && OpenList[i].H < CurNode.H) CurNode = OpenList[i];
+
+                    OpenList.Remove(CurNode);
+                    ClosedList.Add(CurNode);
+
+                    // 마지막
+                    if (CurNode == TargetNode)
+                    {
+
+                        Node TargetCurNode = TargetNode;
+                        while (TargetCurNode != StartNode)
+                        {
+                            FinalNodeList.Add(TargetCurNode);
+                            TargetCurNode = TargetCurNode.ParentNode;
+                        }
+                        FinalNodeList.Add(StartNode);
+                        FinalNodeList.Reverse();
+
+                        return;
+                    }
+
+
+                    // ↗↖↙↘
+                    if (allowDiagonal)
+                    {
+                        OpenListAdd(CurNode.x + 1, CurNode.y + 1);
+                        OpenListAdd(CurNode.x - 1, CurNode.y + 1);
+                        OpenListAdd(CurNode.x - 1, CurNode.y - 1);
+                        OpenListAdd(CurNode.x + 1, CurNode.y - 1);
+                    }
+
+                    // ↑ → ↓ ←
+                    OpenListAdd(CurNode.x, CurNode.y + 1);
+                    OpenListAdd(CurNode.x + 1, CurNode.y);
+                    OpenListAdd(CurNode.x, CurNode.y - 1);
+                    OpenListAdd(CurNode.x - 1, CurNode.y);
                 }
-                FinalNodeList.Add(StartNode);
-                FinalNodeList.Reverse();
 
-                return;
             }
 
 
-            // ↗↖↙↘
-            if (allowDiagonal)
-            {
-                OpenListAdd(CurNode.x + 1, CurNode.y + 1);
-                OpenListAdd(CurNode.x - 1, CurNode.y + 1);
-                OpenListAdd(CurNode.x - 1, CurNode.y - 1);
-                OpenListAdd(CurNode.x + 1, CurNode.y - 1);
-            }
-
-            // ↑ → ↓ ←
-            OpenListAdd(CurNode.x, CurNode.y + 1);
-            OpenListAdd(CurNode.x + 1, CurNode.y);
-            OpenListAdd(CurNode.x, CurNode.y - 1);
-            OpenListAdd(CurNode.x - 1, CurNode.y);
         }
-        
     }
 
 

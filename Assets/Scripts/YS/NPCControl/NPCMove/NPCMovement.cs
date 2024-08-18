@@ -40,7 +40,7 @@ public class NPCMovement : MonoBehaviour
     [Header("Target")]
     public bool idleStop;
 
-    private float moveSpeed;
+    public float moveSpeed;
     private bool canTalk;
 
     float distanceToTarget;
@@ -130,6 +130,7 @@ public class NPCMovement : MonoBehaviour
         {
             distanceToTarget = Vector3.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position);
         }
+
         if (GetComponent<NPCInfo>().isBattle)
         {
             if (distanceToTarget < fleeDistance)
@@ -144,10 +145,12 @@ public class NPCMovement : MonoBehaviour
             {
                 currentState = NPCState.Wander;
             }
+            
             if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
             {
                 currentState = NPCState.Battle;
             }
+            
         }
         else if (!GetComponent<NPCInfo>().isBattle)
         {
@@ -381,7 +384,7 @@ public class NPCMovement : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.8f);
-
+            Debug.Log("PathFinding");
             GetComponent<MoveManager>().PathFindingToTargetPos(targetPos);
             
         }
