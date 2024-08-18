@@ -43,7 +43,8 @@ public class ObjectInteraction : MonoBehaviour
                 {
                     tempQuestManager.OnQuestClear(questName);
                 }
-            }else if (notQuest)
+            }
+            else if (notQuest)
             {
                 SaveManager.Instance.savedItems.Add(gameObject);
                 SaveManager.Instance.saveItemsScript.Add(this);

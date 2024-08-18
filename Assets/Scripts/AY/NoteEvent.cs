@@ -101,6 +101,10 @@ public class NoteEvent : MonoBehaviour
     {
         // npc 생성함
         GameObject go = Instantiate(resistance, player.transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        if (player.transform.position.x - go.transform.position.x <= 0)
+        {
+            go.GetComponent<SpriteRenderer>().flipX = true;
+        }
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId1);
