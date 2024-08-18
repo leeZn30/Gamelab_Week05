@@ -37,7 +37,8 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 
                 // 다음 순서 NPC 활성화
                 currentNPCOrder++;
-                QuestNPCs[currentNPCOrder].gameObject.SetActive(true);
+                // QuestNPCs[currentNPCOrder].gameObject.SetActive(true);
+                QuestNPCs.Find(e => e.order == currentNPCOrder).gameObject.SetActive(true);
                 break;
         }
     }
