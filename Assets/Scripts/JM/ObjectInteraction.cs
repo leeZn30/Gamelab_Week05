@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Data.Common;
 
-public class ObjectInteraction : MonoBehaviour, IListener
+public class ObjectInteraction : MonoBehaviour
 {
     public GameObject interactionUI;
 
@@ -14,9 +14,9 @@ public class ObjectInteraction : MonoBehaviour, IListener
 
     public bool isCollected = false;
     public bool isQuest = false;
+    public bool notQuest = false;
     public string questName;
     public int saveIndex = -1;
-
 
     void Update()
     {
@@ -26,10 +26,12 @@ public class ObjectInteraction : MonoBehaviour, IListener
             {
                 DialogueManager.Instance.SetDialogueID(dialogueId);
                 isSend = true;
-                Debug.Log("다이어리 실행됨");
                 if (CollectedObject != null)
                 {
-                    Destroy(CollectedObject);
+                    //Destroy(CollectedObject);
+                    SaveManager.Instance.savedItems.Add(gameObject);
+                    SaveManager.Instance.saveItemsScript.Add(this);
+                    gameObject.SetActive(false);
                     isCollected = true;
                 }
                 QuestManager tempQuestManager = QuestManager.Instance;
@@ -41,6 +43,12 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 {
                     tempQuestManager.OnQuestClear(questName);
                 }
+            }else if (notQuest)
+            {
+                SaveManager.Instance.savedItems.Add(gameObject);
+                SaveManager.Instance.saveItemsScript.Add(this);
+                gameObject.SetActive(false);
+                isCollected = true;
             }
         }
     }
@@ -72,24 +80,5 @@ public class ObjectInteraction : MonoBehaviour, IListener
     public bool IsPlayerInRange()
     {
         return isPlayerInRange;
-    }
-
-    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
-    {
-        switch (EventType)
-        {
-            case Event_Type.eSave:
-                SaveManager.Instance.savedItems.Add(this);
-                saveIndex = SaveManager.Instance.savedDoors.Count - 1;
-                break;
-            case Event_Type.eLoad:
-                if (SaveManager.Instance.savedItems[saveIndex].isCollected)
-                {
-                    Destroy(CollectedObject);
-                    isCollected = true;
-                    isSend = true;
-                }
-                break;
-        }
     }
 }
