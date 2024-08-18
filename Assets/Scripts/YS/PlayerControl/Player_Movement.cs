@@ -76,10 +76,6 @@ public class Player_Movement : MonoBehaviour
 
         }
 
-        if(DataManager.Instance.playerState == "Battle" && !isDamaged)
-        {
-            DataManager.Instance.playerState = "Idle";
-        }
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------

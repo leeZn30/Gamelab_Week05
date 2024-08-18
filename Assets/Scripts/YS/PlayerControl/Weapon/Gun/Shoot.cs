@@ -27,8 +27,8 @@ public class Shoot : MonoBehaviour
     public AudioClip AudioClip;
 
     private BulletUIManager bulletUIManager;
-    private TextMeshProUGUI maxAmmoUI;
 
+    [SerializeField] TextMeshProUGUI maxAmmoUI;
 
     private void Start()
     {
@@ -39,11 +39,12 @@ public class Shoot : MonoBehaviour
     private void OnEnable()
     {
         DataManager.Instance.BulletCount = 20;
+        maxAmmo = DataManager.Instance.BulletCount * 5;
         isReloading = false;
         shooting = false;
 
         gunsound = GetComponent<AudioSource>();
-        bulletUIManager = GameObject.Find("Battle_Ui").transform.GetComponentInChildren<BulletUIManager>();
+        bulletUIManager = GameObject.FindWithTag("Canvas").transform.Find("BattleUI").transform.GetComponentInChildren<BulletUIManager>();
         rotation = GameObject.FindWithTag("Player").transform.Find("PlayerGunRotatePos").gameObject;
         StartCoroutine(ShootDelay());
 
@@ -54,7 +55,7 @@ public class Shoot : MonoBehaviour
             first = false;
         }
 
-        maxAmmoUI = GameObject.Find("Battle_Ui").transform.Find("MaxBullet_UI").transform.GetComponent<TextMeshProUGUI>();
+        //maxAmmoUI = GameObject.FindWithTag("Canvas").transform.Find("Battle_Ui").transform.Find("MaxBullet_UI").transform.GetComponent<TextMeshProUGUI>();
         maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
     }
     // Update is called once per frame
@@ -69,7 +70,11 @@ public class Shoot : MonoBehaviour
                 currentAmmo--;
                 leftAmmo--;
 
-                maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
+                if (maxAmmoUI != null)
+                {
+                    maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
+                }
+
 
                 gunsound.PlayOneShot(AudioClip);
                 shootTime = 0;
