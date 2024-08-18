@@ -40,7 +40,7 @@ public class NPCInteraction : MonoBehaviour, IListener
         EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {

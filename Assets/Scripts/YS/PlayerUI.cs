@@ -12,6 +12,13 @@ public class PlayerUI : MonoBehaviour
 
     private GameObject battleUI;
 
+    void Awake()
+    {
+        battleUI = GameObject.Find("BattleUI");
+        healthUIManager = battleUI.GetComponentInChildren<HealthUIManager>();
+        PlayerGunUI = battleUI.transform.Find("SkillCoolDown").gameObject;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +28,6 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        battleUI = GameObject.FindWithTag("Canvas").transform.Find("BattleUI").gameObject;
-        healthUIManager = GameObject.FindWithTag("Canvas").transform.Find("BattleUI").transform.GetComponentInChildren<HealthUIManager>();
-        PlayerGunUI = battleUI.transform.Find("SkillCoolDown").gameObject;
-
         if (DataManager.Instance.playerState == "Battle")
         {
             if (battleUI != null)

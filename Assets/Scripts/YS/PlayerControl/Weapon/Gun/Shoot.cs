@@ -44,7 +44,7 @@ public class Shoot : MonoBehaviour
         shooting = false;
 
         gunsound = GetComponent<AudioSource>();
-        bulletUIManager = GameObject.FindWithTag("Canvas").transform.Find("BattleUI").transform.GetComponentInChildren<BulletUIManager>();
+        bulletUIManager = GameObject.Find("BattleUI").transform.GetComponentInChildren<BulletUIManager>();
         rotation = GameObject.FindWithTag("Player").transform.Find("PlayerGunRotatePos").gameObject;
         StartCoroutine(ShootDelay());
 
@@ -156,5 +156,5 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    
+
 }
