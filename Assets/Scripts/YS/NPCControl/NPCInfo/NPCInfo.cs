@@ -44,6 +44,10 @@ public class NPCInfo : MonoBehaviour
     public float resetDistance;
 
 
+    [Header("Damaged")]
+    public GameObject damaged;
+
+
     public float distaance;
     public GameObject blood;
 
@@ -51,6 +55,8 @@ public class NPCInfo : MonoBehaviour
 
     private void Start()
     {
+        damaged.SetActive(false);
+
         if (weapon != null)
         {
             weapon.SetActive(false);
@@ -72,6 +78,16 @@ public class NPCInfo : MonoBehaviour
         BattleCheck();
 
         distaance = Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
+        
+        if (isBattle)
+        {
+            if (distaance > resetDistance && (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
+            {
+                isBattle = false;
+                weapon.SetActive(false);
+            }
+        }
+        
 
         DeathCheck();
 
@@ -108,7 +124,7 @@ public class NPCInfo : MonoBehaviour
 
         }
 
-        if (questNPC)
+        if (!questNPC)
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
 
@@ -121,21 +137,11 @@ public class NPCInfo : MonoBehaviour
                         if (weapon != null && !questNPC)
                         {
                             Debug.Log("PlayerIN");
-                            isBattle = true;
-                            weapon.SetActive(true);
+                            StartCoroutine(DamagedDelay());
                         }
 
                     }
                 }
-            }
-        }
-
-        if (isBattle)
-        {
-            if (distaance > resetDistance)
-            {
-                isBattle = false;
-                weapon.SetActive(false);
             }
         }
     }
@@ -295,22 +301,32 @@ public class NPCInfo : MonoBehaviour
 
             if (weapon != null && !questNPC)
             {
-                isBattle = true;
-                weapon.SetActive(true);
+                StartCoroutine(DamagedDelay());
             }
 
 
-            if (questNPC)
+            if (weapon != null && questNPC)
             {
                 hitTime++;
 
                 if(hitTime >= 5)
                 {
-                    isBattle = true;
-                    weapon.SetActive(true);
+                    StartCoroutine(DamagedDelay());
                 }
             }
 
+        }
+    }
+
+    IEnumerator DamagedDelay()
+    {
+        if (damaged != null)
+        {
+            damaged.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            isBattle = true;
+            weapon.SetActive(true);
+            damaged.SetActive(false);
         }
     }
 

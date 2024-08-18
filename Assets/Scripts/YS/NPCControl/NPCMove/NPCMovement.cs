@@ -65,28 +65,23 @@ public class NPCMovement : MonoBehaviour
 
         if (GetComponent<NPCInfo>().isPatrol)
         {   
-            /*
             currentState = NPCState.Patrol;
-            if (transform.position == targetPosition)
-            {
-                Behave();
-            }
-            */
+
+            Behave();
         }
+
         if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
         {
             currentState = NPCState.Run;
         }
+
+
         if (GetComponent<NPCInfo>().isBattle)
         {
             if (GetComponent<NPCInfo>().target != null)
             {
                 ChangeState();
             }
-            Behave();
-        }
-        else
-        {
             Behave();
         }
 
@@ -141,8 +136,7 @@ public class NPCMovement : MonoBehaviour
                 currentState = NPCState.Battle;
             }
         }
-
-        if (!GetComponent<NPCInfo>().isBattle)
+        else if (!GetComponent<NPCInfo>().isBattle)
         {
             currentState = NPCState.Idle;
             canTalk = true;
@@ -246,22 +240,25 @@ public class NPCMovement : MonoBehaviour
     
     void PatrolIndexChange()
     {
-        if (patrolIndex == PatrolLocation.Count-1)
+        if (Vector2.Distance(transform.position ,PatrolLocation[patrolIndex]) < 1)
         {
-            patWhat = false; 
-        }
-        else if(patrolIndex == 0)
-        {
-            patWhat = true;
-        }
+            if (patrolIndex == PatrolLocation.Count - 1)
+            {
+                patWhat = false;
+            }
+            else if (patrolIndex == 0)
+            {
+                patWhat = true;
+            }
 
-        if (patWhat)
-        {
-            patrolIndex++;
-        }
-        else
-        {
-            patrolIndex--;
+            if (patWhat)
+            {
+                patrolIndex++;
+            }
+            else
+            {
+                patrolIndex--;
+            }
         }
     }
 
@@ -295,7 +292,7 @@ public class NPCMovement : MonoBehaviour
                 Right();
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 2 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 3 * Time.deltaTime);
 
             // 목표 지점에 도달하면 리스트에서 해당 노드를 제거
             if ((Vector2)transform.position == targetPosition)
