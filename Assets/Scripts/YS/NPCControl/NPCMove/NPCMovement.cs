@@ -40,6 +40,7 @@ public class NPCMovement : MonoBehaviour
     [Header("Target")]
     public bool idleStop;
 
+    private float moveSpeed;
     private bool canTalk;
 
     float distanceToTarget;
@@ -60,6 +61,7 @@ public class NPCMovement : MonoBehaviour
 
     void Update()
     {
+        moveSpeed = 3;
         FindWall();
 
 
@@ -73,10 +75,13 @@ public class NPCMovement : MonoBehaviour
         if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
         {
             currentState = NPCState.Run;
+
+            GetComponent<NPCInfo>().isPatrol = false;
+            Behave();
         }
 
 
-        if (GetComponent<NPCInfo>().isBattle)
+        if (GetComponent<NPCInfo>().isBattle && currentState != NPCState.Run)
         {
             if (GetComponent<NPCInfo>().target != null)
             {
@@ -221,14 +226,26 @@ public class NPCMovement : MonoBehaviour
     void Run()
     {
         GameObject[] runs = GameObject.FindGameObjectsWithTag("Run");
-
+        moveSpeed = 5;
         if(runs != null)
         {
-            if (GetComponent<NPCInfo>().side == 1)
+            if (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position) < 2f)
             {
-                int ran = Random.Range(0, runs.Length);
+                int num = 0;
+                float distance = 0; 
 
-                targetPosition = runs[ran].transform.position;
+                for(int i = 0; i< runs.Length; i++)
+                {
+                    int ran = Random.Range(0, runs.Length);
+                    if (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, runs[i].transform.position) > distance)
+                    {
+                        distance = Vector2.Distance(GameObject.FindWithTag("Player").transform.position, runs[i].transform.position);
+                        num = i;
+                    }
+                }
+
+                targetPosition = runs[num].transform.position;
+
             }
 
         }
@@ -296,7 +313,7 @@ public class NPCMovement : MonoBehaviour
                 Right();
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 3 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
             // 목표 지점에 도달하면 리스트에서 해당 노드를 제거
             if ((Vector2)transform.position == targetPosition)
