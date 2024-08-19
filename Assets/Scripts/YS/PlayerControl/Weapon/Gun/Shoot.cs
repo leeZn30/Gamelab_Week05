@@ -27,7 +27,6 @@ public class Shoot : MonoBehaviour
 
     private void Awake()
     {
-        bulletUIManager.SetBulletCount(currentAmmo);
         bulletUIManager = GameObject.Find("BattleUI").transform.GetComponentInChildren<BulletUIManager>();
     }
 
