@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questNPC: 0
+  lastBattleNPC: 1
   EnemyID: 0
   side: 2
   type: Long
