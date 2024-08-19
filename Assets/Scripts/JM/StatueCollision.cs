@@ -39,21 +39,23 @@ public class StatueCollision : MonoBehaviour, IListener
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
     {
-            switch (EventType)
-            {
-                case Event_Type.eSave:
-                    if (isBreak)
-                    {
-                        SaveManager.Instance.saveStatueCollision.Add(true);
-                        saveIndex = SaveManager.Instance.saveStatueCollision.Count - 1;
-                    }
-                    else
-                    {
-                        SaveManager.Instance.saveStatueCollision.Add(false);
-                        saveIndex = SaveManager.Instance.saveStatueCollision.Count - 1;
-                    }
-                    break;
-                case Event_Type.eLoad:
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                if (isBreak)
+                {
+                    SaveManager.Instance.saveStatueCollision.Add(true);
+                    saveIndex = SaveManager.Instance.saveStatueCollision.Count - 1;
+                }
+                else
+                {
+                    SaveManager.Instance.saveStatueCollision.Add(false);
+                    saveIndex = SaveManager.Instance.saveStatueCollision.Count - 1;
+                }
+                break;
+            case Event_Type.eLoad:
+                if (saveIndex != -1)
+                {
                     if (SaveManager.Instance.saveStatueCollision[saveIndex])
                     {
                         childObjectToDisactivate.SetActive(false); // 자식 오브젝트 활성화
@@ -64,7 +66,8 @@ public class StatueCollision : MonoBehaviour, IListener
                         childObjectToDisactivate.SetActive(true); // 자식 오브젝트 활성화
                         childObjectToActivate.SetActive(false); // 자식 오브젝트 활성화
                     }
-                    break;
-            }
+                }
+                break;
+        }
     }
 }

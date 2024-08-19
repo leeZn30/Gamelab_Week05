@@ -53,8 +53,8 @@ public class QuestManager : MonoBehaviour, IListener
             }
         }
 
-        // AcceptQuest("RevoltLastQuest");
-        // AcceptQuest("NoteLastQuest");
+        AcceptQuest("RevoltLastQuest");
+        AcceptQuest("NoteLastQuest");
     }
 
     private void Awake()
