@@ -23,7 +23,7 @@ public class NPCInteraction : MonoBehaviour, IListener
     public string targetQuest;
 
     public bool isDeath = false;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
 
     void Start()
     {

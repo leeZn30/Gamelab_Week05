@@ -28,7 +28,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
     public bool isQuest = false;
     public bool notQuest = false;
     public string questName;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
     public bool isDeath = false;
     
     void Awake()
@@ -122,21 +122,24 @@ public class ObjectInteraction : MonoBehaviour, IListener
             case Event_Type.eLoad:
                 if (!isDeath)
                 {
-                    if (SaveManager.Instance.saveItemStatus[saveIndex].isCollected)
+                    if (saveIndex != -1)
                     {
-                        isCollected = true;
-                    }
-                    else
-                    {
-                        isCollected = false;
-                    }
-                    if (SaveManager.Instance.saveItemStatus[saveIndex].isSend)
-                    {
-                        isSend = true;
-                    }
-                    else
-                    {
-                        isSend = false;
+                        if (SaveManager.Instance.saveItemStatus[saveIndex].isCollected)
+                        {
+                            isCollected = true;
+                        }
+                        else
+                        {
+                            isCollected = false;
+                        }
+                        if (SaveManager.Instance.saveItemStatus[saveIndex].isSend)
+                        {
+                            isSend = true;
+                        }
+                        else
+                        {
+                            isSend = false;
+                        }
                     }
                 }
                 break;

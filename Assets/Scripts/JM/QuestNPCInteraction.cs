@@ -33,7 +33,7 @@ public class QuestNPCInteraction : MonoBehaviour, IListener
 
     private bool isPlayerInRange = false;
     public bool isDeath = false;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
 
     void Start()
     {

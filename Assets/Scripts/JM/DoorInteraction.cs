@@ -21,7 +21,7 @@ public class DoorInteraction : MonoBehaviour, IListener
     private bool isSend = false;
 
     public bool isOpend = false;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
 
     void Awake()
     {
@@ -31,6 +31,7 @@ public class DoorInteraction : MonoBehaviour, IListener
 
     void Update()
     {
+        Debug.Log(saveIndex);
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
             if (KeyObject != null && KeyObject.isCollected)

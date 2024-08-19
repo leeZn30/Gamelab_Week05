@@ -156,7 +156,6 @@ public class DataManager : MonoBehaviour, IListener
                     SaveManager.Instance.playerSaveStatus.currentCount = shoot.currentAmmo;
                     SaveManager.Instance.playerSaveStatus.position = player.transform.position;
                     SaveManager.Instance.playerSaveStatus.rotation = player.transform.rotation;
-                    Debug.Log("currAmmo : "+ shoot.currentAmmo+ ", leftAmmo"+ shoot.leftAmmo);
                 break;
                 case Event_Type.eLoad:
                     health = SaveManager.Instance.playerSaveStatus.health;

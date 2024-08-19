@@ -2646,6 +2646,7 @@ MonoBehaviour:
   saveActiveQuests: []
   saveTargetLocation: 
   saveStatueCollision: 
+  saveBookShelfInteraction: 
   tempDestroyGameObjects: []
   tempNPCDestroy: []
   savedNote:
@@ -16294,7 +16295,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 0
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &212679321
 GameObject:
@@ -18158,7 +18158,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 0
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1001 &345043112
 PrefabInstance:
@@ -22922,7 +22921,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!4 &495512833 stripped
 Transform:
@@ -23298,7 +23296,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetQuest: 
   isActived: 0
-  saveIndex: -1
 --- !u!61 &598237337
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24578,7 +24575,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &724038752
 GameObject:
@@ -25006,7 +25002,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &804392029
 GameObject:
@@ -25100,7 +25095,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetQuest: 
   isActived: 0
-  saveIndex: -1
 --- !u!1001 &806342823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25822,7 +25816,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 0
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!4 &902132508
 Transform:
@@ -26621,7 +26614,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1001 &1045148556
 PrefabInstance:
@@ -27385,7 +27377,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1001 &1110126942
 PrefabInstance:
@@ -28943,7 +28934,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &1247704191
 GameObject:
@@ -30219,7 +30209,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1001 &1368772552
 PrefabInstance:
@@ -30721,7 +30710,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &1494621663
 GameObject:
@@ -32099,7 +32087,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &1690497092
 GameObject:
@@ -32195,7 +32182,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1001 &1700843090
 PrefabInstance:
@@ -33309,7 +33295,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &1795132303
 GameObject:
@@ -37586,7 +37571,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!4 &1899460015 stripped
 Transform:
@@ -38976,7 +38960,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 1
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1001 &2055399466
 PrefabInstance:
@@ -39682,6 +39665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb81e062f78c2a49a3a4d8bf9943096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpened: 0
 --- !u!212 &2088917181
 SpriteRenderer:
   m_ObjectHideFlags: 0
