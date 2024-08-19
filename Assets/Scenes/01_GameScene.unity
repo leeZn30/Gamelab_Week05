@@ -55124,6 +55124,11 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8503624296060852704, guid: 07ad43d88bd900c4b8e79af77e58354a,
+        type: 3}
+      propertyPath: dialogueId
+      value: 220
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
