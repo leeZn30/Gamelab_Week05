@@ -37,11 +37,7 @@ public class BulletControl : MonoBehaviour
                 DataManager.Instance.playerState = "Battle";
             }
         }
-        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player") || collision.collider.CompareTag("Cult") || collision.collider.CompareTag("Resistance") || collision.collider.CompareTag("Statue"))
-        {
-            Destroy(gameObject);
-        }
-
+        Destroy(gameObject);
     }
 
 }
