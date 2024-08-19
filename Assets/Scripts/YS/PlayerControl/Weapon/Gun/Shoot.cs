@@ -8,8 +8,8 @@ using static UnityEngine.ParticleSystem;
 public class Shoot : MonoBehaviour
 {
     public int currentAmmo;
-    public int leftAmmo;
-    public int maxAmmo;
+    //public int leftAmmo;
+    //spublic int maxAmmo;
 
     public GameObject bullet;
     private GameObject rotation;
@@ -33,14 +33,14 @@ public class Shoot : MonoBehaviour
     private void OnEnable()
     {
         DataManager.Instance.BulletCount = 20;
-        maxAmmo = DataManager.Instance.BulletCount * 5;
+        //maxAmmo = DataManager.Instance.BulletCount * 5;
         isReloading = false;
         shooting = false;
         rotation = GameObject.FindWithTag("Player").transform.Find("PlayerGunRotatePos").gameObject;
         StartCoroutine(ShootDelay());
 
-        //maxAmmoUI = GameObject.FindWithTag("Canvas").transform.Find("Battle_Ui").transform.Find("MaxBullet_UI").transform.GetComponent<TextMeshProUGUI>();
-        maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
+
+        //maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
     }
     // Update is called once per frame
     void Update()
@@ -56,12 +56,14 @@ public class Shoot : MonoBehaviour
             if (shooting && shootTime > shootDelay)
             {
                 currentAmmo--;
-                leftAmmo--;
+                //leftAmmo--;
 
+                /*
                 if (maxAmmoUI != null)
                 {
                     maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
                 }
+                */
 
                 shootTime = 0;
                 Instantiate(bullet, transform.position, rotation.transform.rotation);
@@ -88,20 +90,20 @@ public class Shoot : MonoBehaviour
 
     private void Reload()
     {
-        if (currentAmmo == 0 && leftAmmo >= DataManager.Instance.BulletCount)
+        if (currentAmmo == 0 )//&& leftAmmo >= DataManager.Instance.BulletCount)
         {
             StartCoroutine("ReloadTime");
         }
-        else if (currentAmmo == 0 && leftAmmo < DataManager.Instance.BulletCount)
+        else if (currentAmmo == 0 )//&& leftAmmo < DataManager.Instance.BulletCount)
         {
             StartCoroutine("ReloadTime1");
         }
 
-        if (InputManager.Instance.controls.Player.Reload.WasPressedThisFrame() && leftAmmo >= DataManager.Instance.BulletCount)
+        if (InputManager.Instance.controls.Player.Reload.WasPressedThisFrame())// && leftAmmo >= DataManager.Instance.BulletCount)
         {
             StartCoroutine("ReloadTime");
         }
-        else if (InputManager.Instance.controls.Player.Reload.WasPressedThisFrame() && leftAmmo < DataManager.Instance.BulletCount)
+        else if (InputManager.Instance.controls.Player.Reload.WasPressedThisFrame()) // && leftAmmo < DataManager.Instance.BulletCount)
         {
             StartCoroutine("ReloadTime1");
         }
@@ -122,6 +124,7 @@ public class Shoot : MonoBehaviour
 
 
     }
+    /*
     IEnumerator ReloadTime1()
     {
         isReloading = true;
@@ -136,6 +139,7 @@ public class Shoot : MonoBehaviour
         isReloading = false;
 
     }
+    */
 
 
     IEnumerator ShootDelay()
