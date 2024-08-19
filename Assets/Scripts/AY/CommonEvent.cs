@@ -155,13 +155,13 @@ public class CommonEvent : MonoBehaviour
         {
             // 말 시작
 
-            CommonRouteManager.Instance.CallNoteFinal();
+            // CommonRouteManager.Instance.CallNoteFinal();
         }
         else
         {
             // 말 시작
 
-            CommonRouteManager.Instance.CallRevoltFinal();
+            // CommonRouteManager.Instance.CallRevoltFinal();
         }
     }
 

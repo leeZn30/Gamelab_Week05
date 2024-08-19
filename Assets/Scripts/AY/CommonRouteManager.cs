@@ -43,34 +43,6 @@ public class CommonRouteManager : Singleton<CommonRouteManager>, IListener
 
     public void LastChoiceEventCheck()
     {
-        if (NoteRouteManager.Instance.isLast && RevoltRouteManager.Instance.isLast)
-        {
-            // 최종 선택 칸
-            Debug.Log("최종 선택!");
-            StartCoroutine(LastEventCheck());
-        }
-        else if (NoteRouteManager.Instance.isLast && !RevoltRouteManager.Instance.isLast)
-        {
-            Debug.Log("노트 루트!");
-            CallNoteFinal();
-        }
-        else if (!NoteRouteManager.Instance.isLast && RevoltRouteManager.Instance.isLast)
-        {
-            Debug.Log("반란 루트!");
-            CallRevoltFinal();
-        }
+        StartCoroutine(LastEventCheck());
     }
-
-    public void CallNoteFinal()
-    {
-        // 앞선 이벤트
-        StartCoroutine(NoteRouteManager.Instance.CallNoteFinalEvent());
-    }
-
-    public void CallRevoltFinal()
-    {
-        // 앞선 이벤트
-        StartCoroutine(RevoltRouteManager.Instance.CallRevoltFinalEvent());
-    }
-
 }

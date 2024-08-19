@@ -23,12 +23,6 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eRevoltQuestDone, this);
-        EventManager.Instance.AddListener(Event_Type.eRevoltLastQuestDone, this);
-    }
-
-    void Start()
-    {
-        QuestManager.Instance.AcceptQuest("RevoltLastQuest");
     }
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
@@ -36,19 +30,14 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
         switch (EventType)
         {
             case Event_Type.eRevoltQuestDone:
-                // sumQuest = (int)Param;
                 currentQuestSO = (QuestSO)Param;
                 StartCoroutine(EventCheck());
 
                 // 다음 순서 NPC 활성화
                 currentNPCOrder++;
-                if (QuestNPCs.Find(e => e.order == currentNPCOrder) != null)
-                    QuestNPCs.Find(e => e.order == currentNPCOrder).gameObject.SetActive(true);
-                break;
-
-            case Event_Type.eRevoltLastQuestDone:
-                isLast = true;
-                CommonRouteManager.Instance.LastChoiceEventCheck();
+                QuestNPCInteraction npc = QuestNPCs.Find(e => e.order == currentNPCOrder);
+                if (npc != null)
+                    npc.gameObject.SetActive(true);
                 break;
         }
     }
@@ -60,10 +49,8 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
         yield return new WaitUntil(() => isComplete);
     }
 
-    public IEnumerator CallRevoltFinalEvent()
+    public void CallFinalEvent()
     {
-        bool isComplete = false;
-        StartCoroutine(revoltEvent.DoEvent(() => isComplete = true, "RevoltLastQuest"));
-        yield return new WaitUntil(() => isComplete);
+        StartCoroutine(revoltEvent.FinalBattle());
     }
 }

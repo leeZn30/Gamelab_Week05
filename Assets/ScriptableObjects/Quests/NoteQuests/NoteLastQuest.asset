@@ -22,7 +22,7 @@ MonoBehaviour:
   ReachNPC: 0
   isCompleted: 1
   isActived: 1
-  eventType: 5
+  eventType: 4
   targetObject: Rooftop_N
   targetEnemyID: 0
   targetCount: 0
