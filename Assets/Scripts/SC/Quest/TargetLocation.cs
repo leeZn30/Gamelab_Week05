@@ -14,7 +14,7 @@ public class TargetLocation : MonoBehaviour, IListener
         EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
         if (collider != null && isActived)
         {
