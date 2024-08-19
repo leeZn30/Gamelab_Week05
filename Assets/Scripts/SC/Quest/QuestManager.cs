@@ -49,6 +49,9 @@ public class QuestManager : MonoBehaviour, IListener
                 quests.currCount = 0;
             }
         }
+
+        AcceptQuest("RevoltLastQuest");
+        // AcceptQuest("NoteLastQuest");
     }
 
     private void Awake()
@@ -86,27 +89,18 @@ public class QuestManager : MonoBehaviour, IListener
                     AcceptQuest("NoteLastQuest");
                 }
                 break;
-            case "NoteLastQuest":
-                Debug.Log("특정 위치 가기 퀘스트 클리어");
-                EventManager.Instance.PostNotification(Event_Type.eNoteLastQuestDone, this, FindQuest(questName));
-                break;
             case "RevoltQuest3":
                 if (FindQuest("RevoltQuest4").isCompleted)
                 {
                     questName = "RevoltQuest34";
-                    // AcceptQuest("RevoltQuest34");
-                    // OnQuestClear("RevoltQuest34");
                 }
                 break;
             case "RevoltQuest4":
                 if (FindQuest("RevoltQuest3").isCompleted)
                 {
                     questName = "RevoltQuest34"; ;
-                    // AcceptQuest("RevoltQuest34");
-                    // OnQuestClear("RevoltQuest34");
                 }
                 break;
-
             case "RevoltQuest6":
                 if (FindQuest("RevoltQuest7").isCompleted)
                 {
@@ -122,7 +116,6 @@ public class QuestManager : MonoBehaviour, IListener
                 break;
 
             case "RevoltLastQuest":
-                EventManager.Instance.PostNotification(Event_Type.eRevoltLastQuestDone, this, FindQuest(questName));
                 break;
         }
 
@@ -131,12 +124,7 @@ public class QuestManager : MonoBehaviour, IListener
         if (!clearedQuests.Contains(quest))
         {
             clearedQuests.Add(quest);
-
-            if (quest.eventType == Event_Type.eRevoltQuestDone)
-            {
-                EventManager.Instance.PostNotification(quest.eventType, this, quest);
-            }
-
+            EventManager.Instance.PostNotification(quest.eventType, this, quest);
         }
     }
 
@@ -198,6 +186,8 @@ public class QuestManager : MonoBehaviour, IListener
         {
             if (activeQuests[j].questName == questName)
             {
+                Debug.Log(j);
+
                 activeQuests[j].isCompleted = true;
                 GameObject questText = activeQuestTexts[j];
                 questText.GetComponent<TextMeshProUGUI>().text = $"<s>{questText.GetComponent<TextMeshProUGUI>().text}</s>";
