@@ -384,7 +384,7 @@ public class NPCMovement : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.8f);
-            // Debug.Log("PathFinding");
+            //Debug.Log("PathFinding");
             GetComponent<MoveManager>().PathFindingToTargetPos(targetPos);
 
         }

@@ -8,13 +8,11 @@ using static UnityEngine.ParticleSystem;
 public class Shoot : MonoBehaviour
 {
     public int currentAmmo;
-    private int leftAmmo;
+    public int leftAmmo;
     public int maxAmmo;
 
     public GameObject bullet;
     private GameObject rotation;
-
-    private bool first = true;
 
     private bool shooting;
 
@@ -23,14 +21,14 @@ public class Shoot : MonoBehaviour
 
     public bool isReloading;
 
-    private BulletUIManager bulletUIManager;
+    public BulletUIManager bulletUIManager;
 
-    [SerializeField] TextMeshProUGUI maxAmmoUI;
+    [SerializeField]public TextMeshProUGUI maxAmmoUI;
 
-    private void Start()
+    private void Awake()
     {
-        currentAmmo = DataManager.Instance.BulletCount;
         bulletUIManager.SetBulletCount(currentAmmo);
+        bulletUIManager = GameObject.Find("BattleUI").transform.GetComponentInChildren<BulletUIManager>();
     }
 
     private void OnEnable()
@@ -39,17 +37,8 @@ public class Shoot : MonoBehaviour
         maxAmmo = DataManager.Instance.BulletCount * 5;
         isReloading = false;
         shooting = false;
-
-        bulletUIManager = GameObject.Find("BattleUI").transform.GetComponentInChildren<BulletUIManager>();
         rotation = GameObject.FindWithTag("Player").transform.Find("PlayerGunRotatePos").gameObject;
         StartCoroutine(ShootDelay());
-
-
-        if (first)
-        {
-            leftAmmo = maxAmmo;
-            first = false;
-        }
 
         //maxAmmoUI = GameObject.FindWithTag("Canvas").transform.Find("Battle_Ui").transform.Find("MaxBullet_UI").transform.GetComponent<TextMeshProUGUI>();
         maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
@@ -57,7 +46,11 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (currentAmmo >= 21)
+        {
+            currentAmmo = 20;
+            bulletUIManager.SetBulletCount(currentAmmo);
+        }
         ChangeState();
         if (currentAmmo > 0 && !isReloading)
         {
@@ -73,10 +66,7 @@ public class Shoot : MonoBehaviour
 
                 shootTime = 0;
                 Instantiate(bullet, transform.position, rotation.transform.rotation);
-
-
                 bulletUIManager.SetBulletCount(currentAmmo);
-
                 RumbleManager.instance.RumblePulse(0.3f, 1f, 0.1f);
                 DataManager.Instance.ResetCoolDownTime = 0;
             }

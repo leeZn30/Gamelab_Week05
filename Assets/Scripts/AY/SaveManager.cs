@@ -10,13 +10,16 @@ public class SaveManager : Singleton<SaveManager>
     public List<NPCInteractionStatus> saveNPCInteractionStatus = new List<NPCInteractionStatus>();
     public List<QuestNPCInteractionStatus> saveQuestNPCInteractionStatus = new List<QuestNPCInteractionStatus>();
     public List<QuestManagerStatus> saveQuestManagerStatus = new List<QuestManagerStatus>();
-
-
+    public List<string> saveQuestText = new List<string>();
+    public List<QuestSO> saveActiveQuests = new List<QuestSO>();
+    public List<bool> saveTargetLocation = new List<bool>();
+    public List<bool> saveStatueCollision = new List<bool>();
 
     public List<GameObject> tempDestroyGameObjects = new List<GameObject>();
     public List<GameObject> tempNPCDestroy = new List<GameObject>();
 
     public NoteData savedNote;
+    public PlayerSaveStatus playerSaveStatus;
 
     void Awake()
     {
@@ -46,6 +49,12 @@ public class SaveManager : Singleton<SaveManager>
         saveNpcInfoStatus.Clear();
         saveNPCInteractionStatus.Clear();
         saveQuestNPCInteractionStatus.Clear();
+        saveQuestManagerStatus.Clear();
+        saveQuestText.Clear();
+        saveActiveQuests.Clear();
+        saveTargetLocation.Clear();
+        saveStatueCollision.Clear();
+
 
         EventManager.Instance.PostNotification(Event_Type.eSave, this);
     }
