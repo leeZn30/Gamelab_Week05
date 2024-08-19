@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8329251556977666239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGunPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4459015136359318229}
   - component: {fileID: 3496604698062618033}
   - component: {fileID: 4827434184172601456}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,9 +122,9 @@ GameObject:
   - component: {fileID: 5927953788113210885}
   - component: {fileID: 7290926260028284591}
   - component: {fileID: 8300507761734393550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CultJustBattle
-  m_TagString: Untagged
+  m_TagString: Cult
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questNPC: 0
+  lastBattleNPC: 1
   EnemyID: 0
   side: 1
   type: 
@@ -371,7 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650695449499685892}
   - component: {fileID: 7663970759556161669}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +437,7 @@ GameObject:
   - component: {fileID: 54764202127538783}
   - component: {fileID: 1819628117882009636}
   - component: {fileID: 8143449163792015715}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 319338685529192991}
   - component: {fileID: 4184781449855041413}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3255447953168620608}
   - component: {fileID: 2306461578078324539}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGunRotatePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +637,7 @@ GameObject:
   - component: {fileID: 9222570097644202483}
   - component: {fileID: 543871423764120870}
   - component: {fileID: 4480138959131162594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

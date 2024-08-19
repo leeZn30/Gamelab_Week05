@@ -133,10 +133,8 @@ public class NPCInfo : MonoBehaviour, IListener
 
         if (lastBattleNPC)
         {
-            if ((BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
-            {
-                isBattle = true;
-            }
+            isBattle = true;
+            
         }
 
 
