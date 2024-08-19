@@ -13,21 +13,25 @@ public class SpinAngle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent.GetComponent<NPCMovement>().spinDown)
+        if (!transform.parent.GetComponent<NPCInfo>().isBattle)
         {
-            transform.rotation = Quaternion.Euler(0, 0, -90);
+            if (transform.parent.GetComponent<NPCMovement>().spinDown)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, -90);
+            }
+            else if (transform.parent.GetComponent<NPCMovement>().spinUp)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
+            else if (transform.parent.GetComponent<NPCMovement>().spinLeft)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else if (transform.parent.GetComponent<NPCMovement>().spinRight)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+
         }
-        else if (transform.parent.GetComponent<NPCMovement>().spinUp)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-        }
-        else if (transform.parent.GetComponent<NPCMovement>().spinLeft)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (transform.parent.GetComponent<NPCMovement>().spinRight)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-        }   
     }
 }
