@@ -109,6 +109,8 @@ public class CommonEvent : MonoBehaviour
 
         DialogueManager.Instance.SetDialogueID(introDialogueId3);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        SaveManager.Instance.Save();
     }
 
     IEnumerator GrandmaEvent()

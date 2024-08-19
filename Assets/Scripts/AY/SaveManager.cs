@@ -65,6 +65,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void Load()
     {
+        AudioListener.volume = 0.0f;
         while (tempDestroyGameObjects.Count > 0)
         {
             GameObject saveItem = tempDestroyGameObjects[tempDestroyGameObjects.Count - 1];
@@ -103,5 +104,6 @@ public class SaveManager : Singleton<SaveManager>
             Destroy(blood);
         }
         EventManager.Instance.PostNotification(Event_Type.eLoad, this);
+        AudioListener.volume = 1.0f;
     }
 }
