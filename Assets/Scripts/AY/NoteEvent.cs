@@ -195,7 +195,7 @@ public class NoteEvent : MonoBehaviour
         for (int i = 0; i < enemyPositionsF.Count; i++)
         {
             enemies.Add(Instantiate(enemyPrefabs[i], enemyPositionsF[i], Quaternion.identity).gameObject);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         // 대화함
@@ -210,6 +210,7 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        TurnEnd.Instance.StartCoroutine(TurnEnd.Instance.FadeInAndOut());
         SceneManager.LoadScene("02_NoteEnding");
 
         teleport.SetActive(false);
@@ -230,7 +231,7 @@ public class NoteEvent : MonoBehaviour
         for (int i = 0; i < enemyPositionsF.Count; i++)
         {
             enemies.Add(Instantiate(enemyPrefabs[i], enemyPositionsF[i], Quaternion.identity).gameObject);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         // 대화함
@@ -247,6 +248,7 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        TurnEnd.Instance.StartCoroutine(TurnEnd.Instance.FadeInAndOut());
         SceneManager.LoadScene("02_NoteEnding");
 
         teleport.SetActive(false);

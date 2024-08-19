@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class FadeImage : MonoBehaviour
 {
     public Image uiImage; // 투명해질 UI 이미지
@@ -74,6 +75,8 @@ public class FadeImage : MonoBehaviour
         isFading = false;
 
         // "The End" 텍스트 표시
+
+        SceneManager.LoadScene("00_MainScene");
 
     }
 }

@@ -12,7 +12,7 @@ public class TurnEnd : Singleton<TurnEnd>
     private bool isFading = false;
 
 
-    private IEnumerator FadeInAndOut()
+    public IEnumerator FadeInAndOut()
     {
         isFading = true;
         Color originalColor = uiImage.color;
