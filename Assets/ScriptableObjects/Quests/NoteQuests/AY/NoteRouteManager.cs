@@ -57,7 +57,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
-        EventManager.Instance.AddListener(Event_Type.eNoteLastQuestDone, this);
+        EventManager.Instance.AddListener(Event_Type.eNoteQuestDone, this);
         EventManager.Instance.AddListener(Event_Type.eSave, this);
         EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
@@ -71,16 +71,10 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
                 // 현재 노트 안보이게 하기
                 currentNoteData.isTarget = false;
-
                 // 노트 닫을 때까지 기다림
                 StartCoroutine(OnNoteClosed());
-
                 break;
 
-            case Event_Type.eNoteLastQuestDone:
-                isLast = true;
-                CommonRouteManager.Instance.LastChoiceEventCheck();
-                break;
 
             case Event_Type.eSave:
                 SaveManager.Instance.savedNote = new NoteData(currentNoteData.noteID, currentNoteData.content, currentNoteData.order);
@@ -95,13 +89,6 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 currentNoteData.order = SaveManager.Instance.savedNote.order;
                 break;
         }
-    }
-
-    public IEnumerator CallNoteFinalEvent()
-    {
-        bool isComplete = false;
-        StartCoroutine(noteEvent.DoEvent(() => isComplete = true, "NoteLastQuest"));
-        yield return new WaitUntil(() => isComplete);
     }
 
     IEnumerator OnNoteClosed()
@@ -127,11 +114,9 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         }
     }
 
-    IEnumerator NoteQuestEventCheck()
+    public void callFinalBattle()
     {
-        bool isComplete = false;
-        StartCoroutine(noteEvent.DoEvent(() => isComplete = true, currentQuestSO.questName));
-        yield return new WaitUntil(() => isComplete);
+        StartCoroutine(noteEvent.FinalBattle());
     }
 
     public void OpenNote(string content)

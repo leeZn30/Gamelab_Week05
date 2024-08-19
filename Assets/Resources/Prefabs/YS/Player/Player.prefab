@@ -159,10 +159,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  money: 0
   isDead: 0
   playerState: 
   ResetCoolDownTime: 0
+  player: {fileID: 0}
+  shoot: {fileID: 0}
   homeActiveFire: []
 --- !u!114 &4663089229533672087
 MonoBehaviour:
@@ -420,6 +421,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  dieUI: {fileID: 0}
 --- !u!114 &8208399311207262314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +828,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a9f0ed693b1b15b4ebf8555251c0f143,
         type: 3}
+    - target: {fileID: 8451710400268056663, guid: 3d214a6e30efca9459be2f984016d1bc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451710400268056663, guid: 3d214a6e30efca9459be2f984016d1bc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451710400268056663, guid: 3d214a6e30efca9459be2f984016d1bc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1638682339228273228, guid: 3d214a6e30efca9459be2f984016d1bc, type: 3}

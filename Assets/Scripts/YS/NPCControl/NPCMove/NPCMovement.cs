@@ -6,7 +6,6 @@ public class NPCMovement : MonoBehaviour
 {
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    private Transform playerTransform;
     private GameObject[] walls;
     Vector3 directionAwayFromPlayer;
 
@@ -53,7 +52,6 @@ public class NPCMovement : MonoBehaviour
     {
 
         walls = GameObject.FindGameObjectsWithTag("Wall");
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         currentState = NPCState.Idle;
 

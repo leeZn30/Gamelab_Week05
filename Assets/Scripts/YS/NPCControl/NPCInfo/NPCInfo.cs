@@ -24,6 +24,7 @@ public class NPCInfo : MonoBehaviour, IListener
 {
     [Header("NPC Type")] 
     public bool questNPC;
+    public bool lastBattleNPC;
     public int EnemyID;
     private int hitTime;
     public int side;
@@ -76,6 +77,10 @@ public class NPCInfo : MonoBehaviour, IListener
 
     private void Start()
     {
+
+        hitTime = 0;
+        health = maxHealth;
+
         startPos = transform.position;
         damaged.SetActive(false);
 
@@ -84,12 +89,16 @@ public class NPCInfo : MonoBehaviour, IListener
             weapon.SetActive(false);
         }
 
-        hitTime = 0;
-        maxHealth = 10;
-        health = maxHealth;
-        SetSide();
+        if (!lastBattleNPC)
+        {
+            StartCoroutine(FindTargets());
+        }
 
-        StartCoroutine(FindTargets());
+        if (lastBattleNPC)
+        {
+            SetSide();
+            StartCoroutine(FindTargets());
+        }
     }
 
 
@@ -97,23 +106,40 @@ public class NPCInfo : MonoBehaviour, IListener
 
     private void Update()
     {
-        BattleCheck();
-
-        distaance = Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position);
-
-        if (isBattle)
+        
+        if (!lastBattleNPC)
         {
-            if (distaance > resetDistance) //&& (BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
+            BattleCheck();
+
+            if (target != null)
             {
-                if (questNPC)
+                distaance = Vector2.Distance(target.transform.position, transform.position);
+            }
+
+            if (isBattle)
+            {
+                if (distaance > resetDistance)
                 {
-                    GetComponent<NPCMovement>().targetPosition = startPos;
+                    if (questNPC)
+                    {
+                        GetComponent<NPCMovement>().targetPosition = startPos;
+                    }
+                    isBattle = false;
+                    weapon.SetActive(false);
+
                 }
-                isBattle = false;
-                weapon.SetActive(false);
-                
             }
         }
+
+        if (lastBattleNPC)
+        {
+            if ((BattleManager.Instance.Cult.Count > 0 && BattleManager.Instance.Resistance.Count > 1))
+            {
+                isBattle = true;
+            }
+        }
+
+
 
         if (isBattle)
         {
@@ -227,8 +253,7 @@ public class NPCInfo : MonoBehaviour, IListener
                 {
                     if (BattleManager.Instance.Resistance[i].GetComponent<NPCInfo>().type == ("Long"))
                     {
-                        distance = Vector2.Distance(transform.position,
-                            BattleManager.Instance.Resistance[i].transform.position);
+                        distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
 
                         if (distance < minDis)
                         {
@@ -245,13 +270,12 @@ public class NPCInfo : MonoBehaviour, IListener
 
     void LongCult()
     {
-
+        minDis = 50; // reset minDis for each new search
         for (int i = 0; i < BattleManager.Instance.Resistance.Count; i++)
         {
-            if (BattleManager.Instance.Resistance[i] != null)
+            if (BattleManager.Instance.Resistance[i] != null && BattleManager.Instance.Resistance[i].activeSelf)
             {
-                distance = Vector2.Distance(transform.position,
-                    BattleManager.Instance.Resistance[i].transform.position);
+                distance = Vector2.Distance(transform.position, BattleManager.Instance.Resistance[i].transform.position);
 
                 if (distance < minDis)
                 {
@@ -290,9 +314,10 @@ public class NPCInfo : MonoBehaviour, IListener
 
     void LongResistance()
     {
+        minDis = 50; // reset minDis for each new search
         for (int i = 0; i < BattleManager.Instance.Cult.Count; i++)
         {
-            if (BattleManager.Instance.Cult[i] != null)
+            if (BattleManager.Instance.Cult[i] != null && BattleManager.Instance.Cult[i].activeSelf)
             {
                 distance = Vector2.Distance(transform.position, BattleManager.Instance.Cult[i].transform.position);
 

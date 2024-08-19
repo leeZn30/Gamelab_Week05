@@ -12,6 +12,7 @@ public struct DoorInteractionStatus
 
 public class DoorInteraction : MonoBehaviour, IListener
 {
+    public Collider2D closedDoorCollider; // 닫힌 문에 붙어있는 콜라이더
     public int dialogueId; // 이 오브젝트가 출력할 기본 대사 ID
     public GameObject openDoor; // 열린 상태의 도어 오브젝트
     public GameObject closedDoor; // 닫힌 상태의 도어 오브젝트
@@ -22,11 +23,22 @@ public class DoorInteraction : MonoBehaviour, IListener
 
     public bool isOpend = false;
     private int saveIndex = -1;
-
+    public AudioClip doorSound; // 발생할 소리
+    private AudioSource audioSource;
     void Awake()
     {
         EventManager.Instance.AddListener(Event_Type.eSave, this);
         EventManager.Instance.AddListener(Event_Type.eLoad, this);
+    }
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            // 만약 AudioSource가 없다면 자동으로 추가합니다.
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -83,17 +95,24 @@ public class DoorInteraction : MonoBehaviour, IListener
     public void OpenDoor()
     {
         // 필요한 오브젝트가 없을 경우
+        audioSource.PlayOneShot(doorSound);
         closedDoor.SetActive(false);
         openDoor.SetActive(true);
         isSend = true;
         isOpend = true;
+
+        if (closedDoorCollider != null)
+            closedDoorCollider.enabled = false; // 닫힌 문 콜라이더 비활성화
     }
 
     public void CloseDoor()
     {
+        audioSource.PlayOneShot(doorSound);
         closedDoor.SetActive(true);
         openDoor.SetActive(false);
         isOpend = false;
+        if (closedDoorCollider != null)
+            closedDoorCollider.enabled = true; // 닫힌 문 콜라이더 활성화
     }
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)

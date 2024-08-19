@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7284833956607860820}
   - component: {fileID: 4642018812737561136}
   - component: {fileID: 2860525299393820216}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8329251556977666239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGunPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7709968708897129880}
   - component: {fileID: 4054256638021485817}
   - component: {fileID: 78834700454009344}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 3874752723146768548}
   - component: {fileID: 7491810882521862791}
   - component: {fileID: 8347599778235694650}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2510096963901080142}
   - component: {fileID: 3810730594803250104}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,8 +314,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7709968708897129880}
   - {fileID: 3874752723146768548}
+  - {fileID: 7709968708897129880}
   m_Father: {fileID: 7981846547351333017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 5927953788113210885}
   - component: {fileID: 7290926260028284591}
   - component: {fileID: 8300507761734393550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BattleNPC
   m_TagString: Cult
   m_Icon: {fileID: 0}
@@ -453,12 +453,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c3868741f0ebd418ea442077a4ac3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueId: 210
+  dialogueId: 209
   interactionUI: {fileID: 128865448450425839}
   isActive: 0
   targetQuest: 
   isDeath: 0
-  saveIndex: -1
 --- !u!61 &6080178620537599826
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -599,7 +598,6 @@ MonoBehaviour:
   damaged: {fileID: 3566947697411604384}
   distaance: 0
   blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
-  saveIndex: -1
   isDeath: 0
 --- !u!114 &8300507761734393550
 MonoBehaviour:
@@ -633,7 +631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 319338685529192991}
   - component: {fileID: 4184781449855041413}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +682,7 @@ GameObject:
   - component: {fileID: 6263108590716965661}
   - component: {fileID: 948058796100680972}
   - component: {fileID: 4172277501887917394}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3255447953168620608}
   - component: {fileID: 2306461578078324539}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGunRotatePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,7 +865,7 @@ GameObject:
   - component: {fileID: 9222570097644202483}
   - component: {fileID: 543871423764120870}
   - component: {fileID: 4480138959131162594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -59,7 +59,7 @@ MonoBehaviour:
   noteUI: {fileID: 0}
   noteBtn: {fileID: 0}
   noteEvent: {fileID: 8375307396598538245}
-  isEveLast: 0
+  isLast: 0
 --- !u!114 &3675337214351692816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2890793560752448610}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1dde048b9cd4e3479b1de778a0b6ff5, type: 3}
   m_Name: 
@@ -93,7 +93,7 @@ MonoBehaviour:
   - {fileID: 0}
   currentNPCOrder: 0
   revoltEvent: {fileID: 2549719918221561708}
-  isEveLast: 0
+  isLast: 0
 --- !u!1 &2931823689495631830
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,14 +148,33 @@ MonoBehaviour:
   dialogueId1_1: 107
   event2Door: {fileID: 0}
   dialogueId2: 102
-  enemyPositions:
-  - {x: 13, y: -1}
+  enemyPositions2:
+  - {x: 15, y: 0}
   - {x: 15, y: -1}
   dialogueId3: 103
   dialogueId4: 104
   dialogueId5: 105
   questSO1: {fileID: 11400000, guid: 7e17f387f98face4395f831ccbd95709, type: 2}
   questSO2: {fileID: 11400000, guid: ce54326c6e766bb4088c9064d8f3c160, type: 2}
+  teleport: {fileID: 0}
+  Girl0: {fileID: 0}
+  dialogueIdF_0: 1000
+  dialogueIdF_1: 1001
+  enemyPositionsF:
+  - {x: -2, y: 82}
+  - {x: -2, y: 80}
+  - {x: -2, y: 78}
+  - {x: 6, y: 82}
+  - {x: 6, y: 80}
+  - {x: 6, y: 78}
+  enemyPrefabs:
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
 --- !u!1 &3281603346398694590
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,16 +225,48 @@ MonoBehaviour:
     type: 3}
   resistaceBoss: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
     type: 3}
+  cultBoss: {fileID: 4714615146271489924, guid: 1bbe85b7541c9fe4f82d08215260fe3a,
+    type: 3}
   dialogueId1: 23
   dialogueId3_0: 20
   dialogueId3_1: 21
   event2Door: {fileID: 0}
   enemyPositions:
-  - {x: 12, y: -21}
-  - {x: 12, y: -23}
-  - {x: 12, y: -25}
+  - {x: -12, y: 39}
+  - {x: -12, y: 40}
+  - {x: -12, y: 41}
+  - {x: -12, y: 42}
   dialogueId5: 22
   questSO: {fileID: 11400000, guid: 153f89dccd02f224290a99a41e3520f1, type: 2}
+  teleport: {fileID: 0}
+  Girl: {fileID: 0}
+  dialogueIdF_0: 1002
+  dialogueIdF_1: 1003
+  dialogueIdF_2: 1004
+  dialogueIdF_3: 1005
+  allyPositionsF:
+  - {x: -2, y: 82}
+  - {x: -2, y: 80}
+  - {x: -2, y: 78}
+  - {x: 6, y: 82}
+  - {x: 6, y: 80}
+  - {x: 6, y: 78}
+  allyPrefabsF:
+  - {fileID: 4577025040394997144, guid: 5780957e1aff0ec40992a6b07eb47793, type: 3}
+  - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
+  - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
+  - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
+  - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
+  - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
+  - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
+  enemyPositionsF:
+  - {x: 0, y: 78}
+  - {x: -1, y: 78}
+  - {x: -2, y: 78}
+  - {x: 1, y: 78}
+  - {x: 2, y: 78}
+  - {x: -3, y: 78}
+  - {x: 3, y: 78}
 --- !u!1 &7075122282776903226
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEvent: 0
-  resistance: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
+  lastChoice: -1
+  resistanceDefault: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
     type: 3}
   introDialogueId0: 16
   introDialogueId1: 17
@@ -269,3 +321,5 @@ MonoBehaviour:
   introDialogueId3: 19
   note0: {fileID: 0}
   RoomDoor: {fileID: 0}
+  dialogueIdG: 108
+  grandma: {fileID: 0}
