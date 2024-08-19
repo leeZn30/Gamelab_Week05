@@ -38,7 +38,6 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 
                 // 다음 순서 NPC 활성화
                 currentNPCOrder++;
-                Debug.Log("순번 : " + currentNPCOrder);
                 QuestNPCInteraction npc = QuestNPCs.Find(e => e.order == currentNPCOrder);
                 if (npc != null)
                     npc.gameObject.SetActive(true);
@@ -56,5 +55,10 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
     public void CallFinalEvent()
     {
         StartCoroutine(revoltEvent.FinalBattle());
+    }
+
+    public void CallFinalEventAfterChoice()
+    {
+        StartCoroutine(revoltEvent.FinalBattleAfterChoice());
     }
 }

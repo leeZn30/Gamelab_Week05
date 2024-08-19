@@ -21,11 +21,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public NoteData savedNote;
     public PlayerSaveStatus playerSaveStatus;
-    public GameObject dieUI; 
-
-    public RevoltRouteManager revoltRouteManager;
-    public NoteRouteManager noteRouteManager;
-    public CommonEvent CommonEvent;
+    public GameObject dieUI;
 
     void Awake()
     {
@@ -89,14 +85,19 @@ public class SaveManager : Singleton<SaveManager>
             Destroy(blood);
         }
         EventManager.Instance.PostNotification(Event_Type.eLoad, this);
-        if (revoltRouteManager.currentEvent != null)
+        if (RevoltRouteManager.Instance.currentEvent != null)
         {
-            StopCoroutine(revoltRouteManager.currentEvent);
+            StopCoroutine(RevoltRouteManager.Instance.currentEvent);
         }
 
-        if (noteRouteManager.currentEvent != null)
+        if (NoteRouteManager.Instance.currentEvent != null)
         {
-            StopCoroutine(noteRouteManager.currentEvent);
+            StopCoroutine(NoteRouteManager.Instance.currentEvent);
+        }
+
+        if (CommonRouteManager.Instance.currentEvent != null)
+        {
+            StopCoroutine(CommonRouteManager.Instance.currentEvent);
         }
     }
 }
