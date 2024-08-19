@@ -343,6 +343,7 @@ public class NPCInfo : MonoBehaviour, IListener
     {
         if (health < 0)
         {
+            isDeath = true;
             GameObject.Find("QuestManager").GetComponent<QuestManager>().OnEnemyKilled(EnemyID);
             //Destroy(gameObject);
             if (questNPC)

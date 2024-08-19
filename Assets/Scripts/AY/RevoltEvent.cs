@@ -135,7 +135,7 @@ public class RevoltEvent : MonoBehaviour
     IEnumerator EventMeetBoss()
     {
         // 보스 등장
-        GameObject go = Instantiate(resistaceBoss, player.transform.position + new Vector3(-1, 0, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistaceBoss, player.transform.position + new Vector3(-1, 0.5f, 0), Quaternion.identity);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId5);
