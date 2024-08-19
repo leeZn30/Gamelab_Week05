@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 6342496441967193570}
   - component: {fileID: 4114698405490400515}
   m_Layer: 5
-  m_Name: RevoltRouteButton
+  m_Name: ReviveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,7 +21,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public NoteData savedNote;
     public PlayerSaveStatus playerSaveStatus;
-    public GameObject dieUI; 
+    public GameObject dieUI;
 
     public RevoltRouteManager revoltRouteManager;
     public NoteRouteManager noteRouteManager;
@@ -83,14 +83,27 @@ public class SaveManager : Singleton<SaveManager>
             tempNPCDestroy.RemoveAt(tempNPCDestroy.Count - 1);
         }
 
-        if (revoltRouteManager.currentEvent != null)
+        Time.timeScale = 1.0f;
+        dieUI.SetActive(false);
+        GameObject[] bloods = GameObject.FindGameObjectsWithTag("blood");
+        foreach (var blood in bloods)
         {
-            StopCoroutine(revoltRouteManager.currentEvent);
+            Destroy(blood);
+        }
+        EventManager.Instance.PostNotification(Event_Type.eLoad, this);
+        if (RevoltRouteManager.Instance.currentEvent != null)
+        {
+            StopCoroutine(RevoltRouteManager.Instance.currentEvent);
         }
 
-        if (noteRouteManager.currentEvent != null)
+        if (NoteRouteManager.Instance.currentEvent != null)
         {
-            StopCoroutine(noteRouteManager.currentEvent);
+            StopCoroutine(NoteRouteManager.Instance.currentEvent);
+        }
+
+        if (CommonRouteManager.Instance.currentEvent != null)
+        {
+            StopCoroutine(CommonRouteManager.Instance.currentEvent);
         }
 
         Time.timeScale = 1.0f;

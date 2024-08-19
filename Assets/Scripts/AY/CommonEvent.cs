@@ -15,7 +15,7 @@ public class CommonEvent : MonoBehaviour
     [Header("UI")]
     GameObject LastChoiceUI;
     Button noteButton;
-    Button revoltButton;
+    [SerializeField] Button revoltButton;
 
     [Header("Prefabs")]
     [SerializeField] GameObject resistanceDefault;
@@ -27,6 +27,16 @@ public class CommonEvent : MonoBehaviour
     [SerializeField] int introDialogueId3; // 대사 ID, 이 NPC가 말할 대사를 지정
     [SerializeField] Note note0;
     [SerializeField] DoorInteraction RoomDoor;
+
+    [Header("LastChoice")]
+    [SerializeField] GameObject RBoss;
+    [SerializeField] Vector2 RBossPose;
+    [SerializeField] Vector2 playerPose;
+    [SerializeField] GameObject girl;
+    [SerializeField] int dialogueIdL_0; // 대사 ID, 이 NPC가 말할 대사를 지정
+    [SerializeField] int dialogueIdL_1; // 대사 ID, 이 NPC가 말할 대사를 지정
+    [SerializeField] int dialogueIdL_2; // 대사 ID, 이 NPC가 말할 대사를 지정
+
 
     [Header("Grandma")]
     [SerializeField] int dialogueIdG;
@@ -143,7 +153,26 @@ public class CommonEvent : MonoBehaviour
 
     IEnumerator LastChoiceEvent()
     {
+        girl.SetActive(true);
+
+        player.transform.position = playerPose;
+        yield return new WaitForSeconds(0.5f);
+
         // 대사
+        DialogueManager.Instance.SetDialogueID(dialogueIdL_0);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        // 보스 등장
+        Instantiate(RBoss, RBossPose, Quaternion.identity);
+
+        // 대사
+        DialogueManager.Instance.SetDialogueID(dialogueIdL_1);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        // 대사
+        DialogueManager.Instance.SetDialogueID(dialogueIdL_2);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
 
         // 최종 선택 하기
         LastChoiceUI.SetActive(true);
@@ -153,14 +182,12 @@ public class CommonEvent : MonoBehaviour
         if (lastChoice == 0)
         {
             // 말 시작
-
-            // CommonRouteManager.Instance.CallNoteFinal();
+            NoteRouteManager.Instance.callFinalBattleAfterChoice();
         }
         else
         {
             // 말 시작
-
-            // CommonRouteManager.Instance.CallRevoltFinal();
+            RevoltRouteManager.Instance.CallFinalEventAfterChoice();
         }
     }
 
