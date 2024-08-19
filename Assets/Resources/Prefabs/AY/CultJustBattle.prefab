@@ -325,7 +325,7 @@ MonoBehaviour:
   side: 1
   type: 
   health: 0
-  maxHealth: 0
+  maxHealth: 15
   weapon: {fileID: 8462435281715169430}
   damage: 0
   attackRange: 10
@@ -338,7 +338,6 @@ MonoBehaviour:
   damaged: {fileID: 3600742966540989161}
   distaance: 10
   blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
-  saveIndex: -1
   isDeath: 0
 --- !u!114 &8300507761734393550
 MonoBehaviour:
@@ -352,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b557556b0b483642ade6ee60097ed5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runningNpc: 0
   targetPosition: {x: 0, y: 0, z: 0}
   chaseDistance: 10
   fleeDistance: 5
@@ -395,7 +395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 18.8}
+  m_AnchoredPosition: {x: 0, y: -8.9}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7663970759556161669

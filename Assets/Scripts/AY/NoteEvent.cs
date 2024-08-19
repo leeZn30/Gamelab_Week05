@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class NoteEvent : MonoBehaviour
@@ -23,7 +21,7 @@ public class NoteEvent : MonoBehaviour
     [Header("Event2")]
     public DoorInteraction event2Door;
     public int dialogueId2; // 대사 ID, 이 NPC가 말할 대사를 지정
-    [SerializeField] List<Vector2> enemyPositions;
+    [SerializeField] List<Vector2> enemyPositions2;
 
     [Header("Event3")]
     public int dialogueId3; // 대사 ID, 이 NPC가 말할 대사를 지정
@@ -38,7 +36,13 @@ public class NoteEvent : MonoBehaviour
     [SerializeField] QuestSO questSO1;
     [SerializeField] QuestSO questSO2;
 
-    // [Header("최종 직전")]
+    [Header("FinalBattle")]
+    [SerializeField] GameObject teleport;
+    [SerializeReference] GameObject Girl0;
+    [SerializeField] int dialogueIdF_0;
+    [SerializeField] int dialogueIdF_1;
+    [SerializeField] List<Vector2> enemyPositionsF = new List<Vector2>();
+    [SerializeField] List<NPCInfo> enemyPrefabs = new List<NPCInfo>();
 
     void Awake()
     {
@@ -132,9 +136,9 @@ public class NoteEvent : MonoBehaviour
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
-        for (int i = 0; i < enemyPositions.Count; i++)
+        for (int i = 0; i < enemyPositions2.Count; i++)
         {
-            enemies.Add(Instantiate(cultEnemy, enemyPositions[i], Quaternion.identity));
+            enemies.Add(Instantiate(cultEnemy, enemyPositions2[i], Quaternion.identity));
             yield return new WaitForSeconds(0.2f);
         }
 
@@ -183,10 +187,39 @@ public class NoteEvent : MonoBehaviour
         yield return null;
     }
 
-
     // 마지막 퀘스트 완료하면 전투 해야함
     public IEnumerator FinalBattle()
     {
+        teleport.SetActive(false);
+        Girl0.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        // 대화함
+        DialogueManager.Instance.SetDialogueID(dialogueIdF_0);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        // 적이 엄청 생성됨
+        List<GameObject> enemies = new List<GameObject>();
+        for (int i = 0; i < enemyPositionsF.Count; i++)
+        {
+            enemies.Add(Instantiate(enemyPrefabs[i], enemyPositionsF[i], Quaternion.identity).gameObject);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        // 대화함
+        DialogueManager.Instance.SetDialogueID(dialogueIdF_1);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+        yield return new WaitForSeconds(0.5f);
+
+        // 전투
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
+
+        // 장면 전환 (페이드 아웃?)
+
+        // 대화함
+        Debug.Log("컷씬으로 넘어가기");
+
         yield return null;
     }
 

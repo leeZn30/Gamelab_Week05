@@ -34,13 +34,20 @@ public class CommonRouteManager : Singleton<CommonRouteManager>, IListener
         yield return new WaitUntil(() => isComplete);
     }
 
+    IEnumerator LastEventCheck()
+    {
+        bool isComplete = false;
+        StartCoroutine(commonEvent.DoLastChoiceEvent(() => isComplete = true));
+        yield return new WaitUntil(() => isComplete);
+    }
+
     public void LastChoiceEventCheck()
     {
         if (NoteRouteManager.Instance.isLast && RevoltRouteManager.Instance.isLast)
         {
             // 최종 선택 칸
             Debug.Log("최종 선택!");
-
+            StartCoroutine(LastEventCheck());
         }
         else if (NoteRouteManager.Instance.isLast && !RevoltRouteManager.Instance.isLast)
         {

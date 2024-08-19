@@ -31,7 +31,7 @@ public class DoorInteraction : MonoBehaviour, IListener
 
     void Update()
     {
-        Debug.Log(saveIndex);
+        // Debug.Log(saveIndex);
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !DialogueManager.Instance.isDialogueActive && !isSend)
         {
             if (KeyObject != null && KeyObject.isCollected)
