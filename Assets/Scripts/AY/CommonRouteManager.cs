@@ -21,7 +21,7 @@ public class CommonRouteManager : Singleton<CommonRouteManager>, IListener
     void Start()
     {
         // 일단 공통 루트로 시작
-        // EventManager.Instance.PostNotification(Event_Type.eGameStart, this);
+        EventManager.Instance.PostNotification(Event_Type.eGameStart, this);
     }
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)

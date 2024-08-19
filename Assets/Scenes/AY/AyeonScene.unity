@@ -2724,31 +2724,6 @@ PrefabInstance:
       propertyPath: event2Door
       value: 
       objectReference: {fileID: 1808374857}
-    - target: {fileID: 8375307396598538245, guid: 50be0bf80a811384d8fca4bb957188ff,
-        type: 3}
-      propertyPath: enemyPositionsF.Array.data[1].y
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 8375307396598538245, guid: 50be0bf80a811384d8fca4bb957188ff,
-        type: 3}
-      propertyPath: enemyPositionsF.Array.data[2].y
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 8375307396598538245, guid: 50be0bf80a811384d8fca4bb957188ff,
-        type: 3}
-      propertyPath: enemyPositionsF.Array.data[3].y
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 8375307396598538245, guid: 50be0bf80a811384d8fca4bb957188ff,
-        type: 3}
-      propertyPath: enemyPositionsF.Array.data[4].y
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 8375307396598538245, guid: 50be0bf80a811384d8fca4bb957188ff,
-        type: 3}
-      propertyPath: enemyPositionsF.Array.data[5].y
-      value: 82
-      objectReference: {fileID: 0}
     - target: {fileID: 9052588749714916937, guid: 50be0bf80a811384d8fca4bb957188ff,
         type: 3}
       propertyPath: girl

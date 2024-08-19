@@ -52,9 +52,6 @@ public class QuestManager : MonoBehaviour, IListener
                 quests.currCount = 0;
             }
         }
-
-        AcceptQuest("RevoltLastQuest");
-        AcceptQuest("NoteLastQuest");
     }
 
     private void Awake()
