@@ -23,6 +23,8 @@ public class SaveManager : Singleton<SaveManager>
     public PlayerSaveStatus playerSaveStatus;
     public GameObject dieUI;
 
+    public bool isSeperated;
+
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -76,14 +78,7 @@ public class SaveManager : Singleton<SaveManager>
             saveItem.SetActive(true);
             tempNPCDestroy.RemoveAt(tempNPCDestroy.Count - 1);
         }
-
-        Time.timeScale = 1.0f;
-        dieUI.SetActive(false);
-        GameObject[] bloods = GameObject.FindGameObjectsWithTag("blood");
-        foreach (var blood in bloods)
-        {
-            Destroy(blood);
-        }
+        
         EventManager.Instance.PostNotification(Event_Type.eLoad, this);
         if (RevoltRouteManager.Instance.currentEvent != null)
         {
@@ -99,5 +94,14 @@ public class SaveManager : Singleton<SaveManager>
         {
             StopCoroutine(CommonRouteManager.Instance.currentEvent);
         }
+
+        Time.timeScale = 1.0f;
+        dieUI.SetActive(false);
+        GameObject[] bloods = GameObject.FindGameObjectsWithTag("blood");
+        foreach (var blood in bloods)
+        {
+            Destroy(blood);
+        }
+        EventManager.Instance.PostNotification(Event_Type.eLoad, this);
     }
 }
