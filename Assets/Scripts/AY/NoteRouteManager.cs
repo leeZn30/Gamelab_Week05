@@ -62,6 +62,11 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
 
+    void Start()
+    {
+        // QuestManager.Instance.AcceptQuest("NoteLastQuest");
+    }
+
     // 노트를 봤다면 이벤트 실행
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
     {

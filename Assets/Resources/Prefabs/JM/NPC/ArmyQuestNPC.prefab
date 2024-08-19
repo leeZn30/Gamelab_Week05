@@ -251,7 +251,7 @@ MonoBehaviour:
   side: 2
   type: Long
   health: 0
-  maxHealth: 0
+  maxHealth: 30
   weapon: {fileID: 3822939385306119993}
   damage: 0
   attackRange: 10
@@ -260,11 +260,10 @@ MonoBehaviour:
   isPatrol: 0
   isBattle: 0
   state: 0
-  resetDistance: 0
+  resetDistance: 7
   damaged: {fileID: 6172006986636051679}
   distaance: 0
   blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
-  saveIndex: -1
   isDeath: 0
 --- !u!114 &78477634468401303
 MonoBehaviour:
@@ -278,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b557556b0b483642ade6ee60097ed5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runningNpc: 0
   targetPosition: {x: 0, y: 0, z: 0}
   chaseDistance: 10
   fleeDistance: 5
@@ -332,7 +332,6 @@ MonoBehaviour:
   completeQuest: {fileID: 2660137703191005050}
   questDialogueCompleted: 0
   isDeath: 0
-  saveIndex: -1
 --- !u!212 &8849346184691921320
 SpriteRenderer:
   m_ObjectHideFlags: 0

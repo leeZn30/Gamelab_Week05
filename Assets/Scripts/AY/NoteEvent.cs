@@ -193,7 +193,7 @@ public class NoteEvent : MonoBehaviour
         teleport.SetActive(false);
         Girl0.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        // yield return new WaitForSeconds(1f);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueIdF_0);
@@ -220,7 +220,7 @@ public class NoteEvent : MonoBehaviour
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
 
-        yield return null;
+        teleport.SetActive(false);
     }
 
 
