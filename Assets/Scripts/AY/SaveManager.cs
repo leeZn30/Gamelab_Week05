@@ -21,6 +21,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public NoteData savedNote;
     public PlayerSaveStatus playerSaveStatus;
+    public GameObject dieUI; 
 
     void Awake()
     {
@@ -76,6 +77,13 @@ public class SaveManager : Singleton<SaveManager>
             tempNPCDestroy.RemoveAt(tempNPCDestroy.Count - 1);
         }
 
+        Time.timeScale = 1.0f;
+        dieUI.SetActive(false);
+        GameObject[] bloods = GameObject.FindGameObjectsWithTag("blood");
+        foreach (var blood in bloods)
+        {
+            Destroy(blood);
+        }
         EventManager.Instance.PostNotification(Event_Type.eLoad, this);
     }
 }
