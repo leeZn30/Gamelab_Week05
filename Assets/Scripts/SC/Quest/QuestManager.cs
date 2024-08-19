@@ -75,7 +75,7 @@ public class QuestManager : MonoBehaviour, IListener
 
     public void OnQuestClear(string questName)
     {
-        Debug.Log("OnClearQuest: " + questName);
+        // Debug.Log("OnClearQuest: " + questName);
 
         StartCoroutine(CompleteQuest(questName));
         DeleteQuests(deleteCount);
@@ -188,8 +188,6 @@ public class QuestManager : MonoBehaviour, IListener
         {
             if (activeQuests[j].questName == questName)
             {
-                Debug.Log(j);
-
                 activeQuests[j].isCompleted = true;
                 GameObject questText = activeQuestTexts[j];
                 questText.GetComponent<TextMeshProUGUI>().text = $"<s>{questText.GetComponent<TextMeshProUGUI>().text}</s>";

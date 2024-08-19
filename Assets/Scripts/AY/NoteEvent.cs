@@ -173,7 +173,7 @@ public class NoteEvent : MonoBehaviour
     // 마지막 퀘스트 완료하면 전투 해야함
     public IEnumerator FinalBattle()
     {
-        player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 2;
+        player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 4;
         yield return new WaitForSeconds(0.5f);
 
         teleport.SetActive(false);

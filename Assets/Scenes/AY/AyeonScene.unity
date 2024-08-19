@@ -833,6 +833,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 835696995}
+    - target: {fileID: 4114698405490400515, guid: 47c3b3d56bd6afe4d9705dc1df6516a9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158082714175546180, guid: 47c3b3d56bd6afe4d9705dc1df6516a9,
+        type: 3}
+      propertyPath: m_Name
+      value: ReviveButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10201,6 +10211,7 @@ MonoBehaviour:
     type: 3}
   activeQuestTexts: []
   sumRevoltQuest: 0
+  deleteCount: 
 --- !u!4 &561422228
 Transform:
   m_ObjectHideFlags: 0
@@ -31748,17 +31759,17 @@ PrefabInstance:
     - target: {fileID: 626483840691094795, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 626483840691094795, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 626483840691094795, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2094562570039198571, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
@@ -31768,22 +31779,22 @@ PrefabInstance:
     - target: {fileID: 2094562570039198571, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3528648317068956288, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3528648317068956288, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3528648317068956288, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 4577025040394997144, guid: 4ae634f7ad6b80e4280795f07ca4b270,
         type: 3}

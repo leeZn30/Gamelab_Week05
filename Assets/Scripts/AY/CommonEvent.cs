@@ -15,7 +15,7 @@ public class CommonEvent : MonoBehaviour
     [Header("UI")]
     GameObject LastChoiceUI;
     Button noteButton;
-    Button revoltButton;
+    [SerializeField] Button revoltButton;
 
     [Header("Prefabs")]
     [SerializeField] GameObject resistanceDefault;
@@ -143,6 +143,9 @@ public class CommonEvent : MonoBehaviour
 
     IEnumerator LastChoiceEvent()
     {
+        player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 4;
+        yield return new WaitForSeconds(0.5f);
+
         // 대사
 
         // 최종 선택 하기
@@ -153,8 +156,7 @@ public class CommonEvent : MonoBehaviour
         if (lastChoice == 0)
         {
             // 말 시작
-
-            // CommonRouteManager.Instance.CallNoteFinal();
+            NoteRouteManager.Instance.callFinalBattle();
         }
         else
         {
