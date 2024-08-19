@@ -230,9 +230,10 @@ public class Player_Movement : MonoBehaviour
         if (collision.transform.CompareTag("Bullet"))
         {
             isDamaged = true;
-            DataManager.Instance.Health--;
+            DataManager.Instance.Health -= 0.5f;
 
             DataManager.Instance.ResetCoolDownTime = 0;
+
         }
     }
 }

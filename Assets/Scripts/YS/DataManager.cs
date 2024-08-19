@@ -111,8 +111,10 @@ public class DataManager : MonoBehaviour
             for(int i = 0; i < GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().playerGun.Count; i++)
             {
                 GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().playerGun[i].SetActive(false);
+                GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().currentGunIndex = 0;
                 GameObject.FindWithTag("Player").GetComponent<PlayerGunManager>().isActive = false;
             }
+            GameObject.FindWithTag("Player").GetComponent<PlayerUI>().battleUI.SetActive(false);
 
         }
     }

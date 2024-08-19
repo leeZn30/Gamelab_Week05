@@ -364,6 +364,33 @@ public class NPCInfo : MonoBehaviour, IListener
                 }
             }
         }
+
+        if (collision.transform.CompareTag("Sword"))
+        {
+            health = health - 5;
+            float randX = UnityEngine.Random.Range(transform.position.x - 1, transform.position.x + 1);
+            float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
+
+            Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+            DataManager.Instance.playerState = "Battle";
+
+
+            if (weapon != null && !questNPC)
+            {
+                StartCoroutine(DamagedDelay());
+            }
+
+
+            if (weapon != null && questNPC)
+            {
+                hitTime++;
+
+                if (hitTime >= 5)
+                {
+                    StartCoroutine(DamagedDelay());
+                }
+            }
+        }
     }
 
     IEnumerator DamagedDelay()

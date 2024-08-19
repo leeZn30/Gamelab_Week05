@@ -7,11 +7,17 @@ public class BulletControl : MonoBehaviour
     public float speed;
     public float lifeTime;
 
+    public AudioSource AudioSource;
+    public AudioClip AudioClip;
+
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        AudioSource = GetComponent<AudioSource>();
+
+        AudioSource.PlayOneShot(AudioClip);
         Destroy(gameObject, lifeTime);
     }
 
@@ -23,7 +29,7 @@ public class BulletControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player") || collision.collider.CompareTag("Cult") || collision.collider.CompareTag("Resistance"))
+        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Player") || collision.collider.CompareTag("Cult") || collision.collider.CompareTag("Resistance") || collision.collider.CompareTag("Statue"))
         {
             Destroy(gameObject);
         }

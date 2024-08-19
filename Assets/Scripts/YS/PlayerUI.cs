@@ -10,43 +10,48 @@ public class PlayerUI : MonoBehaviour
     public GameObject PlayerGunUI;
     public TextMeshProUGUI gunIndexText;
 
-    private GameObject battleUI;
+    public GameObject battleUI;
 
     void Awake()
     {
         battleUI = GameObject.Find("BattleUI");
         healthUIManager = battleUI.GetComponentInChildren<HealthUIManager>();
         PlayerGunUI = battleUI.transform.Find("SkillCoolDown").gameObject;
+
+        battleUI.SetActive(false);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerGunSetting();
+        //PlayerGunSetting();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (DataManager.Instance.playerState == "Battle")
+
+        healthUIManager.SethealthCount(DataManager.Instance.Health);
+
+        if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
         {
             if (battleUI != null)
             {
-                battleUI.SetActive(true);
-                healthUIManager.SethealthCount(DataManager.Instance.Health);
+                //battleUI.SetActive(true);
             }
         }
+        
 
         if (DataManager.Instance.playerState != "Battle")
         {
             if (battleUI != null)
             {
-                battleUI.SetActive(false);
+                //battleUI.SetActive(false);
             }
         }
     }
 
-
+    /*
     void PlayerGunSetting()
     {
         for (int i = 0; i < GetComponent<PlayerGunManager>().playerGun.Count; i++)
@@ -54,9 +59,10 @@ public class PlayerUI : MonoBehaviour
             GetComponent<PlayerGunManager>().playerGun[i].SetActive(false);
         }
 
-        GetComponent<PlayerGunManager>().playerGun[GetComponent<PlayerGunManager>().currentGunIndex].SetActive(true);
+        // GetComponent<PlayerGunManager>().playerGun[GetComponent<PlayerGunManager>().currentGunIndex].SetActive(true);
 
     }
+    */
     void GunUI()
     {
         PlayerGunUI.SetActive(true);
