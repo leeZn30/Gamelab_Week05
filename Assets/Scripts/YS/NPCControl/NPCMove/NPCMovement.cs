@@ -17,18 +17,18 @@ public class NPCMovement : MonoBehaviour
     private float maxY = 5.0f;
 
 
-    [Header ("Target")]
+    [Header("Target")]
     public Vector3 targetPosition;
     private Vector2Int targetPos;
 
     private bool isWall;
 
-    private enum NPCState { Chase, Flee, Wander, Battle, Run, Idle, Patrol}
+    private enum NPCState { Chase, Flee, Wander, Battle, Run, Idle, Patrol }
     private NPCState currentState;
 
     [Header("Distance")]
-    public float chaseDistance = 10.0f;  
-    public float fleeDistance = 5.0f;    
+    public float chaseDistance = 10.0f;
+    public float fleeDistance = 5.0f;
     public float wanderDistance = 15.0f;
 
 
@@ -67,7 +67,7 @@ public class NPCMovement : MonoBehaviour
 
 
         if (GetComponent<NPCInfo>().isPatrol)
-        {   
+        {
             currentState = NPCState.Patrol;
 
             Behave();
@@ -99,7 +99,7 @@ public class NPCMovement : MonoBehaviour
         }
 
         MoveToTarget();
-        
+
     }
 
 
@@ -145,12 +145,12 @@ public class NPCMovement : MonoBehaviour
             {
                 currentState = NPCState.Wander;
             }
-            
+
             if (Vector2.Distance(transform.position, GetComponent<NPCInfo>().target.transform.position) < GetComponent<NPCInfo>().attackRange)
             {
                 currentState = NPCState.Battle;
             }
-            
+
         }
         else if (!GetComponent<NPCInfo>().isBattle)
         {
@@ -180,7 +180,7 @@ public class NPCMovement : MonoBehaviour
                 break;
 
             case NPCState.Run:
-                Run(); 
+                Run();
                 break;
 
             case NPCState.Idle:
@@ -234,7 +234,7 @@ public class NPCMovement : MonoBehaviour
     {
         GameObject[] runs = GameObject.FindGameObjectsWithTag("Run");
         moveSpeed = 5;
-        if(runs != null)
+        if (runs != null)
         {
             if (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, transform.position) < 2f)
             {
@@ -253,10 +253,10 @@ public class NPCMovement : MonoBehaviour
         targetPosition = PatrolLocation[patrolIndex];
         PatrolIndexChange();
     }
-    
+
     void PatrolIndexChange()
     {
-        if (Vector2.Distance(transform.position ,PatrolLocation[patrolIndex]) < 1)
+        if (Vector2.Distance(transform.position, PatrolLocation[patrolIndex]) < 1)
         {
             if (patrolIndex == PatrolLocation.Count - 1)
             {
@@ -386,7 +386,7 @@ public class NPCMovement : MonoBehaviour
             yield return new WaitForSeconds(0.8f);
             //Debug.Log("PathFinding");
             GetComponent<MoveManager>().PathFindingToTargetPos(targetPos);
-            
+
         }
     }
 

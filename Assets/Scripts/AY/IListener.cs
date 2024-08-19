@@ -8,8 +8,9 @@ public enum Event_Type
     normal,
     eGameStart,
     eRevoltQuestDone,
+    eRevoltLastQuestDone,
     eNoteRead,
-    eNoteQuestDone,
+    eNoteLastQuestDone,
     eSave,
     eLoad,
     eGrandmaTalked

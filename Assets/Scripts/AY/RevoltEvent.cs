@@ -54,6 +54,21 @@ public class RevoltEvent : MonoBehaviour
         Debug.Log("End Revolt Event");
     }
 
+    public IEnumerator DoEvent(Action onComplete, string name)
+    {
+        Debug.Log("Start Revolt Event");
+
+        switch (name)
+        {
+            case "RevoltLastQuest": // last
+                yield return StartCoroutine(FinalBattle());
+                break;
+        }
+
+        onComplete?.Invoke();
+        Debug.Log("End Revolt Event");
+    }
+
     IEnumerator Event1()
     {
         // npc 생성함
@@ -87,7 +102,7 @@ public class RevoltEvent : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
-        yield return new WaitUntil(() => enemies.All(e => e == null));
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
 
         // 대화2
         DialogueManager.Instance.SetDialogueID(dialogueId3_1);

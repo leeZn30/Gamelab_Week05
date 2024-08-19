@@ -64,10 +64,13 @@ public class QuestManager : MonoBehaviour, IListener
         {
             Destroy(gameObject);
         }
+
     }
 
     public void OnQuestClear(string questName)
     {
+        Debug.Log("OnClearQuest: " + questName);
+
         StartCoroutine(CompleteQuest(questName));
         switch (questName)
         {
@@ -85,19 +88,22 @@ public class QuestManager : MonoBehaviour, IListener
                 break;
             case "NoteLastQuest":
                 Debug.Log("특정 위치 가기 퀘스트 클리어");
-                // StartCoroutine(NoteRouteManager.Instance.noteEvent.CallEvent("FinalBattle"));
-                EventManager.Instance.PostNotification(Event_Type.eNoteQuestDone, this, FindQuest(questName));
+                EventManager.Instance.PostNotification(Event_Type.eNoteLastQuestDone, this, FindQuest(questName));
                 break;
             case "RevoltQuest3":
                 if (FindQuest("RevoltQuest4").isCompleted)
                 {
                     questName = "RevoltQuest34";
+                    // AcceptQuest("RevoltQuest34");
+                    // OnQuestClear("RevoltQuest34");
                 }
                 break;
             case "RevoltQuest4":
                 if (FindQuest("RevoltQuest3").isCompleted)
                 {
-                    questName = "RevoltQuest34";
+                    questName = "RevoltQuest34"; ;
+                    // AcceptQuest("RevoltQuest34");
+                    // OnQuestClear("RevoltQuest34");
                 }
                 break;
 
@@ -113,6 +119,10 @@ public class QuestManager : MonoBehaviour, IListener
                 {
                     AcceptQuest("RevoltQuest67");
                 }
+                break;
+
+            case "RevoltLastQuest":
+                EventManager.Instance.PostNotification(Event_Type.eRevoltLastQuestDone, this, FindQuest(questName));
                 break;
         }
 
@@ -258,46 +268,47 @@ public class QuestManager : MonoBehaviour, IListener
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
     {
-            switch (EventType)
-            {
-                case Event_Type.eSave:
-                    foreach (var quest in allQuests)
-                    {
-                        QuestManagerStatus questManagerStatus = new QuestManagerStatus(quest.isCompleted, quest.isActived, quest.currCount);
-                        SaveManager.Instance.saveQuestManagerStatus.Add(questManagerStatus);
-                    }
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                foreach (var quest in allQuests)
+                {
+                    QuestManagerStatus questManagerStatus = new QuestManagerStatus(quest.isCompleted, quest.isActived, quest.currCount);
+                    SaveManager.Instance.saveQuestManagerStatus.Add(questManagerStatus);
+                }
 
-                    for(int i = 0; i< activeQuests.Count; i++)
-                    {
-                        SaveManager.Instance.saveActiveQuests.Add(activeQuests[i]);
-                        SaveManager.Instance.saveQuestText.Add(activeQuestTexts[i].GetComponent<TextMeshProUGUI>().text);
-                    }
-                    break;
-                case Event_Type.eLoad:
-                    foreach (var texts in activeQuestTexts)
-                    {
-                        Destroy(texts);
-                    }
+                for (int i = 0; i < activeQuests.Count; i++)
+                {
+                    SaveManager.Instance.saveActiveQuests.Add(activeQuests[i]);
+                    SaveManager.Instance.saveQuestText.Add(activeQuestTexts[i].GetComponent<TextMeshProUGUI>().text);
+                }
+                break;
 
-                    activeQuestTexts.Clear();
-                    activeQuests.Clear();
+            case Event_Type.eLoad:
+                foreach (var texts in activeQuestTexts)
+                {
+                    Destroy(texts);
+                }
 
-                    for (int i = 0; i < SaveManager.Instance.saveActiveQuests.Count; i++)
-                    {
-                        GameObject newQuestText = Instantiate(questTextPrefab, questListParent);
-                        newQuestText.GetComponent<TextMeshProUGUI>().text = SaveManager.Instance.saveQuestText[i];
-                        activeQuestTexts.Add(newQuestText);
-                        activeQuests.Add(SaveManager.Instance.saveActiveQuests[i]);
-                    }
+                activeQuestTexts.Clear();
+                activeQuests.Clear();
+
+                for (int i = 0; i < SaveManager.Instance.saveActiveQuests.Count; i++)
+                {
+                    GameObject newQuestText = Instantiate(questTextPrefab, questListParent);
+                    newQuestText.GetComponent<TextMeshProUGUI>().text = SaveManager.Instance.saveQuestText[i];
+                    activeQuestTexts.Add(newQuestText);
+                    activeQuests.Add(SaveManager.Instance.saveActiveQuests[i]);
+                }
 
 
-                    for (int i = 0; i < allQuests.Count; i++)
-                    {
-                        allQuests[i].isCompleted = SaveManager.Instance.saveQuestManagerStatus[i].isCompleted;
-                        allQuests[i].isActived = SaveManager.Instance.saveQuestManagerStatus[i].isActived;
-                        allQuests[i].currCount = SaveManager.Instance.saveQuestManagerStatus[i].currCount;
-                    }
-                    break;
-            }
+                for (int i = 0; i < allQuests.Count; i++)
+                {
+                    allQuests[i].isCompleted = SaveManager.Instance.saveQuestManagerStatus[i].isCompleted;
+                    allQuests[i].isActived = SaveManager.Instance.saveQuestManagerStatus[i].isActived;
+                    allQuests[i].currCount = SaveManager.Instance.saveQuestManagerStatus[i].currCount;
+                }
+                break;
+        }
     }
 }

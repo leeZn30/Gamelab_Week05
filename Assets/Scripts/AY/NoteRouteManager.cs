@@ -20,7 +20,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
     [SerializeField] NoteEvent noteEvent;
 
     [Header("최종 루트 진입 직전")]
-    [SerializeField] bool isEveLast;
+    public bool isLast;
 
     void Awake()
     {
@@ -57,7 +57,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
         // 이벤트 등록
         EventManager.Instance.AddListener(Event_Type.eNoteRead, this);
-        EventManager.Instance.AddListener(Event_Type.eNoteQuestDone, this);
+        EventManager.Instance.AddListener(Event_Type.eNoteLastQuestDone, this);
         EventManager.Instance.AddListener(Event_Type.eSave, this);
         EventManager.Instance.AddListener(Event_Type.eLoad, this);
     }
@@ -77,9 +77,9 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 
                 break;
 
-            case Event_Type.eNoteQuestDone:
-                currentQuestSO = (QuestSO)Param;
-                StartCoroutine(NoteQuestEventCheck());
+            case Event_Type.eNoteLastQuestDone:
+                isLast = true;
+                CommonRouteManager.Instance.LastChoiceEventCheck();
                 break;
 
             case Event_Type.eSave:
@@ -87,7 +87,7 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 break;
 
             case Event_Type.eLoad:
-                for (int i = 0; i< noteDatas.Count; i++)
+                for (int i = 0; i < noteDatas.Count; i++)
                 {
                     noteDatas[i].isTarget = false;
                 }
@@ -95,6 +95,13 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
                 currentNoteData.order = SaveManager.Instance.savedNote.order;
                 break;
         }
+    }
+
+    public IEnumerator CallNoteFinalEvent()
+    {
+        bool isComplete = false;
+        StartCoroutine(noteEvent.DoEvent(() => isComplete = true, "NoteLastQuest"));
+        yield return new WaitUntil(() => isComplete);
     }
 
     IEnumerator OnNoteClosed()
