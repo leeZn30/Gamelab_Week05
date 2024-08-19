@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,24 +20,6 @@ public class Item_To_Player : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         price = Random.Range(100, 200);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (canGet && InputManager.Instance.controls.Player.Interaction.WasPerformedThisFrame())
-        {
-            if(DataManager.Instance.money >= price)
-            {
-                var obj = Instantiate(relatedObject, player.transform.GetChild(1).GetChild(0));
-                player.GetComponent<PlayerGunManager>().playerGun.Add(obj);
-                obj.SetActive(false);
-
-                DataManager.Instance.money -= price;
-
-                Destroy(gameObject);
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,3 +47,4 @@ public class Item_To_Player : MonoBehaviour
     }
 
 }
+*/

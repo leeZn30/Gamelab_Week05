@@ -266,23 +266,36 @@ public class QuestManager : MonoBehaviour, IListener
                         QuestManagerStatus questManagerStatus = new QuestManagerStatus(quest.isCompleted, quest.isActived, quest.currCount);
                         SaveManager.Instance.saveQuestManagerStatus.Add(questManagerStatus);
                     }
+
+                    for(int i = 0; i< activeQuests.Count; i++)
+                    {
+                        SaveManager.Instance.saveActiveQuests.Add(activeQuests[i]);
+                        SaveManager.Instance.saveQuestText.Add(activeQuestTexts[i].GetComponent<TextMeshProUGUI>().text);
+                    }
                     break;
                 case Event_Type.eLoad:
                     foreach (var texts in activeQuestTexts)
                     {
-                        texts.SetActive(false);
+                        Destroy(texts);
                     }
 
-                for (int i = 0; i < allQuests.Count; i++)
+                    activeQuestTexts.Clear();
+                    activeQuests.Clear();
+
+                    for (int i = 0; i < SaveManager.Instance.saveActiveQuests.Count; i++)
+                    {
+                        GameObject newQuestText = Instantiate(questTextPrefab, questListParent);
+                        newQuestText.GetComponent<TextMeshProUGUI>().text = SaveManager.Instance.saveQuestText[i];
+                        activeQuestTexts.Add(newQuestText);
+                        activeQuests.Add(SaveManager.Instance.saveActiveQuests[i]);
+                    }
+
+
+                    for (int i = 0; i < allQuests.Count; i++)
                     {
                         allQuests[i].isCompleted = SaveManager.Instance.saveQuestManagerStatus[i].isCompleted;
                         allQuests[i].isActived = SaveManager.Instance.saveQuestManagerStatus[i].isActived;
                         allQuests[i].currCount = SaveManager.Instance.saveQuestManagerStatus[i].currCount;
-
-                        if (allQuests[i].isCompleted)
-                        {
-
-                        }
                     }
                     break;
             }

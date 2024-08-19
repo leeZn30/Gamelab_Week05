@@ -106,13 +106,16 @@ public class DoorInteraction : MonoBehaviour, IListener
                 saveIndex = SaveManager.Instance.savedDoorStatus.Count - 1;
                 break;
             case Event_Type.eLoad:
-                if (SaveManager.Instance.savedDoorStatus[saveIndex].isOpend)
+                if (saveIndex != -1)
                 {
-                    OpenDoor();
-                }
-                else
-                {
-                    CloseDoor();
+                    if (SaveManager.Instance.savedDoorStatus[saveIndex].isOpend)
+                    {
+                        OpenDoor();
+                    }
+                    else
+                    {
+                        CloseDoor();
+                    }
                 }
                 break;
         }
