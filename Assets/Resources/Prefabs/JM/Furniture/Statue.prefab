@@ -148,7 +148,6 @@ MonoBehaviour:
   isActive: 0
   targetQuest: 
   isDeath: 0
-  saveIndex: -1
 --- !u!1 &3109647023932369831
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +296,6 @@ MonoBehaviour:
   isActive: 0
   targetQuest: 
   isDeath: 0
-  saveIndex: -1
 --- !u!1 &8438088247443564962
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   childObjectToActivate: {fileID: 2045785499690882295}
   childObjectToDisactivate: {fileID: 3109647023932369831}
+  isBreak: 0
 --- !u!61 &5971115564153789744
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -379,7 +378,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07999259, y: 1.0898808}
+  m_Offset: {x: -0.07999253, y: 0.0261029}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -390,5 +389,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.159875, y: 2.2998588}
+  m_Size: {x: 2.159875, y: 4.427415}
   m_EdgeRadius: 0

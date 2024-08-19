@@ -111,6 +111,10 @@ public class Shoot : MonoBehaviour
     {
         isReloading = true;
         currentAmmo = DataManager.Instance.BulletCount;
+        if (currentAmmo >= 21)
+        {
+            currentAmmo = 20;
+        }
         bulletUIManager.SetBulletCount(currentAmmo);
 
         yield return new WaitForSeconds(1);
@@ -122,6 +126,10 @@ public class Shoot : MonoBehaviour
     {
         isReloading = true;
         currentAmmo = leftAmmo;
+        if (currentAmmo >= 21)
+        {
+            currentAmmo = 20;
+        }
         bulletUIManager.SetBulletCount(currentAmmo);
 
         yield return new WaitForSeconds(1);

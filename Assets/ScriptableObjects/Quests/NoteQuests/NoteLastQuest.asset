@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: NoteLastQuest
   m_EditorClassIdentifier: 
   questName: NoteLastQuest
-  description: "\uC625\uC0C1\uC73C\uB85C \uAC00\uAE30"
+  description: "\uCABD\uC9C0\uC758 \uC8FC\uC778\uC744 \uCC3E\uC544 \uC625\uC0C1\uC73C\uB85C
+    \uAC00\uAE30"
   returnNPC: 0
   KillEnemies: 0
   ReachLocation: 1
   ReachItem: 0
   ReachNPC: 0
-  isCompleted: 0
+  isCompleted: 1
   isActived: 1
   eventType: 5
   targetObject: Rooftop_N
