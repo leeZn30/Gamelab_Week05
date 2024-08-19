@@ -30,13 +30,14 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        healthUIManager.SethealthCount(DataManager.Instance.Health);
+
         if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
         {
             if (battleUI != null)
             {
                 //battleUI.SetActive(true);
-                healthUIManager.SethealthCount(DataManager.Instance.Health);
             }
         }
         
