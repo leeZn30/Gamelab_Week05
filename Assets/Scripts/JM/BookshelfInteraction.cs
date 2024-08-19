@@ -19,6 +19,7 @@ public class BookshelfInteraction : MonoBehaviour, IListener
     private int saveIndex = -1;
     private Vector3 initialPosition; // 책장의 초기 위치
     private Vector3 targetPosition; // 책장이 이동할 목표 위치
+    private Rigidbody2D rb; // Rigidbody2D 컴포넌트
 
     void Awake()
     {
@@ -44,6 +45,11 @@ public class BookshelfInteraction : MonoBehaviour, IListener
     private IEnumerator MoveBookshelf()
     {
         isMoving = true;
+        // X축 잠금 해제
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
 
         // 책장을 목표 위치로 이동시킵니다.
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
@@ -54,6 +60,11 @@ public class BookshelfInteraction : MonoBehaviour, IListener
 
         transform.position = targetPosition; // 정확한 위치 보정
         isMoving = false;
+        // X축 잠금 다시 설정
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
