@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class RevoltEvent : MonoBehaviour
 {
@@ -258,7 +259,10 @@ public class RevoltEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        CutsceneManager.Instance.PlayCutsceneByName("03_QuestEnding");
 
         teleport.SetActive(false);
     }
+
+
 }

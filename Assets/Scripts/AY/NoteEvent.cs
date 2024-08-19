@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class NoteEvent : MonoBehaviour
 {
+
     [Header("Player")]
     GameObject player;
 
@@ -235,6 +236,8 @@ public class NoteEvent : MonoBehaviour
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
         yield return new WaitForSeconds(0.5f);
 
+        BattleManager.Instance.Cult.Add(GameObject.FindWithTag("Player"));
+
         // 전투
         yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
 
@@ -242,9 +245,9 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        CutsceneManager.Instance.PlayCutsceneByName("02_NoteEnding");
 
         teleport.SetActive(false);
     }
-
 
 }

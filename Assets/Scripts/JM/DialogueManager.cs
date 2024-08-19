@@ -96,14 +96,17 @@ public class DialogueManager : Singleton<DialogueManager>
 
     IEnumerator TypeSentence(string sentence)
     {
-        dialogueText.text = $"{currentSpeaker}: "; // 캐릭터 이름을 먼저 출력foreach (char letter in sentence.ToCharArray())
-        foreach (char letter in sentence.ToCharArray())
+        // TypeSentence 실행 중에도 currentSpeaker를 계속 확인하여 업데이트
+        while (dialogueText.text != $"{currentSpeaker}: {sentence}")
         {
-            dialogueText.text += letter;
-            yield return null;
+            dialogueText.text = $"{currentSpeaker}: "; // 캐릭터 이름을 먼저 출력
+            foreach (char letter in sentence.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return null;
+            }
         }
     }
-
     void EndDialogue()
     {
         dialogueUI.SetActive(false);
