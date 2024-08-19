@@ -54,6 +54,21 @@ public class RevoltEvent : MonoBehaviour
         Debug.Log("End Revolt Event");
     }
 
+    public IEnumerator DoEvent(Action onComplete, string name)
+    {
+        Debug.Log("Start Revolt Event");
+
+        switch (name)
+        {
+            case "RevoltLastQuest": // last
+                yield return StartCoroutine(FinalBattle());
+                break;
+        }
+
+        onComplete?.Invoke();
+        Debug.Log("End Revolt Event");
+    }
+
     IEnumerator Event1()
     {
         // npc 생성함

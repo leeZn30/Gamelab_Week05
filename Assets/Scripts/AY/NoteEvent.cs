@@ -188,15 +188,7 @@ public class NoteEvent : MonoBehaviour
     // 마지막 퀘스트 완료하면 전투 해야함
     public IEnumerator FinalBattle()
     {
-        // 적이 엄청 생성됨
-        List<GameObject> enemies = new List<GameObject>();
-        for (int i = 0; i < 4; i++)
-        {
-            enemies.Add(Instantiate(resistanceEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
-        }
-
-        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
-
+        yield return null;
     }
 
 

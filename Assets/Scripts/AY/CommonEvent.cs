@@ -2,13 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CommonEvent : MonoBehaviour
 {
     public int currentEvent;
+    public int lastChoice = -1;
 
     [Header("Player")]
     GameObject player;
+
+    [Header("UI")]
+    GameObject LastChoiceUI;
+    Button noteButton;
+    Button revoltButton;
 
     [Header("Prefabs")]
     [SerializeField] GameObject resistanceDefault;
@@ -28,6 +35,13 @@ public class CommonEvent : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
+
+        LastChoiceUI = GameObject.Find("LastChoiceUI");
+        noteButton = GameObject.Find("NoteRouteButton").GetComponent<Button>();
+        revoltButton = GameObject.Find("RevoltRouteButton").GetComponent<Button>();
+        noteButton.onClick.AddListener(() => { lastChoice = 0; LastChoiceUI.SetActive(false); });
+        revoltButton.onClick.AddListener(() => { lastChoice = 1; LastChoiceUI.SetActive(false); });
+        LastChoiceUI.SetActive(false);
     }
 
     public IEnumerator DoEvent(Action onComplete, Event_Type type)
@@ -38,13 +52,22 @@ public class CommonEvent : MonoBehaviour
         {
             case Event_Type.eGameStart:
                 yield return StartCoroutine(Intro());
-
                 break;
 
             case Event_Type.eGrandmaTalked:
                 yield return StartCoroutine(GrandmaEvent());
                 break;
         }
+
+        onComplete?.Invoke();
+        Debug.Log("End Common Event");
+    }
+
+    public IEnumerator DoLastChoiceEvent(Action onComplete)
+    {
+        Debug.Log("Start Common Event");
+
+        yield return LastChoiceEvent();
 
         onComplete?.Invoke();
         Debug.Log("End Common Event");
@@ -117,6 +140,29 @@ public class CommonEvent : MonoBehaviour
         Destroy(go2);
         grandma.SetActive(false);
         sprite3.color = new Color(sprite3.color.r, sprite3.color.g, sprite3.color.b, 1);
+    }
+
+    IEnumerator LastChoiceEvent()
+    {
+        // 대사
+
+        // 최종 선택 하기
+        LastChoiceUI.SetActive(true);
+        yield return new WaitUntil(() => !LastChoiceUI.activeSelf);
+
+        // 최종 선택 별 말
+        if (lastChoice == 0)
+        {
+            // 말 시작
+
+            CommonRouteManager.Instance.CallNoteFinal();
+        }
+        else
+        {
+            // 말 시작
+
+            CommonRouteManager.Instance.CallRevoltFinal();
+        }
     }
 
 
