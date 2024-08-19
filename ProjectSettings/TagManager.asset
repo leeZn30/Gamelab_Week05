@@ -12,6 +12,7 @@ TagManager:
   - Canvas
   - Statue
   - Sword
+  - blood
   layers:
   - Default
   - TransparentFX

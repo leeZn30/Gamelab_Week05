@@ -61,7 +61,7 @@ public class NPCInteraction : MonoBehaviour, IListener
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -118,6 +118,11 @@ public class NPCInteraction : MonoBehaviour, IListener
                 case Event_Type.eLoad:
                     isActive = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isActive;
                     isSend = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isSend;
+                    isPlayerInRange = false;
+                    if (interactionUI != null)
+                    {
+                        interactionUI.SetActive(false);
+                    }
                     break;
             }
         }
