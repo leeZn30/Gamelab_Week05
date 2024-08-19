@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/03_QuestEnding.unity
     guid: 96078c60a2af24c4482a9aa4f5a51847
+  - enabled: 1
+    path: Assets/Scenes/00_MainScene.unity
+    guid: 6b31f560e4eea274fa66d442e89f0a4d
   m_configObjects: {}

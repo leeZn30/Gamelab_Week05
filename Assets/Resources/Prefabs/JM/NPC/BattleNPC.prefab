@@ -1,55 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &69173816197808940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2402024880302620805}
-  - component: {fileID: 6540461677460437161}
-  m_Layer: 8
-  m_Name: Raycast
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2402024880302620805
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69173816197808940}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.66, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3255447953168620608}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6540461677460437161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69173816197808940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f71e4683c7ea44596f2ca03935660a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 5
-  numRays: 20
-  coneAngle: 60
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &128865448450425839
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +592,7 @@ MonoBehaviour:
   attackRange: 10
   attackSpeed: 0.6
   target: {fileID: 0}
-  isPatrol: 0
+  isPatrol: 1
   isBattle: 0
   state: 0
   resetDistance: 10
@@ -667,11 +617,17 @@ MonoBehaviour:
   chaseDistance: 10
   fleeDistance: 5
   wanderDistance: 15
-  PatrolLocation: []
+  PatrolLocation:
+  - {x: 8.2, y: -82, z: 0}
+  - {x: 8.2, y: -92, z: 0}
   patrolIndex: 0
   patWhat: 0
   idleStop: 0
   moveSpeed: 0
+  spinUp: 0
+  spinDown: 0
+  spinLeft: 0
+  spinRight: 0
 --- !u!1 &7299696127629854729
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3255447953168620608}
   - component: {fileID: 2306461578078324539}
+  - component: {fileID: 2185470551369688889}
   m_Layer: 8
   m_Name: NPCGunRotatePos
   m_TagString: Untagged
@@ -868,7 +825,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8329251556977666239}
-  - {fileID: 2402024880302620805}
   m_Father: {fileID: 6191228726517070680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2306461578078324539
@@ -887,6 +843,18 @@ MonoBehaviour:
   aimPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
   targetPos: {x: 0, y: 0}
+--- !u!114 &2185470551369688889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462435281715169430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4e7804eb6f15e49a47ff4fc327cd03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8570762537521585238
 GameObject:
   m_ObjectHideFlags: 0
