@@ -82,20 +82,26 @@ public class Player_Movement : MonoBehaviour
             
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
 
-            for (int i = 0; i < hitColliders.Length; i++)
+            if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
             {
-                if (hitColliders[i].CompareTag("Cult"))
+                for (int i = 0; i < hitColliders.Length; i++)
                 {
-                    if (DataManager.Instance.playerState == "Battle")
+                    if (hitColliders[i].CompareTag("Cult"))
                     {
-                        if (!hitColliders[i].GetComponent<NPCInfo>().questNPC)
+                        //if (DataManager.Instance.playerState == "Battle")
+                        if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
                         {
-                            hitColliders[i].GetComponent<NPCInfo>().isBattle = true;
+                            if (!hitColliders[i].GetComponent<NPCInfo>().questNPC)
+                            {
+                                hitColliders[i].GetComponent<NPCInfo>().isBattle = true;
+                            }
                         }
                     }
                 }
+
             }
-            
+
+
 
 
         }
