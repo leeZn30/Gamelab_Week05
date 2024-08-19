@@ -111,18 +111,22 @@ public class NPCInteraction : MonoBehaviour, IListener
         {
             switch (EventType)
             {
+                
                 case Event_Type.eSave:
                     NPCInteractionStatus npcInteractionStatus = new NPCInteractionStatus(isSend, isActive);
                     SaveManager.Instance.saveNPCInteractionStatus.Add(npcInteractionStatus);
                     saveIndex = SaveManager.Instance.saveNPCInteractionStatus.Count - 1;
                     break;
                 case Event_Type.eLoad:
-                    isActive = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isActive;
-                    isSend = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isSend;
-                    isPlayerInRange = false;
-                    if (interactionUI != null)
+                    if (saveIndex != -1)
                     {
-                        interactionUI.SetActive(false);
+                        isActive = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isActive;
+                        isSend = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isSend;
+                        isPlayerInRange = false;
+                        if (interactionUI != null)
+                        {
+                            interactionUI.SetActive(false);
+                        }
                     }
                     break;
             }
