@@ -236,6 +236,8 @@ public class NoteEvent : MonoBehaviour
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
         yield return new WaitForSeconds(0.5f);
 
+        BattleManager.Instance.Cult.Add(GameObject.FindWithTag("Player"));
+
         // 전투
         yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
 

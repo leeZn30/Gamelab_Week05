@@ -47,10 +47,11 @@ public class NPCShoot : MonoBehaviour
                         }
 
                     }
-                    else if(transform.parent.parent.parent.GetComponent<NPCInfo>().side == 2)
+
+                    if(transform.parent.parent.parent.GetComponent<NPCInfo>().side == 2)
                     {
                         // 사격 처리
-                        if (hit.collider.CompareTag("Cult"))
+                        if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Cult"))
                         {
                             if (shootTime > transform.parent.parent.parent.GetComponent<NPCInfo>().attackSpeed)
                             {
