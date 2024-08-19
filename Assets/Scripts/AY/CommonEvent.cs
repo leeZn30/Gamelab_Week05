@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CommonEvent : MonoBehaviour
 {
-    public int currentEvent;
+    public Coroutine currentEvent;
     public int lastChoice = -1;
 
     [Header("Player")]
