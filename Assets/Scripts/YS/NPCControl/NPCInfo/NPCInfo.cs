@@ -446,7 +446,7 @@ public class NPCInfo : MonoBehaviour, IListener
                     if (saveIndex == -1)
                     {
                         isDeath = true;
-                        Destroy(gameObject);
+                        gameObject.transform.position = new Vector2(10000, 10000);
                     }
                     else
                     {
