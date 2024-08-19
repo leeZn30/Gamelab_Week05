@@ -63,7 +63,15 @@ public class NPCInteraction : MonoBehaviour, IListener
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GetComponent<NPCInfo>() == null)
+        {
+            isPlayerInRange = true;
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(true);
+            }
+        }
+        else if (other.CompareTag("Player") && GetComponent<NPCInfo>() != null)
         {
             if (!GetComponent<NPCInfo>().isBattle)
             {
@@ -74,14 +82,7 @@ public class NPCInteraction : MonoBehaviour, IListener
                 }
             }
         }
-        else if(GetComponent<NPCInfo>() != null)
-        {
-            isPlayerInRange = true;
-            if (interactionUI != null)
-            {
-                interactionUI.SetActive(true);
-            }
-        }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
