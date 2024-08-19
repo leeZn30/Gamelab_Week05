@@ -19,10 +19,10 @@ MonoBehaviour:
   ReachLocation: 1
   ReachItem: 0
   ReachNPC: 0
-  isCompleted: 0
-  isActived: 0
+  isCompleted: 1
+  isActived: 1
   eventType: 2
-  targetObject: Rooftop
+  targetObject: Rooftop_R
   targetEnemyID: 0
   targetCount: 0
   currCount: 0
