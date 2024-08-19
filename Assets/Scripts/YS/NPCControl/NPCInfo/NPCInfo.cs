@@ -429,6 +429,11 @@ public class NPCInfo : MonoBehaviour, IListener
                         if (SaveManager.Instance.saveNpcInfoStatus[saveIndex].isBattle)
                         {
                             isBattle = true;
+                            weapon.SetActive(true);
+                        }
+                        else
+                        {
+                            isBattle = false;
                             weapon.SetActive(false);
                         }
                     }
