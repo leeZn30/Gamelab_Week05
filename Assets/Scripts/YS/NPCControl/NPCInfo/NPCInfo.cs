@@ -462,6 +462,7 @@ public class NPCInfo : MonoBehaviour, IListener
                             isBattle = false;
                             weapon.SetActive(false);
                         }
+                        damaged.SetActive(false);
                     }
                     break;
             }
