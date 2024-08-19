@@ -156,6 +156,7 @@ public class DataManager : MonoBehaviour, IListener
                     SaveManager.Instance.playerSaveStatus.currentCount = shoot.currentAmmo;
                     SaveManager.Instance.playerSaveStatus.position = player.transform.position;
                     SaveManager.Instance.playerSaveStatus.rotation = player.transform.rotation;
+
                     health = 5.0f;
                 break;
                 case Event_Type.eLoad:
