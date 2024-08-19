@@ -14,6 +14,7 @@ public class SaveManager : Singleton<SaveManager>
     public List<QuestSO> saveActiveQuests = new List<QuestSO>();
     public List<bool> saveTargetLocation = new List<bool>();
     public List<bool> saveStatueCollision = new List<bool>();
+    public List<bool> saveBookShelfInteraction = new List<bool>();
 
     public List<GameObject> tempDestroyGameObjects = new List<GameObject>();
     public List<GameObject> tempNPCDestroy = new List<GameObject>();
@@ -54,7 +55,7 @@ public class SaveManager : Singleton<SaveManager>
         saveActiveQuests.Clear();
         saveTargetLocation.Clear();
         saveStatueCollision.Clear();
-
+        saveBookShelfInteraction.Clear();
 
         EventManager.Instance.PostNotification(Event_Type.eSave, this);
     }

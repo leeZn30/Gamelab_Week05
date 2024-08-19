@@ -120,7 +120,6 @@ public class NoteEvent : MonoBehaviour
         }
         // 페이드 아웃이 완료된 후 오브젝트를 비활성화 또는 삭제
         Destroy(go); // 오브젝트를 삭제하고 싶다면 이 줄을 사용하세요.
-
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueId1_1);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);

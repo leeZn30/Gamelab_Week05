@@ -6,7 +6,7 @@ public class TargetLocation : MonoBehaviour, IListener
 {
     public string targetQuest;
     public bool isActived = false;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
 
     void Awake()
     {

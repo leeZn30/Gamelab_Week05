@@ -1,15 +1,30 @@
 using UnityEngine;
 using System.Collections;
+public struct BookshelfInteractionStatus
+{
+    public bool isOpend;
+    public BookshelfInteractionStatus(bool currOpend)
+    {
+        isOpend = currOpend;
+    }
+}
 
-
-public class BookshelfInteraction : MonoBehaviour
+public class BookshelfInteraction : MonoBehaviour, IListener
 {
     private float moveDistance = 1.0f; // 책장이 이동할 거리
     private float moveSpeed = 2.0f; // 책장이 이동하는 속도
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
     private bool isMoving = false; // 책장이 이동 중인지 확인
+    public bool isOpened = false;
+    private int saveIndex = -1;
     private Vector3 initialPosition; // 책장의 초기 위치
     private Vector3 targetPosition; // 책장이 이동할 목표 위치
+
+    void Awake()
+    {
+        EventManager.Instance.AddListener(Event_Type.eSave, this);
+        EventManager.Instance.AddListener(Event_Type.eLoad, this);
+    }
 
     void Start()
     {
@@ -22,6 +37,7 @@ public class BookshelfInteraction : MonoBehaviour
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !isMoving)
         {
             StartCoroutine(MoveBookshelf());
+            isOpened = true;
         }
     }
 
@@ -56,4 +72,34 @@ public class BookshelfInteraction : MonoBehaviour
         }
     }
 
+    public void OnEvent(Event_Type EventType, Component sender, object Param = null)
+    {
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                if (isOpened)
+                {
+                    SaveManager.Instance.saveBookShelfInteraction.Add(true);
+                }
+                else
+                {
+                    SaveManager.Instance.saveBookShelfInteraction.Add(false);
+                }
+                saveIndex = SaveManager.Instance.saveBookShelfInteraction.Count - 1;
+                break;
+            case Event_Type.eLoad:
+                if (saveIndex != -1)
+                {
+                    if (SaveManager.Instance.savedDoorStatus[saveIndex].isOpend)
+                    {
+                        transform.position = targetPosition;
+                    }
+                    else
+                    {
+                        transform.position = initialPosition;
+                    }
+                }
+                break;
+        }
+    }
 }

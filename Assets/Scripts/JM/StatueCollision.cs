@@ -9,7 +9,7 @@ public class StatueCollision : MonoBehaviour, IListener
     private int maxCollisions = 4; // 최대 충돌 횟수
 
     public bool isBreak = false;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
 
     void Awake()
     {
