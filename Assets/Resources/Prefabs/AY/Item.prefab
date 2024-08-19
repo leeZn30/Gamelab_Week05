@@ -263,9 +263,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2497510487928269456}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.68, y: -10.96, z: 0.10746662}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.35025996, y: 0.35025996, z: 1.7513}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2347700324531695978}
@@ -355,7 +355,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.012032926, y: -0.026571274}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -366,7 +366,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.4811869, y: 4.5720177}
   m_EdgeRadius: 0
 --- !u!114 &8503624296060852704
 MonoBehaviour:
@@ -385,7 +385,10 @@ MonoBehaviour:
   CollectedObject: {fileID: 2497510487928269456}
   isCollected: 0
   isQuest: 0
+  notQuest: 0
   questName: 
+  saveIndex: -1
+  isDeath: 0
 --- !u!1 &3464727973756500158
 GameObject:
   m_ObjectHideFlags: 0

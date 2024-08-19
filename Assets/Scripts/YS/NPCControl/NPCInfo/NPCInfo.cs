@@ -55,8 +55,6 @@ public class NPCInfo : MonoBehaviour, IListener
 
 
     [Header("Check Battle")] 
-    public float radius = 5f;
-    public LayerMask layerMask;
     public float resetDistance;
 
 
@@ -117,6 +115,14 @@ public class NPCInfo : MonoBehaviour, IListener
             }
         }
 
+        if (isBattle)
+        {
+            weapon.SetActive(true);
+        }
+        else if (!isBattle)
+        {
+            weapon.SetActive(false);
+        }
 
         DeathCheck();
 
@@ -148,7 +154,6 @@ public class NPCInfo : MonoBehaviour, IListener
             if (weapon != null && !questNPC)
             {
                 isBattle = true;
-                weapon.SetActive(true);
             }
 
         }
@@ -345,7 +350,6 @@ public class NPCInfo : MonoBehaviour, IListener
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
-            DataManager.Instance.playerState = "Battle";
 
 
             if (weapon != null && !questNPC)
@@ -372,7 +376,6 @@ public class NPCInfo : MonoBehaviour, IListener
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
-            DataManager.Instance.playerState = "Battle";
 
 
             if (weapon != null && !questNPC)
@@ -400,7 +403,6 @@ public class NPCInfo : MonoBehaviour, IListener
             damaged.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             isBattle = true;
-            weapon.SetActive(true);
             damaged.SetActive(false);
         }
     }
