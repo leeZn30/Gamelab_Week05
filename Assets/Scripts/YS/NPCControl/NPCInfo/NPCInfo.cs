@@ -421,6 +421,7 @@ public class NPCInfo : MonoBehaviour, IListener
                 case Event_Type.eLoad:
                     if (saveIndex == -1)
                     {
+                        isDeath = true;
                         Destroy(gameObject);
                     }
                     else
