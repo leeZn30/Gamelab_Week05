@@ -270,7 +270,7 @@ public partial class @NewInputSystemPlayerControl: IInputActionCollection2, IDis
                 {
                     ""name"": """",
                     ""id"": ""bfce3409-3818-478c-944d-f05a288c5a04"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyBoardAndMouse;KeyboardMouse"",

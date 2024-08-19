@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1215549197976322652}
   - component: {fileID: 680804052346047161}
   - component: {fileID: 6267517062948452398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 9042119375487380675}
   - component: {fileID: 3421643391358445161}
   - component: {fileID: 3812294489703855048}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 78477634468401303}
   - component: {fileID: 3766949187617528686}
   - component: {fileID: 8849346184691921320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AllyRevolt
   m_TagString: Resistance
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questNPC: 0
   EnemyID: 0
-  side: 0
+  side: 2
   type: Long
   health: 0
   maxHealth: 100
@@ -359,7 +359,7 @@ MonoBehaviour:
   PatrolLocation: []
   patrolIndex: 0
   patWhat: 0
-  idleStop: 1
+  idleStop: 0
   moveSpeed: 0
 --- !u!114 &3766949187617528686
 MonoBehaviour:
@@ -442,7 +442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4007509713541837411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGunPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8413058976762640262}
   - component: {fileID: 8356271568709170503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPCGunRotatePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 3404465709333800452}
   - component: {fileID: 8434989533321391}
   - component: {fileID: 6739070954861938214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 655590055797992335}
   - component: {fileID: 1363582662495247848}
   - component: {fileID: 4236912344960442321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602382900480653475}
   - component: {fileID: 1371873222056154682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

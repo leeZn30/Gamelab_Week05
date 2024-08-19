@@ -33,15 +33,33 @@ public class NPCShoot : MonoBehaviour
             {
                 if (Vector2.Distance(sPoint.transform.position, hit.point) < transform.parent.parent.parent.GetComponent<NPCInfo>().attackRange)
                 {
-                    // 사격 처리
-                    if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Cult") || hit.collider.CompareTag("Resistance"))
+                    if(transform.parent.parent.parent.GetComponent<NPCInfo>().side == 1)
                     {
-                        if (shootTime > transform.parent.parent.parent.GetComponent<NPCInfo>().attackSpeed)
+                        // 사격 처리
+                        if (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Resistance"))
                         {
-                            shootTime = 0;
-                            Instantiate(bullet, transform.position, rotation.rotation);
-                            Debug.Log("Shooting bullet");
+                            if (shootTime > transform.parent.parent.parent.GetComponent<NPCInfo>().attackSpeed)
+                            {
+                                shootTime = 0;
+                                Instantiate(bullet, transform.position, rotation.rotation);
+                                Debug.Log("Shooting bullet");
+                            }
                         }
+
+                    }
+                    else if(transform.parent.parent.parent.GetComponent<NPCInfo>().side == 2)
+                    {
+                        // 사격 처리
+                        if (hit.collider.CompareTag("Cult"))
+                        {
+                            if (shootTime > transform.parent.parent.parent.GetComponent<NPCInfo>().attackSpeed)
+                            {
+                                shootTime = 0;
+                                Instantiate(bullet, transform.position, rotation.rotation);
+                                Debug.Log("Shooting bullet");
+                            }
+                        }
+
                     }
 
                 }
