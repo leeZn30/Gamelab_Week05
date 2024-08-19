@@ -152,13 +152,10 @@ public class RevoltEvent : MonoBehaviour
         QuestManager.Instance.AcceptQuest(questSO.name);
     }
 
-    IEnumerator FinalBattle()
+    public IEnumerator FinalBattle()
     {
-        // yield return new WaitUntil(() => player.transform.position == GameObject.Find("RoopTopPosition").transform.position);
-
         player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 2;
-
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         teleport.SetActive(false);
         Girl.SetActive(true);

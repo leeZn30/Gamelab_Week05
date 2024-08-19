@@ -83,21 +83,6 @@ public class NoteEvent : MonoBehaviour
         Debug.Log("End Note Event");
     }
 
-    public IEnumerator DoEvent(Action onComplete, string EventName)
-    {
-        Debug.Log("Start Note Event");
-
-        switch (EventName)
-        {
-            case "NoteLastQuest":
-                yield return StartCoroutine(FinalBattle());
-                break;
-        }
-
-        onComplete?.Invoke();
-        Debug.Log("End Note Event");
-    }
-
     IEnumerator Event1()
     {
         // npc 생성함
@@ -190,10 +175,11 @@ public class NoteEvent : MonoBehaviour
     // 마지막 퀘스트 완료하면 전투 해야함
     public IEnumerator FinalBattle()
     {
+        player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 2;
+        yield return new WaitForSeconds(0.5f);
+
         teleport.SetActive(false);
         Girl0.SetActive(true);
-
-        // yield return new WaitForSeconds(1f);
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueIdF_0);
