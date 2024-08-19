@@ -417,13 +417,20 @@ public class NPCInfo : MonoBehaviour, IListener
                     saveIndex = SaveManager.Instance.saveNpcInfoStatus.Count - 1;
                     break;
                 case Event_Type.eLoad:
-                    health = SaveManager.Instance.saveNpcInfoStatus[saveIndex].health;
-                    transform.position = SaveManager.Instance.saveNpcInfoStatus[saveIndex].position;
-                    transform.rotation = SaveManager.Instance.saveNpcInfoStatus[saveIndex].rotation;
-                    if (SaveManager.Instance.saveNpcInfoStatus[saveIndex].isBattle)
+                    if (saveIndex == -1)
                     {
-                        isBattle = true;
-                        weapon.SetActive(false);
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        health = SaveManager.Instance.saveNpcInfoStatus[saveIndex].health;
+                        transform.position = SaveManager.Instance.saveNpcInfoStatus[saveIndex].position;
+                        transform.rotation = SaveManager.Instance.saveNpcInfoStatus[saveIndex].rotation;
+                        if (SaveManager.Instance.saveNpcInfoStatus[saveIndex].isBattle)
+                        {
+                            isBattle = true;
+                            weapon.SetActive(false);
+                        }
                     }
                     break;
             }

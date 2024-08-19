@@ -268,11 +268,21 @@ public class QuestManager : MonoBehaviour, IListener
                     }
                     break;
                 case Event_Type.eLoad:
-                    for (int i = 0; i < allQuests.Count; i++)
+                    foreach (var texts in activeQuestTexts)
+                    {
+                        texts.SetActive(false);
+                    }
+
+                for (int i = 0; i < allQuests.Count; i++)
                     {
                         allQuests[i].isCompleted = SaveManager.Instance.saveQuestManagerStatus[i].isCompleted;
                         allQuests[i].isActived = SaveManager.Instance.saveQuestManagerStatus[i].isActived;
                         allQuests[i].currCount = SaveManager.Instance.saveQuestManagerStatus[i].currCount;
+
+                        if (allQuests[i].isCompleted)
+                        {
+
+                        }
                     }
                     break;
             }
