@@ -40,7 +40,7 @@ public class DialogueManager : Singleton<DialogueManager>
     void DeleteAllBullets()
     {
         // "bullet"이 포함된 모든 오브젝트를 찾아서 삭제
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject obj in allObjects)
         {
             if (obj.name.ToLower().Contains("bullet"))

@@ -25,14 +25,15 @@ public class BulletUIManager : MonoBehaviour
 
     public void UpdateBulletUI(int count)
     {
-        foreach (Transform child in bullitUiContainer) {
-            Destroy(child.gameObject);
-        }
+            foreach (Transform child in bullitUiContainer)
+            {
+                Destroy(child.gameObject);
+            }
 
-        for (int i = 0; i < count; i++)
-        {
-            GameObject bulletIcon = Instantiate(bulletIconPrefeb, bullitUiContainer);
-        }
+            for (int i = 0; i < count; i++)
+            {
+                GameObject bulletIcon = Instantiate(bulletIconPrefeb, bullitUiContainer);
+            }
     }
 
     public void SetBulletCount(int count)
