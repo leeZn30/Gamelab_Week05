@@ -332,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questNPC: 0
   EnemyID: 0
-  side: 0
+  side: 1
   type: 
   health: 0
   maxHealth: 0
@@ -344,10 +344,6 @@ MonoBehaviour:
   isPatrol: 0
   isBattle: 1
   state: 0
-  radius: 3
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
   resetDistance: 20
   damaged: {fileID: 1253941154046509103}
   distaance: 10
