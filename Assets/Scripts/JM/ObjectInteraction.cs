@@ -48,7 +48,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 if (CollectedObject != null)
                 {
                     //Destroy(CollectedObject);
-                    SaveManager.Instance.tempDestroyGameObjects.Add(gameObject);
+                    //SaveManager.Instance.tempDestroyGameObjects.Add(gameObject);
                     CollectedObject.SetActive(false);
                     isCollected = true;
                 }
@@ -69,7 +69,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
                 if (CollectedObject != null)
                 {
                     //Destroy(CollectedObject);
-                    SaveManager.Instance.tempDestroyGameObjects.Add(gameObject);
+                    //SaveManager.Instance.tempDestroyGameObjects.Add(gameObject);
                     CollectedObject.SetActive(false);
                     isCollected = true;
                 }
