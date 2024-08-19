@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class CommonRouteManager : Singleton<CommonRouteManager>, IListener
 {
+    [Header("현재 이벤트")]
+    public Coroutine currentEvent;
+
     [Header("CommonEvent")]
     [SerializeField] CommonEvent commonEvent;
-
 
     void Awake()
     {
@@ -19,7 +21,7 @@ public class CommonRouteManager : Singleton<CommonRouteManager>, IListener
     void Start()
     {
         // 일단 공통 루트로 시작
-        EventManager.Instance.PostNotification(Event_Type.eGameStart, this);
+        // EventManager.Instance.PostNotification(Event_Type.eGameStart, this);
     }
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)

@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueId: 209
-  interactionUI: {fileID: 128865448450425839}
+  interactionUI: {fileID: 4254625061308282112}
   isActive: 0
   targetQuest: 
   isDeath: 0
@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questNPC: 0
+  lastBattleNPC: 0
   EnemyID: 0
   side: 1
   type: 

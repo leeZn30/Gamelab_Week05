@@ -13,7 +13,7 @@ public class PlayerGunManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < playerGun.Count; i++)
+        for (int i = 0; i < playerGun.Count; i++)
         {
             playerGun[i].SetActive(false);
         }

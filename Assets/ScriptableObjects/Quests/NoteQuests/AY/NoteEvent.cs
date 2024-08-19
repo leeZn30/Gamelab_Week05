@@ -56,28 +56,26 @@ public class NoteEvent : MonoBehaviour
         switch (eventNum)
         {
             case 1:
-                yield return StartCoroutine(Event1());
+                yield return NoteRouteManager.Instance.currentEvent = StartCoroutine(Event1());
                 break;
 
             case 2:
-                yield return StartCoroutine(Event2());
+                yield return NoteRouteManager.Instance.currentEvent = StartCoroutine(Event2());
                 break;
 
 
             case 5:
-                yield return StartCoroutine(Event5());
+                yield return NoteRouteManager.Instance.currentEvent = StartCoroutine(Event5());
                 break;
 
 
             case 6:
-                yield return StartCoroutine(Event6());
+                yield return NoteRouteManager.Instance.currentEvent = StartCoroutine(Event6());
                 break;
 
             default:
                 break;
         }
-
-        yield return null;
 
         onComplete?.Invoke();
         Debug.Log("End Note Event");

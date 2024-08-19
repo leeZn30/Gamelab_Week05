@@ -52,14 +52,11 @@ public class RevoltEvent : MonoBehaviour
         switch (questSO.questName)
         {
             case "RevoltQuest2":
-                yield return StartCoroutine(Event2());
+                yield return RevoltRouteManager.Instance.currentEvent = StartCoroutine(Event2());
                 break;
 
             case "RevoltQuest67":
-                yield return StartCoroutine(EventMeetBoss());
-                break;
-
-            case "RevoltLastQuest": // last
+                yield return RevoltRouteManager.Instance.currentEvent = StartCoroutine(EventMeetBoss());
                 break;
         }
 
@@ -74,7 +71,7 @@ public class RevoltEvent : MonoBehaviour
         switch (name)
         {
             case "RevoltLastQuest": // last
-                yield return StartCoroutine(FinalBattle());
+                yield return RevoltRouteManager.Instance.currentEvent = StartCoroutine(FinalBattle());
                 break;
         }
 
