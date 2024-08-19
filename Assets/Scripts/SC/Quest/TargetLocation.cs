@@ -23,35 +23,37 @@ public class TargetLocation : MonoBehaviour, IListener
                 isActived = true;
                 GetComponent<BoxCollider2D>().enabled = false;
                 QuestManager tempQuestManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-                    if (tempQuestManager.FindQuest(targetQuest).returnNPC)
-                    {
-                        tempQuestManager.UnderlineQuest(targetQuest);
-                    }
-                    else
-                    {
-                        tempQuestManager.OnQuestClear(targetQuest);
-                    }
-                
+                if (tempQuestManager.FindQuest(targetQuest).returnNPC)
+                {
+                    tempQuestManager.UnderlineQuest(targetQuest);
+                }
+                else
+                {
+                    tempQuestManager.OnQuestClear(targetQuest);
+                }
+
             }
         }
     }
 
     public void OnEvent(Event_Type EventType, Component sender, object Param = null)
     {
-            switch (EventType)
-            {
-                case Event_Type.eSave:
-                    if (isActived)
-                    {
-                        SaveManager.Instance.saveTargetLocation.Add(true);
-                    }
-                    else
-                    {
-                        SaveManager.Instance.saveTargetLocation.Add(false);
-                    }
-                    saveIndex = SaveManager.Instance.saveTargetLocation.Count - 1;
+        switch (EventType)
+        {
+            case Event_Type.eSave:
+                if (isActived)
+                {
+                    SaveManager.Instance.saveTargetLocation.Add(true);
+                }
+                else
+                {
+                    SaveManager.Instance.saveTargetLocation.Add(false);
+                }
+                saveIndex = SaveManager.Instance.saveTargetLocation.Count - 1;
                 break;
-                case Event_Type.eLoad:
+            case Event_Type.eLoad:
+                if (saveIndex != -1)
+                {
                     if (SaveManager.Instance.saveTargetLocation[saveIndex])
                     {
                         isActived = true;
@@ -60,7 +62,8 @@ public class TargetLocation : MonoBehaviour, IListener
                     {
                         isActived = false;
                     }
+                }
                 break;
-            }
+        }
     }
 }

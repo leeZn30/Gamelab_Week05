@@ -368,7 +368,7 @@ public class NPCInfo : MonoBehaviour, IListener
     {
         if (collision.transform.CompareTag("Bullet"))
         {
-            health--;
+            health -= 2.0f;
             float randX = UnityEngine.Random.Range(transform.position.x - 1, transform.position.x + 1);
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 

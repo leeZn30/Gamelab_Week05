@@ -199,7 +199,7 @@ public class QuestNPCInteraction : MonoBehaviour, IListener
                     saveIndex = SaveManager.Instance.saveQuestNPCInteractionStatus.Count - 1;
                     break;
                 case Event_Type.eLoad:
-                    if(saveIndex != -1)
+                    if (saveIndex != -1)
                     {
                         questDialogueCompleted = SaveManager.Instance.saveQuestNPCInteractionStatus[saveIndex].questDialogueCompleted;
                         isSend = SaveManager.Instance.saveQuestNPCInteractionStatus[saveIndex].isSend;

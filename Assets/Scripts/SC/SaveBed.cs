@@ -59,6 +59,7 @@ public class SaveBed : MonoBehaviour
         saveUI.SetActive(false);
         Time.timeScale = 1f; // 시간 재개
         isTimeStopped = false;
+        GameObject.Find("Manager").GetComponent<DataManager>().health = 5.0f;
     }
 
     public void notSaveClicked()

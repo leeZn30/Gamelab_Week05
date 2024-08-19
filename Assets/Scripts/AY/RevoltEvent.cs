@@ -103,6 +103,7 @@ public class RevoltEvent : MonoBehaviour
 
     IEnumerator Event2()
     {
+
         // 쿵 소리
         yield return new WaitForSeconds(0.5f);
 
@@ -213,6 +214,8 @@ public class RevoltEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        yield return TurnEnd.Instance.StartCoroutine(TurnEnd.Instance.FadeInAndOut());
+
         SceneManager.LoadScene("03_QuestEnding");
 
         teleport.SetActive(false);
@@ -261,6 +264,7 @@ public class RevoltEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        yield return TurnEnd.Instance.StartCoroutine(TurnEnd.Instance.FadeInAndOut());
         SceneManager.LoadScene("03_QuestEnding");
 
         teleport.SetActive(false);
