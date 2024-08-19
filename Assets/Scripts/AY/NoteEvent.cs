@@ -37,12 +37,17 @@ public class NoteEvent : MonoBehaviour
     [SerializeField] QuestSO questSO2;
 
     [Header("FinalBattle")]
+    [SerializeField] Vector2 playerPose;
     [SerializeField] GameObject teleport;
     [SerializeReference] GameObject Girl0;
     [SerializeField] int dialogueIdF_0;
     [SerializeField] int dialogueIdF_1;
     [SerializeField] List<Vector2> enemyPositionsF = new List<Vector2>();
     [SerializeField] List<NPCInfo> enemyPrefabs = new List<NPCInfo>();
+
+    [Header("FinalBattleAfterChoice")]
+    [SerializeField] int dialogueIdFC_0;
+    [SerializeField] int dialogueIdFC_1;
 
     void Awake()
     {
@@ -173,7 +178,7 @@ public class NoteEvent : MonoBehaviour
     // 마지막 퀘스트 완료하면 전투 해야함
     public IEnumerator FinalBattle()
     {
-        player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 4;
+        player.transform.position = playerPose;
         yield return new WaitForSeconds(0.5f);
 
         teleport.SetActive(false);
@@ -193,6 +198,40 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         DialogueManager.Instance.SetDialogueID(dialogueIdF_1);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+        yield return new WaitForSeconds(0.5f);
+
+        // 전투
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
+
+        // 장면 전환 (페이드 아웃?)
+
+        // 대화함
+        Debug.Log("컷씬으로 넘어가기");
+
+        teleport.SetActive(false);
+    }
+
+    public IEnumerator FinalBattleAfterChoice()
+    {
+        teleport.SetActive(false);
+
+        // 대화함
+        DialogueManager.Instance.SetDialogueID(dialogueIdFC_0);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        GameObject.Find("AllyBoss(Clone)").SetActive(false);
+
+        // 적이 엄청 생성됨
+        List<GameObject> enemies = new List<GameObject>();
+        for (int i = 0; i < enemyPositionsF.Count; i++)
+        {
+            enemies.Add(Instantiate(enemyPrefabs[i], enemyPositionsF[i], Quaternion.identity).gameObject);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        // 대화함
+        DialogueManager.Instance.SetDialogueID(dialogueIdFC_1);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
         yield return new WaitForSeconds(0.5f);
 

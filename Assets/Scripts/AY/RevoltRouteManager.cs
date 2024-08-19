@@ -56,4 +56,9 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
     {
         StartCoroutine(revoltEvent.FinalBattle());
     }
+
+    public void CallFinalEventAfterChoice()
+    {
+        StartCoroutine(revoltEvent.FinalBattleAfterChoice());
+    }
 }

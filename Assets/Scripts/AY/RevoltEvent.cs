@@ -30,6 +30,7 @@ public class RevoltEvent : MonoBehaviour
     [SerializeField] QuestSO questSO;
 
     [Header("FinalBattle")]
+    [SerializeField] Vector2 playerPose;
     [SerializeField] GameObject teleport;
     [SerializeReference] GameObject Girl;
     [SerializeField] int dialogueIdF_0;
@@ -39,6 +40,12 @@ public class RevoltEvent : MonoBehaviour
     [SerializeField] List<Vector2> allyPositionsF = new List<Vector2>();
     [SerializeField] List<NPCInfo> allyPrefabsF = new List<NPCInfo>();
     [SerializeField] List<Vector2> enemyPositionsF = new List<Vector2>();
+
+    [Header("FinalBattleAfterChoice")]
+    [SerializeField] int dialogueIdFC_0;
+    [SerializeField] int dialogueIdFC_1;
+    [SerializeField] int dialogueIdFC_2;
+
 
     void Awake()
     {
@@ -151,7 +158,7 @@ public class RevoltEvent : MonoBehaviour
 
     public IEnumerator FinalBattle()
     {
-        player.transform.position = GameObject.Find("RoopTopPosition").transform.position + Vector3.up * 4;
+        player.transform.position = playerPose;
         yield return new WaitForSeconds(0.5f);
 
         teleport.SetActive(false);
@@ -183,8 +190,6 @@ public class RevoltEvent : MonoBehaviour
         DialogueManager.Instance.SetDialogueID(dialogueIdF_2);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
-        Time.timeScale = 0f;
-
         // 반란군 도와주러 옴
         for (int i = 1; i < allyPositionsF.Count; i++)
         {
@@ -196,6 +201,55 @@ public class RevoltEvent : MonoBehaviour
         DialogueManager.Instance.SetDialogueID(dialogueIdF_3);
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
         yield return new WaitForSeconds(0.5f);
+
+        Girl.SetActive(false);
+
+        // 전투
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
+
+        // 장면 전환 (페이드 아웃?)
+
+        // 대화함
+        Debug.Log("컷씬으로 넘어가기");
+
+        teleport.SetActive(false);
+    }
+
+    public IEnumerator FinalBattleAfterChoice()
+    {
+        teleport.SetActive(false);
+
+        // 대화함
+        DialogueManager.Instance.SetDialogueID(dialogueIdFC_0);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        // 교주랑 광신도 등장
+        List<GameObject> enemies = new List<GameObject>
+        {
+            Instantiate(cultBoss, enemyPositionsF[0], Quaternion.identity).gameObject
+        };
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 1; i < enemyPositionsF.Count; i++)
+        {
+            enemies.Add(Instantiate(cultEnemy, enemyPositionsF[i], Quaternion.identity).gameObject);
+        }
+
+        // 대화
+        DialogueManager.Instance.SetDialogueID(dialogueIdFC_1);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        // 반란군 도와주러 옴
+        for (int i = 1; i < allyPositionsF.Count; i++)
+        {
+            Instantiate(allyPrefabsF[i], allyPositionsF[i], Quaternion.identity);
+            // yield return new WaitForSeconds(0.1f);
+        }
+
+        // 대화
+        DialogueManager.Instance.SetDialogueID(dialogueIdFC_2);
+        yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
+
+        Girl.SetActive(false);
 
         // 전투
         yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));

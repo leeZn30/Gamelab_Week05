@@ -67,7 +67,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2890793560752448610}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1dde048b9cd4e3479b1de778a0b6ff5, type: 3}
   m_Name: 
@@ -156,25 +156,28 @@ MonoBehaviour:
   dialogueId5: 105
   questSO1: {fileID: 11400000, guid: 7e17f387f98face4395f831ccbd95709, type: 2}
   questSO2: {fileID: 11400000, guid: ce54326c6e766bb4088c9064d8f3c160, type: 2}
+  playerPose: {x: 0, y: 85}
   teleport: {fileID: 0}
   Girl0: {fileID: 0}
   dialogueIdF_0: 1000
   dialogueIdF_1: 1001
   enemyPositionsF:
+  - {x: -3, y: 87}
+  - {x: -1, y: 82}
   - {x: -2, y: 82}
-  - {x: -2, y: 80}
-  - {x: -2, y: 78}
-  - {x: 6, y: 82}
-  - {x: 6, y: 80}
-  - {x: 6, y: 78}
+  - {x: 0, y: 82}
+  - {x: 1, y: 82}
+  - {x: 2, y: 82}
   enemyPrefabs:
+  - {fileID: 4577025040394997144, guid: 8d8b4745fd0d28d45a161a7dc87a6ef1, type: 3}
   - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
   - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
   - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
   - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
   - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
   - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
-  - {fileID: 4577025040394997144, guid: c66e0394befe70a4fb45a205ec0cb195, type: 3}
+  dialogueIdFC_0: 1009
+  dialogueIdFC_1: 1001
 --- !u!1 &3281603346398694590
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +241,7 @@ MonoBehaviour:
   - {x: -12, y: 42}
   dialogueId5: 22
   questSO: {fileID: 11400000, guid: 153f89dccd02f224290a99a41e3520f1, type: 2}
+  playerPose: {x: 0, y: 85}
   teleport: {fileID: 0}
   Girl: {fileID: 0}
   dialogueIdF_0: 1002
@@ -245,12 +249,12 @@ MonoBehaviour:
   dialogueIdF_2: 1004
   dialogueIdF_3: 1005
   allyPositionsF:
-  - {x: -2, y: 82}
-  - {x: -2, y: 80}
-  - {x: -2, y: 78}
-  - {x: 6, y: 82}
-  - {x: 6, y: 80}
-  - {x: 6, y: 78}
+  - {x: -3, y: 87}
+  - {x: -3, y: 85}
+  - {x: -3, y: 83}
+  - {x: 3, y: 87}
+  - {x: 3, y: 85}
+  - {x: 3, y: 83}
   allyPrefabsF:
   - {fileID: 4577025040394997144, guid: 5780957e1aff0ec40992a6b07eb47793, type: 3}
   - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
@@ -260,13 +264,16 @@ MonoBehaviour:
   - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
   - {fileID: 4577025040394997144, guid: d45ef612b3d3ba5449124c00e32fd134, type: 3}
   enemyPositionsF:
-  - {x: 0, y: 78}
-  - {x: -1, y: 78}
-  - {x: -2, y: 78}
-  - {x: 1, y: 78}
-  - {x: 2, y: 78}
-  - {x: -3, y: 78}
-  - {x: 3, y: 78}
+  - {x: 0, y: 81}
+  - {x: -1, y: 81}
+  - {x: -2, y: 81}
+  - {x: 1, y: 81}
+  - {x: 2, y: 81}
+  - {x: -3, y: 81}
+  - {x: 3, y: 81}
+  dialogueIdFC_0: 1007
+  dialogueIdFC_1: 1008
+  dialogueIdFC_2: 1005
 --- !u!1 &7075122282776903226
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,8 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf14bf189ecf0942bc85c1f592df458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEvent: 0
   lastChoice: -1
+  revoltButton: {fileID: 0}
   resistanceDefault: {fileID: 2094562570039198571, guid: 037199d76101cd849908c4ce84d99385,
     type: 3}
   introDialogueId0: 16
@@ -321,5 +328,12 @@ MonoBehaviour:
   introDialogueId3: 19
   note0: {fileID: 0}
   RoomDoor: {fileID: 0}
+  RBoss: {fileID: 2094562570039198571, guid: 5780957e1aff0ec40992a6b07eb47793, type: 3}
+  RBossPose: {x: -3, y: 87}
+  playerPose: {x: 0, y: 85}
+  girl: {fileID: 0}
+  dialogueIdL_0: 1002
+  dialogueIdL_1: 1003
+  dialogueIdL_2: 1006
   dialogueIdG: 108
   grandma: {fileID: 0}
