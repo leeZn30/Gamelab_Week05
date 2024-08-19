@@ -75,7 +75,6 @@ public class QuestManager : MonoBehaviour, IListener
         // Debug.Log("OnClearQuest: " + questName);
 
         StartCoroutine(CompleteQuest(questName));
-        DeleteQuests(deleteCount);
 
         switch (questName)
         {
@@ -125,6 +124,8 @@ public class QuestManager : MonoBehaviour, IListener
             clearedQuests.Add(quest);
             EventManager.Instance.PostNotification(quest.eventType, this, quest);
         }
+
+        DeleteQuests();
     }
 
     public QuestSO FindQuest(string questName)
@@ -188,6 +189,7 @@ public class QuestManager : MonoBehaviour, IListener
                 activeQuests[j].isCompleted = true;
                 GameObject questText = activeQuestTexts[j];
                 questText.GetComponent<TextMeshProUGUI>().text = $"<s>{questText.GetComponent<TextMeshProUGUI>().text}</s>";
+                deleteCount.Add(j);
 
                 // 퀘스트 제거 (페이드 아웃 애니메이션)
                 for (float i = 1; i >= 0; i -= Time.deltaTime)
@@ -195,21 +197,20 @@ public class QuestManager : MonoBehaviour, IListener
                     questText.GetComponent<TextMeshProUGUI>().color = new Color(questText.GetComponent<TextMeshProUGUI>().color.r, questText.GetComponent<TextMeshProUGUI>().color.g, questText.GetComponent<TextMeshProUGUI>().color.b, i);
                     yield return null;
                 }
-                deleteCount.Add(j);
+
+                Destroy(questText);
             }
         }
     }
 
-    private void DeleteQuests(List<int> nums)
+    private void DeleteQuests()
     {
         deleteCount.Sort((a, b) => b.CompareTo(a));
 
         for (int i = 0; i < deleteCount.Count; i++)
         {
-            GameObject questText = activeQuestTexts[deleteCount[i]];
             activeQuests.RemoveAt(deleteCount[i]);
             activeQuestTexts.RemoveAt(deleteCount[i]);
-            Destroy(questText);
         }
 
         deleteCount.Clear();
