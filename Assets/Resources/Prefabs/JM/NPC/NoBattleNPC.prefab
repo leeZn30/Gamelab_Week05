@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueId: 212
-  interactionUI: {fileID: 6704406126788795913}
+  interactionUI: {fileID: 3133335679022356811}
   isActive: 0
   targetQuest: 
   isDeath: 0
@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questNPC: 0
+  lastBattleNPC: 0
   EnemyID: 0
   side: 1
   type: 
@@ -773,6 +774,12 @@ PrefabInstance:
 --- !u!224 &3009829307650472426 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7219231415860069520, guid: cf3b09469e83d124e964ac1d19628155,
+    type: 3}
+  m_PrefabInstance: {fileID: 5614532396759055738}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3133335679022356811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7390700855253640241, guid: cf3b09469e83d124e964ac1d19628155,
     type: 3}
   m_PrefabInstance: {fileID: 5614532396759055738}
   m_PrefabAsset: {fileID: 0}

@@ -6,15 +6,15 @@ using TMPro;
 using UnityEngine.UI;
 public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
 {
+    [Header("현재 이벤트")]
+    public Coroutine currentEvent;
+
     [Header("노트 관련")]
     public TextAsset noteCSV;
     public List<NoteData> noteDatas = new List<NoteData>();
     public NoteData currentNoteData;
     public GameObject noteUI;
     [SerializeField] Button noteBtn;
-
-    [Header("퀘스트 관련")]
-    QuestSO currentQuestSO;
 
     [Header("노트 이벤트")]
     [SerializeField] NoteEvent noteEvent;
@@ -29,10 +29,6 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         {
             DontDestroyOnLoad(gameObject);
         }
-        // else
-        // {
-        //     DestroyImmediate(gameObject);
-        // }
 
         // 노트 CSV 읽고 노트 데이터 만들기
         List<Dictionary<string, object>> readCSV = CSVReader.Read(CSVReader.GetFilePath(noteCSV));

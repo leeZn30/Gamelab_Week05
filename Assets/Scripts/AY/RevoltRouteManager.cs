@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 {
+    [Header("현재 이벤트")]
+    public Coroutine currentEvent;
+
     [Header("반란 이벤트")]
     public List<QuestNPCInteraction> QuestNPCs = new List<QuestNPCInteraction>();
     public int currentNPCOrder = 0;
