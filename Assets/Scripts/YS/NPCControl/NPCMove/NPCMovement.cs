@@ -46,6 +46,11 @@ public class NPCMovement : MonoBehaviour
 
     float distanceToTarget;
 
+    public bool spinUp;
+    public bool spinDown;
+    public bool spinLeft;
+    public bool spinRight;
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Start()
@@ -302,6 +307,7 @@ public class NPCMovement : MonoBehaviour
 
             if (GetComponent<NPCInfo>().target != null)
             {
+
                 Up();
                 Down();
                 Left();
@@ -309,6 +315,38 @@ public class NPCMovement : MonoBehaviour
             }
 
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            if (GetComponent<MoveManager>().FinalNodeList[1].x - GetComponent<MoveManager>().FinalNodeList[0].x > 0)
+            {
+                spinLeft = true;
+                spinRight = false;
+            }
+            else if (GetComponent<MoveManager>().FinalNodeList[1].x - GetComponent<MoveManager>().FinalNodeList[0].x < 0)
+            {
+                spinLeft = false;
+                spinRight = true;
+            }
+            else
+            {
+                spinRight = false;
+                spinLeft = false;
+            }
+
+            if (GetComponent<MoveManager>().FinalNodeList[1].y - GetComponent<MoveManager>().FinalNodeList[0].y > 0)
+            {
+                spinUp = true;
+                spinDown = false;
+            }
+            else if (GetComponent<MoveManager>().FinalNodeList[1].y - GetComponent<MoveManager>().FinalNodeList[0].y < 0)
+            {
+                spinUp = false;
+                spinDown = true;
+            }
+            else
+            {
+                spinUp = false;
+                spinDown = false;
+            }
 
             // 목표 지점에 도달하면 리스트에서 해당 노드를 제거
             if ((Vector2)transform.position == targetPosition)
