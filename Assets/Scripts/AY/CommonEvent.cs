@@ -98,7 +98,7 @@ public class CommonEvent : MonoBehaviour
 
         RoomDoor.OpenDoor();
         yield return new WaitForSeconds(0.5f);
-        GameObject go = Instantiate(resistanceDefault, RoomDoor.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+        GameObject go = Instantiate(resistanceDefault, RoomDoor.transform.position + new Vector3(0, 5, 0), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
 
         DialogueManager.Instance.SetDialogueID(introDialogueId2);

@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 577.53, y: 57.3007}
+  m_SizeDelta: {x: 0, y: 57.3007}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &493779262253300696
 CanvasRenderer:
@@ -67,10 +67,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: qwertyqwett
+  m_text: "\uD018\uC2A4\uD2B8 \uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d3908af4189d1f2439a1f931561b99b1, type: 2}
-  m_sharedMaterial: {fileID: 7114543369377783836, guid: d3908af4189d1f2439a1f931561b99b1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e37e305e07f15ef4db0274842d90546d, type: 2}
+  m_sharedMaterial: {fileID: -4609515654776861947, guid: e37e305e07f15ef4db0274842d90546d,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

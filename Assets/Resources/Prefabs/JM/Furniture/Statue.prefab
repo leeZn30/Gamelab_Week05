@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 609096861793714251}
   - component: {fileID: 6798126825694812448}
   - component: {fileID: 6980918684737828737}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 2252081558018317218}
   - component: {fileID: 5728115220102327250}
   - component: {fileID: 712282092804009119}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: statue-removebg-preview
   m_TagString: Statue
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 6884533111306058337}
   - component: {fileID: 3068184319067280680}
   - component: {fileID: 5971115564153789744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Statue
   m_TagString: Statue
   m_Icon: {fileID: 0}
