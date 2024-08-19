@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Color = UnityEngine.Color;
 public struct QuestManagerStatus
@@ -36,6 +37,8 @@ public class QuestManager : MonoBehaviour, IListener
     [SerializeField] List<GameObject> activeQuestTexts = new List<GameObject>();
 
     public int sumRevoltQuest = 0;
+    public List<int> deleteCount = new List<int>();
+
 
     void Start()
     {
@@ -72,6 +75,8 @@ public class QuestManager : MonoBehaviour, IListener
         Debug.Log("OnClearQuest: " + questName);
 
         StartCoroutine(CompleteQuest(questName));
+        DeleteQuests(deleteCount);
+
         switch (questName)
         {
             case "ClothQuest":
@@ -125,7 +130,6 @@ public class QuestManager : MonoBehaviour, IListener
                 EventManager.Instance.PostNotification(Event_Type.eRevoltLastQuestDone, this, FindQuest(questName));
                 break;
         }
-
         QuestSO quest = FindQuest(questName);
 
         if (!clearedQuests.Contains(quest))
@@ -208,11 +212,24 @@ public class QuestManager : MonoBehaviour, IListener
                     questText.GetComponent<TextMeshProUGUI>().color = new Color(questText.GetComponent<TextMeshProUGUI>().color.r, questText.GetComponent<TextMeshProUGUI>().color.g, questText.GetComponent<TextMeshProUGUI>().color.b, i);
                     yield return null;
                 }
-                Destroy(questText);
-                activeQuests.RemoveAt(j);
-                activeQuestTexts.RemoveAt(j);
+                deleteCount.Add(j);
             }
         }
+    }
+
+    private void DeleteQuests(List<int> nums)
+    {
+        deleteCount.Sort((a, b) => b.CompareTo(a));
+
+        for (int i = 0; i < deleteCount.Count; i++)
+        {
+            GameObject questText = activeQuestTexts[deleteCount[i]];
+            activeQuests.RemoveAt(deleteCount[i]);
+            activeQuestTexts.RemoveAt(deleteCount[i]);
+            Destroy(questText);
+        }
+
+        deleteCount.Clear();
     }
 
     public string EditText(QuestSO quest)
