@@ -18,8 +18,8 @@ MonoBehaviour:
   returnNPC: 1
   KillEnemies: 0
   ReachLocation: 0
-  ReachItem: 0
-  ReachNPC: 1
+  ReachItem: 1
+  ReachNPC: 0
   isCompleted: 1
   isActived: 1
   eventType: 0
