@@ -592,7 +592,7 @@ MonoBehaviour:
   attackRange: 10
   attackSpeed: 0.6
   target: {fileID: 0}
-  isPatrol: 1
+  isPatrol: 0
   isBattle: 0
   state: 0
   resetDistance: 10

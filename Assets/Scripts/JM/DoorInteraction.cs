@@ -108,8 +108,16 @@ public class DoorInteraction : MonoBehaviour, IListener
     public void CloseDoor()
     {
         audioSource.PlayOneShot(doorSound);
-        closedDoor.SetActive(true);
-        openDoor.SetActive(false);
+        if(closedDoor != null)
+        {
+            closedDoor.SetActive(false);
+            closedDoor.SetActive(true);
+        }
+
+        if(openDoor != null)
+        {
+            openDoor.SetActive(true);
+        }
         isOpend = false;
         if (closedDoorCollider != null)
             closedDoorCollider.enabled = true; // 닫힌 문 콜라이더 활성화

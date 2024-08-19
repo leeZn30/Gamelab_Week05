@@ -71,12 +71,14 @@ public class Player_Movement : MonoBehaviour
             transform.Translate(Vector2.up * verticalInput * Time.deltaTime * DataManager.Instance.Speed);
             //audioSource.PlayOneShot(walkSound);
 
+            /*
             if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame() && !isDashing &&
                 !DialogueManager.Instance.isDialogueActive)
             {
                 // 대시 코루틴 시작
                 StartCoroutine(Dash());
             }
+            */
 
             // Check Player Life
             PlayerDeath();
