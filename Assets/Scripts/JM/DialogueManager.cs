@@ -25,6 +25,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         sentences = new Queue<string>();
         dialogueUI.SetActive(false);
+
     }
 
     void Update()
@@ -36,6 +37,18 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
+    void DeleteAllBullets()
+    {
+        // "bullet"이 포함된 모든 오브젝트를 찾아서 삭제
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name.ToLower().Contains("bullet"))
+            {
+                Destroy(obj);
+            }
+        }
+    }
     public void SetDialogueID(int id)
     {
         Dialogue dialogue = GetDialogueById(id);
@@ -61,7 +74,8 @@ public class DialogueManager : Singleton<DialogueManager>
                 sentences.Enqueue(sentence);
             }
         }
-
+        // 하이라키 창에서 이름에 "bullet"이 포함된 모든 오브젝트를 삭제
+        DeleteAllBullets();
         isDialogueActive = true; // 첫 번째 대사가 바로 출력되도록 설정
         DisplayNextSentence();   // 첫 번째 대사를 바로 출력
     }
