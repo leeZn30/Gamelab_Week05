@@ -55,8 +55,6 @@ public class NPCInfo : MonoBehaviour, IListener
 
 
     [Header("Check Battle")] 
-    public float radius = 5f;
-    public LayerMask layerMask;
     public float resetDistance;
 
 
@@ -117,6 +115,14 @@ public class NPCInfo : MonoBehaviour, IListener
             }
         }
 
+        if (isBattle)
+        {
+            weapon.SetActive(true);
+        }
+        else if (!isBattle)
+        {
+            weapon.SetActive(false);
+        }
 
         DeathCheck();
 
@@ -148,7 +154,6 @@ public class NPCInfo : MonoBehaviour, IListener
             if (weapon != null && !questNPC)
             {
                 isBattle = true;
-                weapon.SetActive(true);
             }
 
         }
@@ -400,7 +405,6 @@ public class NPCInfo : MonoBehaviour, IListener
             damaged.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             isBattle = true;
-            weapon.SetActive(true);
             damaged.SetActive(false);
         }
     }
@@ -429,7 +433,6 @@ public class NPCInfo : MonoBehaviour, IListener
                         if (SaveManager.Instance.saveNpcInfoStatus[saveIndex].isBattle)
                         {
                             isBattle = true;
-                            weapon.SetActive(false);
                         }
                     }
                     break;
