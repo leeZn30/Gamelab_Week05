@@ -350,7 +350,6 @@ public class NPCInfo : MonoBehaviour, IListener
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
-            DataManager.Instance.playerState = "Battle";
 
 
             if (weapon != null && !questNPC)
@@ -377,7 +376,6 @@ public class NPCInfo : MonoBehaviour, IListener
             float randY = UnityEngine.Random.Range(transform.position.y - 1, transform.position.y + 1);
 
             Instantiate(blood, new Vector3(randX, randY, 0), Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
-            DataManager.Instance.playerState = "Battle";
 
 
             if (weapon != null && !questNPC)
