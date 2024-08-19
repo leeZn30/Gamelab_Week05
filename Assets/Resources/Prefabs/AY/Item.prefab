@@ -387,7 +387,6 @@ MonoBehaviour:
   isQuest: 0
   notQuest: 0
   questName: 
-  saveIndex: -1
   isDeath: 0
 --- !u!1 &3464727973756500158
 GameObject:
