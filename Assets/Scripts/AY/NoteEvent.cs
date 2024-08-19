@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NoteEvent : MonoBehaviour
 {
@@ -209,6 +210,7 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        SceneManager.LoadScene("02_NoteEnding");
 
         teleport.SetActive(false);
     }
@@ -245,7 +247,7 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
-        CutsceneManager.Instance.PlayCutsceneByName("02_NoteEnding");
+        SceneManager.LoadScene("02_NoteEnding");
 
         teleport.SetActive(false);
     }
