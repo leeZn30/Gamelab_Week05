@@ -103,6 +103,7 @@ public class RevoltEvent : MonoBehaviour
 
     IEnumerator Event2()
     {
+
         // 쿵 소리
         yield return new WaitForSeconds(0.5f);
 

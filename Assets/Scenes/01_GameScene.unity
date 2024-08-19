@@ -56814,7 +56814,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CollectedObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1214316820}
     - target: {fileID: 8987883561355039972, guid: c9e105940882c854889fb799727683bc,
         type: 3}
       propertyPath: m_Name
