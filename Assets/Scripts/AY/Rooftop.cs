@@ -19,7 +19,7 @@ public class Rooftop : MonoBehaviour
             {
                 NoteRouteManager.Instance.callFinalBattle();
             }
-            else
+            else if (QuestManager.Instance.activeQuests.Contains(QuestManager.Instance.FindQuest("RevoltLastQuest")))
             {
                 RevoltRouteManager.Instance.CallFinalEvent();
             }

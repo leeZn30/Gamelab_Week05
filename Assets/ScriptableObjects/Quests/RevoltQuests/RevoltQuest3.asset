@@ -20,8 +20,8 @@ MonoBehaviour:
   ReachLocation: 0
   ReachItem: 0
   ReachNPC: 1
-  isCompleted: 0
-  isActived: 0
+  isCompleted: 1
+  isActived: 1
   eventType: 0
   targetObject: AnswerNPC1
   targetEnemyID: 0

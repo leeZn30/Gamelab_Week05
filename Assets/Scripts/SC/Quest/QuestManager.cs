@@ -50,7 +50,7 @@ public class QuestManager : MonoBehaviour, IListener
             }
         }
 
-        AcceptQuest("RevoltLastQuest");
+        // AcceptQuest("RevoltLastQuest");
         // AcceptQuest("NoteLastQuest");
     }
 
@@ -115,8 +115,6 @@ public class QuestManager : MonoBehaviour, IListener
                 }
                 break;
 
-            case "RevoltLastQuest":
-                break;
         }
 
         QuestSO quest = FindQuest(questName);
