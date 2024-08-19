@@ -54,13 +54,11 @@ public class RevoltRouteManager : Singleton<RevoltRouteManager>, IListener
 
     public void CallFinalEvent()
     {
-        SaveManager.Instance.Save();
         StartCoroutine(revoltEvent.FinalBattle());
     }
 
     public void CallFinalEventAfterChoice()
     {
-        SaveManager.Instance.Save();
         StartCoroutine(revoltEvent.FinalBattleAfterChoice());
     }
 }
