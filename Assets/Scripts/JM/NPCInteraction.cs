@@ -74,6 +74,14 @@ public class NPCInteraction : MonoBehaviour, IListener
                 }
             }
         }
+        else if(GetComponent<NPCInfo>() != null)
+        {
+            isPlayerInRange = true;
+            if (interactionUI != null)
+            {
+                interactionUI.SetActive(true);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
