@@ -19,7 +19,7 @@ public class ShootRaycast : MonoBehaviour
 
     void PerformRadialRaycast()
     {
-        if (transform.parent.parent.parent.parent.GetComponent<NPCInfo>().isPatrol)
+        if (transform.parent.parent.GetComponent<NPCInfo>().isPatrol)
         {
             float halfConeAngle = coneAngle / 2f;
             float angleStep = coneAngle / (numRays - 1);
@@ -33,9 +33,9 @@ public class ShootRaycast : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    if (hit.collider.CompareTag("Player") && DataManager.Instance.playerState != "Battle")
+                    if (hit.collider.CompareTag("Player"))
                     {
-                        DataManager.Instance.playerState = "Dectected";
+                        transform.parent.parent.GetComponent<NPCInfo>().isBattle = true;
                     }
                     Debug.DrawLine(transform.position, hit.point, Color.red);
 

@@ -152,7 +152,7 @@ public class DataManager : MonoBehaviour, IListener
             {
                 case Event_Type.eSave:
                     SaveManager.Instance.playerSaveStatus.health = health;
-                    SaveManager.Instance.playerSaveStatus.bulletCount = shoot.leftAmmo;
+                    //SaveManager.Instance.playerSaveStatus.bulletCount = shoot.leftAmmo;
                     SaveManager.Instance.playerSaveStatus.currentCount = shoot.currentAmmo;
                     SaveManager.Instance.playerSaveStatus.position = player.transform.position;
                     SaveManager.Instance.playerSaveStatus.rotation = player.transform.rotation;
@@ -160,10 +160,10 @@ public class DataManager : MonoBehaviour, IListener
                 case Event_Type.eLoad:
                     health = SaveManager.Instance.playerSaveStatus.health;
                     bulletCount = SaveManager.Instance.playerSaveStatus.bulletCount;
-                    shoot.leftAmmo = SaveManager.Instance.playerSaveStatus.bulletCount;
+                    //shoot.leftAmmo = SaveManager.Instance.playerSaveStatus.bulletCount;
                     shoot.currentAmmo = SaveManager.Instance.playerSaveStatus.currentCount;
                     shoot.bulletUIManager.SetBulletCount(shoot.currentAmmo);
-                    shoot.maxAmmoUI.text = SaveManager.Instance.playerSaveStatus.bulletCount + " / " + shoot.maxAmmo;
+                    //shoot.maxAmmoUI.text = SaveManager.Instance.playerSaveStatus.bulletCount + " / " + shoot.maxAmmo;
                     player.transform.position = SaveManager.Instance.playerSaveStatus.position;
                     player.transform.rotation = SaveManager.Instance.playerSaveStatus.rotation;
                 break;
