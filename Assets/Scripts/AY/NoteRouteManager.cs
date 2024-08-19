@@ -115,6 +115,11 @@ public class NoteRouteManager : Singleton<NoteRouteManager>, IListener
         StartCoroutine(noteEvent.FinalBattle());
     }
 
+    public void callFinalBattleAfterChoice()
+    {
+        StartCoroutine(noteEvent.FinalBattleAfterChoice());
+    }
+
     public void OpenNote(string content)
     {
         noteUI.GetComponentInChildren<TextMeshProUGUI>().SetText(content);
