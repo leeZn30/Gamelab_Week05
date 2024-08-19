@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CommonEvent : MonoBehaviour
 {
-    public int currentEvent;
+    public Coroutine currentEvent;
     public int lastChoice = -1;
 
     [Header("Player")]
@@ -51,11 +51,11 @@ public class CommonEvent : MonoBehaviour
         switch (type)
         {
             case Event_Type.eGameStart:
-                yield return StartCoroutine(Intro());
+                yield return CommonRouteManager.Instance.currentEvent = StartCoroutine(Intro());
                 break;
 
             case Event_Type.eGrandmaTalked:
-                yield return StartCoroutine(GrandmaEvent());
+                yield return CommonRouteManager.Instance.currentEvent = StartCoroutine(GrandmaEvent());
                 break;
         }
 
@@ -95,7 +95,6 @@ public class CommonEvent : MonoBehaviour
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         Destroy(go);
-        RoomDoor.CloseDoor();
         yield return new WaitForSeconds(0.5f);
 
         DialogueManager.Instance.SetDialogueID(introDialogueId3);
