@@ -87,7 +87,7 @@ public class RevoltEvent : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
-        yield return new WaitUntil(() => enemies.All(e => e == null));
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
 
         // 대화2
         DialogueManager.Instance.SetDialogueID(dialogueId3_1);

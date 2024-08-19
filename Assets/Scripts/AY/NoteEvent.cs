@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -46,13 +47,10 @@ public class NoteEvent : MonoBehaviour
 
     public IEnumerator DoEvent(Action onComplete, int eventNum)
     {
-        Debug.Log("Start Note Event"+eventNum);
+        Debug.Log("Start Note Event" + eventNum);
 
         switch (eventNum)
         {
-            case 0:
-                break;
-
             case 1:
                 yield return StartCoroutine(Event1());
                 break;
@@ -61,15 +59,17 @@ public class NoteEvent : MonoBehaviour
                 yield return StartCoroutine(Event2());
                 break;
 
-            case 3:
-                break;
-
-            case 4:
-                // yield return StartCoroutine(Event4());
-                break;
 
             case 5:
                 yield return StartCoroutine(Event5());
+                break;
+
+
+            case 6:
+                yield return StartCoroutine(Event6());
+                break;
+
+            default:
                 break;
         }
 
@@ -129,7 +129,7 @@ public class NoteEvent : MonoBehaviour
     IEnumerator Event2()
     {
         // 문 닫음
-        //event2Door.CloseDoor();
+        event2Door.CloseDoor();
 
         // 적이 엄청 생성됨
         List<GameObject> enemies = new List<GameObject>();
@@ -144,7 +144,7 @@ public class NoteEvent : MonoBehaviour
         yield return new WaitUntil(() => !DialogueManager.Instance.isDialogueActive);
 
         // 적이랑 싸우면서 적을 다 죽일 때까지 기다림
-        yield return new WaitUntil(() => enemies.All(e => e == null));
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
 
         // 문 엶
         event2Door.OpenDoor();
@@ -195,7 +195,7 @@ public class NoteEvent : MonoBehaviour
             enemies.Add(Instantiate(resistanceEnemy, player.transform.position + new Vector3(i, 0, 0), Quaternion.identity));
         }
 
-        yield return new WaitUntil(() => enemies.All(e => e == null));
+        yield return new WaitUntil(() => enemies.All(e => e == !e.activeSelf));
 
     }
 
