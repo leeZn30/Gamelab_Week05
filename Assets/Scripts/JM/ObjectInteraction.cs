@@ -28,7 +28,7 @@ public class ObjectInteraction : MonoBehaviour, IListener
     public bool isQuest = false;
     public bool notQuest = false;
     public string questName;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
     public bool isDeath = false;
     
     void Awake()

@@ -63,7 +63,7 @@ public class NPCInfo : MonoBehaviour, IListener
 
     public float distaance;
     public GameObject blood;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
     public bool isDeath = false;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

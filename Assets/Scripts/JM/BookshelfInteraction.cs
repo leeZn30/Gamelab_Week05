@@ -16,7 +16,7 @@ public class BookshelfInteraction : MonoBehaviour, IListener
     private bool isPlayerInRange = false; // 플레이어가 범위 내에 있는지 확인
     private bool isMoving = false; // 책장이 이동 중인지 확인
     public bool isOpened = false;
-    public int saveIndex = -1;
+    private int saveIndex = -1;
     private Vector3 initialPosition; // 책장의 초기 위치
     private Vector3 targetPosition; // 책장이 이동할 목표 위치
 
