@@ -120,6 +120,7 @@ public class NPCInteraction : MonoBehaviour, IListener
                 case Event_Type.eLoad:
                     if (saveIndex != -1)
                     {
+
                         isActive = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isActive;
                         isSend = SaveManager.Instance.saveNPCInteractionStatus[saveIndex].isSend;
                         isPlayerInRange = false;
