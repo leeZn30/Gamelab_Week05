@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1343863893898344661}
   - component: {fileID: 950819958838482814}
   - component: {fileID: 2690692358398199596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body-removebg-preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
