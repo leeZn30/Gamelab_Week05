@@ -30,7 +30,6 @@ public class FistAttack : MonoBehaviour
         if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
         {
             DataManager.Instance.ResetCoolDownTime = 0;
-            DataManager.Instance.playerState = "Battle";
 
             if (delayTime > punchDelay)
             {

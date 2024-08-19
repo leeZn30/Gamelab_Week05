@@ -31,6 +31,7 @@ public class PlayerGunManager : MonoBehaviour
         if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
         {
             playerGun[currentGunIndex].SetActive(true);
+            GetComponent<PlayerUI>().battleUI.SetActive(true);
             isActive = true;
         }
 

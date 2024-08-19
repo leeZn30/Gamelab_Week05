@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6780424356891994841}
   - component: {fileID: -7169151532711291334}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: PlayerBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9742461e6078d343809e8839edce227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   lifeTime: 2
   AudioSource: {fileID: 0}
   AudioClip: {fileID: 8300000, guid: b6f2999008bd38c4e8060f123b095b64, type: 3}
