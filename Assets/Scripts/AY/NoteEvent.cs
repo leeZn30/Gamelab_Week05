@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class NoteEvent : MonoBehaviour
 {
+
     [Header("Player")]
     GameObject player;
 
@@ -244,9 +245,9 @@ public class NoteEvent : MonoBehaviour
 
         // 대화함
         Debug.Log("컷씬으로 넘어가기");
+        CutsceneManager.Instance.PlayCutsceneByName("02_NoteEnding");
 
         teleport.SetActive(false);
     }
-
 
 }
