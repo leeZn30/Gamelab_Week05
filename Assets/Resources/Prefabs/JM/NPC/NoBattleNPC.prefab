@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f486baec8ae1ca44483204548b318bcf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -474,6 +474,8 @@ MonoBehaviour:
   interactionUI: {fileID: 6704406126788795913}
   isActive: 0
   targetQuest: 
+  isDeath: 0
+  saveIndex: -1
 --- !u!114 &5223426875867731739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,14 +502,12 @@ MonoBehaviour:
   isPatrol: 1
   isBattle: 0
   state: 0
-  radius: 5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
   resetDistance: 0
   damaged: {fileID: 578906708491998963}
   distaance: 0
   blood: {fileID: 9178080251468628412, guid: b358138416816bd4f802b65e122f7ab6, type: 3}
+  saveIndex: -1
+  isDeath: 0
 --- !u!114 &5382745284416825995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,6 +532,7 @@ MonoBehaviour:
   patrolIndex: 0
   patWhat: 0
   idleStop: 1
+  moveSpeed: 0
 --- !u!114 &7157400149397983668
 MonoBehaviour:
   m_ObjectHideFlags: 0
