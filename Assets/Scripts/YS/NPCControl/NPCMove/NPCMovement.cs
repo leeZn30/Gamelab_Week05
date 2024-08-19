@@ -10,6 +10,8 @@ public class NPCMovement : MonoBehaviour
     private GameObject[] walls;
     Vector3 directionAwayFromPlayer;
 
+    public bool runningNpc;
+
     [Header("MinMax")]
     private float minX = -5.0f;
     private float maxX = 5.0f;
@@ -72,8 +74,8 @@ public class NPCMovement : MonoBehaviour
 
             Behave();
         }
-
-        if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2)
+        
+        if (GetComponent<NPCInfo>().health < GetComponent<NPCInfo>().maxHealth / 2 && runningNpc)
         {
             if (!GetComponent<NPCInfo>().questNPC)
             {

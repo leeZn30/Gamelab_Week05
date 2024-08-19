@@ -65,10 +65,13 @@ public class NPCInteraction : MonoBehaviour, IListener
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = true;
-            if (interactionUI != null)
+            if (!GetComponent<NPCInfo>().isBattle)
             {
-                interactionUI.SetActive(true);
+                isPlayerInRange = true;
+                if (interactionUI != null)
+                {
+                    interactionUI.SetActive(true);
+                }
             }
         }
     }
@@ -79,7 +82,7 @@ public class NPCInteraction : MonoBehaviour, IListener
         {
             isPlayerInRange = false;
 
-            if (interactionUI != null)
+            if (interactionUI != null && interactionUI.activeSelf == true)
             {
                 interactionUI.SetActive(false);
             }
