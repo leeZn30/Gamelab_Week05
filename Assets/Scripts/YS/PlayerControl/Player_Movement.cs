@@ -33,6 +33,8 @@ public class Player_Movement : MonoBehaviour
     public float radius = 5f;
     public LayerMask layerMask;
 
+    public GameObject dieUI;
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     void Start()
@@ -47,6 +49,7 @@ public class Player_Movement : MonoBehaviour
         isDashing = false;
 
         BattleManager.Instance.Resistance.Add(gameObject);
+        dieUI.SetActive(false);
         //PlayerGunSetting();
     }
 
@@ -62,13 +65,14 @@ public class Player_Movement : MonoBehaviour
             Move();
             Block();
 
-            
+
             // 일반 이동
             transform.Translate(Vector2.right * horizontalInput * Time.deltaTime * DataManager.Instance.Speed);
             transform.Translate(Vector2.up * verticalInput * Time.deltaTime * DataManager.Instance.Speed);
             //audioSource.PlayOneShot(walkSound);
 
-            if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame() && !isDashing && !DialogueManager.Instance.isDialogueActive)
+            if (InputManager.Instance.controls.Player.Dash.WasPressedThisFrame() && !isDashing &&
+                !DialogueManager.Instance.isDialogueActive)
             {
                 // 대시 코루틴 시작
                 StartCoroutine(Dash());
@@ -79,7 +83,7 @@ public class Player_Movement : MonoBehaviour
 
 
 
-            
+
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, radius, layerMask);
 
             if (InputManager.Instance.controls.Player.Shoot.WasPressedThisFrame())
@@ -123,18 +127,21 @@ public class Player_Movement : MonoBehaviour
         verticalInput = inputVector.y;
 
     }
+
     void Dock()
     {
         if (InputManager.Instance.controls.Player.SlowMove.WasPressedThisFrame())
         {
             DataManager.Instance.Speed = DataManager.Instance.Speed * 0.5f;
         }
+
         if (InputManager.Instance.controls.Player.SlowMove.WasReleasedThisFrame())
         {
             DataManager.Instance.Speed = DataManager.Instance.Speed * 2;
         }
 
     }
+
     private void Block()
     {
         RaycastHit2D[] hitdown = Physics2D.RaycastAll(transform.position, Vector2.down);
@@ -218,16 +225,16 @@ public class Player_Movement : MonoBehaviour
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
     private IEnumerator Dash()
     {
-        isDashing = true;  // 대시 상태 시작float startTime = Time.time;
+        isDashing = true; // 대시 상태 시작float startTime = Time.time;
 
         audioSource.PlayOneShot(dashSound);
         // 대시 중 움직임while (Time.time < startTime + dashTime)
-        
-        DataManager.Instance.Speed *= dashSpeedMultiplier;
-        yield return new WaitForSeconds(dashTime);  // 다음 프레임까지 대기
-        
 
-        isDashing = false;  // 대시 상태 종료
+        DataManager.Instance.Speed *= dashSpeedMultiplier;
+        yield return new WaitForSeconds(dashTime); // 다음 프레임까지 대기
+
+
+        isDashing = false; // 대시 상태 종료
         DataManager.Instance.Speed = DataManager.Instance.Speed / 2;
     }
 
@@ -237,6 +244,11 @@ public class Player_Movement : MonoBehaviour
         {
             isDamaged = true;
             DataManager.Instance.Health -= 0.5f;
+            if (DataManager.Instance.Health <= 0)
+            {
+                Time.timeScale = 0;
+                dieUI.SetActive(true);
+            }
 
             DataManager.Instance.ResetCoolDownTime = 0;
 

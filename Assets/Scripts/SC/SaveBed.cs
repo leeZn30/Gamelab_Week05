@@ -8,11 +8,13 @@ public class SaveBed : MonoBehaviour
     private bool isPlayerInRange;
     private bool isTimeStopped = false;
     public GameObject interactionUI;
-    public GameObject saveUI;
-    public SaveManager saveManager;
+    private GameObject saveUI;
+    private SaveManager saveManager;
 
     void Start()
     {
+        saveUI = GameObject.Find("SaveUI");
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
         saveUI.SetActive(false);
     }
 
