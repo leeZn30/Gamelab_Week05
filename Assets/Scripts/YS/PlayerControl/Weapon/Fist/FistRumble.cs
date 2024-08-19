@@ -35,6 +35,7 @@ public class FistRumble : MonoBehaviour
         {
             audioSource.Play();
             RumbleManager.instance.RumblePulse(1f, 1f, 0.2f);
+            DataManager.Instance.playerState = "Battle";
 
         }
 
