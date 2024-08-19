@@ -40,7 +40,7 @@ public class Shoot : MonoBehaviour
         StartCoroutine(ShootDelay());
 
         //maxAmmoUI = GameObject.FindWithTag("Canvas").transform.Find("Battle_Ui").transform.Find("MaxBullet_UI").transform.GetComponent<TextMeshProUGUI>();
-        //maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
+        maxAmmoUI.text = leftAmmo + " / " + maxAmmo;
     }
     // Update is called once per frame
     void Update()
