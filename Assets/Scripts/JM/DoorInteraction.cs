@@ -108,15 +108,14 @@ public class DoorInteraction : MonoBehaviour, IListener
     public void CloseDoor()
     {
         audioSource.PlayOneShot(doorSound);
-        if(closedDoor != null)
+        if (closedDoor != null)
         {
-            closedDoor.SetActive(false);
             closedDoor.SetActive(true);
         }
 
-        if(openDoor != null)
+        if (openDoor != null)
         {
-            openDoor.SetActive(true);
+            openDoor.SetActive(false);
         }
         isOpend = false;
         if (closedDoorCollider != null)
