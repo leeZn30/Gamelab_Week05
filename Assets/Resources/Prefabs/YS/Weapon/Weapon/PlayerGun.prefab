@@ -97,10 +97,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d126218cb86334dae7e2cd68f0b777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 0
+  currentAmmo: 20
+  leftAmmo: 100
   maxAmmo: 100
   bullet: {fileID: 8726568755697117024, guid: 193a053be71cf974c8e5fc8b4a760a6a, type: 3}
   shootDelay: 0.3
   shootTime: 0
   isReloading: 0
+  bulletUIManager: {fileID: 0}
   maxAmmoUI: {fileID: 0}

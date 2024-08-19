@@ -61,7 +61,7 @@ public class Player_Movement : MonoBehaviour
         if (!isUsingMap)
         {
             // Player Movement
-            Dock();
+            //Dock();
             Move();
             Block();
 
